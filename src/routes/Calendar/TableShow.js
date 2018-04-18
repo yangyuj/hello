@@ -3,6 +3,7 @@ import { connect } from 'dva';
 import {
     Form, Input, DatePicker, Select, Button, Card, InputNumber, Radio, Icon, Tooltip, Table, Divider
 } from 'antd';
+import { routerRedux } from 'dva/router';
 import styles from './TableShow.less';
 import { trans } from '../../utils/i18n';
 
@@ -90,9 +91,12 @@ export default class Show extends PureComponent {
             }
         });
     }
+    toCalendar = ()=>{
+        this.props.dispatch(routerRedux.push('/calShow'));
+    }
     render() {
         const { getTimeInfoMessage } = this.props;
-        console.log(getTimeInfoMessage);
+        // console.log(getTimeInfoMessage);
         return (
             <div className={styles.main}>
                 <div className={styles.showHeader}>
@@ -105,7 +109,7 @@ export default class Show extends PureComponent {
                     <ul className={styles.viewChange}>
                         <li className={styles.barsLi}><Icon type="bars" /></li>
                         <li className={styles.borderLi}></li>
-                        <li className={styles.calendarLi}><Icon type="calendar" /></li>
+                        <li className={styles.calendarLi} onClick={this.toCalendar}><Icon type="calendar" /></li>
                     </ul>
                     <Button type="primary" className={styles.confirmationSchedule}>确认日程</Button>
                     <Button type="primary" className={styles.newInvitation}>新建邀约</Button>
