@@ -1,4 +1,5 @@
 import mockjs from 'mockjs';
+<<<<<<< HEAD
 // import { studentList, studentPostList } from './mock/student';
 // import { getActivities, getNotice, getFakeList , getCardList} from './mock/api';
 // import { getFakeChartData } from './mock/chart';
@@ -6,7 +7,10 @@ import mockjs from 'mockjs';
 // import { getProfileBasicData } from './mock/profile';
 // import { getProfileAdvancedData } from './mock/profile';
 // import { getNotices } from './mock/notices';
+=======
+>>>>>>> bd759d2d5a7db417e13f1e6ad05f6a2b8dabd800
 import { format, delay } from 'roadhog-api-doc';
+
 
 // 是否禁用代理
 const noProxy = process.env.NO_PROXY === 'true';
@@ -37,6 +41,7 @@ const proxy = {
     }
   },
 
+<<<<<<< HEAD
   //列表显示学年和学期的请求
   'GET /api/getTimeInfo': {
     "ifLogin":true,
@@ -235,6 +240,8 @@ const proxy = {
     }
   },
 
+=======
+>>>>>>> bd759d2d5a7db417e13f1e6ad05f6a2b8dabd800
   'POST /api/tutor_save': (req, res) => {
     res.send({
       status: true,
@@ -246,6 +253,7 @@ const proxy = {
     });
   },
 
+<<<<<<< HEAD
   'POST /api/file_upload': (req, res) => {
     res.send({
       status: true,
@@ -291,6 +299,10 @@ const proxy = {
       message: '数据提交失败',
     });
   },
+=======
+
+
+>>>>>>> bd759d2d5a7db417e13f1e6ad05f6a2b8dabd800
 };
 
 export default noProxy ? {} : delay(proxy, 1000);
