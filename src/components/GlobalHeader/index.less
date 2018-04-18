@@ -2,7 +2,7 @@
 
 .header {
   padding: 0 12px 0 0;
-  background: #fff;
+  background: #4A90E2;
   box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
   position: relative;
 }
@@ -29,7 +29,35 @@ i.trigger {
   transition: all .3s;
   padding: 0 24px;
   &:hover {
-    background: @primary-1;
+    //background: @primary-1;
+  }
+}
+
+a.logo {
+  background: url('../../assets/logo.png') no-repeat;
+  display: inline-block;
+  margin-left: 50px;
+  margin-top: 5px;
+  background-size: contain;
+  height: 50px;
+  float: left;
+  color: #fff;
+  padding-left: 60px;
+  line-height: 54px;
+  font-size: 18px;
+}
+
+.topMenu {
+  width: 40%;
+  margin: 0 auto;
+  text-align: center;
+  a {
+    font-size: 18px;
+    color: #fff;
+    margin: 0 15px;
+    &.currrent {
+      color: #1890ff;
+    }
   }
 }
 
@@ -42,6 +70,7 @@ i.trigger {
 .right {
   float: right;
   height: 100%;
+  color: #fff;
   .action {
     cursor: pointer;
     padding: 0 12px;
@@ -54,7 +83,7 @@ i.trigger {
     }
     &:global(.ant-popover-open),
     &:hover {
-      background: @primary-1;
+      //background: @primary-1;
     }
   }
   .search {
@@ -71,5 +100,15 @@ i.trigger {
       background: rgba(255, 255, 255, .85);
       vertical-align: middle;
     }
+  }
+}
+
+.langBox {
+  position: absolute;
+  top: 0;
+  right: 260px;
+  z-index: 99;
+  a {
+    margin: 0 10px;
   }
 }

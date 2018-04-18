@@ -7,10 +7,11 @@ import { Route, Redirect, Switch } from 'dva/router';
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
 //import GlobalHeader from '../components/GlobalHeader';
-import AssessmentGlobalHeader from '../components/AssessmentGlobalHeader';
+import GlobalHeader from '../components/GlobalHeader';
 import GlobalFooter from '../components/GlobalFooter';
 //import SiderMenu from '../components/SiderMenu';
 import NotFound from '../routes/Exception/404';
+import { trans, locale } from '../utils/i18n';
 
 const { Content } = Layout;
 
@@ -59,7 +60,7 @@ class CalendarLayout extends React.PureComponent {
   getPageTitle() {
     const { location, getRouteData } = this.props;
     const { pathname } = location;
-    let title = '杭州云谷学校';
+    let title = trans('global.title', '日程中心 -- 杭州云谷学校');
     getRouteData('CalendarLayout').forEach((item) => {
       if (item.path === pathname) {
         title = `${item.name}`;
@@ -81,15 +82,13 @@ class CalendarLayout extends React.PureComponent {
   }
   render() {
     const {
-      currentUser, collapsed, fetchingNotices, notices, getRouteData, navData, location, dispatch,
+      currentUser, getRouteData, navData, location, dispatch,
     } = this.props;
     const layout = (
       <Layout>
         <Layout>
-            <AssessmentGlobalHeader currentUser = { currentUser }
-                fetchingNotices = { fetchingNotices }
-                notices = { notices }
-                collapsed = { collapsed }
+            <GlobalHeader currentUser = { currentUser }
+
                 dispatch = { dispatch } />
             <Content>
                 <div style = {{minHeight: 'calc(100vh - 260px)'}}>
@@ -103,7 +102,7 @@ class CalendarLayout extends React.PureComponent {
                         <Route component={ NotFound } />
                     </Switch>
                 </div>
-                <GlobalFooter copyright={<div>Copyright <Icon type = "copyright" /> 2018 杭州云谷学校</div>} />
+                <GlobalFooter copyright={<div>Copyright <Icon type = "copyright" /> {trans('global.footer', '2018 杭州云谷学校')}</div>} />
             </Content>
         </Layout>
       </Layout>
@@ -120,8 +119,5 @@ class CalendarLayout extends React.PureComponent {
 }
 
 export default connect(state => { return {
-  currentUser: state.user.currentUser,
-  collapsed: state.global.collapsed,
-  fetchingNotices: state.global.fetchingNotices,
-  notices: state.global.notices,
+  currentUser: state.user.currentUser
 };})(CalendarLayout);

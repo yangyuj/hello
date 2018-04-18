@@ -30,13 +30,13 @@ export default {
     },
 
     *fetchCurrent(_, { call, put }) {
-      /*const response = yield call(queryCurrent);
+      const response = yield call(queryCurrent);
       !response.ifLogin && (yield put(routerRedux.push('/user/login')));
       !response.status && (yield put(routerRedux.push('/user/login')));
       yield put({
         type: 'saveCurrentUser',
         payload: response,
-      });*/
+      });
     },
 
   },
