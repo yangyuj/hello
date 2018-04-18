@@ -13,6 +13,10 @@ export async function fakeAccountLogin(params) {
   });
 }
 //页面获取当前学期和周数
-export async function getTimeInfo(params) {
+export async function getTimeInfo() {
   return request(`/api/getTimeInfo`);
+}
+//日历的类别显示
+export async function getCalendarInfo() {
+  return request(`/api/getAllCalendar`);
 }
