@@ -23,6 +23,11 @@ export const getNavData = app => [
         name: '我的行程',
         path: 'index',
         component: dynamicWrapper(app, [], () => import('../routes/Calendar/Index'))
+      },
+      {
+        name: '查看日历',
+        path: 'show',
+        component: dynamicWrapper(app, [], () => import('../routes/Calendar/Show'))
       }
     ],
   },

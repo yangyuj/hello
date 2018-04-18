@@ -9,16 +9,16 @@ import styles from './Index.less';
 const confirm = Modal.confirm;
 
 @connect(state => ({
-  //content: state.assessmentIndex,
+  // content: state.assessmentIndex,
 }))
 export default class Index extends PureComponent {
   componentDidMount() {
-    /* this.props.dispatch({
-      type: 'assessmentIndex/fetch',
-      payload: {
-        count: 8,
-      },
-    }); */
+    // this.props.dispatch({
+    //   type: 'assessmentIndex/fetch',
+    //   payload: {
+    //     count: 8,
+    //   },
+    // }); 
   }
 
   render() {
