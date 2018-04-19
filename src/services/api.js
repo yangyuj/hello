@@ -20,3 +20,7 @@ export async function getTimeInfo() {
 export async function getCalendarInfo() {
   return request(`/api/getAllCalendar`);
 }
+//日程详情的显示
+export async function checkDetailInfo() {
+  return request(`/api/checkDetail`);
+}

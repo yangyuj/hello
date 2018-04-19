@@ -45,116 +45,38 @@ const proxy = {
     "message":"查询成功！",
     "code":0,
     "ifAdmin":false,
-    "content":[
-      {
-        "id": 1,
-        "name": "2018学年",
-        "start_time":4726497364,     //(学年的开始日期)
-        "end_time":473695763294,     //（学年的结束日期）
-        "List":[
-          {
-            "id":1,
-            "name" : "上学期",
-            "list":[
-              {
-                "week": "第一周",
-                "weekType":  false,	
-                "betweenTime":"344567/234567890" 
-              },{
-                "week": "第二周",
-                "weekType": true,	
-                "betweenTime":"344567/234567890" 
-              },{
-                "week": "第三周",
-                "weekType": true,	
-                "betweenTime":"344567/234567890" 
-              },{
-                "week": "第四周",
-                "weekType": false,	
-                "betweenTime":"344567/234567890" 
-              }
-            ]
-          },
-          {
-            "id":2,
-            "name" : "下学期",
-            "list":[
-              {
-                "week": "第一周",
-                "weekType": true,	
-                "betweenTime":"344567/234567890" 
-              },{
-                "week": "第二周",
-                "weekType": false,	
-                "betweenTime":"344567/234567890" 
-              },{
-                "week": "第三周",
-                "weekType": false,	
-                "betweenTime":"344567/234567890" 
-              },{
-                "week": "第四周",
-                "weekType": true,	
-                "betweenTime":"344567/234567890" 
-              }
-            ]
-          }
+    "content":{
+      "year":{
+        "current":"2018学年上学期",
+        "list":[
+            {
+              "id": 1,
+              "name": "2018学年上学期",
+              "start_time":4726497364,//(学年的开始日期)
+              "end_time":473695763294,//（学年的结束日期）
+            },{
+              "id": 1,
+              "name": "2018学年下学期",
+              "start_time":4726497364,//(学年的开始日期)
+              "end_time":473695763294,//（学年的结束日期）
+            },{
+              "id": 2,
+              "name": "2019学年上学期",
+              "start_time":4726497364,//(学年的开始日期)
+              "end_time":473695763294,//（学年的结束日期）
+            },{
+              "id": 3,
+              "name": "2019学年下学期",
+              "start_time":4726497364,//(学年的开始日期)
+              "end_time":473695763294,//（学年的结束日期）
+            }
         ]
       },
-      {
-        "id": 2,
-        "name": "2019学年",
-        "start_time":4726497364,     //(学年的开始日期)
-        "end_time":473695763294,     //（学年的结束日期）
-        "List" :[
-          {
-            "id":1,
-            "name" : "上学期",
-            "list":[
-              {
-                "week": "第一周",
-                "weekType": false,	
-                "betweenTime" :"344567/234567890" 
-              },{
-                "week": "第二周",
-                "weekType": false,	
-                "betweenTime" :"344567/234567890" 
-              },{
-                "week": "第三周",
-                "weekType": true,	
-                "betweenTime" :"344567/234567890" 
-              },{
-                "week": "第四周",
-                "weekType": false,	
-                "betweenTime" :"344567/234567890" 
-              }
-            ]
-          },
-          {
-            "id":2,
-            "name" : "下学期",
-            "list":[
-              {
-                "week": "第一周",
-                "weekType": false,	
-                "betweenTime" :"344567/234567890" 
-              },{
-                "week": "第二周",
-                "weekType": false,	
-                "betweenTime" :"344567/234567890" 
-              },{
-                "week": "第三周",
-                "weekType": false,	
-                "betweenTime" :"344567/234567890" 
-              },{
-                "week": "第四周",
-                "weekType": true,	
-                "betweenTime" :"344567/234567890" 
-              }
-            ]
-          }
-        ]
+      "week":{
+        "currentWeek":"第六周",
+        "totalWeek":"18"
       }
-    ]
+    }
   },
   //列表内容的显示
   'GET /api/getScheduleList': {
@@ -212,10 +134,10 @@ const proxy = {
         "name":"菠萝计划"
       },{
         "id":3,
-        "name":"菠萝计划"
+        "name":"行事历"
       },{
         "id":4,
-        "name":"菠萝计划"
+        "name":"西瓜计划"
       }
     ]
   },
