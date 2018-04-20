@@ -146,34 +146,43 @@ export default class CalendarShow extends PureComponent {
     toTable = () => {
         this.props.dispatch(routerRedux.push('/tableShow'));
     }
-    //点击切换到上学期
-    previousWeek = () => {
-
+    //点击切换到上一周
+    previousWeek = (value) => {
+        // console.log(value);
+        const current = value.currentWeek;
+        const total = value.totalWeek;
+        // console.log(current.substr(1, 1)); 
     }
-    //点击切换到下学期
-    nextWeek = () => {
-
+    //点击切换到下一周
+    nextWeek = (value) => {
+        // console.log(value);
+        const current = value.currentWeek;
+        const total = value.totalWeek;
+        // console.log(current.substr(1, 1)); 
+    }
+    //切换学期
+    changeSemester = (value) => {
+        console.log(value);
     }
     //删除日程
-    deleteCal = () => {
-        alert("hhh");
-    }
     showModal = () => {
         this.setState({
           visible: true,
         });
     }
     handleOk = (e) => {
-        console.log(e);
         this.setState({
           visible: false,
         });
     }
     handleCancel = (e) => {
-        console.log(e);
         this.setState({
           visible: false,
         });
+    }
+    //切换日历发送请求
+    changeCal = () => {
+        console.log("hhh");
     }
     render() {
         const { getCalendarInfoMessage, getTimeInfoMessage, checkDetailInfoMessage } = this.props;
@@ -182,16 +191,15 @@ export default class CalendarShow extends PureComponent {
         const detailData = checkDetailInfoMessage;
         let w = this.state.weekendShow ? 'inline-block' : 'none';
         let wC = this.state.widthChange ? '70%' : '100%';
-        // console.log(checkDetailInfoMessage);
+        // console.log(calData);
         return (
             <div className={styles.main}>
                 <div className={styles.topHeader}>
                     {   
                         calData 
-                        && calData.content 
-                        && calData.content.length > 0 
+                        && calData.length > 0 
                         && (<Tabs className={styles.showTabs} defaultActiveKey="1">
-                                {calData.content.map((el , i) => <TabPane tab={el.name} key={i} />)}
+                                {calData.map((el , i) => <TabPane  tab={el.name} key={i} />)}
                             </Tabs>)
                     }
                     <div className={styles.calendarList}>
@@ -201,16 +209,16 @@ export default class CalendarShow extends PureComponent {
                                     {
                                         timeData && timeData.content.year.list.map((value, index) => {
                                             return (
-                                                <Option value={value.name} key={index}>{value.name}</Option>
+                                                <Option value={value.name} key={index} onClick={this.changeSemester.bind(this, value)}>{value.name}</Option>
                                             );
                                         })
                                     }
                                 </Select>
                             </span>
                             <span className={styles.weekChange}>
-                                <Button className={styles.weekChangeBtn} onClick={this.previousWeek}><Icon type="left" /></Button>
-                                {timeData && timeData.content.week.currentWeek}
-                                <Button className={styles.weekChangeBtn} onClick={this.nextWeek}><Icon type="right" /></Button>
+                                <Button className={styles.weekChangeBtn} onClick={this.previousWeek.bind(this, timeData && timeData.content.week)}><Icon type="left" /></Button>
+                                    {timeData && timeData.content.week.currentWeek}
+                                <Button className={styles.weekChangeBtn} onClick={this.nextWeek.bind(this, timeData && timeData.content.week)}><Icon type="right" /></Button>
                             </span>
                             <ul className={styles.viewChange}>
                                 <li className={styles.barsLi} onClick={this.toTable}><Icon type="bars" /></li>
@@ -239,7 +247,7 @@ export default class CalendarShow extends PureComponent {
                             <div className={styles.detailHeader}>{detailData && detailData.content.scheduleTemplate.cName}</div>
                             <p className={styles.detailTime}><Icon className={styles.detailIcon} type="clock-circle-o" />{detailData && detailData.content.scheduleTemplate.sTime}</p>
                             <p className={styles.detailPlace}><Icon className={styles.detailIcon} type="environment" />{detailData && detailData.content.scheduleTemplate.address}</p>
-                            <p className={styles.detailNum}><Icon className={styles.detailIcon} type="contacts" />{detailData && detailData.content.personNumbers}</p>
+                            <p className={styles.detailNum}><Icon className={styles.detailIcon} type="contacts" />{detailData && detailData.content.personNumbers}位邀约对象</p>
                             <p className={styles.detailMustChoose}>必选：{detailData && detailData.content.bixuan}</p>
                             <p className={styles.detailCanChoose}>可选：{detailData && detailData.content.kexuan}</p>
                             <p className={styles.detailRemark}><Icon className={styles.detailIcon} type="profile" />{detailData && detailData.content.scheduleTemplate.remark}</p>

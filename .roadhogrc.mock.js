@@ -157,6 +157,7 @@ const proxy = {
         "eTime":"2018-04-17 10:33:27",
         "address":"小雪",
         "remark":"必须来",
+        "weekDay":"周二"
       },
       "personNumbers":23,
       "bixuan":["张三","李四"],

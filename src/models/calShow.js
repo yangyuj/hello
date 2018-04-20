@@ -8,7 +8,7 @@ export default {
 
     state: {
         state: {
-            getCalendarInfoMessage:{},
+            getCalendarInfoMessage:[],
             getTimeInfoMessage:{},
             checkDetailInfoMessage:{}
         },
@@ -22,7 +22,7 @@ export default {
             }
             yield put({
                 type: 'CalendarInfoMessage',
-                payload: response,
+                payload: response.content,
             });
         },
         *timeInfo({ payload }, { call, put }) {

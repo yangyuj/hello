@@ -15758,6 +15758,32 @@ textarea.ant-pagination-options-quick-jumper input {
   line-height: 21px;
   margin-right: 7px;
 }
+.main___3oCgE .weekTable___3m_cM tr {
+  width: auto;
+  border: 1px solid #D9CDEC;
+}
+.main___3oCgE .weekTable___3m_cM tr th {
+  border: 1px solid #E8E8E8;
+  width: auto;
+}
+.main___3oCgE .weekTable___3m_cM tr td {
+  border: 1px solid #E8E8E8;
+  width: auto;
+}
+.main___3oCgE .weekTable___3m_cM tr > td:first-child {
+  background: #F9F6FF;
+  text-align: center;
+  font-family: MicrosoftYaHei;
+  font-size: 16px;
+  color: #6D14F7;
+}
+.main___3oCgE .weekTable___3m_cM tr > th:first-child {
+  background: #F9F6FF;
+  text-align: center;
+  font-family: MicrosoftYaHei;
+  font-size: 16px;
+  color: #6D14F7;
+}
 /* stylelint-disable at-rule-empty-line-before,at-rule-name-space-after,at-rule-no-unknown */
 /* stylelint-disable no-duplicate-selectors */
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */

@@ -42,7 +42,7 @@ const columns = [
 const data = [
     {
         key: '1',
-        date: 'John Brown',
+        date: '周一',
         time: 32,
         theme: 32,
         people: 32,
@@ -50,7 +50,7 @@ const data = [
         address: 'New York No. 1 Lake Park',
     }, {
         key: '2',
-        date: 'John Brown',
+        date: '周二',
         time: 32,
         theme: 32,
         people: 32,
@@ -58,7 +58,31 @@ const data = [
         address: 'New York No. 1 Lake Park',
     }, {
         key: '3',
-        date: 'John Brown',
+        date: '周三',
+        time: 32,
+        theme: 32,
+        people: 32,
+        remark: 32,
+        address: 'New York No. 1 Lake Park',
+    }, {
+        key: '4',
+        date: '周四',
+        time: 32,
+        theme: 32,
+        people: 32,
+        remark: 32,
+        address: 'New York No. 1 Lake Park',
+    }, {
+        key: '5',
+        date: '周五',
+        time: 32,
+        theme: 32,
+        people: 32,
+        remark: 32,
+        address: 'New York No. 1 Lake Park',
+    }, {
+        key: '6',
+        date: '周六',
         time: 32,
         theme: 32,
         people: 32,
@@ -71,9 +95,8 @@ const data = [
     getTimeInfoMessage: state.timeInfo.getTimeInfoMessage
 }))
 @Form.create()
-export default class Show extends PureComponent {
+export default class tableShow extends PureComponent {
     state = {
-        pagination: "none",
     }
 
     constructor(props) {
@@ -97,13 +120,14 @@ export default class Show extends PureComponent {
     render() {
         const { getTimeInfoMessage } = this.props;
         // console.log(getTimeInfoMessage);
+        const timeData = getTimeInfoMessage;
         return (
             <div className={styles.main}>
                 <div className={styles.showHeader}>
                     <span className={styles.showName}>云谷学校行事历</span>
                     <span className={styles.weekChange}>
                         <Button className={styles.weekChangeBtn}><Icon type="left" /></Button>
-                        第五周
+                            {timeData && timeData.content.week.currentWeek}
                         <Button className={styles.weekChangeBtn}><Icon type="right" /></Button>
                     </span>
                     <ul className={styles.viewChange}>
@@ -114,7 +138,7 @@ export default class Show extends PureComponent {
                     <Button type="primary" className={styles.confirmationSchedule}>确认日程</Button>
                     <Button type="primary" className={styles.newInvitation}>新建邀约</Button>
                 </div>
-                <Table {...this.state} columns={columns} dataSource={data} />
+                <Table className={styles.weekTable} columns={columns} dataSource={data} pagination={false}/>
             </div>
         );
     }
