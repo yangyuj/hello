@@ -15920,9 +15920,77 @@ textarea.ant-pagination-options-quick-jumper input {
   -webkit-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
           box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 4px;
+  position: relative;
+}
+.main___30TG8 .checkDetail___2M_Fd .detailIcon___2nv1F {
+  margin-right: 22px;
 }
 .main___30TG8 .checkDetail___2M_Fd .detailHeader___18Y6N {
   background: rgba(109, 20, 247, 0.04);
   width: 100%;
   height: 133px;
+  font-family: PingFangSC-Medium;
+  font-size: 24px;
+  color: #6D14F7;
+  padding-top: 76px;
+  padding-left: 35px;
+}
+.main___30TG8 .checkDetail___2M_Fd .detailTime___2ERJo {
+  margin-top: 34px;
+  margin-left: 38px;
+}
+.main___30TG8 .checkDetail___2M_Fd .detailPlace___y1MRk {
+  margin-top: 19px;
+  margin-left: 38px;
+}
+.main___30TG8 .checkDetail___2M_Fd .detailNum___2tPRD {
+  margin-top: 19px;
+  margin-left: 38px;
+}
+.main___30TG8 .checkDetail___2M_Fd .detailMustChoose___3uq7c {
+  margin-top: 19px;
+  margin-left: 76px;
+}
+.main___30TG8 .checkDetail___2M_Fd .detailCanChoose___Dy7up {
+  margin-top: 19px;
+  margin-left: 76px;
+}
+.main___30TG8 .checkDetail___2M_Fd .detailRemark___1k3ea {
+  margin-top: 19px;
+  margin-left: 38px;
+}
+.main___30TG8 .checkDetail___2M_Fd .detailFooter___-g8kr {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  border-top: 1px solid #E9E9E9;
+  padding-top: 9px;
+  font-family: PingFangSC-Regular;
+  font-size: 12px;
+  padding-left: 27px;
+}
+.main___30TG8 .checkDetail___2M_Fd .detailFooter___-g8kr .detailBtnEdit___2GVRg {
+  float: right;
+  font-family: PingFangSC-Regular;
+  font-size: 14px;
+  color: #FFFFFF;
+  text-align: left;
+  line-height: 21px;
+  margin-right: 15px;
+}
+.main___30TG8 .checkDetail___2M_Fd .detailFooter___-g8kr .detailBtnCancel___3_SNG {
+  float: right;
+  font-family: PingFangSC-Regular;
+  font-size: 14px;
+  color: #666666;
+  text-align: left;
+  line-height: 21px;
+  margin-right: 8px;
+}
+.main___30TG8 .checkDetail___2M_Fd .detailFooter___-g8kr .deleteSpan___15zdx {
+  font-family: PingFangSC-Regular;
+  font-size: 14px;
+  color: #3388DD;
 }

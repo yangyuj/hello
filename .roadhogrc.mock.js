@@ -134,7 +134,7 @@ const proxy = {
         "name":"菠萝计划"
       },{
         "id":3,
-        "name":"行事历"
+        "name":"苹果计划"
       },{
         "id":4,
         "name":"西瓜计划"
@@ -151,7 +151,7 @@ const proxy = {
     "content":{
       "scheduleTemplate":{
         "id":1, //(日程id)
-        "cName":"中文名",
+        "cName":"七年级核心管理团队会议",
         "eName":"name",
         "sTime":"2018-04-17 10:33:26",
         "eTime":"2018-04-17 10:33:27",
