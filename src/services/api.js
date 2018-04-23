@@ -20,3 +20,37 @@ export async function getTimeInfo() {
 export async function getCalendarInfo() {
   return request(`/api/getAllCalendar`);
 }
+
+
+
+
+
+//新建日历
+export async function addCalendar(params) {
+	console.log(params)
+  return request('/api/addCalendar', {
+    method: 'POST',
+    body: params,
+  });
+}
+//创建邀约
+export async function addYaoyue(params) {
+	console.log(params)
+  return request('/api/createScheduleTemplate', {
+    method: 'POST',
+    body: params,
+  });
+}
+//查询所有人员
+export async function getpeopleList() {
+  return request(`/api/getDepartmentList`);
+}
+//查询所有日历
+export async function getallRili() {
+  return request(`/api/getAllCalendar`);
+}
+//模糊查询(用不用？)
+export async function mohuCha(params) {
+	console.log(params.name)
+  return request(`/api/selectPersonName?name=${params.name}`);
+}

@@ -300,6 +300,142 @@ const proxy = {
   },
 
 
+
+
+
+  
+   //模糊查询
+   'GET /api/selectPersonName':{
+        "ifLogin": true,
+        "status": true,
+        "message": "查询人员成功",
+        "code": 11,
+        "content": {
+          "persons": [
+            {
+              "userId": null,
+              "userUnionId": null,
+              "orgId": null,
+              "name": "李明",
+              "ename": "liming",
+              "nickName": null,
+              "sex": null,
+              "certType": null,
+              "certNo": null,
+              "mobile": null,
+              "email": null,
+              "tel": null,
+              "nameSpelling": null,
+              "nationalityCode": null,
+              "deleted": null,
+              "birthday": null,
+              "birthCityCode": null,
+              "birthplace": null,
+              "remarks": null,
+              "createTime": null,
+              "modifyTime": null,
+              "relationType": 1
+            }
+          ]
+      },
+    "ifAdmin": false
+    },
+   //新建日历
+  'POST /api/addCalendar': (req, res) => {
+    res.send({
+        ifLogin:true,
+        status:true,
+        message:"插入成功！",
+        code:0,
+        ifAdmin:false,
+        content:[]
+    });
+  },
+  //查询所有人员
+  'GET /api/getDepartmentList':{
+        "ifLogin": true,
+        "status": true,
+        "message": "查询人员成功123",
+        "code": 11,
+        "content": {
+         "getDepartmentList": [
+      {
+        "orgTreeId": 7,
+        "orgId": null,
+        "parentId": 4,//学生发展研究院的id
+        "orgType": 2,
+        "orgName": "学生发展研究院",
+        "orgUrl": null,
+        "founderUrl": null,
+        "deleted": null,
+        "remarks": null,
+        "createTime": null,
+        "mobileTime": null,
+        "children":[{
+          "parentId":7,
+          "orgName":"一年级组",
+          "orgUserRelation":[{
+            "orgNodeId":7,
+            "userId":7,
+            "name":"李明"
+          }]
+        }]
+      },
+      {
+        "orgTreeId": 8,
+        "orgId": null,
+        "parentId": 4,
+        "orgType": 2,
+        "orgName": "课程研究院",
+        "orgUrl": null,
+        "founderUrl": null,
+        "deleted": null,
+        "remarks": null,
+        "createTime": null,
+        "mobileTime": null,
+        "children":[{
+          "parentId":4,
+          "orgName":"七年级年级组",
+          "orgUserRelation":[{
+            "orgNodeId":8,
+            "userId":61,
+            "name":"赵杰"
+          }]
+        }]
+      }
+    ]
+      },
+    "ifAdmin": false
+    },
+    //创建邀约
+   'POST /api/createScheduleTemplate': (req, res) => {
+    res.send({
+       "ifLogin": true,
+        "status": true,
+        "message": "创建成功",
+        "code": 11,
+        "content":[],
+        "ifAdmin":false
+    });
+  },
+  //获取所有日历
+  'GET /api/getAllCalendar':{
+        "ifLogin": true,
+        "status": true,
+        "message": "查询日历成功",
+        "code": 11,
+        "content": [
+              {
+                "id":1,
+                "name":"行事历"
+              },
+              {
+                "id":2,
+                "name":"菠萝计划"
+              }
+            ],
+        "ifAdmin": false
+  },
 };
 
 export default noProxy ? {} : delay(proxy, 1000);

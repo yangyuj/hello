@@ -15,9 +15,9 @@ export const getNavData = app => [
     layout: 'CalendarLayout',
     children: [
       {
-        name: '新建行事历',
+        name: '新建日历',
         path: 'creat',
-        component: dynamicWrapper(app, ['calendarCreat'], () => import('../routes/Calendar/Creat'))
+        component: dynamicWrapper(app, ['Calendar'], () => import('../routes/Calendar/Creat'))
       },
       {
         name: '我的行程',
@@ -32,6 +32,10 @@ export const getNavData = app => [
         name: '日历视图',
         path: 'CalShow',
         component: dynamicWrapper(app, ['calShow'], () => import('../routes/Calendar/CalShow'))
+      },{
+        name:"新建邀约",
+        path:'createInvitation',
+        component: dynamicWrapper(app, ['Calendar'], () => import('../routes/Calendar/CreateInvitation'))
       }
     ],
   },
