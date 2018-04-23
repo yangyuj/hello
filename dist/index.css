@@ -13375,16 +13375,9 @@ li.ant-calendar-time-picker-select-option-disabled:hover {
   background: #1890ff;
   color: #fff;
 }
-<<<<<<< HEAD
-.ant-modal-body {
-  padding: 50px;
-  font-size: 14px;
-  line-height: 1.5;
-=======
 .ant-calendar-month-panel-selected-cell .ant-calendar-month-panel-month:hover {
   background: #1890ff;
   color: #fff;
->>>>>>> 5349349d353b73410cf16304fe564efe3f3b8053
 }
 .ant-calendar-month-panel-cell {
   text-align: center;
@@ -13459,18 +13452,6 @@ li.ant-calendar-time-picker-select-option-disabled:hover {
 .ant-calendar-year-panel-header .ant-calendar-year-panel-month-select-arrow {
   display: none;
 }
-<<<<<<< HEAD
-/* .ant-confirm .ant-modal-body {
-  padding: 32px 32px 24px;
-} */
-.ant-confirm-body-wrapper {
-  zoom: 1;
-}
-.ant-confirm-body-wrapper:before,
-.ant-confirm-body-wrapper:after {
-  content: " ";
-  display: table;
-=======
 .ant-calendar-year-panel-header .ant-calendar-year-panel-prev-century-btn,
 .ant-calendar-year-panel-header .ant-calendar-year-panel-next-century-btn,
 .ant-calendar-year-panel-header .ant-calendar-year-panel-prev-decade-btn,
@@ -13487,7 +13468,6 @@ li.ant-calendar-time-picker-select-option-disabled:hover {
   font-size: 16px;
   display: inline-block;
   line-height: 40px;
->>>>>>> 5349349d353b73410cf16304fe564efe3f3b8053
 }
 .ant-calendar-year-panel-header .ant-calendar-year-panel-prev-century-btn,
 .ant-calendar-year-panel-header .ant-calendar-year-panel-prev-decade-btn,
