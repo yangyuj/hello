@@ -13248,7 +13248,7 @@ textarea.ant-time-picker-input {
   border-bottom: 1px solid #e8e8e8;
 }
 .ant-modal-body {
-  padding: 24px;
+  padding: 50px;
   font-size: 14px;
   line-height: 1.5;
 }
@@ -13306,9 +13306,9 @@ textarea.ant-time-picker-input {
 .ant-confirm .ant-modal-close {
   display: none;
 }
-.ant-confirm .ant-modal-body {
+/* .ant-confirm .ant-modal-body {
   padding: 32px 32px 24px;
-}
+} */
 .ant-confirm-body-wrapper {
   zoom: 1;
 }
