@@ -92,7 +92,9 @@ const dataWeek = [
 @connect(state => ({
     getCalendarInfoMessage: state.CalendarInfo.getCalendarInfoMessage,
     getTimeInfoMessage: state.CalendarInfo.getTimeInfoMessage,
-    checkDetailInfoMessage: state.CalendarInfo.checkDetailInfoMessage
+    checkDetailInfoMessage: state.CalendarInfo.checkDetailInfoMessage,
+    checkDeleteInfoMessage:state.CalendarInfo.checkDeleteInfoMessage,
+    checkConfirmInfoMessage:state.CalendarInfo.checkConfirmInfoMessage
 }))
 @Form.create()
 export default class CalendarShow extends PureComponent {
@@ -104,7 +106,8 @@ export default class CalendarShow extends PureComponent {
         super(props);
         this.state = {
             weekendShow: 0,
-            widthChange: 0
+            widthChange: 0,
+            confirmShow: "inline-block"
         };
     }
     componentDidMount() {
@@ -170,10 +173,17 @@ export default class CalendarShow extends PureComponent {
           visible: true,
         });
     }
+    //删除日程时候的确定
     handleOk = (e) => {
         this.setState({
           visible: false,
         });
+        this.props.dispatch({
+            type: 'CalendarInfo/deleteInfo',
+            payload:{
+
+            }
+        })
     }
     handleCancel = (e) => {
         this.setState({
@@ -184,14 +194,35 @@ export default class CalendarShow extends PureComponent {
     changeCal = () => {
         console.log("hhh");
     }
+    //转换日期时间
+    changTime = (value) =>{
+        console.log(value);
+    }
+    //确认日程
+    confirmCal = (value) =>{
+        this.props.dispatch({
+            type: 'CalendarInfo/confirmInfo',
+            payload:{
+
+            }
+        });
+        console.log(value);
+        if(value){
+            this.setState({
+                confirmShow: !this.state.confirmShow
+            });
+        }
+    }
     render() {
-        const { getCalendarInfoMessage, getTimeInfoMessage, checkDetailInfoMessage } = this.props;
+        const { getCalendarInfoMessage, getTimeInfoMessage, checkDetailInfoMessage, checkConfirmInfoMessage } = this.props;
         const calData = getCalendarInfoMessage;
         const timeData = getTimeInfoMessage;
         const detailData = checkDetailInfoMessage;
+        const confirmData = checkConfirmInfoMessage;
         let w = this.state.weekendShow ? 'inline-block' : 'none';
         let wC = this.state.widthChange ? '70%' : '100%';
-        // console.log(calData);
+        let con = this.state.confirmShow ? 'inline-block' : 'none';
+        // console.log(checkConfirmInfoMessage);
         return (
             <div className={styles.main}>
                 <div className={styles.topHeader}>
@@ -226,7 +257,8 @@ export default class CalendarShow extends PureComponent {
                                 <li className={styles.calendarLi}><Icon type="calendar" /></li>
                             </ul>
                             <Checkbox onChange={this.checkboxChange} className={styles.showWeekend}>显示双休日</Checkbox>
-                            <Button type="primary" className={styles.confirmationSchedule}>确认日程</Button>
+                            <Button type="primary" className={styles.confirmationSchedule} onClick={this.confirmCal.bind(this,confirmData)} style={{ display: con }}>确认日程</Button>
+                            <Button disabled className={styles.alreadyConfirm} style={{ display: !con }}>已确认</Button>
                             <Button type="primary" className={styles.newInvitation}>新建邀约</Button>
                         </div>
                         <Table
@@ -245,7 +277,7 @@ export default class CalendarShow extends PureComponent {
                         />
                         <div className={styles.checkDetail}>
                             <div className={styles.detailHeader}>{detailData && detailData.content.scheduleTemplate.cName}</div>
-                            <p className={styles.detailTime}><Icon className={styles.detailIcon} type="clock-circle-o" />{detailData && detailData.content.scheduleTemplate.sTime}</p>
+                            <p className={styles.detailTime}><Icon className={styles.detailIcon} type="clock-circle-o" />{detailData && detailData.content.scheduleTemplate.sTime}({detailData && detailData.content.scheduleTemplate.weekDay})</p>
                             <p className={styles.detailPlace}><Icon className={styles.detailIcon} type="environment" />{detailData && detailData.content.scheduleTemplate.address}</p>
                             <p className={styles.detailNum}><Icon className={styles.detailIcon} type="contacts" />{detailData && detailData.content.personNumbers}位邀约对象</p>
                             <p className={styles.detailMustChoose}>必选：{detailData && detailData.content.bixuan}</p>

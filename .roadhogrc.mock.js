@@ -168,6 +168,18 @@ const proxy = {
       "kexuan":["呜呜","湖师大苏"]
     }
   },
+  //确认日程
+  'GET /api/confirmCalendar':{
+    "ifLogin":"是否登录",
+    "status":true,
+    "message":"消息",
+  },
+  //删除日程
+  'GET /api/deleteScheduleTemplate':{
+    "ifLogin":"是否登录",
+    "status":true,
+    "message":"消息",
+  },
 
   'POST /api/tutor_save': (req, res) => {
     res.send({

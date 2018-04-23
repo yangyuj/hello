@@ -117,6 +117,15 @@ export default class tableShow extends PureComponent {
     toCalendar = ()=>{
         this.props.dispatch(routerRedux.push('/calShow'));
     }
+    //确认日程
+    confirmCal = () =>{
+        this.props.dispatch({
+            type: 'CalendarInfo/confirmInfo',
+            payload:{
+                
+            }
+        })
+    }
     render() {
         const { getTimeInfoMessage } = this.props;
         // console.log(getTimeInfoMessage);
@@ -135,7 +144,7 @@ export default class tableShow extends PureComponent {
                         <li className={styles.borderLi}></li>
                         <li className={styles.calendarLi} onClick={this.toCalendar}><Icon type="calendar" /></li>
                     </ul>
-                    <Button type="primary" className={styles.confirmationSchedule}>确认日程</Button>
+                    <Button type="primary" className={styles.confirmationSchedule} onClick={this.confirmCal}>确认日程</Button>
                     <Button type="primary" className={styles.newInvitation}>新建邀约</Button>
                 </div>
                 <Table className={styles.weekTable} columns={columns} dataSource={data} pagination={false}/>

@@ -24,3 +24,11 @@ export async function getCalendarInfo() {
 export async function checkDetailInfo() {
   return request(`/api/checkDetail`);
 }
+//删除日程
+export async function checkDeleteInfo() {
+  return request(`/api/deleteScheduleTemplate`);
+}
+//确认日程
+export async function checkConfirmInfo() {
+  return request(`/api/confirmCalendar`);
+}
