@@ -20,7 +20,7 @@ export async function getTimeInfo() {
 export async function getCalendarInfo() {
   return request(`/api/getAllCalendar`);
 }
-<<<<<<< HEAD
+
 
 
 
@@ -54,7 +54,7 @@ export async function getallRili() {
 export async function mohuCha(params) {
 	console.log(params.name)
   return request(`/api/selectPersonName?name=${params.name}`);
-=======
+}
 //日程详情的显示
 export async function checkDetailInfo() {
   return request(`/api/checkDetail`);
@@ -66,5 +66,5 @@ export async function checkDeleteInfo() {
 //确认日程
 export async function checkConfirmInfo() {
   return request(`/api/confirmCalendar`);
->>>>>>> 13df4a7a8ebf58ab735384de50aab023d8b6d8a8
+
 }

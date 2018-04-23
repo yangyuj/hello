@@ -16358,26 +16358,6 @@ textarea.ant-pagination-options-quick-jumper input {
   width: 30%;
   display: inline-block;
 }
-<<<<<<< HEAD
-/* stylelint-disable at-rule-empty-line-before,at-rule-name-space-after,at-rule-no-unknown */
-/* stylelint-disable no-duplicate-selectors */
-/* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
-/* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
-.content___3NXQ8 {
-  width: 1268px;
-  height: 919px;
-  background: #FFFFFF;
-  margin: 0 auto;
-  -webkit-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.05);
-          box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.05);
-  border-radius: 8px;
-}
-.table___3fy2k {
-  margin: 0 auto;
-}
-.leftKuang____5zv4 {
-  text-align: right;
-=======
 .main___30TG8 .weekendTable___1bMcW tr {
   width: 20%;
   border: 1px solid #D9CDEC;
@@ -16470,5 +16450,23 @@ textarea.ant-pagination-options-quick-jumper input {
   font-family: PingFangSC-Regular;
   font-size: 14px;
   color: #3388DD;
->>>>>>> 13df4a7a8ebf58ab735384de50aab023d8b6d8a8
+}
+/* stylelint-disable at-rule-empty-line-before,at-rule-name-space-after,at-rule-no-unknown */
+/* stylelint-disable no-duplicate-selectors */
+/* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
+/* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
+.content___3NXQ8 {
+  width: 1268px;
+  height: 919px;
+  background: #FFFFFF;
+  margin: 0 auto;
+  -webkit-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.05);
+          box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+}
+.table___3fy2k {
+  margin: 0 auto;
+}
+.leftKuang____5zv4 {
+  text-align: right;
 }

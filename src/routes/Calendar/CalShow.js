@@ -105,13 +105,12 @@ export default class CalendarShow extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-<<<<<<< HEAD
-          
-=======
+
+
             weekendShow: 0,
             widthChange: 0,
             confirmShow: "inline-block"
->>>>>>> 13df4a7a8ebf58ab735384de50aab023d8b6d8a8
+
         };
     }
     componentDidMount() {
