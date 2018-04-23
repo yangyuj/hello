@@ -1,14 +1,14 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import {
-    Form, Input, DatePicker, Select, Button, Card, InputNumber, Radio, Icon, Tabs, Table, Divider, Checkbox
+    Form, Input, DatePicker, Select, Modal, Button, Card, InputNumber, Radio, Icon, Tabs, Table, Divider, Checkbox
 } from 'antd';
 import { routerRedux } from 'dva/router';
 import styles from './CalShow.less';
 import { trans } from '../../utils/i18n';
 
 const FormItem = Form.Item;
-const { Option } = Select;
+const Option = Select.Option;
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 const TabPane = Tabs.TabPane;
@@ -25,11 +25,11 @@ const columns = [
         title: '周三',
         dataIndex: 'theme',
         key: 'theme',
-    },{
+    }, {
         title: '周四',
         dataIndex: 'people',
         key: 'people',
-    },{
+    }, {
         title: '周五',
         dataIndex: 'address',
         key: 'address',
@@ -43,7 +43,7 @@ const data = [
         theme: 32,
         people: 32,
         remark: 32,
-        address: 'New York No. 1 Lake Park',
+        address: 'New York',
     }, {
         key: '2',
         date: 'John Brown',
@@ -51,7 +51,7 @@ const data = [
         theme: 32,
         people: 32,
         remark: 32,
-        address: 'New York No. 1 Lake Park',
+        address: 'New York',
     }, {
         key: '3',
         date: 'John Brown',
@@ -59,60 +59,59 @@ const data = [
         theme: 32,
         people: 32,
         remark: 32,
-        address: 'New York No. 1 Lake Park',
+        address: 'New York',
     }
 ];
 const columnsWeek = [
     {
         title: '周六',
-        dataIndex: 'date',
-        key: 'date',
-    },{
+        dataIndex: 'Saturday',
+        key: 'Saturday',
+    }, {
         title: '周日',
-        dataIndex: 'date',
-        key: 'date',
-    } 
+        dataIndex: 'Sunday',
+        key: 'Sunday',
+    }
 ];
 const dataWeek = [
     {
-        key: '1',
-        date: 'John Brown',
-        time: 32,
-        theme: 32,
-        people: 32,
-        remark: 32,
-        address: 'New York No. 1 Lake Park',
+        key: '9',
+        Saturday: 'John Brown',
+        Sunday: 32,
     }, {
-        key: '2',
-        date: 'John Brown',
-        time: 32,
-        theme: 32,
-        people: 32,
-        remark: 32,
-        address: 'New York No. 1 Lake Park',
-    },{
-        key: '3',
-        date: 'John Brown',
-        time: 32,
-        theme: 32,
-        people: 32,
-        remark: 32,
-        address: 'New York No. 1 Lake Park',
+        key: '8',
+        Saturday: 'John Brown',
+        Sunday: 32,
+    }, {
+        key: '7',
+        Saturday: 'John Brown',
+        Sunday: 32,
     }
 ];
 
 @connect(state => ({
-    getCalendarInfoMessage: state.CalendarInfo.getCalendarInfoMessage
+    getCalendarInfoMessage: state.CalendarInfo.getCalendarInfoMessage,
+    getTimeInfoMessage: state.CalendarInfo.getTimeInfoMessage,
+    checkDetailInfoMessage: state.CalendarInfo.checkDetailInfoMessage,
+    checkDeleteInfoMessage:state.CalendarInfo.checkDeleteInfoMessage,
+    checkConfirmInfoMessage:state.CalendarInfo.checkConfirmInfoMessage
 }))
 @Form.create()
 export default class CalendarShow extends PureComponent {
     state = {
+        visible: false
     }
 
     constructor(props) {
         super(props);
         this.state = {
+<<<<<<< HEAD
           
+=======
+            weekendShow: 0,
+            widthChange: 0,
+            confirmShow: "inline-block"
+>>>>>>> 13df4a7a8ebf58ab735384de50aab023d8b6d8a8
         };
     }
     componentDidMount() {
@@ -122,56 +121,188 @@ export default class CalendarShow extends PureComponent {
             payload: {
 
             }
+        }).then(() => {
+            dispatch({
+                type: 'CalendarInfo/timeInfo',
+                payload: {
+
+                }
+            });
+        }).then(() => {
+            dispatch({
+                type: 'CalendarInfo/detailInfo',
+                payload: {
+
+                }
+            });
         });
     }
-    onChange = (e) =>{
-        console.log(`checked = ${e.target.checked}`);
+    //控制是否显示周末
+    checkboxChange = (e) => {
+        // console.log(e.target.checked);
+        this.setState({
+            weekendShow: !this.state.weekendShow,
+            widthChange: !this.state.widthChange
+        })
     }
-    toNewCalendar=()=>{
+    //转换成日历视图
+    toNewCalendar = () => {
         this.props.dispatch(routerRedux.push('/creat'));
     }
-    toTable = ()=>{
+    //转换成表格视图
+    toTable = () => {
+        this.props.dispatch(routerRedux.push('/tableShow'));
+    }
+    //点击切换到上一周
+    previousWeek = (value) => {
+        // console.log(value);
+        const current = value.currentWeek;
+        const total = value.totalWeek;
+        // console.log(current.substr(1, 1)); 
+    }
+    //点击切换到下一周
+    nextWeek = (value) => {
+        // console.log(value);
+        const current = value.currentWeek;
+        const total = value.totalWeek;
+        // console.log(current.substr(1, 1)); 
+    }
+    //切换学期
+    changeSemester = (value) => {
+        console.log(value);
+    }
+    //删除日程
+    showModal = () => {
+        this.setState({
+          visible: true,
+        });
+    }
+    //删除日程时候的确定
+    handleOk = (e) => {
+        this.setState({
+          visible: false,
+        });
+        this.props.dispatch({
+            type: 'CalendarInfo/deleteInfo',
+            payload:{
+
+            }
+        })
+    }
+    handleCancel = (e) => {
+        this.setState({
+          visible: false,
+        });
+    }
+    //切换日历发送请求
+    changeCal = () => {
+        console.log("hhh");
+    }
+    //转换日期时间
+    changTime = (value) =>{
+        console.log(value);
+    }
+    //确认日程
+    confirmCal = (value) =>{
+        this.props.dispatch({
+            type: 'CalendarInfo/confirmInfo',
+            payload:{
+
+            }
+        });
+        console.log(value);
+        if(value){
+            this.setState({
+                confirmShow: !this.state.confirmShow
+            });
+        }
+    }
+    //新建邀约
+    newInvitation = () =>{
         this.props.dispatch(routerRedux.push('/tableShow'));
     }
     render() {
-        const { getCalendarInfoMessage } = this.props;
-        const dataMsg = getCalendarInfoMessage;
-        // console.log(dataMsg && dataMsg.content);
+        const { getCalendarInfoMessage, getTimeInfoMessage, checkDetailInfoMessage, checkConfirmInfoMessage } = this.props;
+        const calData = getCalendarInfoMessage;
+        const timeData = getTimeInfoMessage;
+        const detailData = checkDetailInfoMessage;
+        const confirmData = checkConfirmInfoMessage;
+        let w = this.state.weekendShow ? 'inline-block' : 'none';
+        let wC = this.state.widthChange ? '70%' : '100%';
+        let con = this.state.confirmShow ? 'inline-block' : 'none';
+        // console.log(checkConfirmInfoMessage);
         return (
             <div className={styles.main}>
                 <div className={styles.topHeader}>
-                    <Tabs defaultActiveKey="1" className={styles.showTabs}>
-                        {/* {
-                           dataMsg && dataMsg.content.map((index, value)=>{
-                               return(
-                                <TabPane tab="Tab" key={index}>Content of Tab Pane 1</TabPane>
-                               );
-                           }) 
-                        } */}
-                        <TabPane tab="Tab 1" key="1">Content of Tab Pane 1</TabPane>
-                        <TabPane tab="Tab 2" key="2">Content of Tab Pane 2</TabPane>
-                        <TabPane tab="Tab 3" key="3">Content of Tab Pane 3</TabPane>
-                    </Tabs>
+                    {   
+                        calData 
+                        && calData.length > 0 
+                        && (<Tabs className={styles.showTabs} defaultActiveKey="1">
+                                {calData.map((el , i) => <TabPane  tab={el.name} key={i} />)}
+                            </Tabs>)
+                    }
+                    <div className={styles.calendarList}>
+                        <div className={styles.showHeader}>
+                            <span className={styles.showName}>
+                                <Select defaultValue={timeData && timeData.content.year.current} style={{ width: 150 }} >
+                                    {
+                                        timeData && timeData.content.year.list.map((value, index) => {
+                                            return (
+                                                <Option value={value.name} key={index} onClick={this.changeSemester.bind(this, value)}>{value.name}</Option>
+                                            );
+                                        })
+                                    }
+                                </Select>
+                            </span>
+                            <span className={styles.weekChange}>
+                                <Button className={styles.weekChangeBtn} onClick={this.previousWeek.bind(this, timeData && timeData.content.week)}><Icon type="left" /></Button>
+                                    {timeData && timeData.content.week.currentWeek}
+                                <Button className={styles.weekChangeBtn} onClick={this.nextWeek.bind(this, timeData && timeData.content.week)}><Icon type="right" /></Button>
+                            </span>
+                            <ul className={styles.viewChange}>
+                                <li className={styles.barsLi} onClick={this.toTable}><Icon type="bars" /></li>
+                                <li className={styles.borderLi}></li>
+                                <li className={styles.calendarLi}><Icon type="calendar" /></li>
+                            </ul>
+                            <Checkbox onChange={this.checkboxChange} className={styles.showWeekend}>显示双休日</Checkbox>
+                            <Button type="primary" className={styles.confirmationSchedule} onClick={this.confirmCal.bind(this,confirmData)} style={{ display: con }}>确认日程</Button>
+                            <Button disabled className={styles.alreadyConfirm} style={{ display: !con }}>已确认</Button>
+                            <Button type="primary" className={styles.newInvitation} onClick={this.newInvitation}>新建邀约</Button>
+                        </div>
+                        <Table
+                            className={styles.weekTable}
+                            columns={columns}
+                            dataSource={data}
+                            pagination={false}
+                            style={{ width: wC }}
+                        />
+                        <Table
+                            className={styles.weekendTable}
+                            columns={columnsWeek}
+                            dataSource={dataWeek}
+                            pagination={false}
+                            style={{ display: w }}
+                        />
+                        <div className={styles.checkDetail}>
+                            <div className={styles.detailHeader}>{detailData && detailData.content.scheduleTemplate.cName}</div>
+                            <p className={styles.detailTime}><Icon className={styles.detailIcon} type="clock-circle-o" />{detailData && detailData.content.scheduleTemplate.sTime}({detailData && detailData.content.scheduleTemplate.weekDay})</p>
+                            <p className={styles.detailPlace}><Icon className={styles.detailIcon} type="environment" />{detailData && detailData.content.scheduleTemplate.address}</p>
+                            <p className={styles.detailNum}><Icon className={styles.detailIcon} type="contacts" />{detailData && detailData.content.personNumbers}位邀约对象</p>
+                            <p className={styles.detailMustChoose}>必选：{detailData && detailData.content.bixuan}</p>
+                            <p className={styles.detailCanChoose}>可选：{detailData && detailData.content.kexuan}</p>
+                            <p className={styles.detailRemark}><Icon className={styles.detailIcon} type="profile" />{detailData && detailData.content.scheduleTemplate.remark}</p>
+                            <p className={styles.detailFooter}>
+                                <span onClick={this.showModal} className={styles.deleteSpan}><Icon type="delete" />删除</span>
+                                <Modal visible={this.state.visible} onOk={this.handleOk} onCancel={this.handleCancel} >
+                                    <p className={styles.deleteSure}>您确定要删除这次日程么？</p>
+                                </Modal>
+                                <Button className={styles.detailBtnEdit} size="small" type="primary">编辑</Button>
+                                <Button className={styles.detailBtnCancel} size="small">取消</Button>
+                            </p>
+                        </div>
+                    </div>
                     <Button className={styles.newCanlendar} onClick={this.toNewCalendar}>新建日历</Button>
                 </div>
-                <div className={styles.showHeader}>
-                    <span className={styles.showName}>云谷学校行事历</span>
-                    <span className={styles.weekChange}>
-                        <Button className={styles.weekChangeBtn}><Icon type="left" /></Button>
-                        第五周
-                        <Button className={styles.weekChangeBtn}><Icon type="right" /></Button>
-                    </span>
-                    <ul className={styles.viewChange}>
-                        <li className={styles.barsLi} onClick={this.toTable}><Icon type="bars" /></li>
-                        <li className={styles.borderLi}></li>
-                        <li className={styles.calendarLi}><Icon type="calendar" /></li>
-                    </ul>
-                    <Checkbox onChange={this.onChange} className={styles.showWeekend}>显示双休日</Checkbox>
-                    <Button type="primary" className={styles.confirmationSchedule}>确认日程</Button>
-                    <Button type="primary" className={styles.newInvitation}>新建邀约</Button>
-                </div>
-                <Table className={styles.weekTable} {...this.state} columns={columns} dataSource={data} pagination={false} />
-                <Table className={styles.weekendTable} columns={columnsWeek} dataSource={dataWeek} pagination={false}/>
             </div>
         );
     }

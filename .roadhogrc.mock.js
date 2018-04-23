@@ -15,27 +15,31 @@ const noProxy = process.env.NO_PROXY === 'true';
 // 代码中会兼容本地 service mock 以及部署站点的静态数据
 const proxy = {
   // 支持值为 Object 和 Array
-  'GET /api/current_user': {
-    $desc: "获取当前用户接口",
-    $params: {
-      pageSize: {
-        desc: '分页',
-        exp: 2,
+  //'GET /api/current_user': {
+
+  'POST /api/current_user': (req, res) => {
+    res.send({
+      $desc: "获取当前用户接口",
+      $params: {
+        pageSize: {
+          desc: '分页',
+          exp: 2,
+        },
       },
-    },
-    $body: {
-      "ifLogin": true,
-      "status": true,
-      "message": "获取成功",
-      "code": 0,
-      "content": {
-        "name": "蔡武娟",
-        "avatar": "https://static.dingtalk.com/media/lADOysn4mc0CgM0Cfg_638_640.jpg",
-        "userId": 14,
-        "notifyCount": 12,
-        "identify":["employee"]
+      $body: {
+        "ifLogin": true,
+        "status": true,
+        "message": "获取成功",
+        "code": 0,
+        "content": {
+          "name": "蔡武娟",
+          "avatar": "https://static.dingtalk.com/media/lADOysn4mc0CgM0Cfg_638_640.jpg",
+          "userId": 14,
+          "notifyCount": 12,
+          "identify":["employee"]
+        }
       }
-    }
+    });
   },
 
   //列表显示学年和学期的请求
@@ -45,116 +49,38 @@ const proxy = {
     "message":"查询成功！",
     "code":0,
     "ifAdmin":false,
-    "content":[
-      {
-        "id": 1,
-        "name": "2018学年",
-        "start_time":4726497364,     //(学年的开始日期)
-        "end_time":473695763294,     //（学年的结束日期）
-        "List":[
-          {
-            "id":1,
-            "name" : "上学期",
-            "list":[
-              {
-                "week": "第一周",
-                "weekType":  false,	
-                "betweenTime":"344567/234567890" 
-              },{
-                "week": "第二周",
-                "weekType": true,	
-                "betweenTime":"344567/234567890" 
-              },{
-                "week": "第三周",
-                "weekType": true,	
-                "betweenTime":"344567/234567890" 
-              },{
-                "week": "第四周",
-                "weekType": false,	
-                "betweenTime":"344567/234567890" 
-              }
-            ]
-          },
-          {
-            "id":2,
-            "name" : "下学期",
-            "list":[
-              {
-                "week": "第一周",
-                "weekType": true,	
-                "betweenTime":"344567/234567890" 
-              },{
-                "week": "第二周",
-                "weekType": false,	
-                "betweenTime":"344567/234567890" 
-              },{
-                "week": "第三周",
-                "weekType": false,	
-                "betweenTime":"344567/234567890" 
-              },{
-                "week": "第四周",
-                "weekType": true,	
-                "betweenTime":"344567/234567890" 
-              }
-            ]
-          }
+    "content":{
+      "year":{
+        "current":"2018学年上学期",
+        "list":[
+            {
+              "id": 1,
+              "name": "2018学年上学期",
+              "start_time":4726497364,//(学年的开始日期)
+              "end_time":473695763294,//（学年的结束日期）
+            },{
+              "id": 1,
+              "name": "2018学年下学期",
+              "start_time":4726497364,//(学年的开始日期)
+              "end_time":473695763294,//（学年的结束日期）
+            },{
+              "id": 2,
+              "name": "2019学年上学期",
+              "start_time":4726497364,//(学年的开始日期)
+              "end_time":473695763294,//（学年的结束日期）
+            },{
+              "id": 3,
+              "name": "2019学年下学期",
+              "start_time":4726497364,//(学年的开始日期)
+              "end_time":473695763294,//（学年的结束日期）
+            }
         ]
       },
-      {
-        "id": 2,
-        "name": "2019学年",
-        "start_time":4726497364,     //(学年的开始日期)
-        "end_time":473695763294,     //（学年的结束日期）
-        "List" :[
-          {
-            "id":1,
-            "name" : "上学期",
-            "list":[
-              {
-                "week": "第一周",
-                "weekType": false,	
-                "betweenTime" :"344567/234567890" 
-              },{
-                "week": "第二周",
-                "weekType": false,	
-                "betweenTime" :"344567/234567890" 
-              },{
-                "week": "第三周",
-                "weekType": true,	
-                "betweenTime" :"344567/234567890" 
-              },{
-                "week": "第四周",
-                "weekType": false,	
-                "betweenTime" :"344567/234567890" 
-              }
-            ]
-          },
-          {
-            "id":2,
-            "name" : "下学期",
-            "list":[
-              {
-                "week": "第一周",
-                "weekType": false,	
-                "betweenTime" :"344567/234567890" 
-              },{
-                "week": "第二周",
-                "weekType": false,	
-                "betweenTime" :"344567/234567890" 
-              },{
-                "week": "第三周",
-                "weekType": false,	
-                "betweenTime" :"344567/234567890" 
-              },{
-                "week": "第四周",
-                "weekType": true,	
-                "betweenTime" :"344567/234567890" 
-              }
-            ]
-          }
-        ]
+      "week":{
+        "currentWeek":"第六周",
+        "totalWeek":"18"
       }
-    ]
+    }
   },
   //列表内容的显示
   'GET /api/getScheduleList': {
@@ -212,10 +138,10 @@ const proxy = {
         "name":"菠萝计划"
       },{
         "id":3,
-        "name":"菠萝计划"
+        "name":"苹果计划"
       },{
         "id":4,
-        "name":"菠萝计划"
+        "name":"西瓜计划"
       }
     ]
   },
@@ -229,17 +155,30 @@ const proxy = {
     "content":{
       "scheduleTemplate":{
         "id":1, //(日程id)
-        "cName":"中文名",
+        "cName":"七年级核心管理团队会议",
         "eName":"name",
         "sTime":"2018-04-17 10:33:26",
         "eTime":"2018-04-17 10:33:27",
         "address":"小雪",
         "remark":"必须来",
+        "weekDay":"周二"
       },
       "personNumbers":23,
       "bixuan":["张三","李四"],
       "kexuan":["呜呜","湖师大苏"]
     }
+  },
+  //确认日程
+  'GET /api/confirmCalendar':{
+    "ifLogin":"是否登录",
+    "status":true,
+    "message":"消息",
+  },
+  //删除日程
+  'GET /api/deleteScheduleTemplate':{
+    "ifLogin":"是否登录",
+    "status":true,
+    "message":"消息",
   },
 
   'POST /api/tutor_save': (req, res) => {

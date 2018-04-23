@@ -17,8 +17,8 @@ export default {
         payload: true,
       });
       const response = yield call(queryUsers);
-      !response.ifLogin && (yield put(routerRedux.push('/user/login')));
-      !response.status && (yield put(routerRedux.push('/user/login')));
+      // !response.ifLogin && (yield put(routerRedux.push('/user/login')));
+      // !response.status && (yield put(routerRedux.push('/user/login')));
       yield put({
         type: 'save',
         payload: response.content,
@@ -31,8 +31,8 @@ export default {
 
     *fetchCurrent(_, { call, put }) {
       const response = yield call(queryCurrent);
-      !response.ifLogin && (yield put(routerRedux.push('/user/login')));
-      !response.status && (yield put(routerRedux.push('/user/login')));
+      // !response.ifLogin && (yield put(routerRedux.push('/user/login')));
+      // !response.status && (yield put(routerRedux.push('/user/login')));
       yield put({
         type: 'saveCurrentUser',
         payload: response,
