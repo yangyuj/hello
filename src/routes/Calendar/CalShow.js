@@ -213,6 +213,10 @@ export default class CalendarShow extends PureComponent {
             });
         }
     }
+    //新建邀约
+    newInvitation = () =>{
+        this.props.dispatch(routerRedux.push('/tableShow'));
+    }
     render() {
         const { getCalendarInfoMessage, getTimeInfoMessage, checkDetailInfoMessage, checkConfirmInfoMessage } = this.props;
         const calData = getCalendarInfoMessage;
@@ -259,7 +263,7 @@ export default class CalendarShow extends PureComponent {
                             <Checkbox onChange={this.checkboxChange} className={styles.showWeekend}>显示双休日</Checkbox>
                             <Button type="primary" className={styles.confirmationSchedule} onClick={this.confirmCal.bind(this,confirmData)} style={{ display: con }}>确认日程</Button>
                             <Button disabled className={styles.alreadyConfirm} style={{ display: !con }}>已确认</Button>
-                            <Button type="primary" className={styles.newInvitation}>新建邀约</Button>
+                            <Button type="primary" className={styles.newInvitation} onClick={this.newInvitation}>新建邀约</Button>
                         </div>
                         <Table
                             className={styles.weekTable}
