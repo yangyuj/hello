@@ -50,6 +50,10 @@ export async function getpeopleList() {
 export async function getallRili() {
   return request(`/api/getAllCalendar`);
 }
+//查询地点
+ export async function getallplace() {
+  return request(`/api/getAddressList`);
+}
 //模糊查询(用不用？)
 export async function mohuCha(params) {
 	console.log(params.name)

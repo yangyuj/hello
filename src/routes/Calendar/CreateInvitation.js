@@ -52,7 +52,9 @@ const treeData = [{
     addWork : state.Calendar.addCalendarapi,
     personlist: state.Calendar.mohuList,
     yaoyue:state.Calendar.yaoyue,
-    rililist:state.Calendar.allrili
+    rililist:state.Calendar.allrili,
+    placelist:state.Calendar.allplace,
+    peoplelist:state.Calendar.peoplelist
 }))
 @Form.create()
 export default class Creat extends PureComponent {
@@ -69,14 +71,15 @@ export default class Creat extends PureComponent {
            lastTime:null,
            chongfu:null,
            place:null,
-           beizhu:null
+           beizhu:null,
+           treeData:null
         };
     }
      componentDidMount(){
       let _this=this
          const { dispatch } = this.props;
               dispatch({
-                  type: 'Calendar/charili',
+                  type: 'Calendar/charili', //查询all日历
                   payload: {
                     
                   }
@@ -85,8 +88,30 @@ export default class Creat extends PureComponent {
                       && _this.props.rililist.content)
 
               })
+         
+             //查询地点
+              dispatch({
+                  type: 'Calendar/chaPlace',
+                  payload: {
+                    
+                  }
+              })
+
+
+              dispatch({  //查询所有人员
+                      type: 'Calendar/people',
+                      payload: {
+                          
+                      }
+              }).then(function(){
+                console.log(_this.props.peoplelist 
+                  && _this.props.peoplelist.content.getDepartmentList)
+              _this.setState({treeData: _this.props.peoplelist 
+                  && _this.props.peoplelist.content.getDepartmentList}) 
+              })
+
      }
-	  handleChange=(value)=> {
+	 handleChange=(value)=> {
     console.log(`类型 ${value}`);
     this.setState({leixing:value})
    }
@@ -132,8 +157,9 @@ export default class Creat extends PureComponent {
     this.setState({place:value})
     }
 
-  handleBlurplace=()=> {
-      console.log('blur');
+  handleBlurplace=(e)=> {
+      console.log("blur");
+      
     }
 
   handleFocusplace=()=> {
@@ -203,25 +229,24 @@ export default class Creat extends PureComponent {
               
     }
   render() {
+    let tree=this.state.treeData
    const tProps1 = {
-      treeData,
+      treeData:tree,
       value1: this.state.value,
       onChange: this.onChangeXiala1,
       onSearch: this.onChangesearch,
-      treeCheckable: true,
-      showCheckedStrategy: SHOW_PARENT,
+      treeCheckable: true,    
       searchPlaceholder: '请输入人名/部门选择',
       style: {
         width: 300,
       },
     };
     const tProps2 = {
-      treeData,
+      treeData:tree,
       value2: this.state.value,
       onChange: this.onChangeXiala2,
       onSearch: this.onChangesearch,
       treeCheckable: true,
-      showCheckedStrategy: SHOW_PARENT,
       searchPlaceholder: '请输入人名/部门选择',
       style: {
         width: 300,
@@ -298,9 +323,15 @@ export default class Creat extends PureComponent {
                 onBlur={this.handleBlurplace}
                 filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
               >
-                <Option value="3-1">3-1</Option>
+              {
+                this.props.placelist
+                 && this.props.placelist.content.listInfobyAddress.map((value,index)=>{
+                  return <Option  value={value.cName} key={value.id}>{value.cName}</Option>
+            })
+              }
+                {/*<Option value="3-1">3-1</Option>
                 <Option value="3-2">3-2</Option>
-                <Option value="3-3">3-3</Option>
+                <Option value="3-3">3-3</Option>*/}
               </Select>
           </td>
          </tr>

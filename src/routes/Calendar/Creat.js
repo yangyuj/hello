@@ -14,18 +14,18 @@ const { TextArea } = Input;
 const SHOW_PARENT = TreeSelect.SHOW_PARENT;
 const SHOW_ALL=TreeSelect.SHOW_ALL;
 
-const treeData = [{
-  label: '技术部',
-  value: '技术部',
-  key: '0-0',
-  children: [{
-    label: '张三',
-    value: '张三',
-    key: '0-0-0',
+let treeData = [{
+  "label": '技术部',
+  "value": '技术部',
+  "key": '0-0',
+  "children": [{
+    "label": '张三',
+    "value": '张三',
+    "key": '0-0-0',
   },{
-    label: '王哦',
-    value: '王哦',
-    key: '0-0-1',
+    "label": '王哦',
+    "value": '王哦',
+    "key": '0-0-1',
   }],
 }, {
   label: '市场部',
@@ -62,14 +62,14 @@ export default class Creat extends PureComponent {
 		    disabled:true,
 		    c_mingzi:null,
 		    e_mingzi:null,
-
+            treeData:null
         };
     }
 
     componentDidMount() {
     	let _this=this
      const { dispatch } = this.props;
-      dispatch({  //模糊查询
+      dispatch({  //查询所有人员
 	            type: 'Calendar/people',
 	            payload: {
 	                
@@ -77,25 +77,8 @@ export default class Creat extends PureComponent {
 	    }).then(function(){
 	    	console.log(_this.props.guanliPeople 
 	    		&& _this.props.guanliPeople.content.getDepartmentList)
-	    	let plist=_this.props.guanliPeople 
-	    		&& _this.props.guanliPeople.content.getDepartmentList
-	    	
-
-				for(let i=0;i<plist.length;i++){
-					let peopleJson={  label: '',
-									  value: '',
-									  key: '',
-									  children: [{
-									    label: '',
-									    value: '',
-									    key: '',
-									  }],
-									}
-                      peopleJson.label=plist[i].orgName
-                      peopleJson.value=plist[i].orgName
-                      peopleJson.key=plist[i].parentId
-
-	             }
+			_this.setState({treeData: _this.props.guanliPeople 
+	    		&& _this.props.guanliPeople.content.getDepartmentList}) 
 	    })
 	}
 
@@ -159,15 +142,16 @@ export default class Creat extends PureComponent {
 	    })
   	}
   render() {
+  	let _this=this
+  	let tree=this.state.treeData
   	console.log(this.props.addWork && this.props.addWork.status)
   	console.log(this.props.personlist && this.props.personlist)
   	const tProps = {
-      treeData,
+      treeData:tree,
       value: this.state.value,
       onChange: this.onChangeXiala,
       onSearch: this.onChangesearch,
       treeCheckable: true,
-      showCheckedStrategy: SHOW_PARENT,
       searchPlaceholder: '请输入人名/部门选择',
       style: {
         width: 300,
