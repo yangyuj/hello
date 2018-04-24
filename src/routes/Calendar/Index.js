@@ -5,6 +5,7 @@ import { routerRedux } from 'dva/router';
 import CalendarHeaderLayout from '../../layouts/CalendarHeaderLayout';
 import { trans } from '../../utils/i18n';
 import { intToChinese } from '../../utils/utils';
+import CalendarBarTable from '../../components/CalendarBarTable';
 import styles from './Index.less';
 
 const confirm = Modal.confirm;
@@ -137,8 +138,10 @@ export default class Index extends PureComponent {
             <Icon className={tableType=='calendar' && styles.cur} onClick={this.checkTable.bind(this, 'calendar')} type="calendar" />
           </span>
         </div>
-        <div>
-          {tableType == 'bars' && '这里是日程表格控件1'}
+        <div className={styles.bodyBox}>
+          {tableType == 'bars'
+            && <CalendarBarTable
+                dataSource={checkListInfo} />}
           {tableType == 'calendar' && '这里是日程表格控件2'}
         </div>
       </div>

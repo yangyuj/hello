@@ -51,7 +51,7 @@ const proxy = {
     "ifAdmin":false,
     "content":{
       "year":{
-        "current":"2018学年上学期",
+        "current": 8,
         "list":[
             {
               "id": 1,
@@ -59,7 +59,7 @@ const proxy = {
               "start_time":4726497364,//(学年的开始日期)
               "end_time":473695763294,//（学年的结束日期）
             },{
-              "id": 1,
+              "id": 8,
               "name": "2018学年下学期",
               "start_time":4726497364,//(学年的开始日期)
               "end_time":473695763294,//（学年的结束日期）
@@ -92,31 +92,143 @@ const proxy = {
     "content":[
       {
         "key": 1,
-        list:[
-          {"scheduleId":1,"scheduleTime":"xx","theme":"会议","people":"xxx,xxx,xxx,xxx","location":"小雪","remark":"xxx"},
-          {"scheduleId":2,"scheduleTime":"xx","theme":"会议","people":"xxx,xxx,xxx,xxx","location":"小雪","remark":"xxx"},
-          {"scheduleId":3,"scheduleTime":"xx","theme":"会议","people":"xxx,xxx,xxx,xxx","location":"小雪","remark":"xxx"}
+        "list": [
+          {
+            "scheduleId": 1,
+            "scheduleTime": "xx",
+            "theme": "会议232",
+            "people": "xxx,xxx,xxx,xxx",
+            "location": "小雪",
+            "remark": "xxx",
+            "start": "7:20",
+            "end": "8:00"
+          },
+          {
+            "scheduleId": 2,
+            "scheduleTime": "xx",
+            "theme": "会议",
+            "people": "xxx,xxx,xxx,xxx",
+            "location": "小雪",
+            "remark": "xxx",
+            "start": "7:00",
+            "end": "7:20"
+          },
+          {
+            "scheduleId": 3,
+            "scheduleTime": "xx",
+            "theme": "会议",
+            "people": "xxx,xxx,xxx,xxx",
+            "location": "小雪",
+            "remark": "xxx",
+            "start": "7:00",
+            "end": "7:20"
+          }
         ]
-      },{
+      },
+      {
         "key": 2,
-        list:[
-          {"scheduleId":1,"scheduleTime":"xx","theme":"会议","people":"xxx,xxx,xxx,xxx","location":"小雪","remark":"xxx"},
-          {"scheduleId":2,"scheduleTime":"xx","theme":"会议","people":"xxx,xxx,xxx,xxx","location":"小雪","remark":"xxx"},
-          {"scheduleId":3,"scheduleTime":"xx","theme":"会议","people":"xxx,xxx,xxx,xxx","location":"小雪","remark":"xxx"}
+        "list": [
+          {
+            "scheduleId": 1,
+            "scheduleTime": "xx",
+            "theme": "会议",
+            "people": "xxx,xxx,xxx,xxx",
+            "location": "小雪",
+            "remark": "xxx",
+            "start": "8:00",
+            "end": "8:20"
+          },
+          {
+            "scheduleId": 2,
+            "scheduleTime": "xx",
+            "theme": "会议",
+            "people": "xxx,xxx,xxx,xxx",
+            "location": "小雪",
+            "remark": "xxx",
+            "start": "8:00",
+            "end": "8:20"
+          },
+          {
+            "scheduleId": 3,
+            "scheduleTime": "xx",
+            "theme": "会议",
+            "people": "xxx,xxx,xxx,xxx",
+            "location": "小雪",
+            "remark": "xxx",
+            "start": "8:00",
+            "end": "8:20"
+          }
         ]
-      },{
+      },
+      {
         "key": 3,
-        list:[
-          {"scheduleId":1,"scheduleTime":"xx","theme":"会议","people":"xxx,xxx,xxx,xxx","location":"小雪","remark":"xxx"},
-          {"scheduleId":2,"scheduleTime":"xx","theme":"会议","people":"xxx,xxx,xxx,xxx","location":"小雪","remark":"xxx"},
-          {"scheduleId":3,"scheduleTime":"xx","theme":"会议","people":"xxx,xxx,xxx,xxx","location":"小雪","remark":"xxx"}
+        "list": [
+          {
+            "scheduleId": 1,
+            "scheduleTime": "xx",
+            "theme": "会议",
+            "people": "xxx,xxx,xxx,xxx",
+            "location": "小雪",
+            "remark": "xxx",
+            "start": "14:00",
+            "end": "15:20"
+
+          },
+          {
+            "scheduleId": 2,
+            "scheduleTime": "xx",
+            "theme": "会议",
+            "people": "xxx,xxx,xxx,xxx",
+            "location": "小雪",
+            "remark": "xxx",
+            "start": "14:00",
+            "end": "15:20"
+          },
+          {
+            "scheduleId": 3,
+            "scheduleTime": "xx",
+            "theme": "会议",
+            "people": "xxx,xxx,xxx,xxx",
+            "location": "小雪",
+            "remark": "xxx",
+            "start": "14:00",
+            "end": "15:20"
+          }
         ]
-      },{
+      },
+      {
         "key": 4,
-        list:[
-          {"scheduleId":1,"scheduleTime":"xx","theme":"会议","people":"xxx,xxx,xxx,xxx","location":"小雪","remark":"xxx"},
-          {"scheduleId":2,"scheduleTime":"xx","theme":"会议","people":"xxx,xxx,xxx,xxx","location":"小雪","remark":"xxx"},
-          {"scheduleId":3,"scheduleTime":"xx","theme":"会议","people":"xxx,xxx,xxx,xxx","location":"小雪","remark":"xxx"}
+        "list": [
+          {
+            "scheduleId": 1,
+            "scheduleTime": "xx",
+            "theme": "会议",
+            "people": "xxx,xxx,xxx,xxx",
+            "location": "小雪",
+            "remark": "xxx",
+            "start": "14:00",
+            "end": "15:20"
+          },
+          {
+            "scheduleId": 2,
+            "scheduleTime": "xx",
+            "theme": "会议",
+            "people": "xxx,xxx,xxx,xxx",
+            "location": "小雪",
+            "remark": "xxx",
+            "start": "14:00",
+            "end": "15:20"
+          },
+          {
+            "scheduleId": 3,
+            "scheduleTime": "xx",
+            "theme": "会议",
+            "people": "xxx,xxx,xxx,xxx",
+            "location": "小雪",
+            "remark": "xxx",
+            "start": "14:00",
+            "end": "15:20"
+          }
         ]
       }
     ]
@@ -299,7 +411,7 @@ const proxy = {
         "content": {
          "getDepartmentList": [
             {
-              
+
               "value": "4-7",
               "key": "4-7",
               "label": "学生发展研究院",
