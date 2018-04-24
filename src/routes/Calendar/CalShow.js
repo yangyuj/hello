@@ -105,12 +105,14 @@ export default class CalendarShow extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-
-
             weekendShow: 0,
             widthChange: 0,
-            confirmShow: "inline-block"
-
+            confirmShow: "inline-block",
+            params:{
+                tabChange: 0,
+                yearsChange: 0,
+                weekChange: 0
+            }
         };
     }
     componentDidMount() {
@@ -220,6 +222,11 @@ export default class CalendarShow extends PureComponent {
     newInvitation = () =>{
         this.props.dispatch(routerRedux.push('/tableShow'));
     }
+    alert = (value) =>{
+        this.setState({
+            
+        })
+    }
     render() {
         const { getCalendarInfoMessage, getTimeInfoMessage, checkDetailInfoMessage, checkConfirmInfoMessage } = this.props;
         const calData = getCalendarInfoMessage;
@@ -236,7 +243,7 @@ export default class CalendarShow extends PureComponent {
                     {   
                         calData 
                         && calData.length > 0 
-                        && (<Tabs className={styles.showTabs} defaultActiveKey="1">
+                        && (<Tabs className={styles.showTabs} defaultActiveKey="1" onChange={this.alert.bind(this)}>
                                 {calData.map((el , i) => <TabPane  tab={el.name} key={i} />)}
                             </Tabs>)
                     }
