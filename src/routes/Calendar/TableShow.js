@@ -6,6 +6,8 @@ import {
 import { routerRedux } from 'dva/router';
 import styles from './TableShow.less';
 import { trans } from '../../utils/i18n';
+import TableView from '../../components/TableView/index';
+import CalendarView from '../../components/CalendarView/index';
 
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -92,7 +94,8 @@ const data = [
 ];
 
 @connect(state => ({
-    getTimeInfoMessage: state.timeInfo.getTimeInfoMessage
+    getTimeInfoMessage: state.timeInfo.getTimeInfoMessage,
+    getListInfoMessage: state.timeInfo.getListInfoMessage
 }))
 @Form.create()
 export default class tableShow extends PureComponent {
@@ -102,7 +105,6 @@ export default class tableShow extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-
         };
     }
     componentDidMount() {
@@ -112,6 +114,13 @@ export default class tableShow extends PureComponent {
             payload: {
 
             }
+        }).then(()=>{
+            dispatch({
+                type: 'timeInfo/listInfo',
+                payload: {
+
+                }
+            })
         });
     }
     toCalendar = ()=>{
@@ -127,8 +136,7 @@ export default class tableShow extends PureComponent {
         })
     }
     render() {
-        const { getTimeInfoMessage } = this.props;
-        // console.log(getTimeInfoMessage);
+        const { getTimeInfoMessage, getListInfoMessage } = this.props;
         const timeData = getTimeInfoMessage;
         return (
             <div className={styles.main}>
@@ -147,7 +155,9 @@ export default class tableShow extends PureComponent {
                     <Button type="primary" className={styles.confirmationSchedule} onClick={this.confirmCal}>确认日程</Button>
                     <Button type="primary" className={styles.newInvitation}>新建邀约</Button>
                 </div>
-                <Table className={styles.weekTable} columns={columns} dataSource={data} pagination={false}/>
+                {/* <Table className={styles.weekTable} columns={columns} dataSource={data} pagination={false}/> */}
+                <TableView getListInfoMessage={getListInfoMessage && getListInfoMessage.content}/>
+                <CalendarView getListInfoMessage={getListInfoMessage && getListInfoMessage.content}/>
             </div>
         );
     }

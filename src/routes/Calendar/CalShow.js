@@ -6,6 +6,8 @@ import {
 import { routerRedux } from 'dva/router';
 import styles from './CalShow.less';
 import { trans } from '../../utils/i18n';
+// import TableView from '../../components/TableView/index';
+// import CalendarView from '../../components/CalendarView/index';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -232,6 +234,7 @@ export default class CalendarShow extends PureComponent {
         let w = this.state.weekendShow ? 'inline-block' : 'none';
         let wC = this.state.widthChange ? '70%' : '100%';
         let con = this.state.confirmShow ? 'inline-block' : 'none';
+        let com = this.state.confirmShow ? 'none' : 'inline-block';
         // console.log(checkConfirmInfoMessage);
         return (
             <div className={styles.main}>
@@ -268,24 +271,10 @@ export default class CalendarShow extends PureComponent {
                             </ul>
                             <Checkbox onChange={this.checkboxChange} className={styles.showWeekend}>显示双休日</Checkbox>
                             <Button type="primary" className={styles.confirmationSchedule} onClick={this.confirmCal.bind(this, confirmData)} style={{ display: con }}>确认日程</Button>
-                            <Button disabled className={styles.alreadyConfirm} style={{ display: !con }}>已确认</Button>
+                            <Button disabled className={styles.alreadyConfirm} style={{ display: com }}>已确认</Button>
                             <Button type="primary" className={styles.newInvitation} onClick={this.newInvitation}>新建邀约</Button>
                         </div>
-                        <Table
-                            className={styles.weekTable}
-                            columns={columns}
-                            dataSource={data}
-                            pagination={false}
-                            style={{ width: wC }}
-                        />
-                        <Table
-                            className={styles.weekendTable}
-                            columns={columnsWeek}
-                            dataSource={dataWeek}
-                            pagination={false}
-                            style={{ display: w }}
-                        />
-                        <div className={styles.checkDetail}>
+                        {/* <div className={styles.checkDetail}>
                             <div className={styles.detailHeader}>{detailData && detailData.content.scheduleTemplate.cName}</div>
                             <p className={styles.detailTime}><Icon className={styles.detailIcon} type="clock-circle-o" />{detailData && detailData.content.scheduleTemplate.sTime}({detailData && detailData.content.scheduleTemplate.weekDay})</p>
                             <p className={styles.detailPlace}><Icon className={styles.detailIcon} type="environment" />{detailData && detailData.content.scheduleTemplate.address}</p>
@@ -301,10 +290,12 @@ export default class CalendarShow extends PureComponent {
                                 <Button className={styles.detailBtnEdit} size="small" type="primary">编辑</Button>
                                 <Button className={styles.detailBtnCancel} size="small">取消</Button>
                             </p>
-                        </div>
+                        </div> */}
                     </div>
                     <Button className={styles.newCanlendar} onClick={this.toNewCalendar}>新建日历</Button>
                 </div>
+                {/* <TableView/> */}
+                {/* <CalendarView/> */}
             </div>
         );
     }
