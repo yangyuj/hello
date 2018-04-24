@@ -1,6 +1,6 @@
 import { routerRedux } from 'dva/router';
 import { message } from 'antd';
-import { addCalendar , mohuCha,getpeopleList,addYaoyue,getallRili} from '../services/api';
+import { addCalendar , mohuCha,getpeopleList,addYaoyue,getallRili,getallplace} from '../services/api';
 import { trans } from '../utils/i18n';
 
 
@@ -13,7 +13,8 @@ export default {
             mohuList:{},
             peoplelist:{},
             yaoyue:{},
-            allrili:{}
+            allrili:{},
+            allplace:{}
         },
     },
 
@@ -68,6 +69,16 @@ export default {
 	            payload: response,
 	        });
 	    },
+	    *chaPlace({ payload }, { call, put }) {
+	        const response = yield call(getallplace, payload);
+	        if (!response) {
+	            return;
+	        }
+	        yield put({
+	            type: 'CalendarInfoMessageplace',
+	            payload: response,
+	        });
+	    },
     },
 
     reducers: {
@@ -103,6 +114,13 @@ export default {
 			return { 
 				...state,
 				allrili: payload,
+				loading: true
+			};	
+		},
+		CalendarInfoMessageplace(state, { payload }) {
+			return { 
+				...state,
+				allplace: payload,
 				loading: true
 			};	
 		},

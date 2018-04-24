@@ -298,50 +298,45 @@ const proxy = {
         "code": 11,
         "content": {
          "getDepartmentList": [
-      {
-        "orgTreeId": 7,
-        "orgId": null,
-        "parentId": 4,//学生发展研究院的id
-        "orgType": 2,
-        "orgName": "学生发展研究院",
-        "orgUrl": null,
-        "founderUrl": null,
-        "deleted": null,
-        "remarks": null,
-        "createTime": null,
-        "mobileTime": null,
-        "children":[{
-          "parentId":7,
-          "orgName":"一年级组",
-          "orgUserRelation":[{
-            "orgNodeId":7,
-            "userId":7,
-            "name":"李明"
-          }]
-        }]
-      },
-      {
-        "orgTreeId": 8,
-        "orgId": null,
-        "parentId": 4,
-        "orgType": 2,
-        "orgName": "课程研究院",
-        "orgUrl": null,
-        "founderUrl": null,
-        "deleted": null,
-        "remarks": null,
-        "createTime": null,
-        "mobileTime": null,
-        "children":[{
-          "parentId":4,
-          "orgName":"七年级年级组",
-          "orgUserRelation":[{
-            "orgNodeId":8,
-            "userId":61,
-            "name":"赵杰"
-          }]
-        }]
-      }
+            {
+              
+              "value": "4-7",
+              "key": "4-7",
+              "label": "学生发展研究院",
+              "children":[{
+                "value": "4-7-1",
+                "key": "4-7-1",
+                "label":"一年级组",
+                "children":[{
+                  "value": "4-7-1-1",
+                  "key": "4-7-1-1",
+                  "label":"李明"
+                },{
+                  "value": "4-7-1-2",
+                  "key": "4-7-1-2",
+                  "label":"王帅"
+                }]
+              }]
+            },
+            {
+               "value": "4-8",
+              "key": "4-8",
+              "label": "课程研究院",
+              "children":[{
+                "value": "4-8-61",
+                "key": "4-8-61",
+                "label":"七年级组",
+                "children":[{
+                  "value": "4-7-61-61",
+                  "key": "4-7-61-61",
+                  "label":"赵杰"
+                },{
+                  "value": "4-7-61-62",
+                  "key": "4-7-61-62",
+                  "label":"张三"
+                }]
+              }]
+            }
     ]
       },
     "ifAdmin": false
@@ -373,6 +368,54 @@ const proxy = {
                 "name":"菠萝计划"
               }
             ],
+        "ifAdmin": false
+  },
+  //获取地点
+   'GET /api/getAddressList':{
+        "ifLogin": true,
+        "status": true,
+        "message": "查询地点信息列表成功",
+        "code": 11,
+        "content":{
+        "listInfobyAddress":[
+            {
+                "id":1,
+                "cName":"教室1",
+                "eName":null,
+                "remark":null,
+                "startTime":null,
+                "endtime":null,
+                "deleted":false
+            },
+            {
+                "id":2,
+                "cName":"教室12",
+                "eName":null,
+                "remark":null,
+                "startTime":null,
+                "endtime":null,
+                "deleted":false
+            },
+             {
+                "id":3,
+                "cName":"教室13",
+                "eName":null,
+                "remark":null,
+                "startTime":null,
+                "endtime":null,
+                "deleted":false
+            },
+             {
+                "id":4,
+                "cName":"教室14",
+                "eName":null,
+                "remark":null,
+                "startTime":null,
+                "endtime":null,
+                "deleted":false
+            }
+        ]
+    },
         "ifAdmin": false
   },
 };
