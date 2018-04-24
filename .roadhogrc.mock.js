@@ -77,7 +77,7 @@ const proxy = {
         ]
       },
       "week":{
-        "currentWeek":"第六周",
+        "currentWeek":"6",
         "totalWeek":"18"
       }
     }
@@ -242,7 +242,7 @@ const proxy = {
 
 
 
-  
+
    //模糊查询
    'GET /api/selectPersonName':{
         "ifLogin": true,

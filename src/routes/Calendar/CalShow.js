@@ -159,14 +159,14 @@ export default class CalendarShow extends PureComponent {
         // console.log(value);
         const current = value.currentWeek;
         const total = value.totalWeek;
-        // console.log(current.substr(1, 1)); 
+        // console.log(current.substr(1, 1));
     }
     //点击切换到下一周
     nextWeek = (value) => {
         // console.log(value);
         const current = value.currentWeek;
         const total = value.totalWeek;
-        // console.log(current.substr(1, 1)); 
+        // console.log(current.substr(1, 1));
     }
     //切换学期
     changeSemester = (value) => {
@@ -224,7 +224,7 @@ export default class CalendarShow extends PureComponent {
     }
     alert = (value) =>{
         this.setState({
-            
+
         })
     }
     render() {
@@ -240,9 +240,9 @@ export default class CalendarShow extends PureComponent {
         return (
             <div className={styles.main}>
                 <div className={styles.topHeader}>
-                    {   
-                        calData 
-                        && calData.length > 0 
+                    {
+                        calData
+                        && calData.length > 0
                         && (<Tabs className={styles.showTabs} defaultActiveKey="1" onChange={this.alert.bind(this)}>
                                 {calData.map((el , i) => <TabPane  tab={el.name} key={i} />)}
                             </Tabs>)
