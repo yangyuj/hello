@@ -89,7 +89,107 @@ const proxy = {
     "message":"查询成功！",
     "code":0,
     "ifAdmin":false,
-    "content":[
+    "content": {
+      "1": [
+        {
+          "scheduleId": 1,
+          "scheduleTime": "xx",
+          "theme": "会议232",
+          "people": "xxx,xxx,xxx,xxx",
+          "location": "小雪",
+          "remark": "xxx",
+          "start": "7:20",
+          "end": "8:00"
+        },
+        {
+          "scheduleId": 2,
+          "scheduleTime": "xx",
+          "theme": "会议",
+          "people": "xxx,xxx,xxx,xxx",
+          "location": "小雪",
+          "remark": "xxx",
+          "start": "7:00",
+          "end": "7:20"
+        },
+        {
+          "scheduleId": 3,
+          "scheduleTime": "xx",
+          "theme": "会议",
+          "people": "xxx,xxx,xxx,xxx",
+          "location": "小雪",
+          "remark": "xxx",
+          "start": "7:00",
+          "end": "7:20"
+        }
+      ],
+      "2": [
+        {
+          "scheduleId": 1,
+          "scheduleTime": "xx",
+          "theme": "会议",
+          "people": "xxx,xxx,xxx,xxx",
+          "location": "小雪",
+          "remark": "xxx",
+          "start": "8:00",
+          "end": "8:20"
+        },
+        {
+          "scheduleId": 2,
+          "scheduleTime": "xx",
+          "theme": "会议",
+          "people": "xxx,xxx,xxx,xxx",
+          "location": "小雪",
+          "remark": "xxx",
+          "start": "8:00",
+          "end": "8:20"
+        },
+        {
+          "scheduleId": 3,
+          "scheduleTime": "xx",
+          "theme": "会议",
+          "people": "xxx,xxx,xxx,xxx",
+          "location": "小雪",
+          "remark": "xxx",
+          "start": "8:00",
+          "end": "8:20"
+        }
+      ],
+      "3": [
+        {
+          "scheduleId": 1,
+          "scheduleTime": "xx",
+          "theme": "会议",
+          "people": "xxx,xxx,xxx,xxx",
+          "location": "小雪",
+          "remark": "xxx",
+          "start": "14:00",
+          "end": "15:20"
+
+        },
+        {
+          "scheduleId": 2,
+          "scheduleTime": "xx",
+          "theme": "会议",
+          "people": "xxx,xxx,xxx,xxx",
+          "location": "小雪",
+          "remark": "xxx",
+          "start": "14:00",
+          "end": "15:20"
+        },
+        {
+          "scheduleId": 3,
+          "scheduleTime": "xx",
+          "theme": "会议",
+          "people": "xxx,xxx,xxx,xxx",
+          "location": "小雪",
+          "remark": "xxx",
+          "start": "14:00",
+          "end": "15:20"
+        }
+      ],
+      "timeStamp": 1524563786979
+    },
+    "content—bac":[
       {
         "key": 1,
         "list": [
