@@ -6,7 +6,34 @@
     color: #666;
     border-top: 1px solid #E8E8E8;
     border-bottom: 1px solid #E8E8E8;
-    margin-bottom: 30px;
+    .currentCol {
+      color: #F5A623;
+    }
+  }
+  .rowLine {
+    border-top: 2px solid #F5A623;
+    position: relative;
+    z-index: 2;
+    .currentCol::before {
+      content: " ";
+      font-size: 0;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #F5A623;
+      position: relative;
+      left: -5px;
+      display: block;
+      top: -6px;
+    }
+    .timeBox {
+      position: relative;
+      text-align: center;
+      background-color: #fff;
+      top: -15px;
+      font-size: 18px;
+    }
+
   }
   .tableBody {
     border-top: 1px dashed #E8E8E8;
@@ -24,6 +51,14 @@
     .timeBox{
       text-align: center;
     }
+    .bgCol {
+      background-color: #fafafa;
+    }
+    .colMain {
+      padding: 6px;
+      display: inline-block;
+      font-size: 12px;
+    }
   }
   .rendBox {
     width: 100%;
@@ -35,5 +70,27 @@
     color: #6D14F7;
     display: inline-block;
     position: relative;
+    z-index: 1;
+    overflow: auto;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+    cursor: pointer;
   }
+  >.allDayRow {
+    border-top: 0;
+    border-bottom: 1px solid #E8E8E8;
+    margin-bottom: 20px;
+    margin-top: -29px;
+    .bgCol {
+      background-color: #fff;
+    }
+    .timeLineBox, .timeBox {
+      height: 60px;
+      .positionBox {
+        top: 50%;
+        margin-top: -10px;
+      }
+    }
+  }
+
 }

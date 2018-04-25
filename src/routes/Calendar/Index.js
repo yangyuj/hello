@@ -106,6 +106,10 @@ export default class Index extends PureComponent {
       return '第' + intToChinese(weekNumber) + '周';
   }
 
+  calendarClick (obj) {
+    console.log(obj);
+  }
+
   render() {
     const {getCalendarInfoMessage, getTimeInfoMessage, checkDetailInfoMessage, checkListInfo} = this.props;
     const {tableType} = this.state;
@@ -141,6 +145,7 @@ export default class Index extends PureComponent {
         <div className={styles.bodyBox}>
           {tableType == 'bars'
             && <CalendarBarTable
+                calendarClick={this.calendarClick.bind(this)}
                 dataSource={checkListInfo} />}
           {tableType == 'calendar' && '这里是日程表格控件2'}
         </div>
