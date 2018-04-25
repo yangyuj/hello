@@ -76,9 +76,9 @@ const proxy = {
           }
         ]
       },
-      "week": {
-        "currentWeek": "第六周",
-        "totalWeek": "18"
+      "week":{
+        "currentWeek":"6",
+        "totalWeek":"18"
       }
     }
   },
@@ -221,12 +221,6 @@ const proxy = {
       message: '数据提交失败',
     });
   },
-
-
-
-
-
-
   //模糊查询
   'GET /api/selectPersonName': {
     "ifLogin": true,
@@ -260,6 +254,7 @@ const proxy = {
           "relationType": 1
         }
       ]
+
     },
     "ifAdmin": false
   },

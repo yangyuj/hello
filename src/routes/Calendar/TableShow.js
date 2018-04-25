@@ -156,8 +156,8 @@ export default class tableShow extends PureComponent {
                     <Button type="primary" className={styles.newInvitation}>新建邀约</Button>
                 </div>
                 {/* <Table className={styles.weekTable} columns={columns} dataSource={data} pagination={false}/> */}
-                <TableView getListInfoMessage={getListInfoMessage && getListInfoMessage.content}/>
-                <CalendarView getListInfoMessage={getListInfoMessage && getListInfoMessage.content}/>
+                {/* <TableView getListInfoMessage={getListInfoMessage && getListInfoMessage.content}/>
+                <CalendarView getListInfoMessage={getListInfoMessage && getListInfoMessage.content}/> */}
             </div>
         );
     }

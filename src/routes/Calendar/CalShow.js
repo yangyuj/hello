@@ -161,14 +161,14 @@ export default class CalendarShow extends PureComponent {
         // console.log(value);
         const current = value.currentWeek;
         const total = value.totalWeek;
-        // console.log(current.substr(1, 1)); 
+        // console.log(current.substr(1, 1));
     }
     //点击切换到下一周
     nextWeek = (value) => {
         // console.log(value);
         const current = value.currentWeek;
         const total = value.totalWeek;
-        // console.log(current.substr(1, 1)); 
+        // console.log(current.substr(1, 1));
     }
     //删除日程
     showModal = () => {
@@ -216,6 +216,13 @@ export default class CalendarShow extends PureComponent {
     newInvitation = () => {
         this.props.dispatch(routerRedux.push('/tableShow'));
     }
+
+    alert = (value) =>{
+        this.setState({
+
+        })
+    }
+
     //切换日历
     changeTab = (value) => {
         console.log(value);
