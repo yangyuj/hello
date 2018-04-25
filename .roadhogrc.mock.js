@@ -44,36 +44,36 @@ const proxy = {
 
   //列表显示学年和学期的请求
   'GET /api/getTimeInfo': {
-    "ifLogin": true,
-    "status": true,
-    "message": "查询成功！",
-    "code": 0,
-    "ifAdmin": false,
-    "content": {
-      "year": {
-        "current": "2018学年上学期",
-        "list": [
-          {
-            "id": 1,
-            "name": "2018学年上学期",
-            "start_time": 4726497364,//(学年的开始日期)
-            "end_time": 473695763294,//（学年的结束日期）
-          }, {
-            "id": 1,
-            "name": "2018学年下学期",
-            "start_time": 4726497364,//(学年的开始日期)
-            "end_time": 473695763294,//（学年的结束日期）
-          }, {
-            "id": 2,
-            "name": "2019学年上学期",
-            "start_time": 4726497364,//(学年的开始日期)
-            "end_time": 473695763294,//（学年的结束日期）
-          }, {
-            "id": 3,
-            "name": "2019学年下学期",
-            "start_time": 4726497364,//(学年的开始日期)
-            "end_time": 473695763294,//（学年的结束日期）
-          }
+    "ifLogin":true,
+    "status":true,
+    "message":"查询成功！",
+    "code":0,
+    "ifAdmin":false,
+    "content":{
+      "year":{
+        "current": 8,
+        "list":[
+            {
+              "id": 1,
+              "name": "2018学年上学期",
+              "start_time":4726497364,//(学年的开始日期)
+              "end_time":473695763294,//（学年的结束日期）
+            },{
+              "id": 8,
+              "name": "2018学年下学期",
+              "start_time":4726497364,//(学年的开始日期)
+              "end_time":473695763294,//（学年的结束日期）
+            },{
+              "id": 2,
+              "name": "2019学年上学期",
+              "start_time":4726497364,//(学年的开始日期)
+              "end_time":473695763294,//（学年的结束日期）
+            },{
+              "id": 3,
+              "name": "2019学年下学期",
+              "start_time":4726497364,//(学年的开始日期)
+              "end_time":473695763294,//（学年的结束日期）
+            }
         ]
       },
       "week":{
@@ -91,16 +91,153 @@ const proxy = {
     "ifAdmin": false,
     "content": [
       {
-        1: [
-          { "scheduleId": 1, "scheduleStartTime": "xx", "scheduleEndTime": "xx", "theme": "会议", "people": "xxx,xxx,xxx,xxx", "location": "小雪", "remark": "xxx" },
-          { "scheduleId": 2, "scheduleStartTime": "xx", "scheduleEndTime": "xx", "theme": "会议", "people": "xxx,xxx,xxx,xxx", "location": "小雪", "remark": "xxx" },
-          { "scheduleId": 3, "scheduleStartTime": "xx", "scheduleEndTime": "xx", "theme": "会议", "people": "xxx,xxx,xxx,xxx", "location": "小雪", "remark": "xxx" }
+        "key": 1,
+        "list": [
+          {
+            "scheduleId": 1,
+            "scheduleTime": "xx",
+            "theme": "会议232",
+            "people": "xxx,xxx,xxx,xxx",
+            "location": "小雪",
+            "remark": "xxx",
+            "start": "7:20",
+            "end": "8:00"
+          },
+          {
+            "scheduleId": 2,
+            "scheduleTime": "xx",
+            "theme": "会议",
+            "people": "xxx,xxx,xxx,xxx",
+            "location": "小雪",
+            "remark": "xxx",
+            "start": "7:00",
+            "end": "7:20"
+          },
+          {
+            "scheduleId": 3,
+            "scheduleTime": "xx",
+            "theme": "会议",
+            "people": "xxx,xxx,xxx,xxx",
+            "location": "小雪",
+            "remark": "xxx",
+            "start": "7:00",
+            "end": "7:20"
+          }
         ]
-      }, {
-        2: [
-          { "scheduleId": 1, "scheduleStartTime": "xx", "scheduleEndTime": "xx", "theme": "会议", "people": "xxx,xxx,xxx,xxx", "location": "小雪", "remark": "xxx" },
-          { "scheduleId": 2, "scheduleStartTime": "xx", "scheduleEndTime": "xx", "theme": "会议", "people": "xxx,xxx,xxx,xxx", "location": "小雪", "remark": "xxx" },
-          { "scheduleId": 3, "scheduleStartTime": "xx", "scheduleEndTime": "xx", "theme": "会议", "people": "xxx,xxx,xxx,xxx", "location": "小雪", "remark": "xxx" }
+      },
+      {
+        "key": 2,
+        "list": [
+          {
+            "scheduleId": 1,
+            "scheduleTime": "xx",
+            "theme": "会议",
+            "people": "xxx,xxx,xxx,xxx",
+            "location": "小雪",
+            "remark": "xxx",
+            "start": "8:00",
+            "end": "8:20"
+          },
+          {
+            "scheduleId": 2,
+            "scheduleTime": "xx",
+            "theme": "会议",
+            "people": "xxx,xxx,xxx,xxx",
+            "location": "小雪",
+            "remark": "xxx",
+            "start": "8:00",
+            "end": "8:20"
+          },
+          {
+            "scheduleId": 3,
+            "scheduleTime": "xx",
+            "theme": "会议",
+            "people": "xxx,xxx,xxx,xxx",
+            "location": "小雪",
+            "remark": "xxx",
+            "start": "8:00",
+            "end": "8:20"
+          }
+        ]
+      },
+      {
+        "key": 3,
+        "list": [
+          {
+            "scheduleId": 1,
+            "scheduleTime": "xx",
+            "theme": "会议",
+            "people": "xxx,xxx,xxx,xxx",
+            "location": "小雪",
+            "remark": "xxx",
+            "start": "14:00",
+            "end": "15:20"
+
+          },
+          {
+            "scheduleId": 2,
+            "scheduleTime": "xx",
+            "theme": "会议",
+            "people": "xxx,xxx,xxx,xxx",
+            "location": "小雪",
+            "remark": "xxx",
+            "start": "14:00",
+            "end": "15:20"
+          },{
+            "scheduleId": 2,
+            "scheduleTime": "xx",
+            "theme": "会议",
+            "people": "xxx,xxx,xxx,xxx",
+            "location": "小雪",
+            "remark": "xxx",
+            "start": "14:00",
+            "end": "15:20"
+          },
+          {
+            "scheduleId": 3,
+            "scheduleTime": "xx",
+            "theme": "会议",
+            "people": "xxx,xxx,xxx,xxx",
+            "location": "小雪",
+            "remark": "xxx",
+            "start": "14:00",
+            "end": "15:20"
+          }
+        ]
+      },
+      {
+        "key": 4,
+        "list": [
+          {
+            "scheduleId": 1,
+            "scheduleTime": "xx",
+            "theme": "会议",
+            "people": "xxx,xxx,xxx,xxx",
+            "location": "小雪",
+            "remark": "xxx",
+            "start": "14:00",
+            "end": "15:20"
+          },
+          {
+            "scheduleId": 2,
+            "scheduleTime": "xx",
+            "theme": "会议",
+            "people": "xxx,xxx,xxx,xxx",
+            "location": "小雪",
+            "remark": "xxx",
+            "start": "14:00",
+            "end": "15:20"
+          },
+          {
+            "scheduleId": 3,
+            "scheduleTime": "xx",
+            "theme": "会议",
+            "people": "xxx,xxx,xxx,xxx",
+            "location": "小雪",
+            "remark": "xxx",
+            "start": "14:00",
+            "end": "15:20"
+          }
         ]
       }
     ]
@@ -270,54 +407,55 @@ const proxy = {
     });
   },
   //查询所有人员
-  'GET /api/getDepartmentList': {
-    "ifLogin": true,
-    "status": true,
-    "message": "查询人员成功123",
-    "code": 11,
-    "content": {
-      "getDepartmentList": [
-        {
 
-          "value": "4-7",
-          "key": "4-7",
-          "label": "学生发展研究院",
-          "children": [{
-            "value": "4-7-1",
-            "key": "4-7-1",
-            "label": "一年级组",
-            "children": [{
-              "value": "4-7-1-1",
-              "key": "4-7-1-1",
-              "label": "李明"
-            }, {
-              "value": "4-7-1-2",
-              "key": "4-7-1-2",
-              "label": "王帅"
-            }]
-          }]
-        },
-        {
-          "value": "4-8",
-          "key": "4-8",
-          "label": "课程研究院",
-          "children": [{
-            "value": "4-8-61",
-            "key": "4-8-61",
-            "label": "七年级组",
-            "children": [{
-              "value": "4-7-61-61",
-              "key": "4-7-61-61",
-              "label": "赵杰"
-            }, {
-              "value": "4-7-61-62",
-              "key": "4-7-61-62",
-              "label": "张三"
-            }]
-          }]
-        }
-      ]
-    },
+  'GET /api/getDepartmentList':{
+        "ifLogin": true,
+        "status": true,
+        "message": "查询人员成功123",
+        "code": 11,
+        "content": {
+         "getDepartmentList": [
+            {
+
+              "value": "4-7",
+              "key": "4-7",
+              "label": "学生发展研究院",
+              "children":[{
+                "value": "4-7-1",
+                "key": "4-7-1",
+                "label":"一年级组",
+                "children":[{
+                  "value": "4-7-1-1",
+                  "key": "4-7-1-1",
+                  "label":"李明"
+                },{
+                  "value": "4-7-1-2",
+                  "key": "4-7-1-2",
+                  "label":"王帅"
+                }]
+              }]
+            },
+            {
+               "value": "4-8",
+              "key": "4-8",
+              "label": "课程研究院",
+              "children":[{
+                "value": "4-8-61",
+                "key": "4-8-61",
+                "label":"七年级组",
+                "children":[{
+                  "value": "4-7-61-61",
+                  "key": "4-7-61-61",
+                  "label":"赵杰"
+                },{
+                  "value": "4-7-61-62",
+                  "key": "4-7-61-62",
+                  "label":"张三"
+                }]
+              }]
+            }
+    ]
+      },
     "ifAdmin": false
   },
   //创建邀约

@@ -5,6 +5,7 @@ import styles from './index.less';
 import { routerRedux } from 'dva/router';
 import { trans } from '../../utils/i18n';
 
+
 @connect(state => ({
 
 }))
@@ -22,8 +23,8 @@ class TableView extends PureComponent {
         key: 'scheduleId',
       }, {
         title: '时间',
-        dataIndex: 'scheduleStartTime',
-        key: 'scheduleStartTime',
+        dataIndex: 'scheduleTime',
+        key: 'scheduleTime',
       }, {
         title: '主题',
         dataIndex: 'theme',
@@ -43,28 +44,25 @@ class TableView extends PureComponent {
       }
     ];
     this.state = {
-
     };
   }
   componentDidMount() {
-   
   }
   
 
   render() {
     const { checkListInfo } = this.props;
-    console.log(checkListInfo);
     return (
       <div className={styles.standardTable}>
         {
-          checkListInfo && checkListInfo.length>0 && checkListInfo.map((value,index)=>{
-            // return(
-            //   <div key={index}>{value}</div>
-            // );
-            console.log(value);
+          checkListInfo && checkListInfo.map((value, index)=>{
+            value.list.map((value, index)=>{
+              console.log(value);
+              return value;
+            })
           })
         }
-        <Table className={styles.weekTable} columns={this.columns} dataSource={checkListInfo} pagination={false} />
+        <Table className={styles.weekTable} columns={this.columns} dataSource={checkListInfo && checkListInfo[0].list} pagination={false} />
       </div>
     );
   }
