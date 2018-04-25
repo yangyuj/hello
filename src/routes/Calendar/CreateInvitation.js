@@ -2,11 +2,13 @@ import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import {
   Form, Input, DatePicker, Select, Button, Card, InputNumber, Radio, Icon, Tooltip,
-TreeSelect,TimePicker} from 'antd';
+TreeSelect,TimePicker,Modal} from 'antd';
 //import AssessmentHeaderLayout from '../../layouts/AssessmentHeaderLayout';
 import styles from './CreatInvition.less';
+import { routerRedux } from 'dva/router';
 import { trans } from '../../utils/i18n';
 import moment from 'moment';
+const confirm = Modal.confirm;
 const RadioGroup = Radio.Group;
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -29,23 +31,6 @@ const treeData = [{
     label: '王哦',
     value: '王哦',
     key: '0-0-1',
-  }],
-}, {
-  label: '市场部',
-  value: '市场部',
-  key: '0-1',
-  children: [{
-    label: '王为',
-    value: '王为',
-    key: '0-1-0',
-  }, {
-    label: '王子',
-    value: '王子',
-    key: '0-1-1',
-  }, {
-    label: '品牌',
-    value: '品牌',
-    key: '0-1-2',
   }],
 }];
 @connect(state => ({
@@ -169,6 +154,18 @@ export default class Creat extends PureComponent {
    console.log(e.target.value)
      this.setState({beizhu:e.target.value})
     }
+    showConfirm() {
+    confirm({
+      title: '请把信息填写完整！',
+
+      onOk() {
+        console.log('OK');
+      },
+      onCancel() {
+        console.log('Cancel');
+      },
+    });
+  }
     addYaoyue=(e)=>{
  
       console.log(this.state.leixing)
@@ -176,6 +173,7 @@ export default class Creat extends PureComponent {
       console.log(this.state.e_zhuti)
       console.log(this.state.value1)
       console.log(this.state.value2)
+      console.log(this.state.data)
        // console.log(new Date(chuofrist).getTime())
        //  console.log(new Date(chuolast).getTime())
       console.log(this.state.chongfu)
@@ -194,7 +192,7 @@ export default class Creat extends PureComponent {
          this.state.place==null ||
          this.state.beizhu==null 
          ){
-           alert('请把信息填写完整')
+           this.showConfirm()
       }else{
         //拼成2017/9/9 3:80
          let chuofrist=this.state.data.replace(/-/g, '/')+' '+this.state.firstTime
@@ -228,6 +226,10 @@ export default class Creat extends PureComponent {
       }         
               
     }
+    cancel=(e)=>{
+       this.props.dispatch(routerRedux.push('/calShow'));
+       console.log('取消')
+    }
   render() {
     let tree=this.state.treeData
    const tProps1 = {
@@ -259,7 +261,7 @@ export default class Creat extends PureComponent {
                  console.log(allRili)
     return (
       <div className={styles.content}>
-         <div style={{textAlign:"center"}}>新建邀约</div>
+         <div style={{textAlign:"center"}} className={styles.addyaoyue}>新建邀约</div>
           <table className={styles.table}>
        <tbody>
          <tr>
@@ -292,8 +294,8 @@ export default class Creat extends PureComponent {
          </tr>
          <tr>
           <td className={styles.leftKuang1}>时间：</td>
-          <td><DatePicker onChange={this.dataChange}  placeholder="日期"/>
-          <TimePicker defaultValue={moment('01:00', format)} format={format} onChange={this.timeChangefitst}/>
+          <td><DatePicker onChange={this.dataChange}  placeholder="日期"/><span className={styles.jiange}></span>
+          <TimePicker defaultValue={moment('01:00', format)} format={format} onChange={this.timeChangefitst}/><span className={styles.jiange}></span>
           <TimePicker defaultValue={moment('01:00', format)} format={format} onChange={this.timeChangelast}/>
           </td>
          </tr>
@@ -314,14 +316,12 @@ export default class Creat extends PureComponent {
           <td className={styles.leftKuang1}>地点：</td>
           <td>
             <Select
-                showSearch
-                style={{ width: 200 }}
-                placeholder="请输入关键字搜索选择"
-                optionFilterProp="children"
+                mode="combobox"
+                size="default"
+                defaultValue=""
+                placeholder=""
                 onChange={this.handleChangeplace}
-                onFocus={this.handleFocusplace}
-                onBlur={this.handleBlurplace}
-                filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                style={{ width: 200 }}
               >
               {
                 this.props.placelist
@@ -342,7 +342,7 @@ export default class Creat extends PureComponent {
           </td>
          </tr>
          <tr>
-          <td colSpan="2" style={{textAlign:"right"}} ><Button onClick={this.cancel}>取消</Button>
+          <td colSpan="2" style={{textAlign:"right"}} ><Button onClick={this.cancel}>取消</Button><span className={styles.jiange}></span>
           <Button type="primary" onClick={this.addYaoyue}>确定</Button></td>
          </tr>
           </tbody>

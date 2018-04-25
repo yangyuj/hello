@@ -1,6 +1,6 @@
 import { routerRedux } from 'dva/router';
 import { message } from 'antd';
-import { addCalendar , mohuCha,getpeopleList,addYaoyue,getallRili,getallplace} from '../services/api';
+import { addCalendar , mohuCha,getpeopleList,addYaoyue,getallRili,getallplace,CalendarHuixian,YaoyueHuixian,xiugaiYaoyue,deleteRili} from '../services/api';
 import { trans } from '../utils/i18n';
 
 
@@ -14,7 +14,11 @@ export default {
             peoplelist:{},
             yaoyue:{},
             allrili:{},
-            allplace:{}
+            allplace:{},
+            riliHuilist:{},
+            yaoyueHuilist:{},
+            xiugaiyaoyue:{},
+            delete:{}
         },
     },
 
@@ -79,6 +83,46 @@ export default {
 	            payload: response,
 	        });
 	    },
+	    *riliHuixian({ payload }, { call, put }) {
+	        const response = yield call(CalendarHuixian, payload);
+	        if (!response) {
+	            return;
+	        }
+	        yield put({
+	            type: 'CalendarInfoMessageHuixianRili',
+	            payload: response,
+	        });
+	    },
+	    *yaoyueHuixian({ payload }, { call, put }) {
+	        const response = yield call(YaoyueHuixian, payload);
+	        if (!response) {
+	            return;
+	        }
+	        yield put({
+	            type: 'CalendarInfoMessageHuixianyaoyue',
+	            payload: response,
+	        });
+	    },
+	    *xiugaiyaoyue({ payload }, { call, put }) {
+	        const response = yield call(xiugaiYaoyue, payload);
+	        if (!response) {
+	            return;
+	        }
+	        yield put({
+	            type: 'CalendarInfoMessageXiugaiyaoyue',
+	            payload: response,
+	        });
+	    },
+	    *deleteri({ payload }, { call, put }) {
+	        const response = yield call(deleteRili, payload);
+	        if (!response) {
+	            return;
+	        }
+	        yield put({
+	            type: 'deleteRiLi',
+	            payload: response,
+	        });
+	    },
     },
 
     reducers: {
@@ -121,6 +165,34 @@ export default {
 			return { 
 				...state,
 				allplace: payload,
+				loading: true
+			};	
+		},
+		CalendarInfoMessageHuixianRili(state, { payload }) {
+			return { 
+				...state,
+				riliHuilist: payload,
+				loading: true
+			};	
+		},
+		CalendarInfoMessageHuixianyaoyue(state, { payload }) {
+			return { 
+				...state,
+				yaoyueHuilist: payload,
+				loading: true
+			};	
+		},
+		CalendarInfoMessageXiugaiyaoyue(state, { payload }) {
+			return { 
+				...state,
+				xiugaiyaoyue: payload,
+				loading: true
+			};	
+		},
+		deleteRiLi(state, { payload }) {
+			return { 
+				...state,
+				delete: payload,
 				loading: true
 			};	
 		},

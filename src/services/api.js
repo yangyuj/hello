@@ -55,6 +55,32 @@ export async function mohuCha(params) {
 	console.log(params.name)
   return request(`/api/selectPersonName?name=${params.name}`);
 }
+//日历回显
+export async function CalendarHuixian(params) {
+	console.log(params.name)
+  return request(`/api/getCalendarEcho?calendarId=${params.calendarId}`);
+}
+//邀约回显
+export async function YaoyueHuixian(params) {
+	console.log(params.name)
+  return request(`/api/getScheduleEcho?scheduleId=${params.scheduleId}&pageType=${params.pageType}`);
+}
+//修改邀约
+export async function xiugaiYaoyue(params) {
+	console.log(params)
+  return request('/api/getScheduleModified', {
+    method: 'POST',
+    body: params,
+  });
+}
+//删除日历
+export async function deleteRili(params) {
+	console.log(params.name)
+  return request(`/api/deleted?Id=${params.Id}`);
+}
+
+
+
 //日程详情的显示
 export async function checkDetailInfo() {
   return request(`/api/checkDetail`);
