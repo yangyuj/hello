@@ -16250,7 +16250,10 @@ textarea.ant-pagination-options-quick-jumper input {
   -webkit-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.05);
           box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.05);
   border-radius: 8px;
-  margin-left: 90px;
+  margin-left: -634px;
+  position: relative;
+  top: 0;
+  left: 50%;
 }
 .main___30TG8 .topHeader___1grA7 {
   background: #fff;

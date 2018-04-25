@@ -93,8 +93,8 @@ const dataWeek = [
     getCalendarInfoMessage: state.CalendarInfo.getCalendarInfoMessage,
     getTimeInfoMessage: state.CalendarInfo.getTimeInfoMessage,
     checkDetailInfoMessage: state.CalendarInfo.checkDetailInfoMessage,
-    checkDeleteInfoMessage:state.CalendarInfo.checkDeleteInfoMessage,
-    checkConfirmInfoMessage:state.CalendarInfo.checkConfirmInfoMessage
+    checkDeleteInfoMessage: state.CalendarInfo.checkDeleteInfoMessage,
+    checkConfirmInfoMessage: state.CalendarInfo.checkConfirmInfoMessage
 }))
 @Form.create()
 export default class CalendarShow extends PureComponent {
@@ -108,7 +108,7 @@ export default class CalendarShow extends PureComponent {
             weekendShow: 0,
             widthChange: 0,
             confirmShow: "inline-block",
-            params:{
+            params: {
                 tabChange: 0,
                 yearsChange: 0,
                 weekChange: 0
@@ -159,74 +159,77 @@ export default class CalendarShow extends PureComponent {
         // console.log(value);
         const current = value.currentWeek;
         const total = value.totalWeek;
-        // console.log(current.substr(1, 1)); 
+        // console.log(current.substr(1, 1));
     }
     //点击切换到下一周
     nextWeek = (value) => {
         // console.log(value);
         const current = value.currentWeek;
         const total = value.totalWeek;
-        // console.log(current.substr(1, 1)); 
-    }
-    //切换学期
-    changeSemester = (value) => {
-        console.log(value);
+        // console.log(current.substr(1, 1));
     }
     //删除日程
     showModal = () => {
         this.setState({
-          visible: true,
+            visible: true,
         });
     }
     //删除日程时候的确定
     handleOk = (e) => {
         this.setState({
-          visible: false,
+            visible: false,
         });
         this.props.dispatch({
             type: 'CalendarInfo/deleteInfo',
-            payload:{
+            payload: {
 
             }
         })
     }
     handleCancel = (e) => {
         this.setState({
-          visible: false,
+            visible: false,
         });
     }
-    //切换日历发送请求
-    changeCal = () => {
-        console.log("hhh");
-    }
     //转换日期时间
-    changTime = (value) =>{
+    changTime = (value) => {
         console.log(value);
     }
     //确认日程
-    confirmCal = (value) =>{
+    confirmCal = (value) => {
         this.props.dispatch({
             type: 'CalendarInfo/confirmInfo',
-            payload:{
+            payload: {
 
             }
         });
         console.log(value);
-        if(value){
+        if (value) {
             this.setState({
                 confirmShow: !this.state.confirmShow
             });
         }
     }
     //新建邀约
-    newInvitation = () =>{
+    newInvitation = () => {
         this.props.dispatch(routerRedux.push('/tableShow'));
     }
+
     alert = (value) =>{
         this.setState({
-            
+
         })
     }
+
+    //切换日历
+    changeTab = (value) => {
+        console.log(value);
+    }
+    //切换学期
+    changeSemester = (value) => {
+        console.log(value);
+    }
+
     render() {
         const { getCalendarInfoMessage, getTimeInfoMessage, checkDetailInfoMessage, checkConfirmInfoMessage } = this.props;
         const calData = getCalendarInfoMessage;
@@ -240,21 +243,21 @@ export default class CalendarShow extends PureComponent {
         return (
             <div className={styles.main}>
                 <div className={styles.topHeader}>
-                    {   
-                        calData 
-                        && calData.length > 0 
-                        && (<Tabs className={styles.showTabs} defaultActiveKey="1" onChange={this.alert.bind(this)}>
-                                {calData.map((el , i) => <TabPane  tab={el.name} key={i} />)}
-                            </Tabs>)
+                    {
+                        calData
+                        && calData.length > 0
+                        && (<Tabs className={styles.showTabs} defaultActiveKey="1" onChange={this.changeTab.bind(this)}>
+                            {calData.map((el, i) => <TabPane tab={el.name} key={i} />)}
+                        </Tabs>)
                     }
                     <div className={styles.calendarList}>
                         <div className={styles.showHeader}>
                             <span className={styles.showName}>
-                                <Select defaultValue={timeData && timeData.content.year.current} style={{ width: 150 }} >
+                                <Select defaultValue={timeData && timeData.content.year.current} onChange={this.changeSemester} style={{ width: 150 }} >
                                     {
                                         timeData && timeData.content.year.list.map((value, index) => {
                                             return (
-                                                <Option value={value.name} key={index} onClick={this.changeSemester.bind(this, value)}>{value.name}</Option>
+                                                <Option value={value.name} key={index} >{value.name}</Option>
                                             );
                                         })
                                     }
@@ -262,7 +265,7 @@ export default class CalendarShow extends PureComponent {
                             </span>
                             <span className={styles.weekChange}>
                                 <Button className={styles.weekChangeBtn} onClick={this.previousWeek.bind(this, timeData && timeData.content.week)}><Icon type="left" /></Button>
-                                    {timeData && timeData.content.week.currentWeek}
+                                {timeData && timeData.content.week.currentWeek}
                                 <Button className={styles.weekChangeBtn} onClick={this.nextWeek.bind(this, timeData && timeData.content.week)}><Icon type="right" /></Button>
                             </span>
                             <ul className={styles.viewChange}>
@@ -271,7 +274,7 @@ export default class CalendarShow extends PureComponent {
                                 <li className={styles.calendarLi}><Icon type="calendar" /></li>
                             </ul>
                             <Checkbox onChange={this.checkboxChange} className={styles.showWeekend}>显示双休日</Checkbox>
-                            <Button type="primary" className={styles.confirmationSchedule} onClick={this.confirmCal.bind(this,confirmData)} style={{ display: con }}>确认日程</Button>
+                            <Button type="primary" className={styles.confirmationSchedule} onClick={this.confirmCal.bind(this, confirmData)} style={{ display: con }}>确认日程</Button>
                             <Button disabled className={styles.alreadyConfirm} style={{ display: !con }}>已确认</Button>
                             <Button type="primary" className={styles.newInvitation} onClick={this.newInvitation}>新建邀约</Button>
                         </div>
