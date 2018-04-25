@@ -61,7 +61,8 @@ export default class Creat extends PureComponent {
            beizhu:null,
            treeData:null,
            bjcode:null,
-           queding:null
+           queding:null,
+           chongfuziduan:null
         };
     }
      componentDidMount(){
@@ -144,6 +145,26 @@ export default class Creat extends PureComponent {
 
                  _this.setState({chongfu:_this.props.yaoyueHui 
                   && _this.props.yaoyueHui.content.scheduleTemplateInfo.repeatType}) 
+
+                 let type=_this.props.yaoyueHui 
+                  && _this.props.yaoyueHui.content.scheduleTemplateInfo.repeatType
+                  if(type=="1"){
+                    console.log('不重复')
+                   _this.setState({chongfuziduan:"不重复"})
+                  }
+                  if(type==2){
+
+                  }
+                  if(type==3){
+
+                  }
+                  if(type==4){
+
+                  }
+                  if(type==5){
+
+                  }
+
                   _this.setState({place:_this.props.yaoyueHui 
                   && _this.props.yaoyueHui.content.scheduleTemplateInfo.address})
                   _this.setState({beizhu:_this.props.yaoyueHui 
@@ -329,6 +350,7 @@ export default class Creat extends PureComponent {
        this.props.dispatch(routerRedux.push('/calShow'));
     }
   render() {
+    console.log(this.state.chongfuziduan)
     let _this=this
     let tree=this.state.treeData
     let time=new Date(_this.props.yaoyueHui 
@@ -416,8 +438,7 @@ export default class Creat extends PureComponent {
           <tr>
           <td className={styles.leftKuang1}>重复：</td>
           <td>
-           <Select defaultValue={_this.props.yaoyueHui 
-                  && _this.props.yaoyueHui.content.scheduleTemplateInfo.haha} style={{ width: 300 }} onChange={this.handleChangechong} disabled={this.state.bjcode}>
+           <Select defaultValue={_this.state.chongfuziduan} style={{ width: 300 }} onChange={this.handleChangechong} disabled={this.state.bjcode}>
             <Option value="1">不重复</Option>
             <Option value="2">每天</Option>
             <Option value="3">每周</Option>

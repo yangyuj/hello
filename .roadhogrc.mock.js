@@ -808,7 +808,7 @@ const proxy = {
           "cCalendarType": "行事历",
           "eCalendarType": "calendar",
           "personNumbers": 2,
-          "bj_code": "0002"  //0002是不能修改（把确定尽调  查看功能），0001只能修改重复结束时间，0003随意修改
+          "bj_code": "0003"  //0002是不能修改（把确定尽调  查看功能），0001只能修改重复结束时间，0003随意修改
         },
         "ifAdmin": false
         },
