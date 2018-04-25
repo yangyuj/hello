@@ -6,10 +6,10 @@ import { trans } from '../../utils/i18n';
 import { intToChinese } from '../../utils/utils';
 import styles from './index.less';
 
-const spaceMaps = ['', '', (<span className={styles.floatEl}>text</span>), '', '', '', ''];
+const spaceMaps = ['', '', '', '', '', '', ''];
 const weekMap = ['周一', '周二', '周三', '周四', '周五', '周六', '周天'];
-const timeLine = ['上午7点', '上午8点', '上午9点', '上午10点', '上午11点', '正午', '下午1点', '下午2点', '下午3点', '下午4点', '下午5点', '下午6点'];
-const timeLineNumber = [700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800];
+const timeLine = ['全天', '上午7点', '上午8点', '上午9点', '上午10点', '上午11点', '正午', '下午1点', '下午2点', '下午3点', '下午4点', '下午5点', '下午6点'];
+const timeLineNumber = [100, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800];
 
 
 export default class Index extends PureComponent {
@@ -39,15 +39,15 @@ export default class Index extends PureComponent {
     return (e[0] - s[0])*60 + parseInt(e[1] - s[1], 10);
   }
 
-  calculationList(data) {
+  calculationList(weekMap) {
     let weekCalenList = [],
-        weekMap = {},
+        //weekMap = {},
         renderData = [];
 
-    if(!data || data.length < 1) {
+    if(!weekMap) {
       return;
     }
-
+    /*
     data.map(el => {
       weekMap[el.key] = [];
       el.list.length > 0 && el.list.map(e => {
@@ -60,7 +60,8 @@ export default class Index extends PureComponent {
           height: this.minuteDifference(e.start, e.end) * 10 / 6
         });
       })
-    })
+    })*/
+
     timeLineNumber.map(el => {
       let lineEl = [];
       for (let i = 1; i <= 7; i++) {
@@ -68,7 +69,8 @@ export default class Index extends PureComponent {
           let a = [],
               w = '100%';
           weekMap[i].map( e => {
-            if(e.startNumber < el + 60 && e.startNumber >= el) {
+            let startNumber = parseInt(e.start.replace(':', ''), 10);
+            if( startNumber < parseInt(el, 10) + 60 && startNumber >= el) {
               a.push(e);
             }
           })
@@ -76,7 +78,15 @@ export default class Index extends PureComponent {
           if(a.length > 0){
             let elment = [];
             a.map((v, l) => {
-              elment.push(<span key={l} style={{position: v.startNumber - el>0? 'relative': '', top: (v.startNumber - el) * 10/6 + '%', width: 1/a.length * 100 + '%', height: v.height + '%'}} className={styles.floatEl}>{v.theme}</span>)
+              elment.push(<span
+                key={l}
+                style={{
+                  top: (parseInt(v.start.replace(':', ''), 10) - el) * 10/6 + '%',
+                  width: 1/a.length * 100 + '%',
+                  height: this.minuteDifference(v.start, v.end) * 10 / 6 + '%'}}
+                className={styles.floatEl}>
+                {v.theme}
+              </span>)
             })
             lineEl.push(<span className={styles.rendBox}>{elment}</span>)
           } else  {
@@ -100,7 +110,6 @@ export default class Index extends PureComponent {
         colSpan = ifWeekend? '3': '4',
         columns = ifWeekend? 7: 5,
         calendarMap = this.calculationList(dataSource);
-    console.log(calendarMap);
     return (
       <div className={styles.borderBox}>
         <Row className={styles.colTitle} type="flex" justify="space-between">
@@ -110,13 +119,13 @@ export default class Index extends PureComponent {
           {this.renderCol(columns, weekMap)}
         </Row>
         {timeLine.map((el, i) => {
-          return(<Row key={i} type="flex" justify="space-between" className={styles.tableBody}>
+          return(<Row key={i} type="flex" justify="space-between" className={styles.tableBody + (i == 0 && styles.allDayRow)}>
             <Col className={styles.spanBox} span={'2'}>
               <div className={styles.timeBox}>
                 <span className={styles.positionBox}>{el}</span>
               </div>
             </Col>
-            {this.renderCol(columns, calendarMap?calendarMap[i]:spaceMaps, styles.timeLineBox)}
+            {this.renderCol(columns, calendarMap? calendarMap[i]: spaceMaps, styles.timeLineBox)}
           </Row>)
         })}
 

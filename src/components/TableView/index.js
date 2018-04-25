@@ -5,6 +5,8 @@ import styles from './index.less';
 import { routerRedux } from 'dva/router';
 import { trans } from '../../utils/i18n';
 
+const weekMap = [1,2,3,4,5,6,7];
+let map = [];
 
 @connect(state => ({
 
@@ -47,22 +49,31 @@ class TableView extends PureComponent {
     };
   }
   componentDidMount() {
+    
   }
-  
+  list =() =>{
+    for(i=1;i<=7;i++){
+      let week = weekMap[i];
+      week.map((value, index)=>{
+        map.push({...value,week:i})
+      })
+    }
+    console.log(map);
+  }
 
   render() {
     const { checkListInfo } = this.props;
+    console.log(checkListInfo && checkListInfo.timeStamp);
     return (
       <div className={styles.standardTable}>
         {
-          checkListInfo && checkListInfo.map((value, index)=>{
-            value.list.map((value, index)=>{
-              console.log(value);
-              return value;
-            })
-          })
+          
         }
-        <Table className={styles.weekTable} columns={this.columns} dataSource={checkListInfo && checkListInfo[0].list} pagination={false} />
+        <Table 
+          className={styles.weekTable} 
+          columns={this.columns} 
+          // dataSource={checkListInfo} 
+          pagination={false} />
       </div>
     );
   }
