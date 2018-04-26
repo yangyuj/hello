@@ -185,9 +185,19 @@ const proxy = {
           "remark": "xxx",
           "start": "14:00",
           "end": "15:20"
+        },
+        {
+          "scheduleId": 3,
+          "scheduleTime": "xx",
+          "theme": "全天会议",
+          "people": "xxx,xxx,xxx,xxx",
+          "location": "小雪",
+          "remark": "xxx",
+          "start": "7:00",
+          "end": "18:10"
         }
       ],
-      "timeStamp": 1524563786979
+      "timeStamp": 1524635363000
     },
     "content—bac":[
       {

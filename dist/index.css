@@ -18,14 +18,9 @@ body {
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 /* stylelint-disable at-rule-no-unknown */
 @font-face {
-  font-family: "Monospace Number";
-  src: local("Tahoma");
+  font-family: "Helvetica Neue For Number";
+  src: local("Helvetica Neue");
   unicode-range: U+30-39;
-}
-@font-face {
-  font-family: "Chinese Quote";
-  src: local("PingFang SC"), local("SimSun");
-  unicode-range: U+2018, U+2019, U+201c, U+201d;
 }
 html,
 body {
@@ -70,7 +65,7 @@ section {
 }
 body {
   margin: 0;
-  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
@@ -114,8 +109,6 @@ address {
   line-height: inherit;
 }
 input[type="text"],
-input[type="password"],
-input[type="number"],
 textarea {
   -webkit-appearance: none;
 }
@@ -2946,7 +2939,7 @@ mark {
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 .ant-message {
-  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
@@ -3033,7 +3026,7 @@ mark {
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 .ant-notification {
-  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
@@ -3272,7 +3265,7 @@ a.ant-notification-notice-close:focus {
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 .ant-spin {
-  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
@@ -3344,18 +3337,6 @@ a.ant-notification-notice-close:focus {
 }
 .ant-spin-container {
   position: relative;
-  zoom: 1;
-}
-.ant-spin-container:before,
-.ant-spin-container:after {
-  content: " ";
-  display: table;
-}
-.ant-spin-container:after {
-  clear: both;
-  visibility: hidden;
-  font-size: 0;
-  height: 0;
 }
 .ant-spin-blur {
   overflow: hidden;
@@ -3600,7 +3581,7 @@ a.ant-notification-notice-close:focus {
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 .ant-dropdown {
-  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
@@ -3888,8 +3869,15 @@ a.ant-notification-notice-close:focus {
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 .ant-btn {
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height: 1.5;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
   display: inline-block;
+  margin-bottom: 0;
   font-weight: 400;
   text-align: center;
   -ms-touch-action: manipulation;
@@ -3898,6 +3886,7 @@ a.ant-notification-notice-close:focus {
   background-image: none;
   border: 1px solid transparent;
   white-space: nowrap;
+  line-height: 1.15;
   padding: 0 15px;
   font-size: 14px;
   border-radius: 4px;
@@ -3941,7 +3930,7 @@ a.ant-notification-notice-close:focus {
 }
 .ant-btn-lg {
   padding: 0 15px;
-  font-size: 16px;
+  font-size: 14px;
   border-radius: 4px;
   height: 40px;
 }
@@ -4495,7 +4484,7 @@ a.ant-notification-notice-close:focus {
 .ant-btn-circle-outline.ant-btn-lg {
   width: 40px;
   padding: 0;
-  font-size: 18px;
+  font-size: 16px;
   border-radius: 50%;
   height: 40px;
 }
@@ -4565,7 +4554,7 @@ a.ant-notification-notice-close:focus {
 }
 .ant-btn-group-lg > .ant-btn {
   padding: 0 15px;
-  font-size: 16px;
+  font-size: 14px;
   border-radius: 4px;
   height: 40px;
 }
@@ -4850,13 +4839,6 @@ a.ant-notification-notice-close:focus {
   right: 0;
   background: transparent;
 }
-.ant-btn-two-chinese-chars:first-letter {
-  letter-spacing: .34em;
-}
-.ant-btn-two-chinese-chars > * {
-  letter-spacing: .34em;
-  margin-right: -0.34em;
-}
 @-webkit-keyframes buttonEffect {
   to {
     opacity: 0;
@@ -4891,7 +4873,7 @@ a.ant-btn-sm {
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 .ant-avatar {
-  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
@@ -4955,7 +4937,7 @@ a.ant-btn-sm {
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 .ant-menu {
-  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
@@ -5646,7 +5628,7 @@ a.ant-btn-sm {
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 .ant-tooltip {
-  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
@@ -5986,7 +5968,7 @@ a.logo___2MuEY {
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 .ant-radio-group {
-  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
@@ -5999,7 +5981,7 @@ a.logo___2MuEY {
   line-height: unset;
 }
 .ant-radio-wrapper {
-  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
@@ -6015,7 +5997,7 @@ a.logo___2MuEY {
   cursor: pointer;
 }
 .ant-radio {
-  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
@@ -6144,7 +6126,6 @@ span.ant-radio + * {
   cursor: pointer;
   border: 1px solid #d9d9d9;
   border-left: 0;
-  border-top-width: 1.02px;
   background: #fff;
   padding: 0 15px;
   position: relative;
@@ -6161,7 +6142,6 @@ span.ant-radio + * {
 .ant-radio-group-large .ant-radio-button-wrapper {
   height: 40px;
   line-height: 38px;
-  font-size: 16px;
 }
 .ant-radio-group-small .ant-radio-button-wrapper {
   height: 24px;
@@ -6304,7 +6284,7 @@ span.ant-radio + * {
   }
 }
 .ant-select-tree-checkbox {
-  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
@@ -6448,7 +6428,7 @@ span.ant-radio + * {
   cursor: not-allowed;
 }
 .ant-select-tree-checkbox-wrapper {
-  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
@@ -6470,7 +6450,7 @@ span.ant-radio + * {
   padding-right: 8px;
 }
 .ant-select-tree-checkbox-group {
-  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
@@ -6479,7 +6459,6 @@ span.ant-radio + * {
   margin: 0;
   padding: 0;
   list-style: none;
-  display: inline-block;
 }
 .ant-select-tree-checkbox-group-item {
   display: inline-block;
@@ -6492,7 +6471,7 @@ span.ant-radio + * {
   margin-left: 0;
 }
 .ant-select-tree {
-  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
@@ -6644,7 +6623,7 @@ li.ant-select-tree-treenode-disabled > .ant-select-tree-node-content-wrapper:hov
   vertical-align: top;
 }
 .ant-select-tree-dropdown {
-  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
@@ -6684,7 +6663,7 @@ li.ant-select-tree-treenode-disabled > .ant-select-tree-node-content-wrapper:hov
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 .ant-select {
-  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
@@ -6755,7 +6734,6 @@ li.ant-select-tree-treenode-disabled > .ant-select-tree-node-content-wrapper:hov
   background-color: #fff;
   border-radius: 4px;
   border: 1px solid #d9d9d9;
-  border-top-width: 1.02px;
   -webkit-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   -o-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -6863,9 +6841,6 @@ li.ant-select-tree-treenode-disabled > .ant-select-tree-node-content-wrapper:hov
   pointer-events: none;
   display: inline-block;
   width: 0;
-}
-.ant-select-lg {
-  font-size: 16px;
 }
 .ant-select-lg .ant-select-selection--single {
   height: 40px;
@@ -7121,7 +7096,7 @@ li.ant-select-tree-treenode-disabled > .ant-select-tree-node-content-wrapper:hov
   margin-right: 20px;
 }
 .ant-select-dropdown {
-  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   margin: 0;
@@ -7276,7 +7251,7 @@ li.ant-select-tree-treenode-disabled > .ant-select-tree-node-content-wrapper:hov
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 .ant-input {
-  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   margin: 0;
@@ -7338,14 +7313,13 @@ textarea.ant-input {
 .ant-input-lg {
   padding: 6px 11px;
   height: 40px;
-  font-size: 16px;
 }
 .ant-input-sm {
   padding: 1px 7px;
   height: 24px;
 }
 .ant-input-group {
-  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
@@ -7399,7 +7373,7 @@ textarea.ant-input {
   z-index: 1;
 }
 .ant-input-group-addon {
-  padding: 0 11px;
+  padding: 4px 11px;
   font-size: 14px;
   font-weight: normal;
   line-height: 1;
@@ -7473,7 +7447,6 @@ textarea.ant-input {
 .ant-input-group-lg > .ant-input-group-addon {
   padding: 6px 11px;
   height: 40px;
-  font-size: 16px;
 }
 .ant-input-group-sm .ant-input,
 .ant-input-group-sm > .ant-input-group-addon {
@@ -7553,7 +7526,7 @@ textarea.ant-input {
   width: 100%;
 }
 .ant-input-affix-wrapper {
-  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
@@ -7647,7 +7620,7 @@ textarea.ant-input {
   }
 }
 .ant-checkbox {
-  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
@@ -7791,7 +7764,7 @@ textarea.ant-input {
   cursor: not-allowed;
 }
 .ant-checkbox-wrapper {
-  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
@@ -7813,7 +7786,7 @@ textarea.ant-input {
   padding-right: 8px;
 }
 .ant-checkbox-group {
-  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
@@ -7822,7 +7795,6 @@ textarea.ant-input {
   margin: 0;
   padding: 0;
   list-style: none;
-  display: inline-block;
 }
 .ant-checkbox-group-item {
   display: inline-block;
@@ -7839,7 +7811,7 @@ textarea.ant-input {
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 .ant-form {
-  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
@@ -7925,7 +7897,7 @@ input[type="checkbox"].disabled {
   cursor: not-allowed;
 }
 .ant-form-item {
-  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
@@ -7967,6 +7939,9 @@ input[type="checkbox"].disabled {
   font-size: 0;
   height: 0;
 }
+.ant-form-item-control > * {
+  font-size: 14px;
+}
 .ant-form-item-with-help {
   margin-bottom: 5px;
   -webkit-transition: none;
@@ -7991,7 +7966,7 @@ input[type="checkbox"].disabled {
   top: -0.5px;
 }
 .ant-form-item .ant-switch {
-  margin: 2px 0 4px;
+  margin: 4px 0;
 }
 .ant-form-item-no-colon .ant-form-item-label label:after {
   content: " ";
@@ -8082,14 +8057,54 @@ form .ant-select,
 form .ant-cascader-picker {
   width: 100%;
 }
+form .ant-select:only-child,
+form .ant-cascader-picker:only-child {
+  display: block;
+  position: relative;
+  top: 4px;
+}
+form .ant-select:only-child.ant-select-sm,
+form .ant-cascader-picker:only-child.ant-select-sm,
+form .ant-select:only-child.ant-cascader-picker-small,
+form .ant-cascader-picker:only-child.ant-cascader-picker-small {
+  top: 8px;
+}
+form .ant-select:only-child.ant-select-lg,
+form .ant-cascader-picker:only-child.ant-select-lg,
+form .ant-select:only-child.ant-cascader-picker-large,
+form .ant-cascader-picker:only-child.ant-cascader-picker-large {
+  top: 0px;
+}
 form .ant-input-group .ant-select,
 form .ant-input-group .ant-cascader-picker {
   width: auto;
 }
+form .ant-input-group-addon .ant-select:only-child,
+form .ant-input-group-addon .ant-cascader-picker:only-child {
+  display: inline-block;
+  top: 0;
+}
+form .ant-input-group-addon .ant-select:only-child.ant-select-sm,
+form .ant-input-group-addon .ant-cascader-picker:only-child.ant-select-sm,
+form .ant-input-group-addon .ant-select:only-child.ant-cascader-picker-small,
+form .ant-input-group-addon .ant-cascader-picker:only-child.ant-cascader-picker-small {
+  top: 0;
+}
+form .ant-input-group-addon .ant-select:only-child.ant-select-lg,
+form .ant-input-group-addon .ant-cascader-picker:only-child.ant-select-lg,
+form .ant-input-group-addon .ant-select:only-child.ant-cascader-picker-large,
+form .ant-input-group-addon .ant-cascader-picker:only-child.ant-cascader-picker-large {
+  top: 0;
+}
 form .ant-input-group-wrapper {
-  vertical-align: middle;
   position: relative;
-  top: -1px;
+  top: 4px;
+}
+form .ant-input-group-wrapper.ant-input-group-wrapper-lg {
+  top: 0px;
+}
+form .ant-input-group-wrapper.ant-input-group-wrapper-sm {
+  top: 8px;
 }
 .ant-input-group-wrap .ant-select-selection {
   border-bottom-left-radius: 0;
@@ -8126,17 +8141,6 @@ form .ant-input-group-wrapper {
 .ant-col-24.ant-form-item-label label:after,
 .ant-col-xl-24.ant-form-item-label label:after {
   display: none;
-}
-.ant-form-vertical .ant-form-item {
-  padding-bottom: 8px;
-}
-.ant-form-vertical .ant-form-item-control {
-  line-height: 1.5;
-}
-.ant-form-vertical .ant-form-explain,
-.ant-form-vertical .ant-form-extra {
-  margin-top: 2px;
-  margin-bottom: -4px;
 }
 @media (max-width: 575px) {
   .ant-form-item-label,
@@ -8243,7 +8247,7 @@ form .ant-input-group-wrapper {
   right: 0;
   visibility: visible;
   pointer-events: none;
-  width: 32px;
+  width: 40px;
   height: 40px;
   line-height: 40px;
   text-align: center;
@@ -12255,7 +12259,7 @@ form .ant-input-group-wrapper {
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 .ant-calendar-picker-container {
-  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
@@ -12292,7 +12296,7 @@ form .ant-input-group-wrapper {
           animation-name: antSlideUpOut;
 }
 .ant-calendar-picker {
-  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
@@ -12672,6 +12676,7 @@ form .ant-input-group-wrapper {
 }
 .ant-calendar .ant-calendar-ok-btn {
   display: inline-block;
+  margin-bottom: 0;
   font-weight: 400;
   text-align: center;
   -ms-touch-action: manipulation;
@@ -12680,6 +12685,7 @@ form .ant-input-group-wrapper {
   background-image: none;
   border: 1px solid transparent;
   white-space: nowrap;
+  line-height: 1.15;
   padding: 0 15px;
   height: 32px;
   -webkit-user-select: none;
@@ -12726,7 +12732,7 @@ form .ant-input-group-wrapper {
 }
 .ant-calendar .ant-calendar-ok-btn-lg {
   padding: 0 15px;
-  font-size: 16px;
+  font-size: 14px;
   border-radius: 4px;
   height: 40px;
 }
@@ -13018,7 +13024,6 @@ textarea.ant-calendar-range .ant-calendar-time-picker-input {
 .ant-calendar-range .ant-calendar-time-picker-input-lg {
   padding: 6px 11px;
   height: 40px;
-  font-size: 16px;
 }
 .ant-calendar-range .ant-calendar-input-sm,
 .ant-calendar-range .ant-calendar-time-picker-input-sm {
@@ -13721,7 +13726,7 @@ li.ant-calendar-time-picker-select-option-disabled:hover {
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 .ant-time-picker-panel {
-  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
@@ -13919,7 +13924,7 @@ li.ant-time-picker-panel-select-option-disabled:hover {
           animation-name: antSlideUpOut;
 }
 .ant-time-picker {
-  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
@@ -13993,7 +13998,6 @@ textarea.ant-time-picker-input {
 .ant-time-picker-input-lg {
   padding: 6px 11px;
   height: 40px;
-  font-size: 16px;
 }
 .ant-time-picker-input-sm {
   padding: 1px 7px;
@@ -14038,7 +14042,6 @@ textarea.ant-time-picker-input {
 .ant-time-picker-large .ant-time-picker-input {
   padding: 6px 11px;
   height: 40px;
-  font-size: 16px;
 }
 .ant-time-picker-small .ant-time-picker-input {
   padding: 1px 7px;
@@ -14052,7 +14055,7 @@ textarea.ant-time-picker-input {
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 .ant-modal {
-  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
@@ -14452,7 +14455,7 @@ textarea.ant-time-picker-input {
   padding-left: 18px;
 }
 .ant-tabs {
-  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
@@ -14491,7 +14494,7 @@ textarea.ant-time-picker-input {
 }
 .ant-tabs-bar {
   border-bottom: 1px solid #e8e8e8;
-  margin: 0 0 16px 0;
+  margin-bottom: 16px;
   outline: none;
   -webkit-transition: padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   -o-transition: padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -14650,11 +14653,11 @@ textarea.ant-time-picker-input {
 .ant-tabs-nav .ant-tabs-tab {
   display: inline-block;
   height: 100%;
-  margin: 0 0 0 32px;
-  padding: 12px 16px;
+  margin-right: 32px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   position: relative;
+  padding: 12px 16px;
   -webkit-transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   -o-transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -14739,9 +14742,10 @@ textarea.ant-time-picker-input {
 }
 .ant-tabs-vertical > .ant-tabs-bar .ant-tabs-tab {
   float: none;
-  margin: 0 0 16px 0;
-  padding: 8px 24px;
+  margin-right: 0;
+  margin-bottom: 16px;
   display: block;
+  padding: 8px 24px;
 }
 .ant-tabs-vertical > .ant-tabs-bar .ant-tabs-tab:last-child {
   margin-bottom: 0;
@@ -14874,7 +14878,7 @@ textarea.ant-time-picker-input {
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 .ant-breadcrumb {
-  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
@@ -15045,7 +15049,33 @@ textarea.ant-time-picker-input {
   color: #666;
   border-top: 1px solid #E8E8E8;
   border-bottom: 1px solid #E8E8E8;
-  margin-bottom: 30px;
+}
+.borderBox___3Brqj .colTitle___3_-kF .currentCol___n6yHF {
+  color: #F5A623;
+}
+.borderBox___3Brqj .rowLine___UJ2CC {
+  border-top: 2px solid #F5A623;
+  position: relative;
+  z-index: 2;
+}
+.borderBox___3Brqj .rowLine___UJ2CC .currentCol___n6yHF::before {
+  content: " ";
+  font-size: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #F5A623;
+  position: relative;
+  left: -5px;
+  display: block;
+  top: -6px;
+}
+.borderBox___3Brqj .rowLine___UJ2CC .timeBox___38mvL {
+  position: relative;
+  text-align: center;
+  background-color: #fff;
+  top: -15px;
+  font-size: 18px;
 }
 .borderBox___3Brqj .tableBody___2SrW_ {
   border-top: 1px dashed #E8E8E8;
@@ -15066,6 +15096,14 @@ textarea.ant-time-picker-input {
 .borderBox___3Brqj .tableBody___2SrW_ .timeBox___38mvL {
   text-align: center;
 }
+.borderBox___3Brqj .tableBody___2SrW_ .bgCol___2EQG8 {
+  background-color: #fafafa;
+}
+.borderBox___3Brqj .tableBody___2SrW_ .colMain___1AKSo {
+  padding: 6px;
+  display: inline-block;
+  font-size: 12px;
+}
 .borderBox___3Brqj .rendBox___2nSPo {
   width: 100%;
   height: 100%;
@@ -15076,6 +15114,29 @@ textarea.ant-time-picker-input {
   color: #6D14F7;
   display: inline-block;
   position: relative;
+  z-index: 1;
+  overflow: auto;
+  border-left: 1px solid #fff;
+  border-right: 1px solid #fff;
+  cursor: pointer;
+}
+.borderBox___3Brqj > .allDayRow___1YrZl {
+  border-top: 0;
+  border-bottom: 1px solid #E8E8E8;
+  margin-bottom: 20px;
+  margin-top: -29px;
+}
+.borderBox___3Brqj > .allDayRow___1YrZl .bgCol___2EQG8 {
+  background-color: #fff;
+}
+.borderBox___3Brqj > .allDayRow___1YrZl .timeLineBox___20OOT,
+.borderBox___3Brqj > .allDayRow___1YrZl .timeBox___38mvL {
+  height: 60px;
+}
+.borderBox___3Brqj > .allDayRow___1YrZl .timeLineBox___20OOT .positionBox___3bmwt,
+.borderBox___3Brqj > .allDayRow___1YrZl .timeBox___38mvL .positionBox___3bmwt {
+  top: 50%;
+  margin-top: -10px;
 }
 /* stylelint-disable at-rule-empty-line-before,at-rule-name-space-after,at-rule-no-unknown */
 /* stylelint-disable no-duplicate-selectors */
@@ -15177,7 +15238,7 @@ body,
   height: 0;
 }
 .ant-table {
-  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
@@ -15691,18 +15752,10 @@ tr.ant-table-expanded-row:hover {
 .ant-table-middle > .ant-table-content > .ant-table-body > table > .ant-table-thead > tr > th,
 .ant-table-middle > .ant-table-content > .ant-table-scroll > .ant-table-header > table > .ant-table-thead > tr > th,
 .ant-table-middle > .ant-table-content > .ant-table-scroll > .ant-table-body > table > .ant-table-thead > tr > th,
-.ant-table-middle > .ant-table-content > .ant-table-fixed-left > .ant-table-header > table > .ant-table-thead > tr > th,
-.ant-table-middle > .ant-table-content > .ant-table-fixed-right > .ant-table-header > table > .ant-table-thead > tr > th,
-.ant-table-middle > .ant-table-content > .ant-table-fixed-left > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-thead > tr > th,
-.ant-table-middle > .ant-table-content > .ant-table-fixed-right > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-thead > tr > th,
 .ant-table-middle > .ant-table-content > .ant-table-header > table > .ant-table-tbody > tr > td,
 .ant-table-middle > .ant-table-content > .ant-table-body > table > .ant-table-tbody > tr > td,
 .ant-table-middle > .ant-table-content > .ant-table-scroll > .ant-table-header > table > .ant-table-tbody > tr > td,
-.ant-table-middle > .ant-table-content > .ant-table-scroll > .ant-table-body > table > .ant-table-tbody > tr > td,
-.ant-table-middle > .ant-table-content > .ant-table-fixed-left > .ant-table-header > table > .ant-table-tbody > tr > td,
-.ant-table-middle > .ant-table-content > .ant-table-fixed-right > .ant-table-header > table > .ant-table-tbody > tr > td,
-.ant-table-middle > .ant-table-content > .ant-table-fixed-left > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-tbody > tr > td,
-.ant-table-middle > .ant-table-content > .ant-table-fixed-right > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-tbody > tr > td {
+.ant-table-middle > .ant-table-content > .ant-table-scroll > .ant-table-body > table > .ant-table-tbody > tr > td {
   padding: 12px 8px;
 }
 .ant-table-small {
@@ -15720,11 +15773,7 @@ tr.ant-table-expanded-row:hover {
 .ant-table-small > .ant-table-content > .ant-table-header > table,
 .ant-table-small > .ant-table-content > .ant-table-body > table,
 .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-header > table,
-.ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-body > table,
-.ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-header > table,
-.ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-header > table,
-.ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-body-outer > .ant-table-body-inner > table,
-.ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-body-outer > .ant-table-body-inner > table {
+.ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-body > table {
   border: 0;
   padding: 0 8px;
 }
@@ -15732,38 +15781,18 @@ tr.ant-table-expanded-row:hover {
 .ant-table-small > .ant-table-content > .ant-table-body > table > .ant-table-thead > tr > th,
 .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-header > table > .ant-table-thead > tr > th,
 .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-body > table > .ant-table-thead > tr > th,
-.ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-header > table > .ant-table-thead > tr > th,
-.ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-header > table > .ant-table-thead > tr > th,
-.ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-thead > tr > th,
-.ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-thead > tr > th,
 .ant-table-small > .ant-table-content > .ant-table-header > table > .ant-table-tbody > tr > td,
 .ant-table-small > .ant-table-content > .ant-table-body > table > .ant-table-tbody > tr > td,
 .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-header > table > .ant-table-tbody > tr > td,
-.ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-body > table > .ant-table-tbody > tr > td,
-.ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-header > table > .ant-table-tbody > tr > td,
-.ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-header > table > .ant-table-tbody > tr > td,
-.ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-tbody > tr > td,
-.ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-tbody > tr > td {
+.ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-body > table > .ant-table-tbody > tr > td {
   padding: 8px;
 }
 .ant-table-small > .ant-table-content > .ant-table-header > table > .ant-table-thead > tr > th,
 .ant-table-small > .ant-table-content > .ant-table-body > table > .ant-table-thead > tr > th,
 .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-header > table > .ant-table-thead > tr > th,
-.ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-body > table > .ant-table-thead > tr > th,
-.ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-header > table > .ant-table-thead > tr > th,
-.ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-header > table > .ant-table-thead > tr > th,
-.ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-thead > tr > th,
-.ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-thead > tr > th {
+.ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-body > table > .ant-table-thead > tr > th {
   background: #fff;
   border-bottom: 1px solid #e8e8e8;
-}
-.ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-header > table,
-.ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-body > table,
-.ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-header > table,
-.ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-header > table,
-.ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-body-outer > .ant-table-body-inner > table,
-.ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-body-outer > .ant-table-body-inner > table {
-  padding: 0;
 }
 .ant-table-small > .ant-table-content .ant-table-header {
   background: #fff;
@@ -15774,6 +15803,13 @@ tr.ant-table-expanded-row:hover {
 }
 .ant-table-small.ant-table-bordered {
   border-right: 0;
+}
+.ant-table-small.ant-table-bordered .ant-table-header > table,
+.ant-table-small.ant-table-bordered .ant-table-body > table,
+.ant-table-small.ant-table-bordered .ant-table-fixed-left table,
+.ant-table-small.ant-table-bordered .ant-table-fixed-right table {
+  border: 0;
+  padding: 0;
 }
 .ant-table-small.ant-table-bordered .ant-table-title {
   border: 0;
@@ -15797,7 +15833,7 @@ tr.ant-table-expanded-row:hover {
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 .ant-pagination {
-  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
@@ -15825,7 +15861,7 @@ tr.ant-table-expanded-row:hover {
   display: inline-block;
   vertical-align: middle;
   height: 32px;
-  line-height: 30px;
+  line-height: 32px;
   margin-right: 8px;
 }
 .ant-pagination-item {
@@ -15837,7 +15873,7 @@ tr.ant-table-expanded-row:hover {
           user-select: none;
   min-width: 32px;
   height: 32px;
-  line-height: 30px;
+  line-height: 32px;
   text-align: center;
   list-style: none;
   display: inline-block;
@@ -16089,7 +16125,6 @@ textarea.ant-pagination-options-quick-jumper input {
 .ant-pagination-options-quick-jumper input-lg {
   padding: 6px 11px;
   height: 40px;
-  font-size: 16px;
 }
 .ant-pagination-options-quick-jumper input-sm {
   padding: 1px 7px;
@@ -16143,7 +16178,7 @@ textarea.ant-pagination-options-quick-jumper input {
   margin: 0;
   min-width: 24px;
   height: 24px;
-  line-height: 22px;
+  line-height: 24px;
 }
 .ant-pagination.mini .ant-pagination-item:not(.ant-pagination-item-active) {
   background: transparent;
