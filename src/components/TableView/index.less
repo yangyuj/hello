@@ -11,18 +11,23 @@
           width: auto;
       }
   }
-  tr>td:first-child{
+
+  tr>th:first-child, .bgCol {
       background: #F9F6FF;
       text-align: center;
       font-family: MicrosoftYaHei;
       font-size: 16px;
       color: #6D14F7;
   }
-  tr>th:first-child{
-      background: #F9F6FF;
-      text-align: center;
-      font-family: MicrosoftYaHei;
-      font-size: 16px;
-      color: #6D14F7;
+
+  tr:hover > td.bgCol {
+    background: #F9F6FF;
+  }
+  .lineTr>td {
+    border-top-style: dashed;
+
+  }
+  td,th{
+    border-bottom-width: 0 !important;
   }
 }

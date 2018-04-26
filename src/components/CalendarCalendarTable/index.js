@@ -18,9 +18,7 @@ export default class Index extends PureComponent {
     visible: false,
     detailShow: 0
   }
-  componentDidMount() {
 
-  }
 
   renderCol(number, map, curentTime) {
     let cols = [],
@@ -54,7 +52,6 @@ export default class Index extends PureComponent {
 
   floatClick(v) {
     this.props.calendarClick && this.props.calendarClick.call(this, v);
-    console.log(this.props.calendarClick);
     this.setState({
       detailShow: !this.state.detailShow,
     })
@@ -64,7 +61,7 @@ export default class Index extends PureComponent {
     let weekCalenList = [],
       //weekMap = {},
       renderData = [];
-    
+
 
     if (!weekMap) {
       return;
@@ -143,6 +140,8 @@ export default class Index extends PureComponent {
     let date = new Date(time || ''),
       day = date.getDay(),
       newWeekMap = [];
+
+    day == 0 && (day = 7);
     weekMap.map((el, key) => {
       let elDate = new Date(time + 24 * 3600 * 1000 * (key + 1 - day));
       newWeekMap.push(el + fixedZero(elDate.getMonth() + 1) + '-' + fixedZero(elDate.getDate()));

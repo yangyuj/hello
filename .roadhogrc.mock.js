@@ -752,7 +752,7 @@ const proxy = {
             "calendarId": 1,
             "cName": "函询",
             "eName": "hanxu",
-            "startTime": 1524466560000, 
+            "startTime": 1524466560000,
             "endTime": 1524212682000,
             "ifRepeat": false,
             "address": "教室99",

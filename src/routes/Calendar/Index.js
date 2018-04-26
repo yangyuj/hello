@@ -5,7 +5,7 @@ import { routerRedux } from 'dva/router';
 import CalendarHeaderLayout from '../../layouts/CalendarHeaderLayout';
 import { trans } from '../../utils/i18n';
 import { intToChinese } from '../../utils/utils';
-import CalendarBarTable from '../../components/CalendarBarTable';
+import CalendarCalendarTable from '../../components/CalendarCalendarTable';
 import styles from './Index.less';
 import TableView from '../../components/TableView/index';
 
@@ -164,8 +164,8 @@ export default class Index extends PureComponent {
           {tableType == 'bars'
             && <TableView
               checkListInfo={checkListInfo} />}
-          {tableType == 'calendar' 
-            && <CalendarBarTable
+          {tableType == 'calendar'
+            && <CalendarCalendarTable
               calendarClick={this.calendarClick.bind(this)}
               dataSource={checkListInfo} />}
         </div>
