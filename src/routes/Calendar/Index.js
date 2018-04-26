@@ -30,7 +30,9 @@ export default class Index extends PureComponent {
       weekNumber: 1,
       type: 0
     },
-    tableType: 'bars'
+    tableType: 'bars',
+    visible: false,
+    already: 0
   }
   componentDidMount() {
     const { dispatch } = this.props;
@@ -104,7 +106,7 @@ export default class Index extends PureComponent {
   }
 
   //确认日程
-  confirmCal = () => {
+  confirmCal = (value) => {
     this.props.dispatch({
       type: 'Index/confirmInfo',
       payload: {
@@ -112,7 +114,10 @@ export default class Index extends PureComponent {
       }
     });
   }
-
+  //新建日历
+  newCalendar=()=>{
+    this.props.dispatch(routerRedux.push('/Creat'));
+  }
   //新建邀约
   newInvitation = () => {
     this.props.dispatch(routerRedux.push('/createInvitation'));
@@ -126,8 +131,9 @@ export default class Index extends PureComponent {
   }
 
   render() {
-    const { getCalendarInfoMessage, getTimeInfoMessage, checkDetailInfoMessage, checkListInfo } = this.props;
+    const { getCalendarInfoMessage, getTimeInfoMessage, checkDetailInfoMessage, checkListInfo, checkConfirmInfoMessage } = this.props;
     const { tableType } = this.state;
+    console.log(checkDetailInfoMessage);
     return (
       <div className={styles.borderBox}>
         {getCalendarInfoMessage && getCalendarInfoMessage.length > 0 && (
@@ -156,7 +162,7 @@ export default class Index extends PureComponent {
             <span>|</span>
             <Icon className={tableType == 'calendar' && styles.cur} onClick={this.checkTable.bind(this, 'calendar')} type="calendar" />
           </span>
-          <Button type="primary" className={styles.confirmationSchedule} onClick={this.confirmCal}>确认日程</Button>
+          <Button type="primary" className={styles.confirmationSchedule} onClick={this.confirmCal(this, checkConfirmInfoMessage)}>确认日程</Button>
           {/* <Button disabled className={styles.alreadyConfirm} >已确认</Button> */}
           <Button type="primary" className={styles.newInvitation} onClick={this.newInvitation}>新建邀约</Button>
         </div>
@@ -167,8 +173,10 @@ export default class Index extends PureComponent {
           {tableType == 'calendar' 
             && <CalendarBarTable
               calendarClick={this.calendarClick.bind(this)}
-              dataSource={checkListInfo} />}
+              dataSource={checkListInfo} 
+              info={checkDetailInfoMessage}/>}
         </div>
+        <Button className={styles.newCalendar} onClick={this.newCalendar}>新建日历</Button>
       </div>
     );
   }
