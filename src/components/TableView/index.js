@@ -5,8 +5,8 @@ import styles from './index.less';
 import { routerRedux } from 'dva/router';
 import { trans } from '../../utils/i18n';
 
-const weekMap = [1,2,3,4,5,6,7];
-let map = [];
+const weekMap = ['周一', '周二', '周三', '周四', '周五', '周六', '周天'];
+
 
 @connect(state => ({
 
@@ -51,28 +51,35 @@ class TableView extends PureComponent {
   componentDidMount() {
     
   }
-  list =() =>{
-    for(i=1;i<=7;i++){
-      let week = weekMap[i];
-      week.map((value, index)=>{
-        map.push({...value,week:i})
-      })
+  calendarList(weekMap){
+    let map = [];
+    if(!weekMap) {
+      return;
     }
-    console.log(map);
+    for(let i=1;i<=7;i++){
+      if(weekMap[i] && weekMap[i].length >0) {
+        let week = weekMap[i];
+        week.map((value, index)=>{
+          map.push({...value})
+        })
+      } 
+    }
+    // console.log(map);
+    return map;
   }
 
   render() {
     const { checkListInfo } = this.props;
-    console.log(checkListInfo && checkListInfo.timeStamp);
+    let dataMap = this.calendarList(checkListInfo);
+    // console.log(checkListInfo);
     return (
       <div className={styles.standardTable}>
         {
-          
         }
         <Table 
           className={styles.weekTable} 
           columns={this.columns} 
-          // dataSource={checkListInfo} 
+          dataSource={dataMap} 
           pagination={false} />
       </div>
     );

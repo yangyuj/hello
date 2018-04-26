@@ -94,7 +94,7 @@ const proxy = {
         {
           "scheduleId": 1,
           "scheduleTime": "xx",
-          "theme": "会议232",
+          "theme": "周一会议",
           "people": "xxx,xxx,xxx,xxx",
           "location": "小雪",
           "remark": "xxx",
@@ -104,7 +104,7 @@ const proxy = {
         {
           "scheduleId": 2,
           "scheduleTime": "xx",
-          "theme": "会议",
+          "theme": "周一会议",
           "people": "xxx,xxx,xxx,xxx",
           "location": "小雪",
           "remark": "xxx",
@@ -114,7 +114,7 @@ const proxy = {
         {
           "scheduleId": 3,
           "scheduleTime": "xx",
-          "theme": "会议",
+          "theme": "周一会议",
           "people": "xxx,xxx,xxx,xxx",
           "location": "小雪",
           "remark": "xxx",
@@ -126,7 +126,7 @@ const proxy = {
         {
           "scheduleId": 1,
           "scheduleTime": "xx",
-          "theme": "会议",
+          "theme": "周二会议",
           "people": "xxx,xxx,xxx,xxx",
           "location": "小雪",
           "remark": "xxx",
@@ -136,7 +136,7 @@ const proxy = {
         {
           "scheduleId": 2,
           "scheduleTime": "xx",
-          "theme": "会议",
+          "theme": "周二会议",
           "people": "xxx,xxx,xxx,xxx",
           "location": "小雪",
           "remark": "xxx",
@@ -146,7 +146,7 @@ const proxy = {
         {
           "scheduleId": 3,
           "scheduleTime": "xx",
-          "theme": "会议",
+          "theme": "周二会议",
           "people": "xxx,xxx,xxx,xxx",
           "location": "小雪",
           "remark": "xxx",
@@ -158,7 +158,7 @@ const proxy = {
         {
           "scheduleId": 1,
           "scheduleTime": "xx",
-          "theme": "会议",
+          "theme": "周三会议",
           "people": "xxx,xxx,xxx,xxx",
           "location": "小雪",
           "remark": "xxx",
@@ -169,7 +169,7 @@ const proxy = {
         {
           "scheduleId": 2,
           "scheduleTime": "xx",
-          "theme": "会议",
+          "theme": "周三会议",
           "people": "xxx,xxx,xxx,xxx",
           "location": "小雪",
           "remark": "xxx",
@@ -179,7 +179,7 @@ const proxy = {
         {
           "scheduleId": 3,
           "scheduleTime": "xx",
-          "theme": "会议",
+          "theme": "周三会议",
           "people": "xxx,xxx,xxx,xxx",
           "location": "小雪",
           "remark": "xxx",

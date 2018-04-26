@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
-import { Button, Icon, List, Modal, Tabs, Select} from 'antd';
+import { Button, Icon, List, Modal, Tabs, Select } from 'antd';
 import { routerRedux } from 'dva/router';
 import CalendarHeaderLayout from '../../layouts/CalendarHeaderLayout';
 import { trans } from '../../utils/i18n';
@@ -8,7 +8,6 @@ import { intToChinese } from '../../utils/utils';
 import CalendarBarTable from '../../components/CalendarBarTable';
 import styles from './Index.less';
 import TableView from '../../components/TableView/index';
-import CalendarView from '../../components/CalendarView/index';
 
 const confirm = Modal.confirm;
 const TabPane = Tabs.TabPane;
@@ -19,8 +18,8 @@ const Option = Select.Option;
   getCalendarInfoMessage: state.Index.getCalendarInfoMessage,
   getTimeInfoMessage: state.Index.getTimeInfoMessage,
   checkDetailInfoMessage: state.Index.checkDetailInfoMessage,
-  checkDeleteInfoMessage:state.Index.checkDeleteInfoMessage,
-  checkConfirmInfoMessage:state.Index.checkConfirmInfoMessage,
+  checkDeleteInfoMessage: state.Index.checkDeleteInfoMessage,
+  checkConfirmInfoMessage: state.Index.checkConfirmInfoMessage,
   checkListInfo: state.Index.checkListInfo
 }))
 export default class Index extends PureComponent {
@@ -37,22 +36,22 @@ export default class Index extends PureComponent {
     const { dispatch } = this.props;
 
     dispatch({
-        type: 'Index/CalendarInfo',
-        payload: this.state.params
+      type: 'Index/CalendarInfo',
+      payload: this.state.params
     })
     dispatch({
-        type: 'Index/timeInfo',
-        payload: {
-        }
+      type: 'Index/timeInfo',
+      payload: {
+      }
     }).then(() => {
       const { getTimeInfoMessage } = this.props;
       this.state.params.weekNumber = getTimeInfoMessage.week.totalWeek || 1;
       this.fetchCalendarInfo();
     });
     dispatch({
-        type: 'Index/detailInfo',
-        payload: {
-        }
+      type: 'Index/detailInfo',
+      payload: {
+      }
     });
   }
 
@@ -60,37 +59,37 @@ export default class Index extends PureComponent {
   fetchCalendarInfo() {
     const { dispatch } = this.props;
     return dispatch({
-        type: 'Index/fetchList',
-        payload: this.state.params
+      type: 'Index/fetchList',
+      payload: this.state.params
     })
   }
 
   //日程分类选择
-  tabChange (val) {
+  tabChange(val) {
     this.state.params.calendarId = val;
     this.fetchCalendarInfo();
   }
 
   //学期选择
-  yearsChange (val) {
+  yearsChange(val) {
     this.state.params.yearId = val;
     this.fetchCalendarInfo();
   }
 
   //切换周
-  checkWeek (type) {
+  checkWeek(type) {
     const { dispatch } = this.props;
     let week = this.props.getTimeInfoMessage.week.currentWeek,
-        totalWeek = this.props.getTimeInfoMessage.week.totalWeek;
-    if(type == 'left' && parseInt(week, 10) > 1) {
+      totalWeek = this.props.getTimeInfoMessage.week.totalWeek;
+    if (type == 'left' && parseInt(week, 10) > 1) {
       week--;
     }
-    if(type == 'right' && parseInt(week, 10) <= parseInt(totalWeek, 10)) {
+    if (type == 'right' && parseInt(week, 10) <= parseInt(totalWeek, 10)) {
       week++;
     }
     dispatch({
-        type: 'Index/checkWeek',
-        payload: week
+      type: 'Index/checkWeek',
+      payload: week
     })
     this.state.params.weekNumber = week;
     this.fetchCalendarInfo();
@@ -98,22 +97,36 @@ export default class Index extends PureComponent {
   }
 
   //切换日历显示类型
-  checkTable (type) {
+  checkTable(type) {
     this.setState({
       tableType: type
     })
   }
 
-  renderWeek (weekNumber) {
-      return '第' + intToChinese(weekNumber) + '周';
+  //确认日程
+  confirmCal = () => {
+    this.props.dispatch({
+      type: 'Index/confirmInfo',
+      payload: {
+
+      }
+    });
+  }
+
+  //新建邀约
+  newInvitation = () => {
+    this.props.dispatch(routerRedux.push('/createInvitation'));
+  }
+  renderWeek(weekNumber) {
+    return '第' + intToChinese(weekNumber) + '周';
   }
 
   render() {
-    const {getCalendarInfoMessage, getTimeInfoMessage, checkDetailInfoMessage, checkListInfo} = this.props;
-    const {tableType} = this.state;
+    const { getCalendarInfoMessage, getTimeInfoMessage, checkDetailInfoMessage, checkListInfo } = this.props;
+    const { tableType } = this.state;
     return (
       <div className={styles.borderBox}>
-        {getCalendarInfoMessage && getCalendarInfoMessage.length > 0 &&(
+        {getCalendarInfoMessage && getCalendarInfoMessage.length > 0 && (
           <Tabs defaultActiveKey="1" onChange={this.tabChange.bind(this)}>
             {getCalendarInfoMessage.map(el => <TabPane tab={el.name} key={el.id}></TabPane>)}
           </Tabs>
@@ -130,24 +143,27 @@ export default class Index extends PureComponent {
               && getTimeInfoMessage.year.list.map(el => <Option key={el.id} value={el.id}>{el.name}</Option>)}
           </Select>
           <Button className={styles.weekChangeBtn} onClick={this.checkWeek.bind(this, 'left')}><Icon type="left" /></Button>
-            {getTimeInfoMessage
-              && getTimeInfoMessage.week
-              && <span className={styles.plr_10}>{this.renderWeek(getTimeInfoMessage.week.currentWeek)}</span>}
+          {getTimeInfoMessage
+            && getTimeInfoMessage.week
+            && <span className={styles.plr_10}>{this.renderWeek(getTimeInfoMessage.week.currentWeek)}</span>}
           <Button className={styles.weekChangeBtn} onClick={this.checkWeek.bind(this, 'right')}><Icon type="right" /></Button>
           <span className={styles.tabbleCheck}>
-            <Icon className={tableType=='bars' && styles.cur} onClick={this.checkTable.bind(this, 'bars')} type="bars" />
+            <Icon className={tableType == 'bars' && styles.cur} onClick={this.checkTable.bind(this, 'bars')} type="bars" />
             <span>|</span>
-            <Icon className={tableType=='calendar' && styles.cur} onClick={this.checkTable.bind(this, 'calendar')} type="calendar" />
+            <Icon className={tableType == 'calendar' && styles.cur} onClick={this.checkTable.bind(this, 'calendar')} type="calendar" />
           </span>
+          <Button type="primary" className={styles.confirmationSchedule} onClick={this.confirmCal}>确认日程</Button>
+          {/* <Button disabled className={styles.alreadyConfirm} >已确认</Button> */}
+          <Button type="primary" className={styles.newInvitation} onClick={this.newInvitation}>新建邀约</Button>
         </div>
         <div className={styles.bodyBox}>
           {tableType == 'bars'
             && <TableView
-            checkListInfo={checkListInfo} />}
-          {tableType == 'calendar' 
-            && 
+              checkListInfo={checkListInfo} />}
+          {tableType == 'calendar'
+            &&
             <CalendarBarTable
-            dataSource={checkListInfo} />}
+              dataSource={checkListInfo} />}
         </div>
       </div>
     );
