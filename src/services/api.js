@@ -86,8 +86,9 @@ export async function checkDetailInfo() {
   return request(`/api/checkDetail`);
 }
 //删除日程
-export async function checkDeleteInfo() {
-  return request(`/api/deleteScheduleTemplate`);
+export async function checkDeleteInfo(params) {
+  console.log(params)
+  return request(`/api/deleteScheduleTemplate=${params.scheduleId}`);
 }
 //确认日程
 export async function checkConfirmInfo() {

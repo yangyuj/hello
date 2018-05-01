@@ -18,9 +18,7 @@ export default class Index extends PureComponent {
     visible: false,
     dataV: {}
   }
-  componentDidMount() {
 
-  }
 
   renderCol(number, map, curentTime) {
     let cols = [],
@@ -54,10 +52,11 @@ export default class Index extends PureComponent {
 
   floatClick(v) {
     this.props.calendarClick && this.props.calendarClick.call(this, v);
-      this.setState({
-        visible: true,
-        dataV : v
-      });
+    this.setState({
+      visible: true,
+      detailShow: !this.state.detailShow,
+      dataV : v
+    });
   }
 
   calculationList(weekMap) {
@@ -143,6 +142,8 @@ export default class Index extends PureComponent {
     let date = new Date(time || ''),
       day = date.getDay(),
       newWeekMap = [];
+
+    day == 0 && (day = 7);
     weekMap.map((el, key) => {
       let elDate = new Date(time + 24 * 3600 * 1000 * (key + 1 - day));
       newWeekMap.push(el + fixedZero(elDate.getMonth() + 1) + '-' + fixedZero(elDate.getDate()));
@@ -154,38 +155,7 @@ export default class Index extends PureComponent {
     let curHours = (time ? new Date(time) : new Date()).getHours();
     return 80 + (curHours - 7) * 121 + 60;
   }
-  //点击删除显示modal
-  showModal = () => {
-    this.setState({
-      daleteVisible: true,
-    });
-  }
-  //点击删除时候的确定，要发送请求
-  handleOk = (e) => {
-    this.setState({
-      daleteVisible: false,
-      visible: false
-    });
-    // console.log("编辑");
-    // this.props.dispatch(routerRedux.push('/UpdataInvitation'));
-  }
-  handleOutOk = (e) => {
-    this.setState({
-      visible: false,
-    });
-    // console.log("编辑");
-    // this.props.dispatch(routerRedux.push('/UpdataInvitation'));
-  }
-  handleCancel = (e) => {
-    this.setState({
-      daleteVisible: false
-    });
-  }
-  handleOutCancel = (e) => {
-    this.setState({
-      visible: false,
-    });
-  }
+  
 
   render() {
     const { dataSource, info } = this.props;
@@ -223,24 +193,6 @@ export default class Index extends PureComponent {
             {this.renderCol(columns, calendarMap ? calendarMap[i] : spaceMaps, dataSource && dataSource.timeStamp, styles.timeLineBox)}
           </Row>)
         })}
-        <Modal
-          visible={this.state.visible}
-          footer={[
-            <p style={{float: "left"}} onClick={this.showModal} className={styles.deleteSch}>删除</p>,
-            <Button onClick={this.handleOutCancel}>取消</Button>,
-            <Button type="primary" onClick={this.handleOutOk}>编辑</Button>
-          ]}>
-          <div className={styles.detailHeader}>{this.state.dataV.theme}</div>
-          <p className={styles.detailTime}><Icon className={styles.detailIcon} type="clock-circle-o" />{this.state.dataV.start}</p>
-          <p className={styles.detailPlace}><Icon className={styles.detailIcon} type="environment" />{this.state.dataV.location}</p>
-          <p className={styles.detailNum}><Icon className={styles.detailIcon} type="contacts" />{info && info.personNumbers}位邀约对象</p>
-          <p className={styles.detailMustChoose}>必选：{info && info.bixuan}</p>
-          <p className={styles.detailCanChoose}>可选：{info && info.kexuan}</p>
-          <p className={styles.detailRemark}><Icon className={styles.detailIcon} type="profile" />{this.state.dataV.remark}</p>
-            <Modal visible={this.state.daleteVisible} onOk={this.handleOk} onCancel={this.handleCancel} >
-              <p className={styles.deleteSure}>您确定要删除这次日程么？</p>
-            </Modal>
-        </Modal>
       </div>
     );
   }
