@@ -834,7 +834,7 @@ const proxy = {
             "deInfoDoList": null
           }],
           "bixuan": ["韩旭", "机构管理员"],
-          "kexuan": ["huhuhuhu"],
+          "kexuan": ["huhuhuhu","llsdsl"],
           "cCalendarType": "行事历",
           "eCalendarType": "calendar",
           "personNumbers": 2,

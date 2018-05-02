@@ -135,7 +135,7 @@ export default class Index extends PureComponent {
   }
   //新建邀约
   newInvitation = () => {
-    this.props.dispatch(routerRedux.push('/createInvitation'));
+    this.props.dispatch(routerRedux.push('/createInvitation' + '/' + this.state.semester));
   }
   //点击删除显示modal
   showModal = () => {
@@ -257,10 +257,11 @@ export default class Index extends PureComponent {
             <Button onClick={this.handleOutCancel}>取消</Button>,
             <Button type="primary" onClick={this.handleOutOk}>编辑</Button>
           ]}>
-          <p className={styles.detailTime}><Icon className={styles.detailIcon} type="clock-circle-o" />{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.eTime}</p>
-          <p className={styles.detailPlace}><Icon className={styles.detailIcon} type="environment" />{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.address}</p>
-          <p className={styles.detailNum}><Icon className={styles.detailIcon} type="contacts" />{checkDetailInfoMessage && checkDetailInfoMessage.personNumbers}位邀约对象</p>
-          <p className={styles.detailMustChoose}>必选：
+          {/* <p className={styles.detailName} style={{margin: 50 }}>{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.cName}</p> */}
+          <p className={styles.detailTime}><Icon className={styles.detailIcon} type="clock-circle-o" style={{marginRight: 15}}/>{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.eTime}</p>
+          <p className={styles.detailPlace}><Icon className={styles.detailIcon} type="environment" style={{marginRight: 15}}/>{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.address}</p>
+          <p className={styles.detailNum}><Icon className={styles.detailIcon} type="contacts" style={{marginRight: 15}}/>{checkDetailInfoMessage && checkDetailInfoMessage.personNumbers}位邀约对象</p>
+          <p className={styles.detailMustChoose} style={{marginLeft: 26}}>必选：
               {
               checkDetailInfoMessage && checkDetailInfoMessage.bixuan.map((value, index) => {
                 if (index != checkDetailInfoMessage && checkDetailInfoMessage.bixuan.length - 1) {
@@ -268,11 +269,11 @@ export default class Index extends PureComponent {
                 } else {
                   return (value);
                 }
-                console.log(index);
-                console.log(checkDetailInfoMessage && checkDetailInfoMessage.bixuan.length - 1);
+                // console.log(index);
+                // console.log(checkDetailInfoMessage && checkDetailInfoMessage.bixuan.length - 1);
               })
             }</p>
-          <p className={styles.detailCanChoose}>可选：
+          <p className={styles.detailCanChoose} style={{marginLeft: 26}}>可选：
               {
               checkDetailInfoMessage && checkDetailInfoMessage.kexuan.map((value, index) => {
                 if (index != checkDetailInfoMessage && checkDetailInfoMessage.kexuan.length - 1) {
@@ -280,11 +281,11 @@ export default class Index extends PureComponent {
                 } else {
                   return (value);
                 }
-                console.log(index);
-                console.log(checkDetailInfoMessage && checkDetailInfoMessage.bixuan.length - 1);
+                // console.log(index);
+                // console.log(checkDetailInfoMessage && checkDetailInfoMessage.bixuan.length - 1);
               })
             }</p>
-          <p className={styles.detailRemark}><Icon className={styles.detailIcon} type="profile" />{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.remark}</p>
+          <p className={styles.detailRemark}><Icon className={styles.detailIcon} type="profile" style={{marginRight: 15}}/>{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.remark}</p>
           <Modal
             visible={this.state.daleteVisible}
             onOk={this.handleOk}

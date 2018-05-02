@@ -15154,6 +15154,9 @@ body,
   padding: 0 15px;
   position: relative;
 }
+.borderBox___1YApG .ant-modal-title {
+  background: red;
+}
 .borderBox___1YApG .weekChangeBtn___1J7Dl {
   width: 30px;
   height: 30px;
@@ -15220,9 +15223,6 @@ body,
   position: absolute;
   top: 6px;
   right: 15px;
-}
-.borderBox___1YApG .modalStyles___11OVN .stylesll___3oSkq {
-  background: red;
 }
 @media screen and (max-width: 992px) {
   .contentLink___1Wfmo a {
