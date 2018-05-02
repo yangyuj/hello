@@ -502,30 +502,23 @@ const proxy = {
         }
       ]
 
-<<<<<<< HEAD
+   // //模糊查询
+   // 'GET /api/selectPersonName':{
+   //      "ifLogin": true,
+   //      "status": true,
+   //      "message": "查询人员成功",
+   //      "code": 11,
+   //      "content": {
+   //        "teacherNameList": [
+   //              {
+   //            "value": "4-7",
+   //            "key": "4-7",
+   //            "label": "模糊查询"
+   //          }
+   //        ]
+   //    },
+   //  "ifAdmin": false
 
-
-
-
-
-   //模糊查询
-   'GET /api/selectPersonName':{
-        "ifLogin": true,
-        "status": true,
-        "message": "查询人员成功",
-        "code": 11,
-        "content": {
-          "teacherNameList": [
-                {
-              "value": "4-7",
-              "key": "4-7",
-              "label": "模糊查询"
-            }
-          ]
-      },
-    "ifAdmin": false
-=======
->>>>>>> 9f1daf4f3928f9fc1b391f4e202be2c3f81e0b9f
     },
     "ifAdmin": false
   },
