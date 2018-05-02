@@ -67,7 +67,7 @@ export default class Creat extends PureComponent {
     }
      componentDidMount(){
       let _this=this
-         const { dispatch } = this.props;
+         const { dispatch ,match: {params}} = this.props;
               dispatch({
                   type: 'Calendar/charili', //查询all日历
                   payload: {
@@ -104,7 +104,7 @@ export default class Creat extends PureComponent {
            dispatch({  //查询所有人员
                       type: 'Calendar/yaoyueHuixian',
                       payload: {
-                           scheduleId:"1",   //邀约ID
+                           scheduleId:params.scheduleId,   //邀约ID
                            pageType:"12"
                       }
               }).then(function(){
@@ -149,8 +149,7 @@ export default class Creat extends PureComponent {
                  let type=_this.props.yaoyueHui 
                   && _this.props.yaoyueHui.content.scheduleTemplateInfo.repeatType
                   if(type=="1"){
-                    console.log('不重复')
-                   _this.setState({chongfuziduan:"不重复"})
+                     _this.setState({chongfuziduan:'不重复'})
                   }
                   if(type==2){
 
@@ -280,12 +279,12 @@ export default class Creat extends PureComponent {
         let chuofrist=this.state.data.replace(/-/g, '/')+' '+this.state.firstTime
         let chuolast=this.state.data.replace(/-/g, '/')+' '+this.state.lastTime
         let _this=this
-        const { dispatch } = this.props;
+        const { dispatch ,match: {params}} = this.props;
                  dispatch({
                   type: 'Calendar/xiugaiyaoyue',
                   payload: {
-                     id:"1",//邀约id
-                     calendarId:"2",//日历ID
+                     id: params.scheduleId,//邀约id
+                     calendarId:params.calendarId,//日历ID
                      cName:this.state.c_zhuti,
                      eName:this.state.e_zhuti,
                      startTime:new Date(chuofrist).getTime(),
@@ -295,7 +294,7 @@ export default class Creat extends PureComponent {
                      repeatTypeCode:this.state.chongfu,
                      optionalPersonnel:this.state.value2,
                      requiredPersonnel:this.state.value1,
-                     endTimeSetting:'' //该学期的结束时间（时间戳）
+                     endTimeSetting:params.endTime //该学期的结束时间（时间戳）
                   }
               }).then(function(){
 
@@ -350,7 +349,8 @@ export default class Creat extends PureComponent {
        this.props.dispatch(routerRedux.push('/calShow'));
     }
   render() {
-    console.log(this.state.chongfuziduan)
+    let repeatType=this.props.yaoyueHui 
+                  && this.props.yaoyueHui.content.scheduleTemplateInfo.repeatType
     let _this=this
     let tree=this.state.treeData
     let time=new Date(_this.props.yaoyueHui 
@@ -361,7 +361,7 @@ export default class Creat extends PureComponent {
     console.log(this.state.leixing)
     console.log(this.state.value1)
     console.log(this.state.value2)
-   const tProps1 = {
+    const tProps1 = {
       treeData:tree,
       value: this.state.value1,
       onChange: this.onChangeXiala1,
@@ -387,105 +387,111 @@ export default class Creat extends PureComponent {
     };
 
 
-     let allRili=this.props.rililist
+    let allRili=this.props.rililist
                  && this.props.rililist.content
                  console.log(allRili)
     return (
       <div className={styles.content}>
          <div style={{textAlign:"center"}} className={styles.addyaoyue}>编辑邀约</div>
-          <table className={styles.table}>
-       <tbody>
-         <tr>
-          <td className={styles.leftKuang}>类型：</td>
-          <td> <Select defaultValue={_this.props.yaoyueHui 
-                  && _this.props.yaoyueHui.content.cCalendarType} style={{ width: 300 }} onChange={this.handleChange} disabled={this.state.bjcode}>
-               {
-            this.props.rililist
-                 && this.props.rililist.content.map((value,index)=>{
-                  return <Option  value={value.id} key={value.id}>{value.name}</Option>
-            })
-          }
-            </Select>
-          </td>
-         </tr>
-         <tr>
-          <td className={styles.leftKuang}>主题：</td>
-          <td><Input defaultValue={_this.props.yaoyueHui 
-                  && _this.props.yaoyueHui.content.scheduleTemplateInfo.cName} ref="cmingsheng" onChange={this.czhutiinput} disabled={this.state.bjcode}/></td>
-         </tr>
-          <tr>
-          <td className={styles.leftKuang}>英文主题：</td>
-          <td><Input defaultValue={_this.props.yaoyueHui 
-                  && _this.props.yaoyueHui.content.scheduleTemplateInfo.eName} ref="emingsheng" onChange={this.ezhutiinput} disabled={this.state.bjcode}/></td>
-         </tr>
-         <tr>
-          <td className={styles.leftKuang1}>必选人员：</td>
-          <td><TreeSelect {...tProps1}/> </td>
-         </tr>
-         <tr>
-          <td className={styles.leftKuang1}>可选人员：</td>
-          <td><TreeSelect {...tProps2}/> </td>
-         </tr>
-         <tr>
-          <td className={styles.leftKuang1}>时间：</td>
-          <td><DatePicker defaultValue={moment(time.getFullYear()+'/'+(time.getMonth()+1)+'/'+time.getDate(), dateFormat)} onChange={this.dataChange}  placeholder="日期" disabled={this.state.bjcode}/>
-          <span className={styles.jiange}></span>
-          <TimePicker defaultValue={moment(time.getHours()+':'+time.getMinutes(), format)} format={format} onChange={this.timeChangefitst} disabled={this.state.bjcode}/>
-          <span className={styles.jiange}></span>
-          <TimePicker defaultValue={moment(timelast.getHours()+':'+timelast.getMinutes(), format)} format={format} onChange={this.timeChangelast} disabled={this.state.bjcode}/>
-          </td>
-         </tr>
-          <tr>
-          <td className={styles.leftKuang1}>重复：</td>
-          <td>
-           <Select defaultValue={_this.state.chongfuziduan} style={{ width: 300 }} onChange={this.handleChangechong} disabled={this.state.bjcode}>
-            <Option value="1">不重复</Option>
-            <Option value="2">每天</Option>
-            <Option value="3">每周</Option>
-            <Option value="5">每2周</Option>
-            <Option value="4">每月</Option>
+       {_this.props.yaoyueHui &&
+        _this.props.yaoyueHui.content &&
+        (<table className={styles.table}>
+         <tbody>
+           <tr>
+            <td className={styles.leftKuang}>类型：</td>
+            <td>
+              <Select defaultValue={_this.props.yaoyueHui 
+                    && _this.props.yaoyueHui.content.cCalendarType} style={{ width: 300 }} onChange={this.handleChange} disabled={this.state.bjcode}>
+                 {
+                  this.props.rililist
+                       && this.props.rililist.content.map((value,index)=>{
+                        return <Option  value={value.id} key={value.id}>{value.name}</Option>
+                  })
+                }
               </Select>
+            </td>
+           </tr>
+           <tr>
+            <td className={styles.leftKuang}>主题：</td>
+            <td><Input defaultValue={_this.props.yaoyueHui 
+                    && _this.props.yaoyueHui.content.scheduleTemplateInfo.cName} ref="cmingsheng" onChange={this.czhutiinput} disabled={this.state.bjcode}/></td>
+           </tr>
+            <tr>
+            <td className={styles.leftKuang}>英文主题：</td>
+            <td><Input defaultValue={_this.props.yaoyueHui 
+                    && _this.props.yaoyueHui.content.scheduleTemplateInfo.eName} ref="emingsheng" onChange={this.ezhutiinput} disabled={this.state.bjcode}/></td>
+           </tr>
+           <tr>
+            <td className={styles.leftKuang1}>必选人员：</td>
+            <td><TreeSelect {...tProps1}/> </td>
+           </tr>
+           <tr>
+            <td className={styles.leftKuang1}>可选人员：</td>
+            <td><TreeSelect {...tProps2}/> </td>
+           </tr>
+           <tr>
+            <td className={styles.leftKuang1}>时间：</td>
+            <td><DatePicker defaultValue={moment(time.getFullYear()+'/'+(time.getMonth()+1)+'/'+time.getDate(), dateFormat)} onChange={this.dataChange}  placeholder="日期" disabled={this.state.bjcode}/>
+            <span className={styles.jiange}></span>
+            <TimePicker defaultValue={moment(time.getHours()+':'+time.getMinutes(), format)} format={format} onChange={this.timeChangefitst} disabled={this.state.bjcode}/>
+            <span className={styles.jiange}></span>
+            <TimePicker defaultValue={moment(timelast.getHours()+':'+timelast.getMinutes(), format)} format={format} onChange={this.timeChangelast} disabled={this.state.bjcode}/>
+            </td>
+           </tr>
+            <tr>
+            <td className={styles.leftKuang1}>重复：</td>
+            <td>
+             <Select defaultValue={repeatType==1?'不重复':repeatType==2?
+             '每天':repeatType==3?'每周':repeatType==4?'每月':repeatType==5?'每2周':''} style={{ width: 300 }} onChange={this.handleChangechong} disabled={this.state.bjcode}>
+              <Option value="1">不重复</Option>
+              <Option value="2">每天</Option>
+              <Option value="3">每周</Option>
+              <Option value="5">每2周</Option>
+              <Option value="4">每月</Option>
+                </Select>
 
-          </td>
-         </tr>
-         <tr>
-          <td className={styles.leftKuang1}>地点：</td>
-          <td>
-            <Select
-                mode="combobox"
-                size="default"
-                defaultValue={_this.props.yaoyueHui 
-                  && _this.props.yaoyueHui.content.scheduleTemplateInfo.address}
-                placeholder=""
-                onChange={this.handleChangeplace}
-                style={{ width: 200 }}
-                disabled={this.state.bjcode}
-              >
-              {
-                this.props.placelist
-                 && this.props.placelist.content.listInfobyAddress.map((value,index)=>{
-                  return <Option  value={value.cName} key={value.id}>{value.cName}</Option>
-            })
-              }
-                {/*<Option value="3-1">3-1</Option>
-                <Option value="3-2">3-2</Option>
-                <Option value="3-3">3-3</Option>*/}
-              </Select>
-          </td>
-         </tr>
-         <tr>
-          <td className={styles.leftKuang1}>备注：</td>
-          <td>
-            <TextArea rows={4} onChange={this.beizhu} defaultValue={_this.props.yaoyueHui 
-                  && _this.props.yaoyueHui.content.scheduleTemplateInfo.remark} disabled={this.state.bjcode}/>
-          </td>
-         </tr>
-         <tr>
-          <td colSpan="2" style={{textAlign:"right"}} ><Button onClick={this.cancel}>取消</Button><span className={styles.jiange}></span>
-          <Button type="primary" onClick={this.addYaoyue} disabled={this.state.queding}>确定</Button></td>
-         </tr>
-          </tbody>
-      </table>
+            </td>
+           </tr>
+           <tr>
+            <td className={styles.leftKuang1}>地点：</td>
+            <td>
+              <Select
+                  mode="combobox"
+                  size="default"
+                  defaultValue={_this.props.yaoyueHui 
+                    && _this.props.yaoyueHui.content.scheduleTemplateInfo.address}
+                  placeholder=""
+                  onChange={this.handleChangeplace}
+                  style={{ width: 200 }}
+                  disabled={this.state.bjcode}
+                >
+                {
+                  this.props.placelist
+                   && this.props.placelist.content.listInfobyAddress.map((value,index)=>{
+                    return <Option  value={value.cName} key={value.id}>{value.cName}</Option>
+              })
+                }
+                  {/*<Option value="3-1">3-1</Option>
+                  <Option value="3-2">3-2</Option>
+                  <Option value="3-3">3-3</Option>*/}
+                </Select>
+            </td>
+           </tr>
+           <tr>
+            <td className={styles.leftKuang1}>备注：</td>
+            <td>
+              <TextArea rows={4} onChange={this.beizhu} defaultValue={_this.props.yaoyueHui 
+                    && _this.props.yaoyueHui.content.scheduleTemplateInfo.remark} disabled={this.state.bjcode}/>
+            </td>
+           </tr>
+           <tr>
+            <td colSpan="2" style={{textAlign:"right"}} ><Button onClick={this.cancel}>取消</Button><span className={styles.jiange}></span>
+            <Button type="primary" onClick={this.addYaoyue} disabled={this.state.queding}>确定</Button></td>
+           </tr>
+            </tbody>
+        </table>)
+        }
+        
        
       </div>
     );

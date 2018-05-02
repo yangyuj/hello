@@ -462,30 +462,11 @@ const proxy = {
         "message": "查询人员成功",
         "code": 11,
         "content": {
-          "persons": [
-            {
-              "userId": null,
-              "userUnionId": null,
-              "orgId": null,
-              "name": "李明",
-              "ename": "liming",
-              "nickName": null,
-              "sex": null,
-              "certType": null,
-              "certNo": null,
-              "mobile": null,
-              "email": null,
-              "tel": null,
-              "nameSpelling": null,
-              "nationalityCode": null,
-              "deleted": null,
-              "birthday": null,
-              "birthCityCode": null,
-              "birthplace": null,
-              "remarks": null,
-              "createTime": null,
-              "modifyTime": null,
-              "relationType": 1
+          "teacherNameList": [
+                {
+              "value": "4-7",
+              "key": "4-7",
+              "label": "模糊查询"
             }
           ]
       },
@@ -742,8 +723,7 @@ const proxy = {
             "ifRepeat": false,
             "address": "教室99",
             "repeatCycle": null,
-            "repeatType": 1,
-            "haha":"不重复",
+            "repeatType": 5,
             "repeatIntervals": null,
             "repeatEndTime": null,
             "remark": "你是谁哈哈哈哈哈",

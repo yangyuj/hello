@@ -57,7 +57,7 @@ export default class Creat extends PureComponent {
 
     componentDidMount() {
     	let _this=this
-     const { dispatch } = this.props;
+     const { dispatch,match: {params} } = this.props;
       dispatch({  //查询所有人员
 	            type: 'Calendar/people',
 	            payload: {
@@ -74,7 +74,7 @@ export default class Creat extends PureComponent {
       dispatch({  
               type: 'Calendar/riliHuixian',
               payload: {
-                  calendarId:4
+                  calendarId:params.calendarId
               }
       }).then(function(){
          _this.setState({c_mingzi: _this.props.riliHUI 
@@ -92,11 +92,11 @@ export default class Creat extends PureComponent {
           console.log(atr)
            _this.setState({value:atr})
       })
-	}
-
-	onChangeXiala = (value) => {
-		console.log('onChange ', value, arguments);
-		this.setState({ value });
+	  }
+ 
+	  onChangeXiala = (value) => {
+  		console.log('onChange ', value, arguments);
+  		this.setState({ value });
     }
     onChangesearch=(value)=>{
     	console.log(value)
@@ -109,17 +109,17 @@ export default class Creat extends PureComponent {
 	    })
     }
     showConfirm() {
-    confirm({
-      title: '请把信息填写完整！',
+      confirm({
+        title: '请把信息填写完整！',
 
-      onOk() {
-        console.log('OK');
-      },
-      onCancel() {
-        console.log('Cancel');
-      },
-    });
-  }
+        onOk() {
+          console.log('OK');
+        },
+        onCancel() {
+          console.log('Cancel');
+        },
+      });
+    }
   	add= (e) =>{
   		console.log(this.state.c_mingzi)
   		console.log(this.state.e_mingzi)
@@ -133,11 +133,11 @@ export default class Creat extends PureComponent {
   		 this.showConfirm()
   		}else{
 	  			let _this=this
-	  		const { dispatch } = this.props;
+	  		const { dispatch ,match: {params}} = this.props;
 	        dispatch({
 	            type: 'Calendar/add',
 	            payload: {
-                 Id:"1",
+                 Id:params.calendarId,
 	               cName:this.state.c_mingzi,
 	               eName:this.state.e_mingzi,
 	               calendarAdminIds:this.state.value,
@@ -161,14 +161,14 @@ export default class Creat extends PureComponent {
       visible: true,
      });
     }
-     handleOk = (e) => {
+    handleOk = (e) => {
      // console.log(e);
        let _this=this
-          const { dispatch } = this.props;
+          const { dispatch ,match: {params}} = this.props;
           dispatch({
               type: 'Calendar/deleteri',
               payload: {
-                 Id:"1"  //日历ID   
+                 Id:params.calendarId  //日历ID   
               }
           }).then(function(){
             console.log(_this.props.delete && _this.props.delete.status)
@@ -217,7 +217,7 @@ export default class Creat extends PureComponent {
         width: 300,
       },
     };
-      const radioStyle = {
+    const radioStyle = {
       display: 'block',
       height: '25px',
       lineHeight: '25px',
@@ -225,14 +225,19 @@ export default class Creat extends PureComponent {
     return (
       <div className={styles.content}>
       <div style={{textAlign:"center"}} className={styles.addrili}>编辑日历</div>
-      <table className={styles.table}>
-       <tbody>
+      {_this.props.riliHUI 
+          && _this.props.riliHUI.content
+          && _this.props.riliHUI.content.calendar
+          && (<table className={styles.table}>
+        <tbody>
          <tr>
-          <td className={styles.leftKuang}>日历名称：</td><td><Input defaultValue={_this.props.riliHUI 
+          <td className={styles.leftKuang}>日历名称：</td>
+          <td><Input defaultValue={_this.props.riliHUI 
           && _this.props.riliHUI.content.calendar.cName} ref="mingsheng" onChange={this.cmingchenginput}/></td>
          </tr>
          <tr>
-          <td className={styles.leftKuang}>日历英文名称：</td><td><Input defaultValue={_this.props.riliHUI 
+          <td className={styles.leftKuang}>日历英文名称：</td>
+          <td><Input defaultValue={_this.props.riliHUI 
           && _this.props.riliHUI.content.calendar.eName} onChange={this.emingchenginput}/></td>
          </tr>
           <tr>
@@ -245,7 +250,7 @@ export default class Creat extends PureComponent {
 			        <Radio style={radioStyle} value={1}>管理员确定后在生效，自动添加到个人日程中</Radio>
 			        <Radio style={radioStyle} value={2}  disabled >及时生效，自动添加到个人日程中</Radio>
 			        <Radio style={radioStyle} value={3}  disabled >报名后，再添加到个人日程中</Radio>
-			  </RadioGroup>
+			 </RadioGroup>
 
           </td>
          </tr>
@@ -257,16 +262,14 @@ export default class Creat extends PureComponent {
            </td>
          </tr>
           </tbody>
-      </table>
+      </table>)}
         
-        <Modal
-          visible={this.state.visible}
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
-        >
-          <p>是否删除日历</p>
-         
-        </Modal>   
+      <Modal
+        visible={this.state.visible}
+        onOk={this.handleOk}
+        onCancel={this.handleCancel}>
+        <p>是否删除日历</p>
+      </Modal>   
       </div>
     );
   }
