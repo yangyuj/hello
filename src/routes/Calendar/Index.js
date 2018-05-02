@@ -26,8 +26,8 @@ const Option = Select.Option;
 export default class Index extends PureComponent {
   state = {
     params: {
-      calendarId: '5',
-      yearId: '2',
+      calendarId: '1',
+      yearId: '1',
       weekNumber: 1,
       type: 0
     },
@@ -125,7 +125,9 @@ export default class Index extends PureComponent {
     this.props.dispatch({
       type: 'Index/confirmInfo',
       payload: {
-        calendarId: this.state.params.calendarId
+        calendarId: this.state.params.calendarId,
+        confirmWeek: this.state.params.weekNumber,//确认周
+        semesterId: this.state.params.yearId //学期Id
       }
     });
   }
@@ -135,7 +137,7 @@ export default class Index extends PureComponent {
   }
   //新建邀约
   newInvitation = () => {
-    this.props.dispatch(routerRedux.push('/createInvitation' + '/' + this.state.semester));
+    this.props.dispatch(routerRedux.push('/createInvitation' + '/' + this.state.params.yearId));
   }
   //点击删除显示modal
   showModal = () => {
@@ -159,7 +161,7 @@ export default class Index extends PureComponent {
       visible: false,
     });
     // console.log(this.state.params.calendarId);
-    this.props.dispatch(routerRedux.push('/UpdataInvitation' + '/' + this.state.params.calendarId + '/' + this.state.schId + '/' + this.state.semester));
+    this.props.dispatch(routerRedux.push('/UpdataInvitation' + '/' + this.state.schId + '/' + this.state.params.yearId));
   }
   handleCancel = (e) => {
     this.setState({
@@ -196,6 +198,7 @@ export default class Index extends PureComponent {
     const { tableType } = this.state;
     const identifyStatus = currentUser && currentUser.$body && currentUser.$body.content && currentUser.$body.content.identify
     // console.log(currentUser && currentUser.$body.content.identify);
+    console.log(getTimeInfoMessage && getTimeInfoMessage.year && getTimeInfoMessage.year.current);
     const Admin = identifyStatus && identifyStatus.indexOf("admin");
     const Employee = identifyStatus && identifyStatus.indexOf("employee");
     return (
@@ -207,6 +210,7 @@ export default class Index extends PureComponent {
         )}
         <div>
           <Select
+            defaultValue={getTimeInfoMessage && getTimeInfoMessage.year && getTimeInfoMessage.year.current}
             className={styles.selectBox}
             placeholder="选择学期"
             onChange={this.yearsChange.bind(this)}>
