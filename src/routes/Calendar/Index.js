@@ -20,7 +20,8 @@ const Option = Select.Option;
   checkDetailInfoMessage: state.Index.checkDetailInfoMessage,
   checkDeleteInfoMessage: state.Index.checkDeleteInfoMessage,
   checkConfirmInfoMessage: state.Index.checkConfirmInfoMessage,
-  checkListInfo: state.Index.checkListInfo
+  checkListInfo: state.Index.checkListInfo,
+  currentUser: state.user.currentUser
 }))
 export default class Index extends PureComponent {
   state = {
@@ -50,13 +51,17 @@ export default class Index extends PureComponent {
       }
     }).then(() => {
       const { getTimeInfoMessage } = this.props;
-      this.state.params.weekNumber = getTimeInfoMessage.week.totalWeek || 1;
+      this.state.params.weekNumber = getTimeInfoMessage.week.currentWeek || 1;
       this.fetchCalendarInfo();
     });
 
     // const { checkDetailInfoMessage } = this.props;
     // console.log(checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.sTime);
     // console.log(checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.eTime);
+    // let startTime = checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.sTime;
+    // let endTime = checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.eTime;
+    // let arr = startTime.split("-");
+    // console.log(arr);
   }
 
   //获取所有日历数据
@@ -76,17 +81,13 @@ export default class Index extends PureComponent {
 
   //学期选择
   yearsChange(val) {
-    console.log(val);
+    // console.log(val);
     this.state.params.yearId = val;
     this.fetchCalendarInfo();
-    // this.state.semester = val;
     const { getTimeInfoMessage } = this.props;
-    // console.log(getTimeInfoMessage);
     getTimeInfoMessage && getTimeInfoMessage.year.list.map((value, index) => {
-      // console.log(value);
       if (value.id === val) {
         this.state.semester = value.end_time;
-        // console.log(this.state.semester);
       }
     })
   }
@@ -95,11 +96,11 @@ export default class Index extends PureComponent {
   checkWeek(type) {
     const { dispatch } = this.props;
     let week = this.props.getTimeInfoMessage.week.currentWeek,
-      totalWeek = this.props.getTimeInfoMessage.week.totalWeek;
+      currentWeek = this.props.getTimeInfoMessage.week.currentWeek;
     if (type == 'left' && parseInt(week, 10) > 1) {
       week--;
     }
-    if (type == 'right' && parseInt(week, 10) <= parseInt(totalWeek, 10)) {
+    if (type == 'right' && parseInt(week, 10) <= parseInt(currentWeek, 10)) {
       week++;
     }
     dispatch({
@@ -120,7 +121,7 @@ export default class Index extends PureComponent {
 
   //确认日程
   confirmCal = (value) => {
-    // console.log(value);
+    console.log(value);
     this.props.dispatch({
       type: 'Index/confirmInfo',
       payload: {
@@ -183,7 +184,7 @@ export default class Index extends PureComponent {
         "scheduleId": this.state.schId
       }
     });
-    console.log(obj);
+    // console.log(obj);
     this.setState({
       visible: true,
       schId: obj.scheduleId
@@ -191,9 +192,12 @@ export default class Index extends PureComponent {
   }
 
   render() {
-    const { getCalendarInfoMessage, getTimeInfoMessage, checkDeleteInfoMessage, checkDetailInfoMessage, checkListInfo, checkConfirmInfoMessage } = this.props;
+    const { getCalendarInfoMessage, getTimeInfoMessage, checkDeleteInfoMessage, checkDetailInfoMessage, checkListInfo, checkConfirmInfoMessage, currentUser } = this.props;
     const { tableType } = this.state;
-    // console.log(checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo.eTime);
+    const identifyStatus = currentUser && currentUser.$body && currentUser.$body.content && currentUser.$body.content.identify
+    // console.log(currentUser && currentUser.$body.content.identify);
+    const Admin = identifyStatus && identifyStatus.indexOf("admin");
+    const Employee = identifyStatus && identifyStatus.indexOf("employee");
     return (
       <div className={styles.borderBox}>
         {getCalendarInfoMessage && getCalendarInfoMessage.length > 0 && (
@@ -223,9 +227,12 @@ export default class Index extends PureComponent {
             <Icon className={tableType == 'calendar' && styles.cur} onClick={this.checkTable.bind(this, 'calendar')} type="calendar" />
           </span>
           {
-            checkConfirmInfoMessage && checkConfirmInfoMessage.status ?
-              <Button disabled className={styles.alreadyConfirm} >已确认</Button> :
-              <Button type="primary" className={styles.confirmationSchedule} onClick={this.confirmCal.bind(this, checkConfirmInfoMessage)}>确认日程</Button>
+            (Admin >= 0) &&
+            (
+              checkConfirmInfoMessage && checkConfirmInfoMessage.status ?
+                <Button disabled className={styles.alreadyConfirm} >已确认</Button> :
+                <Button type="primary" className={styles.confirmationSchedule} onClick={this.confirmCal.bind(this, checkConfirmInfoMessage)}>确认日程</Button>
+            )
           }
           <Button type="primary" className={styles.newInvitation} onClick={this.newInvitation}>新建邀约</Button>
         </div>
@@ -240,56 +247,52 @@ export default class Index extends PureComponent {
               info={checkDetailInfoMessage} />}
         </div>
         <Button className={styles.newCalendar} onClick={this.newCalendar}>新建日历</Button>
-        <div className={styles.modalStyles}>
+        <Modal
+          className={styles.stylesll}
+          title={checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.cName}
+          visible={this.state.visible}
+          onCancel={this.handleOutCancel}
+          footer={[
+            <p style={{ float: "left" }} onClick={this.showModal} className={styles.deleteSch}>删除</p>,
+            <Button onClick={this.handleOutCancel}>取消</Button>,
+            <Button type="primary" onClick={this.handleOutOk}>编辑</Button>
+          ]}>
+          <p className={styles.detailTime}><Icon className={styles.detailIcon} type="clock-circle-o" />{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.eTime}</p>
+          <p className={styles.detailPlace}><Icon className={styles.detailIcon} type="environment" />{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.address}</p>
+          <p className={styles.detailNum}><Icon className={styles.detailIcon} type="contacts" />{checkDetailInfoMessage && checkDetailInfoMessage.personNumbers}位邀约对象</p>
+          <p className={styles.detailMustChoose}>必选：
+              {
+              checkDetailInfoMessage && checkDetailInfoMessage.bixuan.map((value, index) => {
+                if (index != checkDetailInfoMessage && checkDetailInfoMessage.bixuan.length - 1) {
+                  return (value + ',');
+                } else {
+                  return (value);
+                }
+                console.log(index);
+                console.log(checkDetailInfoMessage && checkDetailInfoMessage.bixuan.length - 1);
+              })
+            }</p>
+          <p className={styles.detailCanChoose}>可选：
+              {
+              checkDetailInfoMessage && checkDetailInfoMessage.kexuan.map((value, index) => {
+                if (index != checkDetailInfoMessage && checkDetailInfoMessage.kexuan.length - 1) {
+                  return (value + ',');
+                } else {
+                  return (value);
+                }
+                console.log(index);
+                console.log(checkDetailInfoMessage && checkDetailInfoMessage.bixuan.length - 1);
+              })
+            }</p>
+          <p className={styles.detailRemark}><Icon className={styles.detailIcon} type="profile" />{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.remark}</p>
           <Modal
-            className={styles.stylesll}
-            title={checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.cName}
-            visible={this.state.visible}
-            onCancel={this.handleOutCancel}
-            footer={[
-              <p style={{ float: "left" }} onClick={this.showModal} className={styles.deleteSch}>删除</p>,
-              <Button onClick={this.handleOutCancel}>取消</Button>,
-              <Button type="primary" onClick={this.handleOutOk}>编辑</Button>
-            ]}
-          >
-            <p className={styles.detailTime}><Icon className={styles.detailIcon} type="clock-circle-o" />{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.eTime}</p>
-            <p className={styles.detailPlace}><Icon className={styles.detailIcon} type="environment" />{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.address}</p>
-            <p className={styles.detailNum}><Icon className={styles.detailIcon} type="contacts" />{checkDetailInfoMessage && checkDetailInfoMessage.personNumbers}位邀约对象</p>
-            <p className={styles.detailMustChoose}>必选：
-              {
-                checkDetailInfoMessage && checkDetailInfoMessage.bixuan.map((value, index) => {
-                  if (index != checkDetailInfoMessage && checkDetailInfoMessage.bixuan.length - 1) {
-                    return (value + ',');
-                  } else {
-                    return (value);
-                  }
-                  console.log(index);
-                  console.log(checkDetailInfoMessage && checkDetailInfoMessage.bixuan.length - 1);
-                })
-              }</p>
-            <p className={styles.detailCanChoose}>可选：
-              {
-                checkDetailInfoMessage && checkDetailInfoMessage.kexuan.map((value, index) => {
-                  if (index != checkDetailInfoMessage && checkDetailInfoMessage.kexuan.length - 1) {
-                    return (value + ',');
-                  } else {
-                    return (value);
-                  }
-                  console.log(index);
-                  console.log(checkDetailInfoMessage && checkDetailInfoMessage.bixuan.length - 1);
-                })
-              }</p>
-            <p className={styles.detailRemark}><Icon className={styles.detailIcon} type="profile" />{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.remark}</p>
-            <Modal
-              visible={this.state.daleteVisible}
-              onOk={this.handleOk}
-              onCancel={this.handleCancel}
-              style={{ top: 200 }} >
-              <p className={styles.deleteSure}>您确定要删除这次日程么？</p>
-            </Modal>
+            visible={this.state.daleteVisible}
+            onOk={this.handleOk}
+            onCancel={this.handleCancel}
+            style={{ top: 200 }} >
+            <p className={styles.deleteSure}>您确定要删除这次日程么？</p>
           </Modal>
-        </div>
-
+        </Modal>
       </div>
     );
   }

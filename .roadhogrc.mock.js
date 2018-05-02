@@ -36,7 +36,7 @@ const proxy = {
           "avatar": "https://static.dingtalk.com/media/lADOysn4mc0CgM0Cfg_638_640.jpg",
           "userId": 14,
           "notifyCount": 12,
-          "identify": ["employee"]
+          "identify": ["employee","admin"]
         }
       }
     });
