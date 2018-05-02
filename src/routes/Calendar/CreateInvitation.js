@@ -198,7 +198,7 @@ export default class Creat extends PureComponent {
          let chuofrist=this.state.data.replace(/-/g, '/')+' '+this.state.firstTime
          let chuolast=this.state.data.replace(/-/g, '/')+' '+this.state.lastTime
              let _this=this
-          const { dispatch } = this.props;
+          const { dispatch ,match: {params}} = this.props;
               dispatch({
                   type: 'Calendar/addyao',
                   payload: {
@@ -211,7 +211,8 @@ export default class Creat extends PureComponent {
                     endTime:new Date(chuolast).getTime(),
                     repeatTypeCode:this.state.chongfu,
                     address:this.state.place,
-                    remark:this.state.beizhu
+                    remark:this.state.beizhu,
+                    repeatEndTime:params.endTime
                   }
               }).then(function(res){
                        console.log(_this.props.yaoyue
