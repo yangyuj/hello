@@ -36,7 +36,7 @@ const proxy = {
           "avatar": "https://static.dingtalk.com/media/lADOysn4mc0CgM0Cfg_638_640.jpg",
           "userId": 14,
           "notifyCount": 12,
-          "identify":["employee"]
+          "identify": ["employee"]
         }
       }
     });
@@ -94,7 +94,7 @@ const proxy = {
         {
           "scheduleId": 1,
           "scheduleTime": "xx",
-          "theme": "会议232",
+          "theme": "周一会议",
           "people": "xxx,xxx,xxx,xxx",
           "location": "小雪",
           "remark": "xxx",
@@ -104,7 +104,7 @@ const proxy = {
         {
           "scheduleId": 2,
           "scheduleTime": "xx",
-          "theme": "会议",
+          "theme": "周一会议",
           "people": "xxx,xxx,xxx,xxx",
           "location": "小雪",
           "remark": "xxx",
@@ -114,7 +114,7 @@ const proxy = {
         {
           "scheduleId": 3,
           "scheduleTime": "xx",
-          "theme": "会议",
+          "theme": "周一会议",
           "people": "xxx,xxx,xxx,xxx",
           "location": "小雪",
           "remark": "xxx",
@@ -126,7 +126,7 @@ const proxy = {
         {
           "scheduleId": 1,
           "scheduleTime": "xx",
-          "theme": "会议",
+          "theme": "周二会议",
           "people": "xxx,xxx,xxx,xxx",
           "location": "小雪",
           "remark": "xxx",
@@ -136,7 +136,7 @@ const proxy = {
         {
           "scheduleId": 2,
           "scheduleTime": "xx",
-          "theme": "会议",
+          "theme": "周二会议",
           "people": "xxx,xxx,xxx,xxx",
           "location": "小雪",
           "remark": "xxx",
@@ -146,7 +146,7 @@ const proxy = {
         {
           "scheduleId": 3,
           "scheduleTime": "xx",
-          "theme": "会议",
+          "theme": "周二会议",
           "people": "xxx,xxx,xxx,xxx",
           "location": "小雪",
           "remark": "xxx",
@@ -158,7 +158,7 @@ const proxy = {
         {
           "scheduleId": 1,
           "scheduleTime": "xx",
-          "theme": "会议",
+          "theme": "周三会议",
           "people": "xxx,xxx,xxx,xxx",
           "location": "小雪",
           "remark": "xxx",
@@ -169,7 +169,7 @@ const proxy = {
         {
           "scheduleId": 2,
           "scheduleTime": "xx",
-          "theme": "会议",
+          "theme": "周三会议",
           "people": "xxx,xxx,xxx,xxx",
           "location": "小雪",
           "remark": "xxx",
@@ -179,15 +179,25 @@ const proxy = {
         {
           "scheduleId": 3,
           "scheduleTime": "xx",
-          "theme": "会议",
+          "theme": "周三会议",
           "people": "xxx,xxx,xxx,xxx",
           "location": "小雪",
           "remark": "xxx",
           "start": "14:00",
           "end": "15:20"
+        },
+        {
+          "scheduleId": 3,
+          "scheduleTime": "xx",
+          "theme": "全天会议",
+          "people": "xxx,xxx,xxx,xxx",
+          "location": "小雪",
+          "remark": "xxx",
+          "start": "7:00",
+          "end": "18:10"
         }
       ],
-      "timeStamp": 1524563786979
+      "timeStamp": 1524635363000
     },
     "content—bac":[
       {
@@ -283,6 +293,15 @@ const proxy = {
             "remark": "xxx",
             "start": "14:00",
             "end": "15:20"
+          },{
+            "scheduleId": 2,
+            "scheduleTime": "xx",
+            "theme": "会议",
+            "people": "xxx,xxx,xxx,xxx",
+            "location": "小雪",
+            "remark": "xxx",
+            "start": "14:00",
+            "end": "15:20"
           },
           {
             "scheduleId": 3,
@@ -335,62 +354,62 @@ const proxy = {
   },
   //日历的类别显示
   'GET /api/getAllCalendar': {
-    "ifLogin":true,
-    "status":true,
-    "message":"查询成功！",
-    "code":0,
-    "ifAdmin":false,
-    "content":[
+    "ifLogin": true,
+    "status": true,
+    "message": "查询成功！",
+    "code": 0,
+    "ifAdmin": false,
+    "content": [
       {
-        "id":1,
-        "name":"行事历"
+        "id": 1,
+        "name": "行事历"
       },
       {
-        "id":2,
-        "name":"菠萝计划"
-      },{
-        "id":3,
-        "name":"苹果计划"
-      },{
-        "id":4,
-        "name":"西瓜计划"
+        "id": 2,
+        "name": "菠萝计划"
+      }, {
+        "id": 3,
+        "name": "苹果计划"
+      }, {
+        "id": 4,
+        "name": "西瓜计划"
       }
     ]
   },
   //日程详情的显示
-  'GET /api/checkDetail':{
-    "ifLogin":true,
-    "status":true,
-    "message":"查询成功！",
-    "code":0,
-    "ifAdmin":false,
-    "content":{
-      "scheduleTemplate":{
-        "id":1, //(日程id)
-        "cName":"七年级核心管理团队会议",
-        "eName":"name",
-        "sTime":"2018-04-17 10:33:26",
-        "eTime":"2018-04-17 10:33:27",
-        "address":"小雪",
-        "remark":"必须来",
-        "weekDay":"周二"
+  'GET /api/checkDetail': {
+    "ifLogin": true,
+    "status": true,
+    "message": "查询成功！",
+    "code": 0,
+    "ifAdmin": false,
+    "content": {
+      "scheduleTemplate": {
+        "id": 1, //(日程id)
+        "cName": "七年级核心管理团队会议",
+        "eName": "name",
+        "sTime": "2018-04-17 10:33:26",
+        "eTime": "2018-04-17 10:33:27",
+        "address": "小雪",
+        "remark": "必须来",
+        "weekDay": "周二"
       },
-      "personNumbers":23,
-      "bixuan":["张三","李四"],
-      "kexuan":["呜呜","湖师大苏"]
+      "personNumbers": 23,
+      "bixuan": ["张三", "李四"],
+      "kexuan": ["呜呜", "湖师大苏"]
     }
   },
   //确认日程
-  'GET /api/confirmCalendar':{
-    "ifLogin":"是否登录",
-    "status":true,
-    "message":"消息",
+  'GET /api/confirmCalendar': {
+    "ifLogin": "是否登录",
+    "status": true,
+    "message": "消息",
   },
   //删除日程
-  'GET /api/deleteScheduleTemplate':{
-    "ifLogin":"是否登录",
-    "status":true,
-    "message":"消息",
+  'GET /api/deleteScheduleTemplate': {
+    "ifLogin": "是否登录",
+    "status": true,
+    "message": "消息",
   },
 
   'POST /api/tutor_save': (req, res) => {
@@ -449,7 +468,41 @@ const proxy = {
       message: '数据提交失败',
     });
   },
+  //模糊查询
+  'GET /api/selectPersonName': {
+    "ifLogin": true,
+    "status": true,
+    "message": "查询人员成功",
+    "code": 11,
+    "content": {
+      "persons": [
+        {
+          "userId": null,
+          "userUnionId": null,
+          "orgId": null,
+          "name": "李明",
+          "ename": "liming",
+          "nickName": null,
+          "sex": null,
+          "certType": null,
+          "certNo": null,
+          "mobile": null,
+          "email": null,
+          "tel": null,
+          "nameSpelling": null,
+          "nationalityCode": null,
+          "deleted": null,
+          "birthday": null,
+          "birthCityCode": null,
+          "birthplace": null,
+          "remarks": null,
+          "createTime": null,
+          "modifyTime": null,
+          "relationType": 1
+        }
+      ]
 
+<<<<<<< HEAD
 
 
 
@@ -471,19 +524,24 @@ const proxy = {
           ]
       },
     "ifAdmin": false
+=======
+>>>>>>> 9f1daf4f3928f9fc1b391f4e202be2c3f81e0b9f
     },
-   //新建日历
+    "ifAdmin": false
+  },
+  //新建日历
   'POST /api/addCalendar': (req, res) => {
     res.send({
-        ifLogin:true,
-        status:true,
-        message:"插入成功！",
-        code:0,
-        ifAdmin:false,
-        content:[]
+      ifLogin: true,
+      status: true,
+      message: "插入成功！",
+      code: 0,
+      ifAdmin: false,
+      content: []
     });
   },
   //查询所有人员
+
   'GET /api/getDepartmentList':{
         "ifLogin": true,
         "status": true,
@@ -541,83 +599,83 @@ const proxy = {
     ]
       },
     "ifAdmin": false
-    },
-    //创建邀约
-   'POST /api/createScheduleTemplate': (req, res) => {
+  },
+  //创建邀约
+  'POST /api/createScheduleTemplate': (req, res) => {
     res.send({
-       "ifLogin": true,
-        "status": true,
-        "message": "创建成功",
-        "code": 11,
-        "content":[],
-        "ifAdmin":false
+      "ifLogin": true,
+      "status": true,
+      "message": "创建成功",
+      "code": 11,
+      "content": [],
+      "ifAdmin": false
     });
   },
   //获取所有日历
-  'GET /api/getAllCalendar':{
-        "ifLogin": true,
-        "status": true,
-        "message": "查询日历成功",
-        "code": 11,
-        "content": [
-              {
-                "id":1,
-                "name":"行事历"
-              },
-              {
-                "id":2,
-                "name":"菠萝计划"
-              }
-            ],
-        "ifAdmin": false
+  'GET /api/getAllCalendar': {
+    "ifLogin": true,
+    "status": true,
+    "message": "查询日历成功",
+    "code": 11,
+    "content": [
+      {
+        "id": 1,
+        "name": "行事历"
+      },
+      {
+        "id": 2,
+        "name": "菠萝计划"
+      }
+    ],
+    "ifAdmin": false
   },
   //获取地点
-   'GET /api/getAddressList':{
-        "ifLogin": true,
-        "status": true,
-        "message": "查询地点信息列表成功",
-        "code": 11,
-        "content":{
-        "listInfobyAddress":[
-            {
-                "id":1,
-                "cName":"教室1",
-                "eName":null,
-                "remark":null,
-                "startTime":null,
-                "endtime":null,
-                "deleted":false
-            },
-            {
-                "id":2,
-                "cName":"教室12",
-                "eName":null,
-                "remark":null,
-                "startTime":null,
-                "endtime":null,
-                "deleted":false
-            },
-             {
-                "id":3,
-                "cName":"教室13",
-                "eName":null,
-                "remark":null,
-                "startTime":null,
-                "endtime":null,
-                "deleted":false
-            },
-             {
-                "id":4,
-                "cName":"教室14",
-                "eName":null,
-                "remark":null,
-                "startTime":null,
-                "endtime":null,
-                "deleted":false
-            }
-        ]
+  'GET /api/getAddressList': {
+    "ifLogin": true,
+    "status": true,
+    "message": "查询地点信息列表成功",
+    "code": 11,
+    "content": {
+      "listInfobyAddress": [
+        {
+          "id": 1,
+          "cName": "教室1",
+          "eName": null,
+          "remark": null,
+          "startTime": null,
+          "endtime": null,
+          "deleted": false
+        },
+        {
+          "id": 2,
+          "cName": "教室12",
+          "eName": null,
+          "remark": null,
+          "startTime": null,
+          "endtime": null,
+          "deleted": false
+        },
+        {
+          "id": 3,
+          "cName": "教室13",
+          "eName": null,
+          "remark": null,
+          "startTime": null,
+          "endtime": null,
+          "deleted": false
+        },
+        {
+          "id": 4,
+          "cName": "教室14",
+          "eName": null,
+          "remark": null,
+          "startTime": null,
+          "endtime": null,
+          "deleted": false
+        }
+      ]
     },
-        "ifAdmin": false
+    "ifAdmin": false
   },
   //日历回显
   'GET /api/getCalendarEcho':{
@@ -718,7 +776,7 @@ const proxy = {
             "calendarId": 1,
             "cName": "函询",
             "eName": "hanxu",
-            "startTime": 1524466560000, 
+            "startTime": 1524466560000,
             "endTime": 1524212682000,
             "ifRepeat": false,
             "address": "教室99",

@@ -1,6 +1,6 @@
 import { routerRedux } from 'dva/router';
 import { message } from 'antd';
-import { getTimeInfo } from '../services/api';
+import { getTimeInfo, checkListInfo } from '../services/api';
 import { trans } from '../utils/i18n';
 import { loginRedirect } from '../utils/utils';
 
@@ -9,7 +9,8 @@ export default {
 
     state: {
         state: {
-            getTimeInfoMessage:{}
+            getTimeInfoMessage:{},
+            getListInfoMessage:{} 
         },
     },
 
@@ -23,6 +24,16 @@ export default {
                 type: 'timeInfoMessage',
                 payload: response,
             });
+        },
+        *listInfo({ payload }, { call, put }) {
+            const response = yield call(checkListInfo, payload);
+            if (!response) {
+                return;
+            }
+            yield put({
+                type: 'listInfoMessage',
+                payload: response,
+            });
         }
     },
 
@@ -31,6 +42,13 @@ export default {
 			return { 
 				...state,
 				getTimeInfoMessage: payload,
+				loading: true
+			};	
+        },
+        listInfoMessage(state, { payload }) {
+			return { 
+				...state,
+				getListInfoMessage: payload,
 				loading: true
 			};	
 		},
