@@ -127,7 +127,7 @@ export default class Creat extends PureComponent {
 	        }).then(function(res){
 	          if(_this.props.addWork && _this.props.addWork.status){
 	          	//alert(_this.props.addWork && _this.props.addWork.message)
-	          	 this.props.dispatch(routerRedux.push('/index'));
+	          	 _this.props.dispatch(routerRedux.push('/index'));
 	          }else{
 	            alert(_this.props.addWork && _this.props.addWork.message)
 	          }
