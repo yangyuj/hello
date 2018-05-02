@@ -53,15 +53,10 @@ export default class Index extends PureComponent {
       this.state.params.weekNumber = getTimeInfoMessage.week.totalWeek || 1;
       this.fetchCalendarInfo();
     });
-    dispatch({
-      type: 'Index/detailInfo',
-      payload: {
 
-      }
-    });
-    const { checkDetailInfoMessage } = this.props;
-    console.log(checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplate && checkDetailInfoMessage.scheduleTemplate.sTime);
-    console.log(checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplate && checkDetailInfoMessage.scheduleTemplate.eTime);
+    // const { checkDetailInfoMessage } = this.props;
+    // console.log(checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.sTime);
+    // console.log(checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.eTime);
   }
 
   //获取所有日历数据
@@ -87,9 +82,9 @@ export default class Index extends PureComponent {
     // this.state.semester = val;
     const { getTimeInfoMessage } = this.props;
     // console.log(getTimeInfoMessage);
-    getTimeInfoMessage && getTimeInfoMessage.year.list.map((value, index)=>{
+    getTimeInfoMessage && getTimeInfoMessage.year.list.map((value, index) => {
       // console.log(value);
-      if(value.id === val){
+      if (value.id === val) {
         this.state.semester = value.end_time;
         // console.log(this.state.semester);
       }
@@ -180,6 +175,14 @@ export default class Index extends PureComponent {
   }
 
   calendarClick(obj) {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'Index/detailInfo',
+      payload: {
+        "pageType": 11,
+        "scheduleId": this.state.schId
+      }
+    });
     console.log(obj);
     this.setState({
       visible: true,
@@ -190,7 +193,7 @@ export default class Index extends PureComponent {
   render() {
     const { getCalendarInfoMessage, getTimeInfoMessage, checkDeleteInfoMessage, checkDetailInfoMessage, checkListInfo, checkConfirmInfoMessage } = this.props;
     const { tableType } = this.state;
-    // console.log(checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplate.eTime);
+    // console.log(checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo.eTime);
     return (
       <div className={styles.borderBox}>
         {getCalendarInfoMessage && getCalendarInfoMessage.length > 0 && (
@@ -240,7 +243,7 @@ export default class Index extends PureComponent {
         <div className={styles.modalStyles}>
           <Modal
             className={styles.stylesll}
-            title={checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplate.cName}
+            title={checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.cName}
             visible={this.state.visible}
             onCancel={this.handleOutCancel}
             footer={[
@@ -248,16 +251,38 @@ export default class Index extends PureComponent {
               <Button onClick={this.handleOutCancel}>取消</Button>,
               <Button type="primary" onClick={this.handleOutOk}>编辑</Button>
             ]}
-            >
-            <p className={styles.detailTime}><Icon className={styles.detailIcon} type="clock-circle-o" />{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplate.eTime}</p>
-            <p className={styles.detailPlace}><Icon className={styles.detailIcon} type="environment" />{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplate.address}</p>
+          >
+            <p className={styles.detailTime}><Icon className={styles.detailIcon} type="clock-circle-o" />{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.eTime}</p>
+            <p className={styles.detailPlace}><Icon className={styles.detailIcon} type="environment" />{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.address}</p>
             <p className={styles.detailNum}><Icon className={styles.detailIcon} type="contacts" />{checkDetailInfoMessage && checkDetailInfoMessage.personNumbers}位邀约对象</p>
-            <p className={styles.detailMustChoose}>必选：{checkDetailInfoMessage && checkDetailInfoMessage.bixuan}</p>
-            <p className={styles.detailCanChoose}>可选：{checkDetailInfoMessage && checkDetailInfoMessage.kexuan}</p>
-            <p className={styles.detailRemark}><Icon className={styles.detailIcon} type="profile" />{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplate.remark}</p>
-            <Modal 
-              visible={this.state.daleteVisible} 
-              onOk={this.handleOk} 
+            <p className={styles.detailMustChoose}>必选：
+              {
+                checkDetailInfoMessage && checkDetailInfoMessage.bixuan.map((value, index) => {
+                  if (index != checkDetailInfoMessage && checkDetailInfoMessage.bixuan.length - 1) {
+                    return (value + ',');
+                  } else {
+                    return (value);
+                  }
+                  console.log(index);
+                  console.log(checkDetailInfoMessage && checkDetailInfoMessage.bixuan.length - 1);
+                })
+              }</p>
+            <p className={styles.detailCanChoose}>可选：
+              {
+                checkDetailInfoMessage && checkDetailInfoMessage.kexuan.map((value, index) => {
+                  if (index != checkDetailInfoMessage && checkDetailInfoMessage.kexuan.length - 1) {
+                    return (value + ',');
+                  } else {
+                    return (value);
+                  }
+                  console.log(index);
+                  console.log(checkDetailInfoMessage && checkDetailInfoMessage.bixuan.length - 1);
+                })
+              }</p>
+            <p className={styles.detailRemark}><Icon className={styles.detailIcon} type="profile" />{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.remark}</p>
+            <Modal
+              visible={this.state.daleteVisible}
+              onOk={this.handleOk}
               onCancel={this.handleCancel}
               style={{ top: 200 }} >
               <p className={styles.deleteSure}>您确定要删除这次日程么？</p>

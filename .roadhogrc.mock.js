@@ -377,7 +377,7 @@ const proxy = {
     ]
   },
   //日程详情的显示
-  'GET /api/checkDetail': {
+  'GET /api/getScheduleEcho': {
     "ifLogin": true,
     "status": true,
     "message": "查询成功！",
@@ -839,7 +839,7 @@ const proxy = {
             "deInfoDoList": null
           }],
           "bixuan": ["韩旭", "机构管理员"],
-          "kexuan": [],
+          "kexuan": ["huhuhuhu"],
           "cCalendarType": "行事历",
           "eCalendarType": "calendar",
           "personNumbers": 2,

@@ -24,7 +24,7 @@ export async function getCalendarInfo() {
 
 //新建日历
 export async function addCalendar(params) {
-	console.log(params)
+	// console.log(params)
   return request('/api/addCalendar', {
     method: 'POST',
     body: params,
@@ -32,7 +32,7 @@ export async function addCalendar(params) {
 }
 //创建邀约
 export async function addYaoyue(params) {
-	console.log(params)
+	// console.log(params)
   return request('/api/createScheduleTemplate', {
     method: 'POST',
     body: params,
@@ -52,22 +52,22 @@ export async function getallRili() {
 }
 //模糊查询(用不用？)
 export async function mohuCha(params) {
-	console.log(params.name)
+	// console.log(params.name)
   return request(`/api/selectPersonName?name=${params.name}`);
 }
 //日历回显
 export async function CalendarHuixian(params) {
-	console.log(params.name)
+	// console.log(params.name)
   return request(`/api/getCalendarEcho?calendarId=${params.calendarId}`);
 }
 //邀约回显
 export async function YaoyueHuixian(params) {
-	console.log(params.name)
+	// console.log(params.name)
   return request(`/api/getScheduleEcho?scheduleId=${params.scheduleId}&pageType=${params.pageType}`);
 }
 //修改邀约
 export async function xiugaiYaoyue(params) {
-	console.log(params)
+	// console.log(params)
   return request('/api/getScheduleModified', {
     method: 'POST',
     body: params,
@@ -75,19 +75,22 @@ export async function xiugaiYaoyue(params) {
 }
 //删除日历
 export async function deleteRili(params) {
-	console.log(params.name)
+	// console.log(params.name)
   return request(`/api/deleted?Id=${params.Id}`);
 }
 
 
 
 //日程详情的显示
-export async function checkDetailInfo() {
-  return request(`/api/checkDetail`);
+export async function checkDetailInfo(params) {
+  console.log(params);
+  const id = params.scheduleId;
+  const type = params.pageType;
+  return request(`/api/getScheduleEcho?scheduleId=${id}&pageType=${params.pageType}`);
 }
 //删除日程
 export async function checkDeleteInfo(params) {
-  console.log(params)
+  // console.log(params)
   return request(`/api/deleteSchedule?scheduleTemplateId=${params}`);
 }
 //确认日程
