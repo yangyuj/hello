@@ -294,7 +294,7 @@ export default class Creat extends PureComponent {
                      repeatTypeCode:this.state.chongfu,
                      optionalPersonnel:this.state.value2,
                      requiredPersonnel:this.state.value1,
-                     yearId:params.yearId //学期ID
+                     semesterId:params.yearId //学期ID
                   }
               }).then(function(){
 
