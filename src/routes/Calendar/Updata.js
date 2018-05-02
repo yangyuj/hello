@@ -154,7 +154,7 @@ export default class Creat extends PureComponent {
   		
   	}
   	cancel=(e)=>{
-  		 this.props.dispatch(routerRedux.push('/calShow'));
+  		 this.props.dispatch(routerRedux.push('/index'));
   	}
     delete=(e)=>{
      this.setState({
@@ -174,7 +174,7 @@ export default class Creat extends PureComponent {
             console.log(_this.props.delete && _this.props.delete.status)
             if(_this.props.delete && _this.props.delete.status==true){
               console.log('delete')
-              _this.props.dispatch(routerRedux.push('/calShow'));
+              _this.props.dispatch(routerRedux.push('/index'));
             }else{
               console.log('quxiao')
             }

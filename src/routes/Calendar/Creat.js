@@ -85,8 +85,8 @@ export default class Creat extends PureComponent {
 		      console.log(_this.props.personlist 
 		      	&& _this.props.personlist.content.teacherNameList)
 		    	//赋给treeData
-		      _this.setState({treeData:_this.props.personlist 
-		      	&& _this.props.personlist.content.teacherNameList})
+		      // _this.setState({treeData:_this.props.personlist 
+		      // 	&& _this.props.personlist.content.teacherNameList})
 		    })	
     }
     huoquJiao=(value)=>{
@@ -135,7 +135,7 @@ export default class Creat extends PureComponent {
   		
   	}
   	cancel=(e)=>{
-  		 this.props.dispatch(routerRedux.push('/calShow'));
+  		 this.props.dispatch(routerRedux.push('/index'));
   	}
   	cmingchenginput=(e)=>{
   		//console.log(e.target.value)

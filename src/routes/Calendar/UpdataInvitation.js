@@ -346,7 +346,7 @@ export default class Creat extends PureComponent {
               
     }
     cancel=(e)=>{
-       this.props.dispatch(routerRedux.push('/calShow'));
+       this.props.dispatch(routerRedux.push('/index'));
     }
   render() {
     let repeatType=this.props.yaoyueHui 
