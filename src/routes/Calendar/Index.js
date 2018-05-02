@@ -25,8 +25,8 @@ const Option = Select.Option;
 export default class Index extends PureComponent {
   state = {
     params: {
-      calendarId: '',
-      yearId: '',
+      calendarId: '5',
+      yearId: '3',
       weekNumber: 1,
       type: 0
     },
