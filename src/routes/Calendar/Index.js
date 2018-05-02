@@ -34,7 +34,8 @@ export default class Index extends PureComponent {
     visible: false,
     already: 0,
     schId: 0,
-    calId: 0
+    calId: 0,
+    semester: 0
   }
   componentDidMount() {
     const { dispatch } = this.props;
@@ -55,8 +56,12 @@ export default class Index extends PureComponent {
     dispatch({
       type: 'Index/detailInfo',
       payload: {
+
       }
     });
+    const { checkDetailInfoMessage } = this.props;
+    console.log(checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplate && checkDetailInfoMessage.scheduleTemplate.sTime);
+    console.log(checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplate && checkDetailInfoMessage.scheduleTemplate.eTime);
   }
 
   //获取所有日历数据
@@ -76,8 +81,19 @@ export default class Index extends PureComponent {
 
   //学期选择
   yearsChange(val) {
+    console.log(val);
     this.state.params.yearId = val;
     this.fetchCalendarInfo();
+    // this.state.semester = val;
+    const { getTimeInfoMessage } = this.props;
+    // console.log(getTimeInfoMessage);
+    getTimeInfoMessage && getTimeInfoMessage.year.list.map((value, index)=>{
+      // console.log(value);
+      if(value.id === val){
+        this.state.semester = value.end_time;
+        // console.log(this.state.semester);
+      }
+    })
   }
 
   //切换周
@@ -109,10 +125,11 @@ export default class Index extends PureComponent {
 
   //确认日程
   confirmCal = (value) => {
+    // console.log(value);
     this.props.dispatch({
       type: 'Index/confirmInfo',
       payload: {
-
+        calendarId: this.state.params.calendarId
       }
     });
   }
@@ -145,8 +162,8 @@ export default class Index extends PureComponent {
     this.setState({
       visible: false,
     });
-    // console.log("编辑");
-    this.props.dispatch(routerRedux.push('/UpdataInvitation' + '/' + ''));
+    // console.log(this.state.params.calendarId);
+    this.props.dispatch(routerRedux.push('/UpdataInvitation' + '/' + this.state.params.calendarId + '/' + this.state.schId + '/' + this.state.semester));
   }
   handleCancel = (e) => {
     this.setState({
@@ -171,9 +188,9 @@ export default class Index extends PureComponent {
   }
 
   render() {
-    const { getCalendarInfoMessage, getTimeInfoMessage, checkDetailInfoMessage, checkListInfo, checkConfirmInfoMessage } = this.props;
+    const { getCalendarInfoMessage, getTimeInfoMessage, checkDeleteInfoMessage, checkDetailInfoMessage, checkListInfo, checkConfirmInfoMessage } = this.props;
     const { tableType } = this.state;
-    // console.log(checkListInfo);
+    // console.log(checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplate.eTime);
     return (
       <div className={styles.borderBox}>
         {getCalendarInfoMessage && getCalendarInfoMessage.length > 0 && (
@@ -202,8 +219,11 @@ export default class Index extends PureComponent {
             <span>|</span>
             <Icon className={tableType == 'calendar' && styles.cur} onClick={this.checkTable.bind(this, 'calendar')} type="calendar" />
           </span>
-          <Button type="primary" className={styles.confirmationSchedule} onClick={this.confirmCal(this, checkConfirmInfoMessage)}>确认日程</Button>
-          {/* <Button disabled className={styles.alreadyConfirm} >已确认</Button> */}
+          {
+            checkConfirmInfoMessage && checkConfirmInfoMessage.status ?
+              <Button disabled className={styles.alreadyConfirm} >已确认</Button> :
+              <Button type="primary" className={styles.confirmationSchedule} onClick={this.confirmCal.bind(this, checkConfirmInfoMessage)}>确认日程</Button>
+          }
           <Button type="primary" className={styles.newInvitation} onClick={this.newInvitation}>新建邀约</Button>
         </div>
         <div className={styles.bodyBox}>
@@ -217,24 +237,34 @@ export default class Index extends PureComponent {
               info={checkDetailInfoMessage} />}
         </div>
         <Button className={styles.newCalendar} onClick={this.newCalendar}>新建日历</Button>
-        <Modal
-          title={checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplate.cName}
-          visible={this.state.visible}
-          footer={[
-            <p style={{ float: "left" }} onClick={this.showModal} className={styles.deleteSch}>删除</p>,
-            <Button onClick={this.handleOutCancel}>取消</Button>,
-            <Button type="primary" onClick={this.handleOutOk}>编辑</Button>
-          ]}>
-          <p className={styles.detailTime}><Icon className={styles.detailIcon} type="clock-circle-o" />{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplate.eTime}</p>
-          <p className={styles.detailPlace}><Icon className={styles.detailIcon} type="environment" />{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplate.address}</p>
-          <p className={styles.detailNum}><Icon className={styles.detailIcon} type="contacts" />{checkDetailInfoMessage && checkDetailInfoMessage.personNumbers}位邀约对象</p>
-          <p className={styles.detailMustChoose}>必选：{checkDetailInfoMessage && checkDetailInfoMessage.bixuan}</p>
-          <p className={styles.detailCanChoose}>可选：{checkDetailInfoMessage && checkDetailInfoMessage.kexuan}</p>
-          <p className={styles.detailRemark}><Icon className={styles.detailIcon} type="profile" />{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplate.remark}</p>
-          <Modal visible={this.state.daleteVisible} onOk={this.handleOk} onCancel={this.handleCancel} >
-            <p className={styles.deleteSure}>您确定要删除这次日程么？</p>
+        <div className={styles.modalStyles}>
+          <Modal
+            className={styles.stylesll}
+            title={checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplate.cName}
+            visible={this.state.visible}
+            onCancel={this.handleOutCancel}
+            footer={[
+              <p style={{ float: "left" }} onClick={this.showModal} className={styles.deleteSch}>删除</p>,
+              <Button onClick={this.handleOutCancel}>取消</Button>,
+              <Button type="primary" onClick={this.handleOutOk}>编辑</Button>
+            ]}
+            >
+            <p className={styles.detailTime}><Icon className={styles.detailIcon} type="clock-circle-o" />{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplate.eTime}</p>
+            <p className={styles.detailPlace}><Icon className={styles.detailIcon} type="environment" />{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplate.address}</p>
+            <p className={styles.detailNum}><Icon className={styles.detailIcon} type="contacts" />{checkDetailInfoMessage && checkDetailInfoMessage.personNumbers}位邀约对象</p>
+            <p className={styles.detailMustChoose}>必选：{checkDetailInfoMessage && checkDetailInfoMessage.bixuan}</p>
+            <p className={styles.detailCanChoose}>可选：{checkDetailInfoMessage && checkDetailInfoMessage.kexuan}</p>
+            <p className={styles.detailRemark}><Icon className={styles.detailIcon} type="profile" />{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplate.remark}</p>
+            <Modal 
+              visible={this.state.daleteVisible} 
+              onOk={this.handleOk} 
+              onCancel={this.handleCancel}
+              style={{ top: 200 }} >
+              <p className={styles.deleteSure}>您确定要删除这次日程么？</p>
+            </Modal>
           </Modal>
-        </Modal>
+        </div>
+
       </div>
     );
   }
