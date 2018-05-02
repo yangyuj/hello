@@ -30,7 +30,7 @@ export const getNavData = app => [
         component: dynamicWrapper(app, ['calShow'], () => import('../routes/Calendar/CalShow'))
       },{
         name:"新建邀约",
-        path:'createInvitation',
+        path:'createInvitation/:yearId',
         component: dynamicWrapper(app, ['Calendar'], () => import('../routes/Calendar/CreateInvitation'))
       },{
         name:"修改日历",
@@ -40,7 +40,7 @@ export const getNavData = app => [
       },{
         name:"修改邀约",
        // path:'updataInvitation/:calendarId/:scheduleId',
-        path:'updataInvitation/:calendarId/:scheduleId/:endTime',
+        path:'updataInvitation/:scheduleId/:yearId',
         component: dynamicWrapper(app, ['Calendar'], () => import('../routes/Calendar/UpdataInvitation'))
       }
     ],

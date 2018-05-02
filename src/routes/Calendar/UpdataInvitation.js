@@ -284,7 +284,7 @@ export default class Creat extends PureComponent {
                   type: 'Calendar/xiugaiyaoyue',
                   payload: {
                      id: params.scheduleId,//邀约id
-                     calendarId:params.calendarId,//日历ID
+                     calendarId:this.state.leixing,//日历ID
                      cName:this.state.c_zhuti,
                      eName:this.state.e_zhuti,
                      startTime:new Date(chuofrist).getTime(),
@@ -294,7 +294,7 @@ export default class Creat extends PureComponent {
                      repeatTypeCode:this.state.chongfu,
                      optionalPersonnel:this.state.value2,
                      requiredPersonnel:this.state.value1,
-                     endTimeSetting:params.endTime //该学期的结束时间（时间戳）
+                     semesterId:params.yearId //学期ID
                   }
               }).then(function(){
 
