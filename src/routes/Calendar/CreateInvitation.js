@@ -212,7 +212,7 @@ export default class Creat extends PureComponent {
                     repeatTypeCode:this.state.chongfu,
                     address:this.state.place,
                     remark:this.state.beizhu,
-                    repeatEndTime:params.endTime
+                    yearId:params.yearId
                   }
               }).then(function(res){
                        console.log(_this.props.yaoyue
