@@ -502,6 +502,27 @@ const proxy = {
         }
       ]
 
+
+
+
+
+
+   //模糊查询
+  //  'GET /api/selectPersonName':{
+  //       "ifLogin": true,
+  //       "status": true,
+  //       "message": "查询人员成功",
+  //       "code": 11,
+  //       "content": {
+  //         "teacherNameList": [
+  //               {
+  //             "value": "4-7",
+  //             "key": "4-7",
+  //             "label": "模糊查询"
+  //           }
+  //         ]
+  //     },
+  //   "ifAdmin": false
     },
     "ifAdmin": false
   },
@@ -757,8 +778,7 @@ const proxy = {
             "ifRepeat": false,
             "address": "教室99",
             "repeatCycle": null,
-            "repeatType": 1,
-            "haha":"不重复",
+            "repeatType": 5,
             "repeatIntervals": null,
             "repeatEndTime": null,
             "remark": "你是谁哈哈哈哈哈",

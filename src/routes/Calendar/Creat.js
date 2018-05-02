@@ -44,7 +44,7 @@ export default class Creat extends PureComponent {
         super(props);
         this.state = {
             first:1,
-            value: null,
+            value: undefined,
 		    disabled:true,
 		    c_mingzi:null,
 		    e_mingzi:null,
@@ -72,16 +72,26 @@ export default class Creat extends PureComponent {
 		console.log('onChange ', value, arguments);
 		this.setState({ value });
     }
-    // onChangesearch=(value)=>{
-    // 	console.log(value)
-    // 	const { dispatch } = this.props;
-	   //      dispatch({  //模糊查询
-	   //          type: 'Calendar/mohuChaxun',
-	   //          payload: {
-	   //              name:value
-	   //          }
-	   //  })
-    // }
+    onChangesearch=(value)=>{
+    	    console.log(value)
+    	    let _this=this
+    		const { dispatch } = this.props;
+		        dispatch({  //模糊查询
+		            type: 'Calendar/mohuChaxun',
+		            payload: {
+		                 name:value
+		            }
+		    }).then(function(){
+		      console.log(_this.props.personlist 
+		      	&& _this.props.personlist.content.teacherNameList)
+		    	//赋给treeData
+		      _this.setState({treeData:_this.props.personlist 
+		      	&& _this.props.personlist.content.teacherNameList})
+		    })	
+    }
+    huoquJiao=(value)=>{
+    	
+    }
     showConfirm() {
 	  confirm({
 	    title: '请把信息填写完整！',
@@ -143,13 +153,14 @@ export default class Creat extends PureComponent {
   	let _this=this
   	let tree=this.state.treeData
   	console.log(this.props.addWork && this.props.addWork.status)
-  	console.log(this.props.personlist && this.props.personlist)
+  //	console.log(this.props.personlist && this.props.personlist.content)
   	const tProps = {
       treeData:tree,
       value: this.state.value,
       onChange: this.onChangeXiala,
       onSearch: this.onChangesearch,
       treeCheckable: true,
+      treeDefaultExpandAll:true,
       searchPlaceholder: '请输入人名/部门选择',
       style: {
         width: 300,
@@ -173,7 +184,7 @@ export default class Creat extends PureComponent {
          </tr>
           <tr>
           <td className={styles.leftKuang}>日历管理员：</td><td>
-          	<TreeSelect {...tProps}/>
+          	<TreeSelect {...tProps} onKeyup={this.huoquJiao} />
           </td>
          </tr>
          <tr>
