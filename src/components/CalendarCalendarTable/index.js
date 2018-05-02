@@ -16,7 +16,7 @@ export default class Index extends PureComponent {
   state = {
     ifWeekend: true,
     visible: false,
-    detailShow: 0
+    dataV: {}
   }
 
 
@@ -53,8 +53,10 @@ export default class Index extends PureComponent {
   floatClick(v) {
     this.props.calendarClick && this.props.calendarClick.call(this, v);
     this.setState({
+      visible: true,
       detailShow: !this.state.detailShow,
-    })
+      dataV : v
+    });
   }
 
   calculationList(weekMap) {
@@ -153,31 +155,11 @@ export default class Index extends PureComponent {
     let curHours = (time ? new Date(time) : new Date()).getHours();
     return 80 + (curHours - 7) * 121 + 60;
   }
-  //删除日程时候的确定
-  showModal = () => {
-    this.setState({
-      visible: true,
-    });
-  }
-  handleOk = (e) => {
-    this.setState({
-      visible: false,
-    });
-    // this.props.dispatch({
-    //   type: 'CalendarInfo/deleteInfo',
-    //   payload: {
-
-    //   }
-    // })
-  }
-  handleCancel = (e) => {
-    this.setState({
-      visible: false,
-    });
-  }
+  
 
   render() {
-    const { dataSource } = this.props;
+    const { dataSource, info } = this.props;
+    // console.log(info);
     let { ifWeekend } = this.state,
       colSpan = ifWeekend ? '3' : '4',
       columns = ifWeekend ? 7 : 5,
@@ -185,7 +167,6 @@ export default class Index extends PureComponent {
       weekTitleMap = dataSource ? this.calculationWeekDate(dataSource.timeStamp) : weekMap,
       lineTop = this.calculationCurrentLineTop(dataSource && dataSource.timeStamp),
       serverDate = dataSource && dataSource.timeStamp ? new Date(dataSource.timeStamp) : new Date();
-    let d = this.state.detailShow ? 'block' : 'none';
     return (
       <div className={styles.borderBox}>
         <Row className={styles.colTitle} type="flex" justify="space-between">
@@ -212,23 +193,6 @@ export default class Index extends PureComponent {
             {this.renderCol(columns, calendarMap ? calendarMap[i] : spaceMaps, dataSource && dataSource.timeStamp, styles.timeLineBox)}
           </Row>)
         })}
-        <div className={styles.checkDetail} style={{ display: d }}>
-          <div className={styles.detailHeader}></div>
-          <p className={styles.detailTime}><Icon className={styles.detailIcon} type="clock-circle-o" /></p>
-          <p className={styles.detailPlace}><Icon className={styles.detailIcon} type="environment" /></p>
-          <p className={styles.detailNum}><Icon className={styles.detailIcon} type="contacts" />位邀约对象</p>
-          <p className={styles.detailMustChoose}>必选：</p>
-          <p className={styles.detailCanChoose}>可选：</p>
-          <p className={styles.detailRemark}><Icon className={styles.detailIcon} type="profile" /></p>
-          <p className={styles.detailFooter}>
-            <span onClick={this.showModal} className={styles.deleteSpan}><Icon type="delete" />删除</span>
-            <Modal visible={this.state.visible} onOk={this.handleOk} onCancel={this.handleCancel} >
-              <p className={styles.deleteSure}>您确定要删除这次日程么？</p>
-            </Modal>
-            <Button className={styles.detailBtnEdit} size="small" type="primary">编辑</Button>
-            <Button className={styles.detailBtnCancel} size="small">取消</Button>
-          </p>
-        </div>
       </div>
     );
   }

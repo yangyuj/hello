@@ -8,11 +8,11 @@ export default {
 
     state: {
         state: {
-            getCalendarInfoMessage:[],
-            getTimeInfoMessage:{},
-            checkDetailInfoMessage:{},
-            checkDeleteInfoMessage:{},
-            checkConfirmInfoMessage:{},
+            getCalendarInfoMessage: [],
+            getTimeInfoMessage: {},
+            checkDetailInfoMessage: {},
+            checkDeleteInfoMessage: {},
+            checkConfirmInfoMessage: {},
             checkListInfo: []
         },
     },
@@ -65,76 +65,76 @@ export default {
             }
             yield put({
                 type: 'confirmInfoMessage',
-                payload: response.status,
+                payload: response,
             });
         },
-        *checkWeek ({ payload }, { call, put }) {
-          yield put({
-              type: 'updateWeek',
-              payload: payload,
-          });
+        *checkWeek({ payload }, { call, put }) {
+            yield put({
+                type: 'updateWeek',
+                payload: payload,
+            });
         },
         *fetchList({ payload }, { call, put }) {
-          const response = yield call(checkListInfo, payload);
-          if (!response) {
-              return;
-          }
-          yield put({
-              type: 'updateList',
-              payload: response.content,
-          });
+            const response = yield call(checkListInfo, payload);
+            if (!response) {
+                return;
+            }
+            yield put({
+                type: 'updateList',
+                payload: response.content,
+            });
         }
     },
 
     reducers: {
         CalendarInfoMessage(state, { payload }) {
-      			return {
-      				...state,
-      				getCalendarInfoMessage: payload,
-      				loading: true
-      			};
+            return {
+                ...state,
+                getCalendarInfoMessage: payload,
+                loading: true
+            };
         },
         timeInfoMessage(state, { payload }) {
-      			return {
-      				...state,
-      				getTimeInfoMessage: payload,
-      				loading: true
-      			};
+            return {
+                ...state,
+                getTimeInfoMessage: payload,
+                loading: true
+            };
         },
         detailInfoMessage(state, { payload }) {
-      			return {
-      				...state,
-      				checkDetailInfoMessage: payload,
-      				loading: true
-      			};
+            return {
+                ...state,
+                checkDetailInfoMessage: payload,
+                loading: true
+            };
         },
         deleteInfoMessage(state, { payload }) {
-      			return {
-      				...state,
-      				checkDeleteInfoMessage: payload,
-      				loading: true
-      			};
+            return {
+                ...state,
+                checkDeleteInfoMessage: payload,
+                loading: true
+            };
         },
         confirmInfoMessage(state, { payload }) {
-    			return {
-    				...state,
-    				checkConfirmInfoMessage: payload,
-    				loading: true
-    			};
+            return {
+                ...state,
+                checkConfirmInfoMessage: payload,
+                loading: true
+            };
         },
         updateWeek(state, { payload }) {
-          let getTimeInfoMessage = Object.assign({}, state.getTimeInfoMessage, true);
-          getTimeInfoMessage.week.currentWeek = payload;
-          return {
-            ...state,
-            getTimeInfoMessage
-          }
+            let getTimeInfoMessage = Object.assign({}, state.getTimeInfoMessage, true);
+            getTimeInfoMessage.week.currentWeek = payload;
+            return {
+                ...state,
+                getTimeInfoMessage
+            }
         },
         updateList(state, { payload }) {
-          return {
-            ...state,
-            checkListInfo: payload
-          }
+            return {
+                ...state,
+                checkListInfo: payload
+            }
         }
     },
 };

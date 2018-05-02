@@ -62,17 +62,17 @@ const proxy = {
               "id": 8,
               "name": "2018学年下学期",
               "start_time":4726497364,//(学年的开始日期)
-              "end_time":473695763294,//（学年的结束日期）
+              "end_time":358263578236,//（学年的结束日期）
             },{
               "id": 2,
               "name": "2019学年上学期",
               "start_time":4726497364,//(学年的开始日期)
-              "end_time":473695763294,//（学年的结束日期）
+              "end_time":63273627,//（学年的结束日期）
             },{
               "id": 3,
               "name": "2019学年下学期",
               "start_time":4726497364,//(学年的开始日期)
-              "end_time":473695763294,//（学年的结束日期）
+              "end_time":398098,//（学年的结束日期）
             }
         ]
       },
@@ -502,23 +502,22 @@ const proxy = {
         }
       ]
 
-   // //模糊查询
-   // 'GET /api/selectPersonName':{
-   //      "ifLogin": true,
-   //      "status": true,
-   //      "message": "查询人员成功",
-   //      "code": 11,
-   //      "content": {
-   //        "teacherNameList": [
-   //              {
-   //            "value": "4-7",
-   //            "key": "4-7",
-   //            "label": "模糊查询"
-   //          }
-   //        ]
-   //    },
-   //  "ifAdmin": false
-
+   //模糊查询
+  //  'GET /api/selectPersonName':{
+  //       "ifLogin": true,
+  //       "status": true,
+  //       "message": "查询人员成功",
+  //       "code": 11,
+  //       "content": {
+  //         "teacherNameList": [
+  //               {
+  //             "value": "4-7",
+  //             "key": "4-7",
+  //             "label": "模糊查询"
+  //           }
+  //         ]
+  //     },
+  //   "ifAdmin": false
     },
     "ifAdmin": false
   },

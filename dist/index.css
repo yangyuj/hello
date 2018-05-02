@@ -15134,90 +15134,6 @@ textarea.ant-time-picker-input {
   top: 50%;
   margin-top: -10px;
 }
-.borderBox___2Xgc- .checkDetail___18oVA {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 460px;
-  height: 491px;
-  background: #fff;
-  -webkit-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
-          box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
-  position: relative;
-}
-.borderBox___2Xgc- .checkDetail___18oVA .detailIcon___kNOsL {
-  margin-right: 22px;
-}
-.borderBox___2Xgc- .checkDetail___18oVA .detailHeader___1OGQI {
-  background: rgba(109, 20, 247, 0.04);
-  width: 100%;
-  height: 133px;
-  font-family: PingFangSC-Medium;
-  font-size: 24px;
-  color: #6D14F7;
-  padding-top: 76px;
-  padding-left: 35px;
-}
-.borderBox___2Xgc- .checkDetail___18oVA .detailTime___1uQM1 {
-  margin-top: 34px;
-  margin-left: 38px;
-}
-.borderBox___2Xgc- .checkDetail___18oVA .detailPlace___1r7sf {
-  margin-top: 19px;
-  margin-left: 38px;
-}
-.borderBox___2Xgc- .checkDetail___18oVA .detailNum___3dItZ {
-  margin-top: 19px;
-  margin-left: 38px;
-}
-.borderBox___2Xgc- .checkDetail___18oVA .detailMustChoose___1wzoB {
-  margin-top: 19px;
-  margin-left: 76px;
-}
-.borderBox___2Xgc- .checkDetail___18oVA .detailCanChoose___tsoom {
-  margin-top: 19px;
-  margin-left: 76px;
-}
-.borderBox___2Xgc- .checkDetail___18oVA .detailRemark___oyWUV {
-  margin-top: 19px;
-  margin-left: 38px;
-}
-.borderBox___2Xgc- .checkDetail___18oVA .detailFooter___29trh {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 40px;
-  border-top: 1px solid #E9E9E9;
-  padding-top: 9px;
-  font-family: PingFangSC-Regular;
-  font-size: 12px;
-  padding-left: 27px;
-}
-.borderBox___2Xgc- .checkDetail___18oVA .detailFooter___29trh .detailBtnEdit___3UgIv {
-  float: right;
-  font-family: PingFangSC-Regular;
-  font-size: 12px;
-  color: #FFFFFF;
-  text-align: left;
-  line-height: 21px;
-  margin-right: 15px;
-}
-.borderBox___2Xgc- .checkDetail___18oVA .detailFooter___29trh .detailBtnCancel___IbOHp {
-  float: right;
-  font-family: PingFangSC-Regular;
-  font-size: 12px;
-  color: #666666;
-  text-align: left;
-  line-height: 21px;
-  margin-right: 8px;
-}
-.borderBox___2Xgc- .checkDetail___18oVA .detailFooter___29trh .deleteSpan___3oyai {
-  font-family: PingFangSC-Regular;
-  font-size: 14px;
-  color: #3388DD;
-}
 /* stylelint-disable at-rule-empty-line-before,at-rule-name-space-after,at-rule-no-unknown */
 /* stylelint-disable no-duplicate-selectors */
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
@@ -15236,6 +15152,7 @@ body,
   border-radius: 8px;
   margin: 20px 10%;
   padding: 0 15px;
+  position: relative;
 }
 .borderBox___1YApG .weekChangeBtn___1J7Dl {
   width: 30px;
@@ -15281,6 +15198,15 @@ body,
   line-height: 21px;
   margin-right: 7px;
 }
+.borderBox___1YApG .alreadyConfirm___3UROF {
+  float: right;
+  font-family: PingFangSC-Regular;
+  font-size: 14px;
+  color: #666;
+  text-align: left;
+  line-height: 21px;
+  margin-right: 7px;
+}
 .borderBox___1YApG .newInvitation___UtWDy {
   float: right;
   font-family: PingFangSC-Regular;
@@ -15289,6 +15215,14 @@ body,
   text-align: left;
   line-height: 21px;
   margin-right: 15px;
+}
+.borderBox___1YApG .newCalendar___2AIAr {
+  position: absolute;
+  top: 6px;
+  right: 15px;
+}
+.borderBox___1YApG .modalStyles___11OVN .stylesll___3oSkq {
+  background: red;
 }
 @media screen and (max-width: 992px) {
   .contentLink___1Wfmo a {
