@@ -27,7 +27,7 @@ export default class Index extends PureComponent {
   state = {
     params: {
       calendarId: '5',
-      yearId: '3',
+      yearId: '2',
       weekNumber: 1,
       type: 0
     },
