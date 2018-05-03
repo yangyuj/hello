@@ -27,7 +27,7 @@ export default class Index extends PureComponent {
   state = {
     params: {
       calendarId: '1',
-      yearId: '1',
+      yearId: '2',
       weekNumber: 1,
       type: 0
     },
@@ -159,6 +159,7 @@ export default class Index extends PureComponent {
       type: 'Index/deleteInfo',
       payload: this.state.schId
     });
+    this.fetchCalendarInfo();
   }
   handleOutOk = (e) => {
     this.setState({
@@ -182,18 +183,18 @@ export default class Index extends PureComponent {
   }
 
   calendarClick(obj) {
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'Index/detailInfo',
-      payload: {
-        "pageType": 11,
-        "scheduleId": this.state.schId
-      }
-    });
-    // console.log(obj);
     this.setState({
       visible: true,
       schId: obj.scheduleId
+    }, () => {
+      const { dispatch } = this.props;
+      dispatch({
+        type: 'Index/detailInfo',
+        payload: {
+          "pageType": 11,
+          "scheduleId": this.state.schId
+        }
+      });
     });
   }
 
@@ -202,13 +203,13 @@ export default class Index extends PureComponent {
     const { tableType } = this.state;
     const identifyStatus = currentUser && currentUser.$body && currentUser.$body.content && currentUser.$body.content.identify;
     const btn = this.state.mark ? "inline-block" : "none";
-    // console.log(checkListInfo && checkListInfo.confirmStatus);
+    // console.log(getCalendarInfoMessage);
     const Admin = identifyStatus && identifyStatus.indexOf("admin");
     const Employee = identifyStatus && identifyStatus.indexOf("employee");
     return (
       <div className={styles.borderBox}>
         {getCalendarInfoMessage && getCalendarInfoMessage.length > 0 && (
-          <Tabs defaultActiveKey="1" onChange={this.tabChange.bind(this)}>
+          <Tabs defaultActiveKey="1" onChange={this.tabChange.bind(this)} style={{ paddingRight: 100 }}>
             {getCalendarInfoMessage.map(el => <TabPane tab={el.name} key={el.id}></TabPane>)}
           </Tabs>
         )}
@@ -237,13 +238,13 @@ export default class Index extends PureComponent {
           {
             (Admin >= 0) &&
             (
-              (checkListInfo && checkListInfo.confirmStatus === 1)?
-              <Button disabled className={styles.alreadyConfirm} style={{display: !btn}}>已确认</Button>:
-              (
-                checkConfirmInfoMessage && checkConfirmInfoMessage.status ?
-                <Button disabled className={styles.alreadyConfirm} >已确认</Button> :
-                <Button type="primary" className={styles.confirmationSchedule} onClick={this.confirmCal.bind(this, checkConfirmInfoMessage)}>确认日程</Button>
-              )
+              (checkListInfo && checkListInfo.confirmStatus === 1) ?
+                <Button disabled className={styles.alreadyConfirm} style={{ display: !btn }}>已确认</Button> :
+                (
+                  checkConfirmInfoMessage && checkConfirmInfoMessage.status ?
+                    <Button disabled className={styles.alreadyConfirm} >已确认</Button> :
+                    <Button type="primary" className={styles.confirmationSchedule} onClick={this.confirmCal.bind(this, checkConfirmInfoMessage)}>确认日程</Button>
+                )
             )
           }
           <Button type="primary" className={styles.newInvitation} onClick={this.newInvitation}>新建邀约</Button>
@@ -259,6 +260,7 @@ export default class Index extends PureComponent {
               info={checkDetailInfoMessage} />}
         </div>
         <Button className={styles.newCalendar} onClick={this.newCalendar}>新建日历</Button>
+        <span className={styles.spanSolid}></span>
         <Modal
           className={styles.stylesll}
           title={checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.cName}
@@ -270,34 +272,26 @@ export default class Index extends PureComponent {
             <Button type="primary" onClick={this.handleOutOk}>编辑</Button>
           ]}>
           {/* <p className={styles.detailName} style={{margin: 50 }}>{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.cName}</p> */}
-          <p className={styles.detailTime}><Icon className={styles.detailIcon} type="clock-circle-o" style={{marginRight: 15}}/>{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.eTime}</p>
-          <p className={styles.detailPlace}><Icon className={styles.detailIcon} type="environment" style={{marginRight: 15}}/>{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.address}</p>
-          <p className={styles.detailNum}><Icon className={styles.detailIcon} type="contacts" style={{marginRight: 15}}/>{checkDetailInfoMessage && checkDetailInfoMessage.personNumbers}位邀约对象</p>
-          <p className={styles.detailMustChoose} style={{marginLeft: 26}}>必选：
-              {
+          <p className={styles.detailTime}><Icon className={styles.detailIcon} type="clock-circle-o" style={{ marginRight: 15, fontSize: 14, color: "#333" }} />{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.eTime}</p>
+          <p className={styles.detailPlace}><Icon className={styles.detailIcon} type="environment" style={{ marginRight: 15, fontSize: 14, color: "#333" }} />{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.address}</p>
+          <p className={styles.detailNum}><Icon className={styles.detailIcon} type="contacts" style={{ marginRight: 15, fontSize: 14, color: "#333" }} />{checkDetailInfoMessage && checkDetailInfoMessage.personNumbers}位邀约对象</p>
+          <p className={styles.detailMustChoose} style={{ marginLeft: 26, fontSize: 14, color: "#333" }}>必选：
+            {
               checkDetailInfoMessage && checkDetailInfoMessage.bixuan.map((value, index) => {
-                if (index != checkDetailInfoMessage && checkDetailInfoMessage.bixuan.length - 1) {
-                  return (value + ',');
-                } else {
-                  return (value);
-                }
-                // console.log(index);
-                // console.log(checkDetailInfoMessage && checkDetailInfoMessage.bixuan.length - 1);
+                return (
+                  <span key={index} style={{ background: "#F3F3F3", marginRight: 6, fontSize: 12, padding: 2, borderRadius: 4 }}>{value}</span>
+                );
               })
             }</p>
-          <p className={styles.detailCanChoose} style={{marginLeft: 26}}>可选：
-              {
+          <p className={styles.detailCanChoose} style={{ marginLeft: 26, fontSize: 14, color: "#333" }}>可选：
+          {
               checkDetailInfoMessage && checkDetailInfoMessage.kexuan.map((value, index) => {
-                if (index != checkDetailInfoMessage && checkDetailInfoMessage.kexuan.length - 1) {
-                  return (value + ',');
-                } else {
-                  return (value);
-                }
-                // console.log(index);
-                // console.log(checkDetailInfoMessage && checkDetailInfoMessage.bixuan.length - 1);
+                return (
+                  <span key={index} style={{ background: "#F3F3F3", marginRight: 6, fontSize: 12, padding: 2, borderRadius: 4 }}>{value}</span>
+                );
               })
             }</p>
-          <p className={styles.detailRemark}><Icon className={styles.detailIcon} type="profile" style={{marginRight: 15}}/>{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.remark}</p>
+          <p className={styles.detailRemark}><Icon className={styles.detailIcon} type="profile" style={{ marginRight: 15, fontSize: 14, color: "#333" }} />{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.remark}</p>
           <Modal
             visible={this.state.daleteVisible}
             onOk={this.handleOk}

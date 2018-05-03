@@ -15172,6 +15172,9 @@ body,
 .borderBox___1YApG .ant-modal-title {
   background: red;
 }
+.borderBox___1YApG .ant-modal-header {
+  background: red;
+}
 .borderBox___1YApG .weekChangeBtn___1J7Dl {
   width: 30px;
   height: 30px;
@@ -15238,6 +15241,15 @@ body,
   position: absolute;
   top: 6px;
   right: 15px;
+}
+.borderBox___1YApG .spanSolid___2CpEG {
+  position: absolute;
+  top: 43px;
+  right: 16px;
+  width: 100px;
+  height: 1px;
+  background: #e8e8e8;
+  display: inline-block;
 }
 @media screen and (max-width: 992px) {
   .contentLink___1Wfmo a {
