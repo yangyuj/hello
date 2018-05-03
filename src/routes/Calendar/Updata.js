@@ -137,7 +137,7 @@ export default class Creat extends PureComponent {
 	        dispatch({
 	            type: 'Calendar/add',
 	            payload: {
-                 Id:params.calendarId,
+                 id:params.calendarId,
 	               cName:this.state.c_mingzi,
 	               eName:this.state.e_mingzi,
 	               calendarAdminIds:this.state.value,
@@ -145,7 +145,8 @@ export default class Creat extends PureComponent {
 	            }
 	        }).then(function(res){
 	          if(_this.props.addWork && _this.props.addWork.status){
-	          	alert(_this.props.addWork && _this.props.addWork.message)
+	          	console.log(_this.props.addWork && _this.props.addWork.message)
+               _this.props.dispatch(routerRedux.push('/index'));
 	          }else{
 	            alert(_this.props.addWork && _this.props.addWork.message)
 	          }
