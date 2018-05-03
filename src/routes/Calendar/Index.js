@@ -182,6 +182,10 @@ export default class Index extends PureComponent {
   }
 
   calendarClick(obj) {
+    this.setState({
+      visible: true,
+      schId: obj.scheduleId
+    });
     const { dispatch } = this.props;
     dispatch({
       type: 'Index/detailInfo',
@@ -189,11 +193,6 @@ export default class Index extends PureComponent {
         "pageType": 11,
         "scheduleId": this.state.schId
       }
-    });
-    // console.log(obj);
-    this.setState({
-      visible: true,
-      schId: obj.scheduleId
     });
   }
 
