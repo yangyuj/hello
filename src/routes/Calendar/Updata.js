@@ -224,7 +224,7 @@ export default class Creat extends PureComponent {
     };
     return (
       <div className={styles.content}>
-      <div style={{textAlign:"center"}} className={styles.addrili}>编辑日历</div>
+      <div style={{textAlign:"left"}} className={styles.addrili}>编辑日历</div>
       {_this.props.riliHUI 
           && _this.props.riliHUI.content
           && _this.props.riliHUI.content.calendar
@@ -254,16 +254,20 @@ export default class Creat extends PureComponent {
 
           </td>
          </tr>
-         <tr>
+        {/*<tr>
            <td className={styles.del}><div  onClick={this.delete}><Icon type="delete" className={styles.delete}/>删除</div></td>
            <td  style={{textAlign:"right"}}>  
               <Button onClick={this.cancel}>取消</Button><span className={styles.jiange}></span>
               <Button type="primary" onClick={this.add}>确定</Button> 
            </td>
-         </tr>
+         </tr>*/} 
           </tbody>
       </table>)}
-        
+         <div className={styles.di}>
+           <div  onClick={this.delete} className={styles.del}><Icon type="delete" className={styles.delete}/>删除</div>
+           <Button onClick={this.cancel}>取消</Button><span className={styles.jiange}></span>
+           <Button type="primary" onClick={this.add}>确定</Button>
+         </div>  
       <Modal
         visible={this.state.visible}
         onOk={this.handleOk}

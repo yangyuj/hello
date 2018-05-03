@@ -174,7 +174,7 @@ export default class Creat extends PureComponent {
     };
     return (
       <div className={styles.content}>
-      <div style={{textAlign:"center"}} className={styles.addrili}>新建日历</div>
+      <div style={{textAlign:"left"}} className={styles.addrili}>新建日历</div>
       <table className={styles.table}>
        <tbody>
          <tr>
@@ -199,14 +199,17 @@ export default class Creat extends PureComponent {
 
           </td>
          </tr>
-         <tr>
+        {/*<tr>
            <td colSpan="2" style={{textAlign:"right"}}>
               <Button onClick={this.cancel}>取消</Button><span className={styles.jiange}></span><Button type="primary" onClick={this.add}>确定</Button> 
            </td>
-         </tr>
+         </tr>*/} 
           </tbody>
       </table>
-           
+          <div className={styles.di}>
+           <Button onClick={this.cancel}>取消</Button><span className={styles.jiange}></span>
+           <Button type="primary" onClick={this.add}>确定</Button>
+         </div>  
       </div>
     );
   }
