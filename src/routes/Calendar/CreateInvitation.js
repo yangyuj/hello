@@ -236,9 +236,11 @@ export default class Creat extends PureComponent {
                       && _this.props.yaoyue.status)
                           if(_this.props.yaoyue
                       && _this.props.yaoyue.status==true){
-                              alert('新建成功')
+                          _this.props.dispatch(routerRedux.push('/index'));   
+                              //alert('新建成功')
                           }else{
-                               alert('新建失败')
+                               alert(_this.props.yaoyue
+                      && _this.props.yaoyue.message)
                           }
               })
       }         
