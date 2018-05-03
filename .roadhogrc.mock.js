@@ -543,12 +543,12 @@ const proxy = {
          "getDepartmentList": [
             {
 
-              "value": "4-7",
-              "key": "4-7",
+              "value": "d1",
+              "key": "d1",
               "label": "学生发展研究院",
               "children":[{
-                "value": "4-7-1",
-                "key": "4-7-1",
+                "value": "d15",
+                "key": "d15",
                 "label":"一年级组",
                 "children":[{
                   "value": "7",

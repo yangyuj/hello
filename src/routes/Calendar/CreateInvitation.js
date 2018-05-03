@@ -209,10 +209,10 @@ export default class Creat extends PureComponent {
                     requiredPersonnel:this.state.value1,
                     startTime:new Date(chuofrist).getTime(),
                     endTime:new Date(chuolast).getTime(),
-                    repeatTypeCode:this.state.chongfu,
+                    repeatTypeCode:parseInt(this.state.chongfu),
                     address:this.state.place,
                     remark:this.state.beizhu,
-                    semesterId:params.yearId
+                    semesterId:parseInt(params.yearId)
                   }
               }).then(function(res){
                        console.log(_this.props.yaoyue
@@ -262,7 +262,7 @@ export default class Creat extends PureComponent {
                  console.log(allRili)
     return (
       <div className={styles.content}>
-         <div style={{textAlign:"center"}} className={styles.addyaoyue}>新建邀约</div>
+         <div style={{textAlign:"left"}} className={styles.addyaoyue}>新建邀约</div>
           <table className={styles.table}>
        <tbody>
          <tr>
@@ -342,13 +342,13 @@ export default class Creat extends PureComponent {
             <TextArea rows={4} onChange={this.beizhu}/>
           </td>
          </tr>
-         <tr>
-          <td colSpan="2" style={{textAlign:"right"}} ><Button onClick={this.cancel}>取消</Button><span className={styles.jiange}></span>
-          <Button type="primary" onClick={this.addYaoyue}>确定</Button></td>
-         </tr>
+        
           </tbody>
       </table>
-       
+       <div className={styles.di}>
+          <Button onClick={this.cancel}>取消</Button><span className={styles.jiange}></span>
+          <Button type="primary" onClick={this.addYaoyue}>确定</Button>
+       </div>
       </div>
     );
   }

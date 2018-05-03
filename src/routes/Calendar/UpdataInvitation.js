@@ -291,10 +291,10 @@ export default class Creat extends PureComponent {
                      endTime:new Date(chuolast).getTime(),
                      address:this.state.place,
                      remark:this.state.beizhu,
-                     repeatTypeCode:this.state.chongfu,
+                     repeatTypeCode:parseInt(this.state.chongfu),
                      optionalPersonnel:this.state.value2,
                      requiredPersonnel:this.state.value1,
-                     semesterId:params.yearId //学期ID
+                     semesterId:parseInt(params.yearId) //学期ID
                   }
               }).then(function(){
 
@@ -484,14 +484,17 @@ export default class Creat extends PureComponent {
                     && _this.props.yaoyueHui.content.scheduleTemplateInfo.remark} disabled={this.state.bjcode}/>
             </td>
            </tr>
-           <tr>
+           {/*<tr>
             <td colSpan="2" style={{textAlign:"right"}} ><Button onClick={this.cancel}>取消</Button><span className={styles.jiange}></span>
             <Button type="primary" onClick={this.addYaoyue} disabled={this.state.queding}>确定</Button></td>
-           </tr>
+           </tr>*/}
             </tbody>
         </table>)
         }
-        
+         <div className={styles.di}>
+          <Button onClick={this.cancel}>取消</Button><span className={styles.jiange}></span>
+          <Button type="primary" onClick={this.addYaoyue} disabled={this.state.queding}>确定</Button>
+        </div>
        
       </div>
     );
