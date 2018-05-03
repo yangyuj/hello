@@ -185,14 +185,15 @@ export default class Index extends PureComponent {
     this.setState({
       visible: true,
       schId: obj.scheduleId
-    });
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'Index/detailInfo',
-      payload: {
-        "pageType": 11,
-        "scheduleId": this.state.schId
-      }
+    }, () => {
+      const { dispatch } = this.props;
+      dispatch({
+        type: 'Index/detailInfo',
+        payload: {
+          "pageType": 11,
+          "scheduleId": this.state.schId
+        }
+      });
     });
   }
 
@@ -201,13 +202,13 @@ export default class Index extends PureComponent {
     const { tableType } = this.state;
     const identifyStatus = currentUser && currentUser.$body && currentUser.$body.content && currentUser.$body.content.identify;
     const btn = this.state.mark ? "inline-block" : "none";
-    console.log(getCalendarInfoMessage);
+    // console.log(getCalendarInfoMessage);
     const Admin = identifyStatus && identifyStatus.indexOf("admin");
     const Employee = identifyStatus && identifyStatus.indexOf("employee");
     return (
       <div className={styles.borderBox}>
         {getCalendarInfoMessage && getCalendarInfoMessage.length > 0 && (
-          <Tabs defaultActiveKey="1" onChange={this.tabChange.bind(this)} style={{paddingRight: 100}}>
+          <Tabs defaultActiveKey="1" onChange={this.tabChange.bind(this)} style={{ paddingRight: 100 }}>
             {getCalendarInfoMessage.map(el => <TabPane tab={el.name} key={el.id}></TabPane>)}
           </Tabs>
         )}
