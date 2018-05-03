@@ -93,7 +93,7 @@ const proxy = {
       "1": [
         {
           "scheduleId": 1,
-          "scheduleTime": "lll",
+          "scheduleTime": "7:20-8:00",
           "theme": "周一会议",
           "people": "xxx,xxx,xxx,xxx",
           "location": "小雪",
@@ -103,7 +103,7 @@ const proxy = {
         },
         {
           "scheduleId": 2,
-          "scheduleTime": "aaa",
+          "scheduleTime": "7:00-7:20",
           "theme": "周一会议",
           "people": "xxx,xxx,xxx,xxx",
           "location": "小雪",
@@ -113,7 +113,7 @@ const proxy = {
         },
         {
           "scheduleId": 3,
-          "scheduleTime": "xx",
+          "scheduleTime": "7:00-7:20",
           "theme": "周一会议",
           "people": "xxx,xxx,xxx,xxx",
           "location": "小雪",
@@ -353,29 +353,6 @@ const proxy = {
       }
     ]
   },
-  //日程详情的显示
-  // 'GET /api/getScheduleEcho': {
-  //   "ifLogin": true,
-  //   "status": true,
-  //   "message": "查询成功！",
-  //   "code": 0,
-  //   "ifAdmin": false,
-  //   "content": {
-  //     "scheduleTemplate": {
-  //       "id": 1, //(日程id)
-  //       "cName": "七年级核心管理团队会议",
-  //       "eName": "name",
-  //       "sTime": "2018-04-17 10:33:26",
-  //       "eTime": "2018-04-17 10:33:27",
-  //       "address": "小雪",
-  //       "remark": "必须来",
-  //       "weekDay": "周二"
-  //     },
-  //     "personNumbers": 23,
-  //     "bixuan": ["张三", "李四"],
-  //     "kexuan": ["呜呜", "湖师大苏"]
-  //   }
-  // },
   //确认日程
   'GET /api/confirmCalendar': {
     "ifLogin": "是否登录",

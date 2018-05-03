@@ -15172,6 +15172,9 @@ body,
 .borderBox___1YApG .ant-modal-title {
   background: red;
 }
+.borderBox___1YApG .ant-modal-header {
+  background: red;
+}
 .borderBox___1YApG .weekChangeBtn___1J7Dl {
   width: 30px;
   height: 30px;

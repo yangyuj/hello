@@ -35,8 +35,8 @@ class TableView extends PureComponent {
         }
        }, {
         title: '时间',
-        dataIndex: 'start',
-        key: 'start'
+        dataIndex: 'scheduleTime',
+        key: 'scheduleTime'
       }, {
         title: '主题',
         dataIndex: 'theme',
@@ -103,7 +103,6 @@ class TableView extends PureComponent {
   render() {
     const { checkListInfo } = this.props;
     let dataMap = this.calendarList(checkListInfo);
-    // console.log(checkListInfo);
     return (
       <div className={styles.standardTable}>
         <Table
