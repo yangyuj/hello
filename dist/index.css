@@ -14277,7 +14277,7 @@ textarea.ant-time-picker-input {
 }
 .content___F_s8v {
   width: 1268px;
-  height: 919px;
+  height: 730px;
   background: #FFFFFF;
   margin: 0 auto;
   -webkit-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.05);
@@ -14296,12 +14296,14 @@ textarea.ant-time-picker-input {
 }
 .table___2gwmg {
   /*margin:0 auto;*/
-  /*  border:1px solid #f00;*/
+  /*   border:1px solid #f00;*/
   width: 45%;
+  margin-top: 60px;
+  margin-bottom: 290px;
   margin-left: 50px;
 }
 .table___2gwmg tr {
-  height: 80px;
+  height: 60px;
 }
 .jiange___2bvEB {
   display: inline-block;
@@ -16337,7 +16339,7 @@ textarea.ant-pagination-options-quick-jumper input {
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 .content___3NXQ8 {
   width: 1268px;
-  height: 820px;
+  height: 730px;
   background: #FFFFFF;
   margin: 0 auto;
   -webkit-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.05);
@@ -16348,10 +16350,12 @@ textarea.ant-pagination-options-quick-jumper input {
   width: 45%;
   /*margin:0 auto;*/
   margin-left: 50px;
-  /*  border:1px solid #f00;*/
+  margin-top: 40px;
+  margin-bottom: 30px;
+  /*    border:1px solid #f00;*/
 }
 .table___3fy2k tr {
-  height: 70px;
+  height: 55px;
 }
 .jiange___1zie_ {
   display: inline-block;

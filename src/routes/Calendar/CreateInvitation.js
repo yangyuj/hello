@@ -207,8 +207,8 @@ export default class Creat extends PureComponent {
                     eName:this.state.e_zhuti,
                     optionalPersonnel:this.state.value2,
                     requiredPersonnel:this.state.value1,
-                    startTime:new Date(chuofrist).getTime(),
-                    endTime:new Date(chuolast).getTime(),
+                    startTime:new Date(chuofrist).getTime()+'',
+                    endTime:new Date(chuolast).getTime()+'',
                     repeatTypeCode:parseInt(this.state.chongfu),
                     address:this.state.place,
                     remark:this.state.beizhu,
@@ -235,7 +235,7 @@ export default class Creat extends PureComponent {
     let tree=this.state.treeData
    const tProps1 = {
       treeData:tree,
-      value1: this.state.value,
+      value: this.state.value1,
       onChange: this.onChangeXiala1,
       onSearch: this.onChangesearch,
       treeCheckable: true,    
@@ -246,7 +246,7 @@ export default class Creat extends PureComponent {
     };
     const tProps2 = {
       treeData:tree,
-      value2: this.state.value,
+      value: this.state.value2,
       onChange: this.onChangeXiala2,
       onSearch: this.onChangesearch,
       treeCheckable: true,

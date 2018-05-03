@@ -574,8 +574,8 @@ const proxy = {
                 "key": "4-8-61",
                 "label":"七年级组",
                 "children":[{
-                  "value": "4",
-                  "key": "4",
+                  "value": "7",
+                  "key": "7",
                   "label":"赵杰"
                 },{
                   "value": "9",

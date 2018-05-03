@@ -392,7 +392,7 @@ export default class Creat extends PureComponent {
                  console.log(allRili)
     return (
       <div className={styles.content}>
-         <div style={{textAlign:"center"}} className={styles.addyaoyue}>编辑邀约</div>
+         <div style={{textAlign:"left"}} className={styles.addyaoyue}>编辑邀约</div>
        {_this.props.yaoyueHui &&
         _this.props.yaoyueHui.content &&
         (<table className={styles.table}>
