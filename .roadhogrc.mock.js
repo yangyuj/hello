@@ -543,31 +543,38 @@ const proxy = {
         "content": {
          "getDepartmentList": [
             {
-
               "value": "d1",
               "key": "d1",
               "label": "学生发展研究院",
               "children":[{
-                "value": "d15",
-                "key": "d15",
-                "label":"一年级组",
-                "children":[{
-                  "value": "7",
-                  "key": "7",
-                  "label":"诸葛昳隽"
-                },{
-                  "value": "5",
-                  "key": "5",
-                  "label":"王帅"
-                },{
-                  "value": "6",
-                  "key": "6",
-                  "label":"王帅q"
-                }]
+                      "value": "dadas-7",
+                      "key": "d12",
+                      "label":"123"
+                  },{
+                      "value": "789",
+                      "key": "d13",
+                      "label":"12345"
+                  },{
+                    "value": "d15",
+                    "key": "d15",
+                    "label":"一年级组",
+                    "children":[{
+                      "value": "cdcsdc-7",
+                      "key": "d151",
+                      "label":"123"
+                    },{
+                      "value": "5",
+                      "key": "d152",
+                      "label":"dsdsdss"
+                    },{
+                      "value": "6",
+                      "key": "d153",
+                      "label":"王帅q"
+                    }]
               }]
             },
             {
-               "value": "4-8",
+              "value": "4-8",
               "key": "4-8",
               "label": "课程研究院",
               "children":[{
@@ -575,16 +582,16 @@ const proxy = {
                 "key": "4-8-61",
                 "label":"七年级组",
                 "children":[{
-                  "value": "7",
-                  "key": "7",
-                  "label":"赵杰"
+                  "value": "vffvff-7",
+                  "key": "4-8-61-2",
+                  "label":"123"
                 },{
                   "value": "9",
-                  "key": "9",
+                  "key": "4-8-61-3",
                   "label":"张三"
                 },{
                   "value": "8",
-                  "key": "8",
+                  "key": "4-8-61-4",
                   "label":"栗子"
                 }]
               }]

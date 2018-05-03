@@ -87,7 +87,7 @@ export default class Creat extends PureComponent {
           && _this.props.riliHUI.content.adminers
           let atr=[]
           for(let i=0;i<adminers.length;i++){
-              atr.push(adminers[i].userId+"")
+              atr.push(adminers[i].remarks+"")
           }
           console.log(atr)
            _this.setState({value:atr})
