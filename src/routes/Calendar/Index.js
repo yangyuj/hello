@@ -131,9 +131,7 @@ export default class Index extends PureComponent {
         semesterId: this.state.params.yearId //学期Id
       }
     });
-    // this.setState({
-    //   mark: !this.state.mark
-    // })
+    
   }
   //新建日历
   newCalendar = () => {
@@ -197,21 +195,41 @@ export default class Index extends PureComponent {
       });
     });
   }
+  //编辑日历
+  editCalendar = () => {
+    // console.log("bianjirili");
+    this.props.dispatch(routerRedux.push('/updata' + '/' + this.state.params.calendarId)); 
+  }
+  enterCal=()=>{
+    console.log("enter");
+    this.setState({
+      mark: !this.state.mark
+    })
+  }
+  leaveCal=()=>{
+    console.log("leave");
+    this.setState({
+      mark: !this.state.mark
+    })
+  }
 
   render() {
     const { getCalendarInfoMessage, getTimeInfoMessage, checkDeleteInfoMessage, checkDetailInfoMessage, checkListInfo, checkConfirmInfoMessage, currentUser } = this.props;
     const { tableType } = this.state;
     const identifyStatus = currentUser && currentUser.$body && currentUser.$body.content && currentUser.$body.content.identify;
-    const btn = this.state.mark ? "inline-block" : "none";
+    const edit = this.state.mark ? "inline-block" : "none";
     // console.log(getCalendarInfoMessage);
     const Admin = identifyStatus && identifyStatus.indexOf("admin");
     const Employee = identifyStatus && identifyStatus.indexOf("employee");
     return (
       <div className={styles.borderBox}>
         {getCalendarInfoMessage && getCalendarInfoMessage.length > 0 && (
-          <Tabs defaultActiveKey="1" onChange={this.tabChange.bind(this)} style={{ paddingRight: 100 }}>
-            {getCalendarInfoMessage.map(el => <TabPane tab={el.name} key={el.id}></TabPane>)}
-          </Tabs>
+          <div>
+            <Tabs defaultActiveKey="1" onChange={this.tabChange.bind(this)} style={{ paddingRight: 100 }} >
+              {getCalendarInfoMessage.map(el => <TabPane tab={<span>{el.name}<Icon style={{ marginLeft: 5, dispaly: edit }} onMouseOver={this.enterCal} onMouseOut={this.leaveCal} onClick={this.editCalendar} type="form" /></span>} key={el.id}></TabPane>)}
+            </Tabs>
+
+          </div>
         )}
         <div>
           <Select
