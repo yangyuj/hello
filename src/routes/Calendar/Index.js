@@ -159,6 +159,7 @@ export default class Index extends PureComponent {
       type: 'Index/deleteInfo',
       payload: this.state.schId
     });
+    this.fetchCalendarInfo();
   }
   handleOutOk = (e) => {
     this.setState({
