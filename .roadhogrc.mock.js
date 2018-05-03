@@ -93,7 +93,7 @@ const proxy = {
       "1": [
         {
           "scheduleId": 1,
-          "scheduleTime": "xx",
+          "scheduleTime": "lll",
           "theme": "周一会议",
           "people": "xxx,xxx,xxx,xxx",
           "location": "小雪",
@@ -103,7 +103,7 @@ const proxy = {
         },
         {
           "scheduleId": 2,
-          "scheduleTime": "xx",
+          "scheduleTime": "aaa",
           "theme": "周一会议",
           "people": "xxx,xxx,xxx,xxx",
           "location": "小雪",
@@ -197,7 +197,8 @@ const proxy = {
           "end": "18:10"
         }
       ],
-      "timeStamp": 1524635363000
+      "timeStamp": 1524635363000,
+      "confirmStatus": 0
     },
     "content—bac":[
       {

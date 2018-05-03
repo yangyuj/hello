@@ -35,8 +35,8 @@ class TableView extends PureComponent {
         }
        }, {
         title: '时间',
-        dataIndex: 'scheduleTime',
-        key: 'scheduleTime'
+        dataIndex: 'start',
+        key: 'start'
       }, {
         title: '主题',
         dataIndex: 'theme',

@@ -36,7 +36,8 @@ export default class Index extends PureComponent {
     already: 0,
     schId: 0,
     calId: 0,
-    semester: 0
+    semester: 0,
+    mark: 0
   }
   componentDidMount() {
     const { dispatch } = this.props;
@@ -121,7 +122,7 @@ export default class Index extends PureComponent {
 
   //确认日程
   confirmCal = (value) => {
-    console.log(value);
+    // console.log(value);
     this.props.dispatch({
       type: 'Index/confirmInfo',
       payload: {
@@ -130,6 +131,9 @@ export default class Index extends PureComponent {
         semesterId: this.state.params.yearId //学期Id
       }
     });
+    // this.setState({
+    //   mark: !this.state.mark
+    // })
   }
   //新建日历
   newCalendar = () => {
@@ -196,9 +200,9 @@ export default class Index extends PureComponent {
   render() {
     const { getCalendarInfoMessage, getTimeInfoMessage, checkDeleteInfoMessage, checkDetailInfoMessage, checkListInfo, checkConfirmInfoMessage, currentUser } = this.props;
     const { tableType } = this.state;
-    const identifyStatus = currentUser && currentUser.$body && currentUser.$body.content && currentUser.$body.content.identify
-    // console.log(currentUser && currentUser.$body.content.identify);
-    console.log(getTimeInfoMessage && getTimeInfoMessage.year && getTimeInfoMessage.year.current);
+    const identifyStatus = currentUser && currentUser.$body && currentUser.$body.content && currentUser.$body.content.identify;
+    const btn = this.state.mark ? "inline-block" : "none";
+    // console.log(checkListInfo && checkListInfo.confirmStatus);
     const Admin = identifyStatus && identifyStatus.indexOf("admin");
     const Employee = identifyStatus && identifyStatus.indexOf("employee");
     return (
@@ -233,9 +237,13 @@ export default class Index extends PureComponent {
           {
             (Admin >= 0) &&
             (
-              checkConfirmInfoMessage && checkConfirmInfoMessage.status ?
+              (checkListInfo && checkListInfo.confirmStatus === 1)?
+              <Button disabled className={styles.alreadyConfirm} style={{display: !btn}}>已确认</Button>:
+              (
+                checkConfirmInfoMessage && checkConfirmInfoMessage.status ?
                 <Button disabled className={styles.alreadyConfirm} >已确认</Button> :
                 <Button type="primary" className={styles.confirmationSchedule} onClick={this.confirmCal.bind(this, checkConfirmInfoMessage)}>确认日程</Button>
+              )
             )
           }
           <Button type="primary" className={styles.newInvitation} onClick={this.newInvitation}>新建邀约</Button>
