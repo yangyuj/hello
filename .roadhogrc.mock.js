@@ -504,7 +504,7 @@ const proxy = {
                       "key": "d12",
                       "label":"123"
                   },{
-                      "value": "789",
+                      "value": "789-99",
                       "key": "d13",
                       "label":"12345"
                   },{
@@ -512,15 +512,15 @@ const proxy = {
                     "key": "d15",
                     "label":"一年级组",
                     "children":[{
-                      "value": "cdcsdc-7",
+                      "value": "cdcsdc-72",
                       "key": "d151",
                       "label":"123"
                     },{
-                      "value": "5",
+                      "value": "5dsdsds-123",
                       "key": "d152",
                       "label":"dsdsdss"
                     },{
-                      "value": "6",
+                      "value": "sdsds-0",
                       "key": "d153",
                       "label":"王帅q"
                     }]
@@ -535,15 +535,15 @@ const proxy = {
                 "key": "4-8-61",
                 "label":"七年级组",
                 "children":[{
-                  "value": "vffvff-7",
+                  "value": "vffvff-78",
                   "key": "4-8-61-2",
                   "label":"123"
                 },{
-                  "value": "9",
+                  "value": "9dsdsdsd-356",
                   "key": "4-8-61-3",
                   "label":"张三"
                 },{
-                  "value": "8",
+                  "value": "8dsdsd-88",
                   "key": "4-8-61-4",
                   "label":"栗子"
                 }]
