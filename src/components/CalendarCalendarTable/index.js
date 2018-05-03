@@ -41,6 +41,7 @@ export default class Index extends PureComponent {
   }
 
   renderColEl(el) {
+    // console.log(el);
     return (
       <span className={styles.colMain}>
         {el.theme}<br />
