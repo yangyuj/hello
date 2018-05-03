@@ -353,30 +353,6 @@ const proxy = {
       }
     ]
   },
-  //日历的类别显示
-  'GET /api/getAllCalendar': {
-    "ifLogin": true,
-    "status": true,
-    "message": "查询成功！",
-    "code": 0,
-    "ifAdmin": false,
-    "content": [
-      {
-        "id": 1,
-        "name": "行事历"
-      },
-      {
-        "id": 2,
-        "name": "菠萝计划"
-      }, {
-        "id": 3,
-        "name": "苹果计划"
-      }, {
-        "id": 4,
-        "name": "西瓜计划"
-      }
-    ]
-  },
   //日程详情的显示
   // 'GET /api/getScheduleEcho': {
   //   "ifLogin": true,
@@ -618,6 +594,30 @@ const proxy = {
       {
         "id": 2,
         "name": "菠萝计划"
+      }, {
+        "id": 3,
+        "name": "苹果计划"
+      }, {
+        "id": 4,
+        "name": "西瓜计划"
+      }, {
+        "id": 5,
+        "name": "榴莲计划"
+      }, {
+        "id": 6,
+        "name": "猕猴桃计划"
+      }, {
+        "id": 7,
+        "name": "香蕉计划"
+      }, {
+        "id": 8,
+        "name": "猫头鹰计划"
+      }, {
+        "id": 9,
+        "name": "杨桃计划"
+      }, {
+        "id": 10,
+        "name": "橘子计划"
       }
     ],
     "ifAdmin": false

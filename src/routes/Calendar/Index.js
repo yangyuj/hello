@@ -27,7 +27,7 @@ export default class Index extends PureComponent {
   state = {
     params: {
       calendarId: '1',
-      yearId: '1',
+      yearId: '2',
       weekNumber: 1,
       type: 0
     },
@@ -202,13 +202,13 @@ export default class Index extends PureComponent {
     const { tableType } = this.state;
     const identifyStatus = currentUser && currentUser.$body && currentUser.$body.content && currentUser.$body.content.identify;
     const btn = this.state.mark ? "inline-block" : "none";
-    // console.log(checkListInfo && checkListInfo.confirmStatus);
+    console.log(getCalendarInfoMessage);
     const Admin = identifyStatus && identifyStatus.indexOf("admin");
     const Employee = identifyStatus && identifyStatus.indexOf("employee");
     return (
       <div className={styles.borderBox}>
         {getCalendarInfoMessage && getCalendarInfoMessage.length > 0 && (
-          <Tabs defaultActiveKey="1" onChange={this.tabChange.bind(this)}>
+          <Tabs defaultActiveKey="1" onChange={this.tabChange.bind(this)} style={{paddingRight: 100}}>
             {getCalendarInfoMessage.map(el => <TabPane tab={el.name} key={el.id}></TabPane>)}
           </Tabs>
         )}
@@ -259,6 +259,7 @@ export default class Index extends PureComponent {
               info={checkDetailInfoMessage} />}
         </div>
         <Button className={styles.newCalendar} onClick={this.newCalendar}>新建日历</Button>
+        <span className={styles.spanSolid}></span>
         <Modal
           className={styles.stylesll}
           title={checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.cName}
