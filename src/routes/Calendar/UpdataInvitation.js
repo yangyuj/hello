@@ -123,9 +123,9 @@ export default class Creat extends PureComponent {
                   let kexuan=[]
                   for(let i=0;i<allrenyuan.length;i++){
                     if(allrenyuan[i].relationType==1){
-                      bixuan.push(allrenyuan[i].userId+'')
+                      bixuan.push(allrenyuan[i].remarkie+'')
                     }else{
-                       kexuan.push(allrenyuan[i].userId+'')
+                      kexuan.push(allrenyuan[i].remarkie+'')
                     }
                   }
                   _this.setState({value1:bixuan})
