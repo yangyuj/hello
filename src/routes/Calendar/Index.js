@@ -29,7 +29,7 @@ export default class Index extends PureComponent {
       calendarId: '1',
       yearId: '2',
       weekNumber: 1,
-      type: 0
+      type: 1
     },
     tableType: 'bars',
     visible: false,
@@ -78,6 +78,9 @@ export default class Index extends PureComponent {
   tabChange(val) {
     this.state.params.calendarId = val;
     this.fetchCalendarInfo();
+    this.setState({
+      mark: !this.state.mark
+    })
   }
 
   //学期选择
@@ -131,7 +134,7 @@ export default class Index extends PureComponent {
         semesterId: this.state.params.yearId //学期Id
       }
     });
-    
+
   }
   //新建日历
   newCalendar = () => {
@@ -163,7 +166,6 @@ export default class Index extends PureComponent {
     this.setState({
       visible: false,
     });
-    // console.log(this.state.params.calendarId);
     this.props.dispatch(routerRedux.push('/UpdataInvitation' + '/' + this.state.schId + '/' + this.state.params.yearId));
   }
   handleCancel = (e) => {
@@ -198,19 +200,7 @@ export default class Index extends PureComponent {
   //编辑日历
   editCalendar = () => {
     // console.log("bianjirili");
-    this.props.dispatch(routerRedux.push('/updata' + '/' + this.state.params.calendarId)); 
-  }
-  enterCal=()=>{
-    console.log("enter");
-    this.setState({
-      mark: !this.state.mark
-    })
-  }
-  leaveCal=()=>{
-    console.log("leave");
-    this.setState({
-      mark: !this.state.mark
-    })
+    this.props.dispatch(routerRedux.push('/updata' + '/' + this.state.params.calendarId));
   }
 
   render() {
@@ -226,7 +216,7 @@ export default class Index extends PureComponent {
         {getCalendarInfoMessage && getCalendarInfoMessage.length > 0 && (
           <div>
             <Tabs defaultActiveKey="1" onChange={this.tabChange.bind(this)} style={{ paddingRight: 100 }} >
-              {getCalendarInfoMessage.map(el => <TabPane onMouseOver={this.enterCal} onMouseOut={this.leaveCal} tab={<span>{el.name}<Icon style={{ marginLeft: 5, dispaly: edit }} onClick={this.editCalendar} type="form" /></span>} key={el.id}></TabPane>)}
+              {getCalendarInfoMessage.map(el => <TabPane  tab={<span>{el.name}<Icon style={{ marginLeft: 5, display: edit }} className={styles.iconChange} onClick={this.editCalendar} type="form" /></span>} key={el.id}></TabPane>)}
             </Tabs>
 
           </div>
