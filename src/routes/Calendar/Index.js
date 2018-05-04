@@ -159,6 +159,8 @@ export default class Index extends PureComponent {
     this.props.dispatch({
       type: 'Index/deleteInfo',
       payload: this.state.schId
+    }).then(()=>{
+      this.fetchCalendarInfo();
     });
     this.fetchCalendarInfo();
   }
