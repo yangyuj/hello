@@ -276,9 +276,9 @@ export default class Creat extends PureComponent {
       console.log(this.state.beizhu)
       let ifrepeat;
            if(this.state.chongfu=='1'){
-                  ifrepeat=false;
+                  ifrepeat=0;
            }else{
-               ifrepeat=true;
+               ifrepeat=1;
            }
            console.log(ifrepeat)
         let chuofrist=this.state.data.replace(/-/g, '/')+' '+this.state.firstTime
