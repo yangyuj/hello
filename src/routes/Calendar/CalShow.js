@@ -74,10 +74,14 @@ export default class Index extends PureComponent {
     })
   }
 
-  //日程分类选择
+  //日历分类选择
   tabChange(val) {
     this.state.params.calendarId = val;
     this.fetchCalendarInfo();
+    //改变修改日历的入口状态
+    this.setState({
+      mark: true
+    })
   }
 
   //学期选择
@@ -92,7 +96,6 @@ export default class Index extends PureComponent {
       }
     })
   }
-
   //切换周
   checkWeek(type) {
     const { dispatch } = this.props;
@@ -112,17 +115,14 @@ export default class Index extends PureComponent {
     this.fetchCalendarInfo();
 
   }
-
   //切换日历显示类型
   checkTable(type) {
     this.setState({
       tableType: type
     })
   }
-
   //确认日程
   confirmCal = (value) => {
-    // console.log(value);
     this.props.dispatch({
       type: 'Index/confirmInfo',
       payload: {
@@ -131,7 +131,7 @@ export default class Index extends PureComponent {
         semesterId: this.state.params.yearId //学期Id
       }
     });
-    
+
   }
   //新建日历
   newCalendar = () => {
@@ -159,11 +159,11 @@ export default class Index extends PureComponent {
     });
     this.fetchCalendarInfo();
   }
+  //编辑确定跳转
   handleOutOk = (e) => {
     this.setState({
       visible: false,
     });
-    // console.log(this.state.params.calendarId);
     this.props.dispatch(routerRedux.push('/UpdataInvitation' + '/' + this.state.schId + '/' + this.state.params.yearId));
   }
   handleCancel = (e) => {
@@ -179,7 +179,7 @@ export default class Index extends PureComponent {
   renderWeek(weekNumber) {
     return '第' + intToChinese(weekNumber) + '周';
   }
-
+  //点击显示细节
   calendarClick(obj) {
     this.setState({
       visible: true,
@@ -195,22 +195,18 @@ export default class Index extends PureComponent {
       });
     });
   }
-  //编辑日历
+  //编辑日历跳转
   editCalendar = () => {
     // console.log("bianjirili");
-    this.props.dispatch(routerRedux.push('/updata' + '/' + this.state.params.calendarId)); 
+    this.props.dispatch(routerRedux.push('/updata' + '/' + this.state.params.calendarId));
   }
-  enterCal=()=>{
-    console.log("enter");
-    this.setState({
-      mark: !this.state.mark
-    })
+  //
+  overTab = () => {
+    console.log("over");
   }
-  leaveCal=()=>{
-    console.log("leave");
-    this.setState({
-      mark: !this.state.mark
-    })
+  //
+  outTab = () => {
+    console.log("out");
   }
 
   render() {
@@ -218,15 +214,14 @@ export default class Index extends PureComponent {
     const { tableType } = this.state;
     const identifyStatus = currentUser && currentUser.$body && currentUser.$body.content && currentUser.$body.content.identify;
     const edit = this.state.mark ? "inline-block" : "none";
-    // console.log(getCalendarInfoMessage);
-    const Admin = identifyStatus && identifyStatus.indexOf("admin");
-    const Employee = identifyStatus && identifyStatus.indexOf("employee");
+    // console.log(checkListInfo && checkListInfo.ifAdmin);
+    const Admin = checkListInfo && checkListInfo.ifAdmin;
     return (
       <div className={styles.borderBox}>
         {getCalendarInfoMessage && getCalendarInfoMessage.length > 0 && (
           <div>
-            <Tabs defaultActiveKey="1" onChange={this.tabChange.bind(this)} style={{ paddingRight: 100 }} >
-              {getCalendarInfoMessage.map(el => <TabPane onMouseOver={this.enterCal} onMouseOut={this.leaveCal} tab={<span>{el.name}<Icon style={{ marginLeft: 5, dispaly: edit }} onClick={this.editCalendar} type="form" /></span>} key={el.id}></TabPane>)}
+            <Tabs defaultActiveKey="1" onChange={this.tabChange.bind(this)} onMouseOver={this.overTab} onMouseOut={this.outTab} style={{ paddingRight: 100 }} >
+              {getCalendarInfoMessage.map(el => <TabPane tab={<span>{el.name}<Icon style={{ marginLeft: 5, display: edit }} onClick={this.editCalendar} type="form" /></span>} key={el.id}></TabPane>)}
             </Tabs>
 
           </div>
@@ -254,10 +249,10 @@ export default class Index extends PureComponent {
             <Icon className={tableType == 'calendar' && styles.cur} onClick={this.checkTable.bind(this, 'calendar')} type="calendar" />
           </span>
           {
-            (Admin >= 0) &&
+            Admin &&
             (
               (checkListInfo && checkListInfo.confirmStatus === 1) ?
-                <Button disabled className={styles.alreadyConfirm} style={{ display: !btn }}>已确认</Button> :
+                <Button disabled className={styles.alreadyConfirm} >已确认</Button> :
                 (
                   checkConfirmInfoMessage && checkConfirmInfoMessage.status ?
                     <Button disabled className={styles.alreadyConfirm} >已确认</Button> :

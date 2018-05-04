@@ -37,7 +37,8 @@ export default class Index extends PureComponent {
     schId: 0,
     calId: 0,
     semester: 0,
-    mark: 0
+    mark: 0,
+    tabVal: 0
   }
   componentDidMount() {
     const { dispatch } = this.props;
@@ -74,12 +75,15 @@ export default class Index extends PureComponent {
     })
   }
 
-  //日程分类选择
+  //日历分类选择
   tabChange(val) {
     this.state.params.calendarId = val;
+    this.state.tabVal = val;
+    // console.log(this.state.tabVal);
     this.fetchCalendarInfo();
+    //改变修改日历的入口状态
     this.setState({
-      mark: !this.state.mark
+      mark: true
     })
   }
 
@@ -95,7 +99,6 @@ export default class Index extends PureComponent {
       }
     })
   }
-
   //切换周
   checkWeek(type) {
     const { dispatch } = this.props;
@@ -115,17 +118,14 @@ export default class Index extends PureComponent {
     this.fetchCalendarInfo();
 
   }
-
   //切换日历显示类型
   checkTable(type) {
     this.setState({
       tableType: type
     })
   }
-
   //确认日程
   confirmCal = (value) => {
-    // console.log(value);
     this.props.dispatch({
       type: 'Index/confirmInfo',
       payload: {
@@ -159,9 +159,12 @@ export default class Index extends PureComponent {
     this.props.dispatch({
       type: 'Index/deleteInfo',
       payload: this.state.schId
+    }).then(()=>{
+      this.fetchCalendarInfo();
     });
     this.fetchCalendarInfo();
   }
+  //编辑确定跳转
   handleOutOk = (e) => {
     this.setState({
       visible: false,
@@ -181,7 +184,7 @@ export default class Index extends PureComponent {
   renderWeek(weekNumber) {
     return '第' + intToChinese(weekNumber) + '周';
   }
-
+  //点击显示细节
   calendarClick(obj) {
     this.setState({
       visible: true,
@@ -197,7 +200,7 @@ export default class Index extends PureComponent {
       });
     });
   }
-  //编辑日历
+  //编辑日历跳转
   editCalendar = () => {
     // console.log("bianjirili");
     this.props.dispatch(routerRedux.push('/updata' + '/' + this.state.params.calendarId));
@@ -208,14 +211,18 @@ export default class Index extends PureComponent {
     const { tableType } = this.state;
     const identifyStatus = currentUser && currentUser.$body && currentUser.$body.content && currentUser.$body.content.identify;
     const edit = this.state.mark ? "inline-block" : "none";
-    // console.log(checkListInfo && checkListInfo.ifAdmin);
     const Admin = checkListInfo && checkListInfo.ifAdmin;
     return (
       <div className={styles.borderBox}>
         {getCalendarInfoMessage && getCalendarInfoMessage.length > 0 && (
           <div>
             <Tabs defaultActiveKey="1" onChange={this.tabChange.bind(this)} style={{ paddingRight: 100 }} >
-              {getCalendarInfoMessage.map(el => <TabPane  tab={<span>{el.name}<Icon style={{ marginLeft: 5, display: edit }} className={styles.iconChange} onClick={this.editCalendar} type="form" /></span>} key={el.id}></TabPane>)}
+              {getCalendarInfoMessage.map(el => <TabPane tab={<span>{el.name}
+                { 
+                  (this.state.tabVal == el.id)&& Admin &&
+                  <Icon style={{ marginLeft: 5, display: edit }} onClick={this.editCalendar} type="form" />
+                }
+              </span>} key={el.id}></TabPane>)}
             </Tabs>
 
           </div>
