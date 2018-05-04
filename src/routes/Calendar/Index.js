@@ -142,7 +142,7 @@ export default class Index extends PureComponent {
   }
   //新建邀约
   newInvitation = () => {
-    this.props.dispatch(routerRedux.push('/createInvitation' + '/' + this.state.params.yearId + '/' + this.state.params.calendarId));
+    this.props.dispatch(routerRedux.push('/createInvitation' + '/' + this.state.params.yearId));
   }
   //点击删除显示modal
   showModal = () => {
