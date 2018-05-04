@@ -274,8 +274,13 @@ export default class Creat extends PureComponent {
       console.log(this.state.chongfu)
       console.log(this.state.place)
       console.log(this.state.beizhu)
-     
-
+      let ifrepeat;
+           if(this.state.chongfu=='1'){
+                  ifrepeat=false;
+           }else{
+               ifrepeat=true;
+           }
+           console.log(ifrepeat)
         let chuofrist=this.state.data.replace(/-/g, '/')+' '+this.state.firstTime
         let chuolast=this.state.data.replace(/-/g, '/')+' '+this.state.lastTime
         let _this=this
@@ -295,6 +300,7 @@ export default class Creat extends PureComponent {
                      optionalPersonnel:this.state.value2,
                      requiredPersonnel:this.state.value1,
                      semesterId:parseInt(params.yearId) //学期ID
+                    // ifRepeat:ifrepeat
                   }
               }).then(function(){
 

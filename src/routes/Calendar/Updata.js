@@ -207,6 +207,9 @@ export default class Creat extends PureComponent {
   	let tree=this.state.treeData
   	console.log(this.props.addWork && this.props.addWork.status)
   	console.log(this.props.personlist && this.props.personlist)
+    console.log(this.props.riliHUI 
+          && this.props.riliHUI.content
+          && this.props.riliHUI.content.calendar)
   	const tProps = {
       treeData:tree,
       value: this.state.value,

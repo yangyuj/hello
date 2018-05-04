@@ -315,14 +315,14 @@ export default class Creat extends PureComponent {
          <tr>
           <td className={styles.leftKuang1}>时间：</td>
           <td><DatePicker onChange={this.dataChange}  placeholder="日期"/><span className={styles.jiange}></span>
-          <TimePicker defaultValue={moment('01:00', format)} format={format} onChange={this.timeChangefitst}/><span className={styles.jiange}></span>
-          <TimePicker defaultValue={moment('01:00', format)} format={format} onChange={this.timeChangelast}/>
+          <TimePicker defaultValue={moment('0:00', format)} format={format} onChange={this.timeChangefitst}/><span className={styles.jiange}></span>
+          <TimePicker defaultValue={moment('0:00', format)} format={format} onChange={this.timeChangelast}/>
           </td>
          </tr>
           <tr>
           <td className={styles.leftKuang1}>重复：</td>
           <td>
-           <Select placeholder="不重复" style={{ width: 300 }} onChange={this.handleChangechong}>
+           <Select placeholder="请选择类型" style={{ width: 300 }} onChange={this.handleChangechong}>
             <Option value="1">不重复</Option>
             <Option value="2">每天</Option>
             <Option value="3">每周</Option>
