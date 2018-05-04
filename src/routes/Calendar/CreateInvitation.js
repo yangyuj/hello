@@ -18,6 +18,7 @@ const SHOW_PARENT = TreeSelect.SHOW_PARENT;
 const SHOW_ALL=TreeSelect.SHOW_ALL;
 const format = 'HH:mm';
 // const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
+// let attr1=[]
 
 const treeData = [{
   label: '技术部',
@@ -115,7 +116,11 @@ export default class Creat extends PureComponent {
       })
    }
    onChangeXiala1 = (value) => {
+    // attr1
     console.log('onChange ', value, arguments);
+    // for(let i=0;i<value.length;i++){
+    //   attr1.push(value[i].split('-')[1])
+    // }
     this.setState({ value1:value });
     }
     onChangeXiala2 = (value) => {
@@ -172,7 +177,17 @@ export default class Creat extends PureComponent {
       console.log(this.state.c_zhuti)
       console.log(this.state.e_zhuti)
       console.log(this.state.value1)
-      console.log(this.state.value2)
+      // let attr=[]
+      // let attr1=[]
+      //   for(let i=0;i<this.state.value1.length;i++){
+      //       attr.push(this.state.value1[i].split('-')[1])
+      //   }
+      //   console.log(attr)
+        console.log(this.state.value2)
+      //   for(let i=0;i<this.state.value2.length;i++){
+      //       attr1.push(this.state.value2[i].split('-')[1])
+      //   }
+      //   console.log(attr1)
       console.log(this.state.data)
        // console.log(new Date(chuofrist).getTime())
        //  console.log(new Date(chuolast).getTime())
@@ -205,8 +220,10 @@ export default class Creat extends PureComponent {
                     calendarId:this.state.leixing,
                     cName:this.state.c_zhuti,
                     eName:this.state.e_zhuti,
-                    optionalPersonnel:this.state.value2,
-                    requiredPersonnel:this.state.value1,
+                     optionalPersonnel:this.state.value2,
+                     requiredPersonnel:this.state.value1,
+                     // optionalPersonnel:["7-34","7-10","33-17"],
+                     // requiredPersonnel: ["46-67","18-31"],
                     startTime:new Date(chuofrist).getTime(),
                     endTime:new Date(chuolast).getTime(),
                     repeatTypeCode:parseInt(this.state.chongfu),
@@ -219,9 +236,11 @@ export default class Creat extends PureComponent {
                       && _this.props.yaoyue.status)
                           if(_this.props.yaoyue
                       && _this.props.yaoyue.status==true){
-                              alert('新建成功')
+                          _this.props.dispatch(routerRedux.push('/index'));   
+                              //alert('新建成功')
                           }else{
-                               alert('新建失败')
+                               alert(_this.props.yaoyue
+                      && _this.props.yaoyue.message)
                           }
               })
       }         
