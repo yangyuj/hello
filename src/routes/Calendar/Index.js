@@ -37,7 +37,8 @@ export default class Index extends PureComponent {
     schId: 0,
     calId: 0,
     semester: 0,
-    mark: 0
+    mark: 0,
+    tabVal: 0
   }
   componentDidMount() {
     const { dispatch } = this.props;
@@ -77,6 +78,8 @@ export default class Index extends PureComponent {
   //日历分类选择
   tabChange(val) {
     this.state.params.calendarId = val;
+    this.state.tabVal = val;
+    // console.log(this.state.tabVal);
     this.fetchCalendarInfo();
     //改变修改日历的入口状态
     this.setState({
@@ -200,28 +203,24 @@ export default class Index extends PureComponent {
     // console.log("bianjirili");
     this.props.dispatch(routerRedux.push('/updata' + '/' + this.state.params.calendarId));
   }
-  //
-  overTab = () => {
-    console.log("over");
-  }
-  //
-  outTab = () => {
-    console.log("out");
-  }
 
   render() {
     const { getCalendarInfoMessage, getTimeInfoMessage, checkDeleteInfoMessage, checkDetailInfoMessage, checkListInfo, checkConfirmInfoMessage, currentUser } = this.props;
     const { tableType } = this.state;
     const identifyStatus = currentUser && currentUser.$body && currentUser.$body.content && currentUser.$body.content.identify;
     const edit = this.state.mark ? "inline-block" : "none";
-    // console.log(checkListInfo && checkListInfo.ifAdmin);
     const Admin = checkListInfo && checkListInfo.ifAdmin;
     return (
       <div className={styles.borderBox}>
         {getCalendarInfoMessage && getCalendarInfoMessage.length > 0 && (
           <div>
-            <Tabs defaultActiveKey="1" onChange={this.tabChange.bind(this)} onMouseOver={this.overTab} onMouseOut={this.outTab} style={{ paddingRight: 100 }} >
-              {getCalendarInfoMessage.map(el => <TabPane tab={<span>{el.name}<Icon style={{ marginLeft: 5, display: edit }} onClick={this.editCalendar} type="form" /></span>} key={el.id}></TabPane>)}
+            <Tabs defaultActiveKey="1" onChange={this.tabChange.bind(this)} style={{ paddingRight: 100 }} >
+              {getCalendarInfoMessage.map(el => <TabPane tab={<span>{el.name}
+                { 
+                  (this.state.tabVal == el.id)&& Admin &&
+                  <Icon style={{ marginLeft: 5, display: edit }} onClick={this.editCalendar} type="form" />
+                }
+              </span>} key={el.id}></TabPane>)}
             </Tabs>
 
           </div>
