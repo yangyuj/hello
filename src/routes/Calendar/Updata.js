@@ -77,18 +77,11 @@ export default class Creat extends PureComponent {
                   calendarId:params.calendarId
               }
       }).then(function(){
-        console.log(_this.props.riliHUI 
+        console.log( _this.props.riliHUI 
           && _this.props.riliHUI.content.calendar.cName)
-
-        localStorage.setItem('cmingzi',_this.props.riliHUI 
-          && _this.props.riliHUI.content.calendar.cName)
-        localStorage.setItem('emingzi',_this.props.riliHUI 
-          && _this.props.riliHUI.content.calendar.eName)
 
          _this.setState({c_mingzi: _this.props.riliHUI 
           && _this.props.riliHUI.content.calendar.cName})
-                 console.log(_this.props.riliHUI 
-                  && _this.props.riliHUI.content.calendar.cName)
           _this.setState({e_mingzi: _this.props.riliHUI 
           && _this.props.riliHUI.content.calendar.eName}) 
         // console.log(_this.props.riliHUI 
@@ -217,13 +210,9 @@ export default class Creat extends PureComponent {
   	let tree=this.state.treeData
   	console.log(this.props.addWork && this.props.addWork.status)
   	console.log(this.props.personlist && this.props.personlist)
-    console.log(this.props.riliHUI 
-          && this.props.riliHUI.content
-          && this.props.riliHUI.content.calendar)
-    let ch_mingzi=localStorage.getItem('cmingzi')
-    let en_mingzi=localStorage.getItem('emingzi')
-    console.log(ch_mingzi)
-     console.log(en_mingzi)
+    console.log(_this.props.riliHUI 
+          && _this.props.riliHUI.content
+          && _this.props.riliHUI.content.calendar)
   	const tProps = {
       treeData:tree,
       value: this.state.value,
@@ -243,15 +232,20 @@ export default class Creat extends PureComponent {
     return (
       <div className={styles.content}>
       <div style={{textAlign:"left"}} className={styles.addrili}>编辑日历</div>
-      <table className={styles.table}>
+      {_this.props.riliHUI 
+          && _this.props.riliHUI.content
+          && _this.props.riliHUI.content.calendar
+          && (<table className={styles.table}>
         <tbody>
          <tr>
           <td className={styles.leftKuang}>日历名称：</td>
-          <td><Input defaultValue={ch_mingzi} ref="mingsheng" onChange={this.cmingchenginput}/></td>
+          <td><Input defaultValue={_this.props.riliHUI 
+          && _this.props.riliHUI.content.calendar.cName} ref="mingsheng" onChange={this.cmingchenginput}/></td>
          </tr>
          <tr>
           <td className={styles.leftKuang}>日历英文名称：</td>
-          <td><Input defaultValue={en_mingzi} onChange={this.emingchenginput}/></td>
+          <td><Input defaultValue={_this.props.riliHUI 
+          && _this.props.riliHUI.content.calendar.eName} onChange={this.emingchenginput}/></td>
          </tr>
           <tr>
           <td className={styles.leftKuang}>日历管理员：</td><td><TreeSelect {...tProps}/></td>
@@ -275,7 +269,7 @@ export default class Creat extends PureComponent {
            </td>
          </tr>*/} 
           </tbody>
-      </table>
+      </table>)}
          <div className={styles.di}>
            <div  onClick={this.delete} className={styles.del}><Icon type="delete" className={styles.delete}/>删除</div>
            <Button onClick={this.cancel}>取消</Button><span className={styles.jiange}></span>
