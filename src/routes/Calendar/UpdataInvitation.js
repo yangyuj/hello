@@ -299,8 +299,8 @@ export default class Creat extends PureComponent {
                      repeatTypeCode:parseInt(this.state.chongfu),
                      optionalPersonnel:this.state.value2,
                      requiredPersonnel:this.state.value1,
-                     semesterId:parseInt(params.yearId) //学期ID
-                    // ifRepeat:ifrepeat
+                     semesterId:parseInt(params.yearId), //学期ID
+                     ifRepeat:ifrepeat
                   }
               }).then(function(){
 

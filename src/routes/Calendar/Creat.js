@@ -161,7 +161,7 @@ export default class Creat extends PureComponent {
       onChange: this.onChangeXiala,
       onSearch: this.onChangesearch,
       treeCheckable: true,
-      
+  
       searchPlaceholder: '请输入人名/部门选择',
       style: {
         width: 300,
