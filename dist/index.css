@@ -5781,6 +5781,10 @@ a.ant-btn-sm {
           box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
   position: relative;
 }
+.header___nFAzz ul,
+.header___nFAzz li {
+  list-style: none;
+}
 .ant-layout {
   overflow-x: hidden;
 }
@@ -15168,6 +15172,19 @@ body,
   margin: 20px 10%;
   padding: 0 15px;
   position: relative;
+}
+.borderBox___1YApG ul,
+.borderBox___1YApG li {
+  list-style: none;
+}
+.borderBox___1YApG .identifyUl___3JUBt {
+  position: fixed;
+  top: 20px;
+  right: 0;
+}
+.borderBox___1YApG .identifyUl___3JUBt .identifyLi___2JRCD {
+  display: inline-block;
+  margin: 0 5px;
 }
 .borderBox___1YApG .weekChangeBtn___1J7Dl {
   width: 30px;

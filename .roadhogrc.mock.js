@@ -36,7 +36,7 @@ const proxy = {
           "avatar": "https://static.dingtalk.com/media/lADOysn4mc0CgM0Cfg_638_640.jpg",
           "userId": 14,
           "notifyCount": 12,
-          "identify": ["employee","admin"]
+          "identify": ["employee", "admin"]
         }
       }
     });
@@ -44,51 +44,50 @@ const proxy = {
 
   //列表显示学年和学期的请求
   'GET /api/getTimeInfo': {
-    "ifLogin":true,
-    "status":true,
-    "message":"查询成功！",
-    "code":0,
-    "ifAdmin":false,
-    "content":{
-      "year":{
+    "ifLogin": true,
+    "status": true,
+    "message": "查询成功！",
+    "code": 0,
+    "ifAdmin": false,
+    "content": {
+      "year": {
         "current": 8,
-        "list":[
-            {
-              "id": 1,
-              "name": "2018学年上学期",
-              "start_time":4726497364,//(学年的开始日期)
-              "end_time":473695763294,//（学年的结束日期）
-            },{
-              "id": 8,
-              "name": "2018学年下学期",
-              "start_time":4726497364,//(学年的开始日期)
-              "end_time":358263578236,//（学年的结束日期）
-            },{
-              "id": 2,
-              "name": "2019学年上学期",
-              "start_time":4726497364,//(学年的开始日期)
-              "end_time":63273627,//（学年的结束日期）
-            },{
-              "id": 3,
-              "name": "2019学年下学期",
-              "start_time":4726497364,//(学年的开始日期)
-              "end_time":398098,//（学年的结束日期）
-            }
+        "list": [
+          {
+            "id": 1,
+            "name": "2018学年上学期",
+            "start_time": 4726497364,//(学年的开始日期)
+            "end_time": 473695763294,//（学年的结束日期）
+          }, {
+            "id": 8,
+            "name": "2018学年下学期",
+            "start_time": 4726497364,//(学年的开始日期)
+            "end_time": 358263578236,//（学年的结束日期）
+          }, {
+            "id": 2,
+            "name": "2019学年上学期",
+            "start_time": 4726497364,//(学年的开始日期)
+            "end_time": 63273627,//（学年的结束日期）
+          }, {
+            "id": 3,
+            "name": "2019学年下学期",
+            "start_time": 4726497364,//(学年的开始日期)
+            "end_time": 398098,//（学年的结束日期）
+          }
         ]
       },
-      "week":{
-        "currentWeek":"6",
-        "totalWeek":"18"
+      "week": {
+        "currentWeek": "6",
+        "totalWeek": "18"
       }
     }
   },
   //列表内容的显示
   'GET /api/getScheduleList': {
-    "ifLogin":true,
-    "status":true,
-    "message":"查询成功！",
-    "code":0,
-    "ifAdmin":false,
+    "ifLogin": true,
+    "status": true,
+    "message": "查询成功！",
+    "code": 0,
     "content": {
       "1": [
         {
@@ -198,9 +197,10 @@ const proxy = {
         }
       ],
       "timeStamp": 1524635363000,
-      "confirmStatus": 0
+      "confirmStatus": 0,
+      "ifAdmin": true
     },
-    "content—bac":[
+    "content—bac": [
       {
         "key": 1,
         "list": [
@@ -294,7 +294,7 @@ const proxy = {
             "remark": "xxx",
             "start": "14:00",
             "end": "15:20"
-          },{
+          }, {
             "scheduleId": 2,
             "scheduleTime": "xx",
             "theme": "会议",
@@ -456,22 +456,22 @@ const proxy = {
         }
       ]
 
-   //模糊查询
-  //  'GET /api/selectPersonName':{
-  //       "ifLogin": true,
-  //       "status": true,
-  //       "message": "查询人员成功",
-  //       "code": 11,
-  //       "content": {
-  //         "teacherNameList": [
-  //               {
-  //             "value": "4-7",
-  //             "key": "4-7",
-  //             "label": "模糊查询"
-  //           }
-  //         ]
-  //     },
-  //   "ifAdmin": false
+      //模糊查询
+      //  'GET /api/selectPersonName':{
+      //       "ifLogin": true,
+      //       "status": true,
+      //       "message": "查询人员成功",
+      //       "code": 11,
+      //       "content": {
+      //         "teacherNameList": [
+      //               {
+      //             "value": "4-7",
+      //             "key": "4-7",
+      //             "label": "模糊查询"
+      //           }
+      //         ]
+      //     },
+      //   "ifAdmin": false
     },
     "ifAdmin": false
   },
@@ -488,69 +488,69 @@ const proxy = {
   },
   //查询所有人员
 
-  'GET /api/getDepartmentList':{
-        "ifLogin": true,
-        "status": true,
-        "message": "查询人员成功123",
-        "code": 11,
-        "content": {
-         "getDepartmentList": [
-            {
-              "value": "d1",
-              "key": "d1",
-              "label": "学生发展研究院",
-              "children":[{
-                      "value": "dadas-7",
-                      "key": "d12",
-                      "label":"123"
-                  },{
-                      "value": "789-99",
-                      "key": "d13",
-                      "label":"12345"
-                  },{
-                    "value": "d15",
-                    "key": "d15",
-                    "label":"一年级组",
-                    "children":[{
-                      "value": "cdcsdc-72",
-                      "key": "d151",
-                      "label":"123"
-                    },{
-                      "value": "5dsdsds-123",
-                      "key": "d152",
-                      "label":"dsdsdss"
-                    },{
-                      "value": "sdsds-0",
-                      "key": "d153",
-                      "label":"王帅q"
-                    }]
-              }]
-            },
-            {
-              "value": "4-8",
-              "key": "4-8",
-              "label": "课程研究院",
-              "children":[{
-                "value": "4-8-61",
-                "key": "4-8-61",
-                "label":"七年级组",
-                "children":[{
-                  "value": "vffvff-78",
-                  "key": "4-8-61-2",
-                  "label":"123"
-                },{
-                  "value": "9dsdsdsd-356",
-                  "key": "4-8-61-3",
-                  "label":"张三"
-                },{
-                  "value": "8dsdsd-88",
-                  "key": "4-8-61-4",
-                  "label":"栗子"
-                }]
-              }]
-            }
-    ]
-      },
+  'GET /api/getDepartmentList': {
+    "ifLogin": true,
+    "status": true,
+    "message": "查询人员成功123",
+    "code": 11,
+    "content": {
+      "getDepartmentList": [
+        {
+          "value": "d1",
+          "key": "d1",
+          "label": "学生发展研究院",
+          "children": [{
+            "value": "dadas-7",
+            "key": "d12",
+            "label": "123"
+          }, {
+            "value": "789-99",
+            "key": "d13",
+            "label": "12345"
+          }, {
+            "value": "d15",
+            "key": "d15",
+            "label": "一年级组",
+            "children": [{
+              "value": "cdcsdc-72",
+              "key": "d151",
+              "label": "123"
+            }, {
+              "value": "5dsdsds-123",
+              "key": "d152",
+              "label": "dsdsdss"
+            }, {
+              "value": "sdsds-0",
+              "key": "d153",
+              "label": "王帅q"
+            }]
+          }]
+        },
+        {
+          "value": "4-8",
+          "key": "4-8",
+          "label": "课程研究院",
+          "children": [{
+            "value": "4-8-61",
+            "key": "4-8-61",
+            "label": "七年级组",
+            "children": [{
+              "value": "vffvff-78",
+              "key": "4-8-61-2",
+              "label": "123"
+            }, {
+              "value": "9dsdsdsd-356",
+              "key": "4-8-61-3",
+              "label": "张三"
+            }, {
+              "value": "8dsdsd-88",
+              "key": "4-8-61-4",
+              "label": "栗子"
+            }]
+          }]
+        }
+      ]
+    },
     "ifAdmin": false
   },
   //创建邀约
@@ -655,197 +655,197 @@ const proxy = {
     "ifAdmin": false
   },
   //日历回显
-  'GET /api/getCalendarEcho':{
-        "ifLogin": true,
-        "status": true,
-        "message": "日历回显成功",
-        "code": 11,
-        "content":{
-            "calendar": {
-                "id": 5,
-                "cName": "测试日历xiugai",
-                "eName": "dxigai",
-                "effectiveType": 1,
-                "remark": null,
-                "createTime": 1523894400000,
-                "modifiedTime": null,
-                "deleted": false
-             },
-              "adminers": [{
-                "userId": 7,
-                "userUnionId": null,
-                "orgId": null,
-                "name": "诸葛昳隽",
-                "ename": "Zoe",
-                "nickName": null,
-                "sex": null,
-                "certType": null,
-                "certNo": null,
-                "mobile": null,
-                "email": null,
-                "tel": null,
-                "nameSpelling": null,
-                "nationalityCode": null,
-                "deleted": null,
-                "birthday": null,
-                "birthCityCode": null,
-                "birthplace": null,
-                "remarks": null,
-                "createTime": null,
-                "modifyTime": null
-              }, {
-                "userId": 8,
-                "userUnionId": null,
-                "orgId": null,
-                "name": "陈少伟",
-                "ename": "Arvin Chen",
-                "nickName": null,
-                "sex": null,
-                "certType": null,
-                "certNo": null,
-                "mobile": null,
-                "email": null,
-                "tel": null,
-                "nameSpelling": null,
-                "nationalityCode": null,
-                "deleted": null,
-                "birthday": null,
-                "birthCityCode": null,
-                "birthplace": null,
-                "remarks": null,
-                "createTime": null,
-                "modifyTime": null
-              }, {
-                "userId": 4,
-                "userUnionId": null,
-                "orgId": null,
-                "name": "张阳",
-                "ename": "Kate Zhang",
-                "nickName": null,
-                "sex": null,
-                "certType": null,
-                "certNo": null,
-                "mobile": null,
-                "email": null,
-                "tel": null,
-                "nameSpelling": null,
-                "nationalityCode": null,
-                "deleted": null,
-                "birthday": null,
-                "birthCityCode": null,
-                "birthplace": null,
-                "remarks": null,
-                "createTime": null,
-                "modifyTime": null
-              }]
-              },
-        "ifAdmin": false
+  'GET /api/getCalendarEcho': {
+    "ifLogin": true,
+    "status": true,
+    "message": "日历回显成功",
+    "code": 11,
+    "content": {
+      "calendar": {
+        "id": 5,
+        "cName": "测试日历xiugai",
+        "eName": "dxigai",
+        "effectiveType": 1,
+        "remark": null,
+        "createTime": 1523894400000,
+        "modifiedTime": null,
+        "deleted": false
+      },
+      "adminers": [{
+        "userId": 7,
+        "userUnionId": null,
+        "orgId": null,
+        "name": "诸葛昳隽",
+        "ename": "Zoe",
+        "nickName": null,
+        "sex": null,
+        "certType": null,
+        "certNo": null,
+        "mobile": null,
+        "email": null,
+        "tel": null,
+        "nameSpelling": null,
+        "nationalityCode": null,
+        "deleted": null,
+        "birthday": null,
+        "birthCityCode": null,
+        "birthplace": null,
+        "remarks": null,
+        "createTime": null,
+        "modifyTime": null
+      }, {
+        "userId": 8,
+        "userUnionId": null,
+        "orgId": null,
+        "name": "陈少伟",
+        "ename": "Arvin Chen",
+        "nickName": null,
+        "sex": null,
+        "certType": null,
+        "certNo": null,
+        "mobile": null,
+        "email": null,
+        "tel": null,
+        "nameSpelling": null,
+        "nationalityCode": null,
+        "deleted": null,
+        "birthday": null,
+        "birthCityCode": null,
+        "birthplace": null,
+        "remarks": null,
+        "createTime": null,
+        "modifyTime": null
+      }, {
+        "userId": 4,
+        "userUnionId": null,
+        "orgId": null,
+        "name": "张阳",
+        "ename": "Kate Zhang",
+        "nickName": null,
+        "sex": null,
+        "certType": null,
+        "certNo": null,
+        "mobile": null,
+        "email": null,
+        "tel": null,
+        "nameSpelling": null,
+        "nationalityCode": null,
+        "deleted": null,
+        "birthday": null,
+        "birthCityCode": null,
+        "birthplace": null,
+        "remarks": null,
+        "createTime": null,
+        "modifyTime": null
+      }]
+    },
+    "ifAdmin": false
   },
   //邀约回显
-    'GET /api/getScheduleEcho':{
-        "ifLogin": true,
-        "status": true,
-        "message": "查询邀约详情成功",
-        "code": 0,
-        "content": {
-          "scheduleTemplateInfo": {
-            "id": 1,
-            "calendarId": 1,
-            "cName": "函询",
-            "eName": "hanxu",
-            "startTime": 1524466560000,
-            "endTime": 1524212682000,
-            "ifRepeat": false,
-            "address": "教室99",
-            "repeatCycle": null,
-            "repeatType": 5,
-            "repeatIntervals": null,
-            "repeatEndTime": null,
-            "remark": "你是谁哈哈哈哈哈",
-            "createTime": null,
-            "modifyTime": null,
-            "deleted": null,
-            "sTime": "2018-04-23 14:56",
-            "eTime": "2018-04-20 16:24",
-            "weekDays": "1"
-          },
-          "persons": [{
-            "userId": 9,
-            "userUnionId": null,
-            "orgId": null,
-            "name": "张三",
-            "ename": null,
-            "nickName": null,
-            "sex": null,
-            "certType": null,
-            "certNo": null,
-            "mobile": null,
-            "email": null,
-            "tel": null,
-            "nameSpelling": null,
-            "nationalityCode": null,
-            "deleted": null,
-            "birthday": null,
-            "birthCityCode": null,
-            "birthplace": null,
-            "remarks": null,
-            "createTime": null,
-            "modifyTime": null,
-            "relationType": 1,
-            "deInfoDoList": null
-          }, {
-            "userId": 8,
-            "userUnionId": null,
-            "orgId": null,
-            "name": "栗子",
-            "ename": null,
-            "nickName": null,
-            "sex": null,
-            "certType": null,
-            "certNo": null,
-            "mobile": null,
-            "email": null,
-            "tel": null,
-            "nameSpelling": null,
-            "nationalityCode": null,
-            "deleted": null,
-            "birthday": null,
-            "birthCityCode": null,
-            "birthplace": null,
-            "remarks": null,
-            "createTime": null,
-            "modifyTime": null,
-            "relationType": 1,//1必选  2可选
-            "deInfoDoList": null
-          }],
-          "bixuan": ["韩旭", "机构管理员"],
-          "kexuan": ["huhuhuhu","llsdsl"],
-          "cCalendarType": "行事历",
-          "eCalendarType": "calendar",
-          "personNumbers": 2,
-          "bj_code": "0003"  //0002是不能修改（把确定尽调  查看功能），0001只能修改重复结束时间，0003随意修改
-        },
-        "ifAdmin": false
-        },
-   //修改邀约
-    'POST /api/getScheduleModified': (req, res) => {
+  'GET /api/getScheduleEcho': {
+    "ifLogin": true,
+    "status": true,
+    "message": "查询邀约详情成功",
+    "code": 0,
+    "content": {
+      "scheduleTemplateInfo": {
+        "id": 1,
+        "calendarId": 1,
+        "cName": "函询",
+        "eName": "hanxu",
+        "startTime": 1524466560000,
+        "endTime": 1524212682000,
+        "ifRepeat": false,
+        "address": "教室99",
+        "repeatCycle": null,
+        "repeatType": 5,
+        "repeatIntervals": null,
+        "repeatEndTime": null,
+        "remark": "你是谁哈哈哈哈哈",
+        "createTime": null,
+        "modifyTime": null,
+        "deleted": null,
+        "sTime": "2018-04-23 14:56",
+        "eTime": "2018-04-20 16:24",
+        "weekDays": "1"
+      },
+      "persons": [{
+        "userId": 9,
+        "userUnionId": null,
+        "orgId": null,
+        "name": "张三",
+        "ename": null,
+        "nickName": null,
+        "sex": null,
+        "certType": null,
+        "certNo": null,
+        "mobile": null,
+        "email": null,
+        "tel": null,
+        "nameSpelling": null,
+        "nationalityCode": null,
+        "deleted": null,
+        "birthday": null,
+        "birthCityCode": null,
+        "birthplace": null,
+        "remarks": null,
+        "createTime": null,
+        "modifyTime": null,
+        "relationType": 1,
+        "deInfoDoList": null
+      }, {
+        "userId": 8,
+        "userUnionId": null,
+        "orgId": null,
+        "name": "栗子",
+        "ename": null,
+        "nickName": null,
+        "sex": null,
+        "certType": null,
+        "certNo": null,
+        "mobile": null,
+        "email": null,
+        "tel": null,
+        "nameSpelling": null,
+        "nationalityCode": null,
+        "deleted": null,
+        "birthday": null,
+        "birthCityCode": null,
+        "birthplace": null,
+        "remarks": null,
+        "createTime": null,
+        "modifyTime": null,
+        "relationType": 1,//1必选  2可选
+        "deInfoDoList": null
+      }],
+      "bixuan": ["韩旭", "机构管理员"],
+      "kexuan": ["huhuhuhu", "llsdsl"],
+      "cCalendarType": "行事历",
+      "eCalendarType": "calendar",
+      "personNumbers": 2,
+      "bj_code": "0003"  //0002是不能修改（把确定尽调  查看功能），0001只能修改重复结束时间，0003随意修改
+    },
+    "ifAdmin": false
+  },
+  //修改邀约
+  'POST /api/getScheduleModified': (req, res) => {
     res.send({
-       "ifLogin": true,
-        "status": true,
-        "message": "修改成功",
-        "code": 11,
-        "content":[],
-        "ifAdmin":false
+      "ifLogin": true,
+      "status": true,
+      "message": "修改成功",
+      "code": 11,
+      "content": [],
+      "ifAdmin": false
     });
   },
   //删除日历
-  'GET /api/deleted':{
-        "ifLogin": true,
-        "status": true,
-        "message": "删除成功！",
-        "code": 11,
-        "content": [],
-        "ifAdmin": false
+  'GET /api/deleted': {
+    "ifLogin": true,
+    "status": true,
+    "message": "删除成功！",
+    "code": 11,
+    "content": [],
+    "ifAdmin": false
   },
 };
 

@@ -82,6 +82,12 @@ export default class GlobalHeader extends PureComponent {
           <a href={pathname + '#/calshow'} ref="norm">{trans('global.headTab2', '行事历')}</a>
           <a href={pathname + '#/assessment/norm'} ref="norm">{trans('global.headTab3', '校历')}</a>
         </div>
+        {/* <div>
+          <ul>
+            <li className={styles.}>管理员身份</li>
+            <li>员工身份</li>
+          </ul>
+        </div> */}
       </Header>
     );
   }

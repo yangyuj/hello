@@ -29,7 +29,7 @@ export default class Index extends PureComponent {
       calendarId: '1',
       yearId: '2',
       weekNumber: 1,
-      type: 1
+      type: 0
     },
     tableType: 'bars',
     visible: false,
@@ -208,9 +208,8 @@ export default class Index extends PureComponent {
     const { tableType } = this.state;
     const identifyStatus = currentUser && currentUser.$body && currentUser.$body.content && currentUser.$body.content.identify;
     const edit = this.state.mark ? "inline-block" : "none";
-    // console.log(getCalendarInfoMessage);
-    const Admin = identifyStatus && identifyStatus.indexOf("admin");
-    const Employee = identifyStatus && identifyStatus.indexOf("employee");
+    console.log(checkListInfo && checkListInfo.ifAdmin);
+    const Admin = checkListInfo && checkListInfo.ifAdmin;
     return (
       <div className={styles.borderBox}>
         {getCalendarInfoMessage && getCalendarInfoMessage.length > 0 && (
@@ -244,7 +243,7 @@ export default class Index extends PureComponent {
             <Icon className={tableType == 'calendar' && styles.cur} onClick={this.checkTable.bind(this, 'calendar')} type="calendar" />
           </span>
           {
-            (Admin >= 0) &&
+            Admin &&
             (
               (checkListInfo && checkListInfo.confirmStatus === 1) ?
                 <Button disabled className={styles.alreadyConfirm} style={{ display: !btn }}>已确认</Button> :
