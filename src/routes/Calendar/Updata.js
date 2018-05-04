@@ -220,6 +220,10 @@ export default class Creat extends PureComponent {
     console.log(this.props.riliHUI 
           && this.props.riliHUI.content
           && this.props.riliHUI.content.calendar)
+    let ch_mingzi=localStorage.getItem('cmingzi')
+    let en_mingzi=localStorage.getItem('emingzi')
+    console.log(ch_mingzi)
+     console.log(en_mingzi)
   	const tProps = {
       treeData:tree,
       value: this.state.value,
@@ -243,11 +247,11 @@ export default class Creat extends PureComponent {
         <tbody>
          <tr>
           <td className={styles.leftKuang}>日历名称：</td>
-          <td><Input defaultValue={localStorage.getItem('cmingzi')} ref="mingsheng" onChange={this.cmingchenginput}/></td>
+          <td><Input defaultValue={ch_mingzi} ref="mingsheng" onChange={this.cmingchenginput}/></td>
          </tr>
          <tr>
           <td className={styles.leftKuang}>日历英文名称：</td>
-          <td><Input defaultValue={localStorage.getItem('emingzi')} onChange={this.emingchenginput}/></td>
+          <td><Input defaultValue={en_mingzi} onChange={this.emingchenginput}/></td>
          </tr>
           <tr>
           <td className={styles.leftKuang}>日历管理员：</td><td><TreeSelect {...tProps}/></td>
