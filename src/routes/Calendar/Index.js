@@ -208,7 +208,7 @@ export default class Index extends PureComponent {
     const { tableType } = this.state;
     const identifyStatus = currentUser && currentUser.$body && currentUser.$body.content && currentUser.$body.content.identify;
     const edit = this.state.mark ? "inline-block" : "none";
-    console.log(checkListInfo && checkListInfo.ifAdmin);
+    // console.log(checkListInfo && checkListInfo.ifAdmin);
     const Admin = checkListInfo && checkListInfo.ifAdmin;
     return (
       <div className={styles.borderBox}>
