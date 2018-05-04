@@ -226,7 +226,7 @@ export default class Index extends PureComponent {
         {getCalendarInfoMessage && getCalendarInfoMessage.length > 0 && (
           <div>
             <Tabs defaultActiveKey="1" onChange={this.tabChange.bind(this)} style={{ paddingRight: 100 }} >
-              {getCalendarInfoMessage.map(el => <TabPane tab={<span>{el.name}<Icon style={{ marginLeft: 5, dispaly: edit }} onMouseOver={this.enterCal} onMouseOut={this.leaveCal} onClick={this.editCalendar} type="form" /></span>} key={el.id}></TabPane>)}
+              {getCalendarInfoMessage.map(el => <TabPane onMouseOver={this.enterCal} onMouseOut={this.leaveCal} tab={<span>{el.name}<Icon style={{ marginLeft: 5, dispaly: edit }} onClick={this.editCalendar} type="form" /></span>} key={el.id}></TabPane>)}
             </Tabs>
 
           </div>
