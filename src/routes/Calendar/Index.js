@@ -246,7 +246,7 @@ export default class Index extends PureComponent {
             Admin &&
             (
               (checkListInfo && checkListInfo.confirmStatus === 1) ?
-                <Button disabled className={styles.alreadyConfirm} style={{ display: !btn }}>已确认</Button> :
+                <Button disabled className={styles.alreadyConfirm} >已确认</Button> :
                 (
                   checkConfirmInfoMessage && checkConfirmInfoMessage.status ?
                     <Button disabled className={styles.alreadyConfirm} >已确认</Button> :
