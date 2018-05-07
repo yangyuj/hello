@@ -130,7 +130,7 @@ const proxy = {
           "location": "小雪",
           "remark": "xxx",
           "start": "8:00",
-          "end": "8:20"
+          "end": "9:00"
         },
         {
           "scheduleId": 2,

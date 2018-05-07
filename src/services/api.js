@@ -13,15 +13,14 @@ export async function fakeAccountLogin(params) {
   });
 }
 //页面获取当前学期和周数
-export async function getTimeInfo() {
-  return request(`/api/getTimeInfo`);
+export async function getTimeInfo(params) {
+  // console.log(params);
+  return request(`/api/getTimeInfo?${stringify(params)}`);
 }
 //日历的类别显示
 export async function getCalendarInfo() {
   return request(`/api/getAllCalendar`);
 }
-
-
 //新建日历
 export async function addCalendar(params) {
 	// console.log(params)
@@ -78,9 +77,6 @@ export async function deleteRili(params) {
 	// console.log(params.name)
   return request(`/api/deleted?Id=${params.Id}`);
 }
-
-
-
 //日程详情的显示
 export async function checkDetailInfo(params) {
   // console.log(params);
@@ -95,6 +91,7 @@ export async function checkDeleteInfo(params) {
 }
 //确认日程
 export async function checkConfirmInfo(params) {
+  console.log(params);
   return request(`/api/confirmCalendar?${stringify(params)}`);
 
 }
