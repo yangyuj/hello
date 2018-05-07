@@ -14300,14 +14300,24 @@ textarea.ant-time-picker-input {
 }
 .table___2gwmg {
   /*margin:0 auto;*/
-  /*   border:1px solid #f00;*/
+  /*border:1px solid #f00;*/
   width: 45%;
   margin-top: 60px;
   margin-bottom: 290px;
   margin-left: 50px;
 }
+.table___2gwmg td {
+  /*    border:1px solid #f00;*/
+}
 .table___2gwmg tr {
   height: 60px;
+}
+.tree___24U7A {
+  height: 50px;
+  overflow: auto;
+}
+.rightKuang___fN6xn {
+  vertical-align: top;
 }
 .jiange___2bvEB {
   display: inline-block;
@@ -14315,6 +14325,7 @@ textarea.ant-time-picker-input {
 }
 .leftKuang___WFX21 {
   text-align: right;
+  vertical-align: top;
 }
 .leftKuang1___3_r3J {
   text-align: right;

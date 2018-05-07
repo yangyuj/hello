@@ -144,10 +144,10 @@ export default class Creat extends PureComponent {
                   _this.setState({lastTime:timechuo_end.getHours()+':'+timechuo_end.getMinutes()})
 
                  _this.setState({chongfu:_this.props.yaoyueHui 
-                  && _this.props.yaoyueHui.content.scheduleTemplateInfo.repeatType}) 
+                  && _this.props.yaoyueHui.content.scheduleTemplateInfo.repeatMark}) 
 
                  let type=_this.props.yaoyueHui 
-                  && _this.props.yaoyueHui.content.scheduleTemplateInfo.repeatType
+                  && _this.props.yaoyueHui.content.scheduleTemplateInfo.repeatMark
                   if(type=="1"){
                      _this.setState({chongfuziduan:'不重复'})
                   }
@@ -276,9 +276,9 @@ export default class Creat extends PureComponent {
       console.log(this.state.beizhu)
       let ifrepeat;
            if(this.state.chongfu=='1'){
-                  ifrepeat=false;
+                  ifrepeat=0;
            }else{
-               ifrepeat=true;
+               ifrepeat=1;
            }
            console.log(ifrepeat)
         let chuofrist=this.state.data.replace(/-/g, '/')+' '+this.state.firstTime
@@ -299,8 +299,8 @@ export default class Creat extends PureComponent {
                      repeatTypeCode:parseInt(this.state.chongfu),
                      optionalPersonnel:this.state.value2,
                      requiredPersonnel:this.state.value1,
-                     semesterId:parseInt(params.yearId) //学期ID
-                    // ifRepeat:ifrepeat
+                     semesterId:parseInt(params.yearId), //学期ID
+                     ifRepeat:ifrepeat
                   }
               }).then(function(){
 
@@ -356,7 +356,7 @@ export default class Creat extends PureComponent {
     }
   render() {
     let repeatType=this.props.yaoyueHui 
-                  && this.props.yaoyueHui.content.scheduleTemplateInfo.repeatType
+                  && this.props.yaoyueHui.content.scheduleTemplateInfo.repeatMark
     let _this=this
     let tree=this.state.treeData
     let time=new Date(_this.props.yaoyueHui 
