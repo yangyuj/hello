@@ -164,7 +164,7 @@ export default class Creat extends PureComponent {
       allowClear:true,
       searchPlaceholder: '',
       style: {
-        width: 300,
+        width: 500,
 
       },
     };
