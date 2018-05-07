@@ -241,12 +241,11 @@ export default class Creat extends PureComponent {
         <tbody>
          <tr>
           <td className={styles.leftKuang}>日历名称：</td>
-          <td className={styles.rightKuang}><Input defaultValue={_this.props.riliHUI 
-          && _this.props.riliHUI.content.calendar.cName} ref="mingsheng" onChange={this.cmingchenginput}/></td>
+          <td className={styles.rightKuang}><Input value={_this.state.c_mingz} ref="mingsheng" onChange={this.cmingchenginput}/></td>
          </tr>
          <tr>
           <td className={styles.leftKuang}>日历英文名称：</td>
-          <td className={styles.rightKuang}><Input value={_this.state.e_mingzi } onChange={this.emingchenginput}/></td>
+          <td className={styles.rightKuang}><Input value={_this.state.e_mingzi} onChange={this.emingchenginput}/></td>
          </tr>
           <tr>
           <td className={styles.leftKuang}>日历管理员：</td><td className={styles.rightKuang}><TreeSelect {...tProps} className={styles.tree}/></td>
