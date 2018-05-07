@@ -58,12 +58,13 @@ export default class Creat extends PureComponent {
            chongfu:null,
            place:null,
            beizhu:null,
-           treeData:null
+           treeData:null,
+           defaultV:null
         };
     }
      componentDidMount(){
       let _this=this
-         const { dispatch } = this.props;
+         const { dispatch ,match: {params}} = this.props;
               dispatch({
                   type: 'Calendar/charili', //查询all日历
                   payload: {
@@ -72,6 +73,16 @@ export default class Creat extends PureComponent {
               }).then(function(){
                 console.log(_this.props.rililist
                       && _this.props.rililist.content)
+                let riliall=_this.props.rililist
+                      && _this.props.rililist.content
+                for(let i=0;i<riliall.length;i++){
+                  if(riliall[i].id==params.calendarId){
+                    console.log(riliall[i].name)
+                    //localStorage.setItem("pp",riliall[i].name)
+                      _this.setState({leixing:riliall[i].id})
+                     _this.setState({defaultV:riliall[i].name})
+                  }
+                }
 
               })
          
@@ -196,8 +207,7 @@ export default class Creat extends PureComponent {
       console.log(this.state.beizhu)
      
                // console.log(new Date(chuo).getTime())
-      if(this.state.leixing==null ||
-         this.state.c_zhuti==null ||
+      if(this.state.c_zhuti==null ||
          this.state.e_zhuti==null ||
          this.state.value1==null ||
          this.state.value2==null ||
@@ -251,6 +261,7 @@ export default class Creat extends PureComponent {
        console.log('取消')
     }
   render() {
+   
     let tree=this.state.treeData
    const tProps1 = {
       treeData:tree,
@@ -258,7 +269,8 @@ export default class Creat extends PureComponent {
       onChange: this.onChangeXiala1,
       onSearch: this.onChangesearch,
       treeCheckable: true,    
-      searchPlaceholder: '请输入人名/部门选择',
+      allowClear:true,
+      searchPlaceholder: '',
       style: {
         width: 300,
       },
@@ -269,7 +281,8 @@ export default class Creat extends PureComponent {
       onChange: this.onChangeXiala2,
       onSearch: this.onChangesearch,
       treeCheckable: true,
-      searchPlaceholder: '请输入人名/部门选择',
+      allowClear:true,
+      searchPlaceholder: '',
       style: {
         width: 300,
       },
@@ -286,7 +299,7 @@ export default class Creat extends PureComponent {
        <tbody>
          <tr>
           <td className={styles.leftKuang}>类型：</td>
-          <td> <Select placeholder="行事历会议邀约" style={{ width: 300 }} onChange={this.handleChange}>
+          {this.state.defaultV && (<td className={styles.rightKuang}> <Select  defaultValue={this.state.defaultV} style={{ width: 300 }} onChange={this.handleChange}>
                {
             this.props.rililist
                  && this.props.rililist.content.map((value,index)=>{
@@ -294,34 +307,34 @@ export default class Creat extends PureComponent {
             })
           }
             </Select>
-          </td>
+          </td>)}
          </tr>
          <tr>
           <td className={styles.leftKuang}>主题：</td>
-          <td><Input placeholder="请输入" ref="cmingsheng" onChange={this.czhutiinput}/></td>
+          <td className={styles.rightKuang}><Input placeholder="请输入" ref="cmingsheng" onChange={this.czhutiinput}/></td>
          </tr>
           <tr>
           <td className={styles.leftKuang}>英文主题：</td>
-          <td><Input placeholder="请输入" ref="emingsheng" onChange={this.ezhutiinput}/></td>
+          <td className={styles.rightKuang}><Input placeholder="请输入" ref="emingsheng" onChange={this.ezhutiinput}/></td>
          </tr>
          <tr>
           <td className={styles.leftKuang1}>必选人员：</td>
-          <td><TreeSelect {...tProps1}/> </td>
+          <td className={styles.rightKuang}><TreeSelect {...tProps1} className={styles.tree}/> </td>
          </tr>
          <tr>
           <td className={styles.leftKuang1}>可选人员：</td>
-          <td><TreeSelect {...tProps2}/> </td>
+          <td className={styles.rightKuang}><TreeSelect {...tProps2} className={styles.tree}/> </td>
          </tr>
          <tr>
           <td className={styles.leftKuang1}>时间：</td>
-          <td><DatePicker onChange={this.dataChange}  placeholder="日期"/><span className={styles.jiange}></span>
+          <td className={styles.rightKuang}><DatePicker onChange={this.dataChange}  placeholder="日期"/><span className={styles.jiange}></span>
           <TimePicker defaultValue={moment('0:00', format)} format={format} onChange={this.timeChangefitst}/><span className={styles.jiange}></span>
           <TimePicker defaultValue={moment('0:00', format)} format={format} onChange={this.timeChangelast}/>
           </td>
          </tr>
           <tr>
           <td className={styles.leftKuang1}>重复：</td>
-          <td>
+          <td className={styles.rightKuang}>
            <Select placeholder="请选择类型" style={{ width: 300 }} onChange={this.handleChangechong}>
             <Option value="1">不重复</Option>
             <Option value="2">每天</Option>
@@ -334,7 +347,7 @@ export default class Creat extends PureComponent {
          </tr>
          <tr>
           <td className={styles.leftKuang1}>地点：</td>
-          <td>
+          <td className={styles.rightKuang}>
             <Select
                 mode="combobox"
                 size="default"
@@ -357,7 +370,7 @@ export default class Creat extends PureComponent {
          </tr>
          <tr>
           <td className={styles.leftKuang1}>备注：</td>
-          <td>
+          <td className={styles.rightKuang}>
             <TextArea rows={4} onChange={this.beizhu}/>
           </td>
          </tr>
