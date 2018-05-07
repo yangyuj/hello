@@ -289,9 +289,9 @@ export default class Index extends PureComponent {
           <DatePicker 
             onChange={this.sendDate} 
             style={{width: 40, border: "none"}} 
+            className={styles.dateStyle}
             placeholder=''
             value=''/>
-          {/* <Icon type="caret-down" /> */}
           <Button className={styles.weekChangeBtn} onClick={this.checkWeek.bind(this, 'right')}><Icon type="right" /></Button>
           <span className={styles.tabbleCheck}>
             <Icon className={tableType == 'bars' && styles.cur} onClick={this.checkTable.bind(this, 'bars')} type="bars" />
