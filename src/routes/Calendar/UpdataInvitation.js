@@ -364,8 +364,7 @@ export default class Creat extends PureComponent {
        this.props.dispatch(routerRedux.push('/index'));
     }
   render() {
-    let repeatType=this.props.yaoyueHui 
-                  && this.props.yaoyueHui.content.scheduleTemplateInfo.repeatMark
+    let repeatType=this.state.chongfu
     let _this=this
     let tree=this.state.treeData
     let time=new Date(_this.props.yaoyueHui 
@@ -456,7 +455,7 @@ export default class Creat extends PureComponent {
             <tr>
             <td className={styles.leftKuang1}>重复：</td>
             <td className={styles.rightKuang}>
-             <Select defaultValue={repeatType==1?'不重复':repeatType==2?
+             <Select value={repeatType==1?'不重复':repeatType==2?
              '每天':repeatType==3?'每周':repeatType==4?'每月':repeatType==5?'每2周':''} style={{ width: 300 }} onChange={this.handleChangechong} disabled={this.state.bjcode}>
               <Option value="1">不重复</Option>
               <Option value="2">每天</Option>
