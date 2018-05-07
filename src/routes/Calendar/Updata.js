@@ -219,7 +219,7 @@ export default class Creat extends PureComponent {
       onChange: this.onChangeXiala,
       onSearch: this.onChangesearch,
       treeCheckable: true,
-      searchPlaceholder: '请输入人名/部门选择',
+      searchPlaceholder: '',
       style: {
         width: 300,
       },
@@ -239,16 +239,16 @@ export default class Creat extends PureComponent {
         <tbody>
          <tr>
           <td className={styles.leftKuang}>日历名称：</td>
-          <td><Input defaultValue={_this.props.riliHUI 
+          <td className={styles.rightKuang}><Input defaultValue={_this.props.riliHUI 
           && _this.props.riliHUI.content.calendar.cName} ref="mingsheng" onChange={this.cmingchenginput}/></td>
          </tr>
          <tr>
           <td className={styles.leftKuang}>日历英文名称：</td>
-          <td><Input defaultValue={_this.props.riliHUI 
+          <td className={styles.rightKuang}><Input defaultValue={_this.props.riliHUI 
           && _this.props.riliHUI.content.calendar.eName} onChange={this.emingchenginput}/></td>
          </tr>
           <tr>
-          <td className={styles.leftKuang}>日历管理员：</td><td><TreeSelect {...tProps}/></td>
+          <td className={styles.leftKuang}>日历管理员：</td><td className={styles.rightKuang}><TreeSelect {...tProps} className={styles.tree}/></td>
          </tr>
          <tr>
           <td className={styles.leftKuang1}>日程生效：</td>

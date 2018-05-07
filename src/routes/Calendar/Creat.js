@@ -162,9 +162,10 @@ export default class Creat extends PureComponent {
       onSearch: this.onChangesearch,
       treeCheckable: true,
   
-      searchPlaceholder: '请输入人名/部门选择',
+      searchPlaceholder: '',
       style: {
         width: 300,
+
       },
     };
       const radioStyle = {
@@ -178,14 +179,14 @@ export default class Creat extends PureComponent {
       <table className={styles.table}>
        <tbody>
          <tr>
-          <td className={styles.leftKuang}>日历名称：</td><td><Input placeholder="请输入" ref="mingsheng" onChange={this.cmingchenginput}/></td>
+          <td className={styles.leftKuang}>日历名称：</td><td className={styles.rightKuang}><Input placeholder="请输入" ref="mingsheng" onChange={this.cmingchenginput}/></td>
          </tr>
          <tr>
-          <td className={styles.leftKuang}>日历英文名称：</td><td><Input placeholder="请输入" onChange={this.emingchenginput}/></td>
+          <td className={styles.leftKuang}>日历英文名称：</td><td className={styles.rightKuang}><Input placeholder="请输入" onChange={this.emingchenginput}/></td>
          </tr>
           <tr>
-          <td className={styles.leftKuang}>日历管理员：</td><td>
-          	<TreeSelect {...tProps} onKeyup={this.huoquJiao} />
+          <td className={styles.leftKuang}>日历管理员：</td><td className={styles.rightKuang}>
+          	<TreeSelect {...tProps} onKeyup={this.huoquJiao} className={styles.tree}/>
           </td>
          </tr>
          <tr>

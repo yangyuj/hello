@@ -144,10 +144,10 @@ export default class Creat extends PureComponent {
                   _this.setState({lastTime:timechuo_end.getHours()+':'+timechuo_end.getMinutes()})
 
                  _this.setState({chongfu:_this.props.yaoyueHui 
-                  && _this.props.yaoyueHui.content.scheduleTemplateInfo.repeatType}) 
+                  && _this.props.yaoyueHui.content.scheduleTemplateInfo.repeatMark}) 
 
                  let type=_this.props.yaoyueHui 
-                  && _this.props.yaoyueHui.content.scheduleTemplateInfo.repeatType
+                  && _this.props.yaoyueHui.content.scheduleTemplateInfo.repeatMark
                   if(type=="1"){
                      _this.setState({chongfuziduan:'不重复'})
                   }
@@ -356,7 +356,7 @@ export default class Creat extends PureComponent {
     }
   render() {
     let repeatType=this.props.yaoyueHui 
-                  && this.props.yaoyueHui.content.scheduleTemplateInfo.repeatType
+                  && this.props.yaoyueHui.content.scheduleTemplateInfo.repeatMark
     let _this=this
     let tree=this.state.treeData
     let time=new Date(_this.props.yaoyueHui 
