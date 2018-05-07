@@ -57,6 +57,7 @@ export default class Index extends PureComponent {
     dispatch({
       type: 'Index/timeInfo',
       payload: {
+        completeTime: null
       }
     }).then(() => {
       const { getTimeInfoMessage } = this.props;
@@ -231,6 +232,7 @@ export default class Index extends PureComponent {
     let dateChange = new Date(str);
     let timeChange = dateChange.getTime();
     this.state.changeDate = timeChange;
+    console.log(typeof(timeChange));
     const { dispatch } = this.props;
     dispatch({
       type: 'Index/timeInfo',
