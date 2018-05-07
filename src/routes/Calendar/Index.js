@@ -286,7 +286,12 @@ export default class Index extends PureComponent {
           {getTimeInfoMessage
             && getTimeInfoMessage.week
             && <span className={styles.plr_10}>{this.renderWeek(getTimeInfoMessage.week.currentWeek)}</span>}
-          <DatePicker onChange={this.sendDate} />
+          <DatePicker 
+            onChange={this.sendDate} 
+            style={{width: 40, border: "none"}} 
+            placeholder=''
+            value=''/>
+          {/* <Icon type="caret-down" /> */}
           <Button className={styles.weekChangeBtn} onClick={this.checkWeek.bind(this, 'right')}><Icon type="right" /></Button>
           <span className={styles.tabbleCheck}>
             <Icon className={tableType == 'bars' && styles.cur} onClick={this.checkTable.bind(this, 'bars')} type="bars" />
