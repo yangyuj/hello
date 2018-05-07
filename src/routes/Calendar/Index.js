@@ -212,10 +212,10 @@ export default class Index extends PureComponent {
     const identifyStatus = currentUser && currentUser.$body && currentUser.$body.content && currentUser.$body.content.identify;
     const edit = this.state.mark ? "inline-block" : "none";
     const Admin = checkListInfo && checkListInfo.ifAdmin;
-    const currentId = checkListInfo && checkListInfo.currentI;
-    // const current = parseInt(checkListInfo && checkListInfo.currentId);
-    // console.log(current);
-    // console.log(checkListInfo);
+    const currentId = checkListInfo && checkListInfo.currentId;
+    const current = toString(checkListInfo && checkListInfo.currentId);
+    console.log(currentId);
+    // console.log(checkListInfo && checkListInfo.currentId);
     return (
       <div className={styles.borderBox}>
         {getCalendarInfoMessage && getCalendarInfoMessage.length > 0 && (
@@ -302,13 +302,13 @@ export default class Index extends PureComponent {
               })
             }</p>
           <p className={styles.detailCanChoose} style={{ marginLeft: 26, fontSize: 14, color: "#333" }}>可选：
-          {
-              checkDetailInfoMessage && checkDetailInfoMessage.kexuan.map((value, index) => {
-                return (
-                  <span key={index} style={{ background: "#F3F3F3", marginRight: 6, fontSize: 12, padding: 2, borderRadius: 4 }}>{value}</span>
-                );
-              })
-            }</p>
+            {
+                checkDetailInfoMessage && checkDetailInfoMessage.kexuan.map((value, index) => {
+                  return (
+                    <span key={index} style={{ background: "#F3F3F3", marginRight: 6, fontSize: 12, padding: 2, borderRadius: 4 }}>{value}</span>
+                  );
+                })
+              }</p>
           <p className={styles.detailRemark}><Icon className={styles.detailIcon} type="profile" style={{ marginRight: 15, fontSize: 14, color: "#333" }} />{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.remark}</p>
           <Modal
             visible={this.state.daleteVisible}
