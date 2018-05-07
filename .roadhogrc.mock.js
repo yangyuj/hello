@@ -197,8 +197,9 @@ const proxy = {
         }
       ],
       "timeStamp": 1524635363000,
-      "confirmStatus": 1,
-      "ifAdmin": false
+      "confirmStatus": 0,
+      "ifAdmin": true,
+      "currentId": 2
     },
     "content—bac": [
       {

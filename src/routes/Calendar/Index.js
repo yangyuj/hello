@@ -212,11 +212,15 @@ export default class Index extends PureComponent {
     const identifyStatus = currentUser && currentUser.$body && currentUser.$body.content && currentUser.$body.content.identify;
     const edit = this.state.mark ? "inline-block" : "none";
     const Admin = checkListInfo && checkListInfo.ifAdmin;
+    const currentId = checkListInfo && checkListInfo.currentI;
+    // const current = parseInt(checkListInfo && checkListInfo.currentId);
+    // console.log(current);
+    // console.log(checkListInfo);
     return (
       <div className={styles.borderBox}>
         {getCalendarInfoMessage && getCalendarInfoMessage.length > 0 && (
           <div>
-            <Tabs defaultActiveKey="1" onChange={this.tabChange.bind(this)} style={{ paddingRight: 100 }} >
+            <Tabs defaultActiveKey = {currentId} onChange={this.tabChange.bind(this)} style={{ paddingRight: 100 }} >
               {getCalendarInfoMessage.map(el => <TabPane tab={<span>{el.name}
                 { 
                   (this.state.tabVal == el.id)&& Admin &&
