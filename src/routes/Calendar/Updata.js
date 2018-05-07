@@ -55,7 +55,7 @@ export default class Creat extends PureComponent {
         };
     }
 
-    componentDidMount() {
+    componentWillMount() {
     	let _this=this
      const { dispatch,match: {params} } = this.props;
       dispatch({  //查询所有人员
