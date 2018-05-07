@@ -14300,14 +14300,14 @@ textarea.ant-time-picker-input {
 }
 .table___2gwmg {
   /*margin:0 auto;*/
-  /*border:1px solid #f00;*/
-  width: 45%;
+  /* border:1px solid #f00;*/
+  /*   width:45%;*/
   margin-top: 60px;
   margin-bottom: 290px;
   margin-left: 50px;
 }
 .table___2gwmg td {
-  /*    border:1px solid #f00;*/
+  /*  border:1px solid #f00;*/
 }
 .table___2gwmg tr {
   height: 60px;
@@ -16372,7 +16372,7 @@ textarea.ant-pagination-options-quick-jumper input {
   border-radius: 8px;
 }
 .table___3fy2k {
-  width: 45%;
+  /*    width:45%;*/
   /*margin:0 auto;*/
   margin-left: 50px;
   margin-top: 40px;
@@ -16380,7 +16380,7 @@ textarea.ant-pagination-options-quick-jumper input {
   /* border:1px solid #f00;*/
 }
 .table___3fy2k td {
-  /*     border:1px solid #f00;*/
+  /*  border:1px solid #f00;*/
 }
 .table___3fy2k tr {
   height: 60px;
