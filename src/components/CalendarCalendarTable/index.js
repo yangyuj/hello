@@ -60,7 +60,7 @@ export default class Index extends PureComponent {
     });
   }
 
-  calculationList(weekMap) {
+  calculationList(weekMap, titleMap) {
     let weekCalenList = [],
       //weekMap = {},
       renderData = [];
@@ -80,11 +80,19 @@ export default class Index extends PureComponent {
             let startNumber = parseInt(e.start.replace(':', ''), 10),
               endNumber = parseInt(e.end.replace(':', ''), 10);
             if (startNumber <= 700 && endNumber >= 1800) {
-              allDay.push(e);
+              allDay.push({
+                week: i,
+                cdate: titleMap && titleMap[i-1],
+                ...e
+              });
               return;
             }
             if (startNumber < parseInt(el, 10) + 60 && startNumber >= el) {
-              a.push(e);
+              a.push({
+                week: i,
+                cdate: titleMap && titleMap[i-1],
+                ...e
+              });
             }
           })
 
@@ -164,8 +172,8 @@ export default class Index extends PureComponent {
     let { ifWeekend } = this.state,
       colSpan = ifWeekend ? '3' : '4',
       columns = ifWeekend ? 7 : 5,
-      calendarMap = this.calculationList(dataSource),
       weekTitleMap = dataSource ? this.calculationWeekDate(dataSource.timeStamp) : weekMap,
+      calendarMap = this.calculationList(dataSource, weekTitleMap),
       lineTop = this.calculationCurrentLineTop(dataSource && dataSource.timeStamp),
       serverDate = dataSource && dataSource.timeStamp ? new Date(dataSource.timeStamp) : new Date();
     return (
