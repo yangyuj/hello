@@ -34,12 +34,10 @@ export const getNavData = app => [
         component: dynamicWrapper(app, ['Calendar'], () => import('../routes/Calendar/CreateInvitation'))
       },{
         name:"修改日历",
-       // path:'updata/:calendarId/:scheduleId',
         path:'updata/:calendarId',
         component: dynamicWrapper(app, ['Calendar'], () => import('../routes/Calendar/Updata'))
       },{
         name:"修改邀约",
-       // path:'updataInvitation/:calendarId/:scheduleId',
         path:'updataInvitation/:scheduleId/:yearId',
         component: dynamicWrapper(app, ['Calendar'], () => import('../routes/Calendar/UpdataInvitation'))
       }
