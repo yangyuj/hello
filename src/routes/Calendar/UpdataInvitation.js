@@ -41,7 +41,8 @@ const treeData = [{
     rililist:state.Calendar.allrili,
     placelist:state.Calendar.allplace,
     peoplelist:state.Calendar.peoplelist,
-    yaoyueHui:state.Calendar.yaoyueHuilist
+    yaoyueHui:state.Calendar.yaoyueHuilist,
+    xiugaiyaoyue:state.Calendar.xiugaiyaoyue
 }))
 @Form.create()
 export default class Creat extends PureComponent {
@@ -303,7 +304,15 @@ export default class Creat extends PureComponent {
                      ifRepeat:ifrepeat
                   }
               }).then(function(){
-
+              // console.log(_this.props.xiugaiyaoyue
+              //          && _this.props.xiugaiyaoyue.status) 
+              if(_this.props.xiugaiyaoyue
+                           && _this.props.xiugaiyaoyue.status==true){
+                   _this.props.dispatch(routerRedux.push('/index'));  
+              }else{
+                alert(_this.props.xiugaiyaoyue
+                           && _this.props.xiugaiyaoyue.message)
+              }
               })
       //          // console.log(new Date(chuo).getTime())
       // if(this.state.leixing==null ||
