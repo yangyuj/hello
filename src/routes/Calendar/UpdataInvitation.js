@@ -430,13 +430,11 @@ export default class Creat extends PureComponent {
            </tr>
            <tr>
             <td className={styles.leftKuang}>主题：</td>
-            <td className={styles.rightKuang}><Input defaultValue={_this.props.yaoyueHui 
-                    && _this.props.yaoyueHui.content.scheduleTemplateInfo.cName} ref="cmingsheng" onChange={this.czhutiinput} disabled={this.state.bjcode}/></td>
+            <td className={styles.rightKuang}><Input value={_this.state.c_zhuti} ref="cmingsheng" onChange={this.czhutiinput} disabled={this.state.bjcode}/></td>
            </tr>
             <tr>
             <td className={styles.leftKuang}>英文主题：</td>
-            <td className={styles.rightKuang}><Input defaultValue={_this.props.yaoyueHui 
-                    && _this.props.yaoyueHui.content.scheduleTemplateInfo.eName} ref="emingsheng" onChange={this.ezhutiinput} disabled={this.state.bjcode}/></td>
+            <td className={styles.rightKuang}><Input value={_this.state.e_zhuti} ref="emingsheng" onChange={this.ezhutiinput} disabled={this.state.bjcode}/></td>
            </tr>
            <tr>
             <td className={styles.leftKuang1}>必选人员：</td>
@@ -475,8 +473,7 @@ export default class Creat extends PureComponent {
               <Select
                   mode="combobox"
                   size="default"
-                  defaultValue={_this.props.yaoyueHui 
-                    && _this.props.yaoyueHui.content.scheduleTemplateInfo.address}
+                  value={_this.state.place}
                   placeholder=""
                   onChange={this.handleChangeplace}
                   style={{ width: 200 }}
@@ -497,8 +494,7 @@ export default class Creat extends PureComponent {
            <tr>
             <td className={styles.leftKuang1}>备注：</td>
             <td className={styles.rightKuang}>
-              <TextArea rows={4} onChange={this.beizhu} defaultValue={_this.props.yaoyueHui 
-                    && _this.props.yaoyueHui.content.scheduleTemplateInfo.remark} disabled={this.state.bjcode}/>
+              <TextArea rows={4} onChange={this.beizhu} value={_this.state.beizhu} disabled={this.state.bjcode}/>
             </td>
            </tr>
            {/*<tr>
