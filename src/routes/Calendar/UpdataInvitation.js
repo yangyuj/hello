@@ -66,7 +66,7 @@ export default class Creat extends PureComponent {
            chongfuziduan:null
         };
     }
-     componentDidMount(){
+     componentWillMount(){
       let _this=this
          const { dispatch ,match: {params}} = this.props;
               dispatch({
