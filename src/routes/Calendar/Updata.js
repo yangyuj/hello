@@ -241,7 +241,7 @@ export default class Creat extends PureComponent {
         <tbody>
          <tr>
           <td className={styles.leftKuang}>日历名称：</td>
-          <td className={styles.rightKuang}><Input value={_this.state.c_mingz} ref="mingsheng" onChange={this.cmingchenginput}/></td>
+          <td className={styles.rightKuang}><Input value={_this.state.c_mingzi} ref="mingsheng" onChange={this.cmingchenginput}/></td>
          </tr>
          <tr>
           <td className={styles.leftKuang}>日历英文名称：</td>
