@@ -15264,6 +15264,18 @@ body,
   background: #e8e8e8;
   display: inline-block;
 }
+.stylesll___3oSkq > div > div:nth-child(2) {
+  background: rgba(109, 20, 247, 0.04);
+  height: 133px;
+}
+.stylesll___3oSkq > div > div:nth-child(2) > div {
+  color: #6D14F7;
+  font-size: 24px;
+  margin-top: 65px;
+}
+.dateStyle___2XOi9 > div > input {
+  border: none;
+}
 @media screen and (max-width: 992px) {
   .contentLink___1Wfmo a {
     margin-right: 16px;
