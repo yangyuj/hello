@@ -219,6 +219,7 @@ export default class Creat extends PureComponent {
       onChange: this.onChangeXiala,
       onSearch: this.onChangesearch,
       treeCheckable: true,
+      allowClear:true,
       searchPlaceholder: '',
       style: {
         width: 300,

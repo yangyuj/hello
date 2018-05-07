@@ -16386,10 +16386,13 @@ textarea.ant-pagination-options-quick-jumper input {
   margin-left: 50px;
   margin-top: 40px;
   margin-bottom: 30px;
-  /*    border:1px solid #f00;*/
+  /* border:1px solid #f00;*/
+}
+.table___3fy2k td {
+  /*     border:1px solid #f00;*/
 }
 .table___3fy2k tr {
-  height: 55px;
+  height: 60px;
 }
 .jiange___1zie_ {
   display: inline-block;
@@ -16407,6 +16410,18 @@ textarea.ant-pagination-options-quick-jumper input {
 }
 .leftKuang____5zv4 {
   text-align: right;
+  vertical-align: top;
+}
+.leftKuang1___fnyvG {
+  text-align: right;
+  vertical-align: top;
+}
+.rightKuang___7yI2M {
+  vertical-align: top;
+}
+.tree___sbFKJ {
+  height: 50px;
+  overflow: auto;
 }
 .di___3O7B9 {
   border-top: 1px solid #ccc;
