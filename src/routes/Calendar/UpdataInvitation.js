@@ -289,7 +289,7 @@ export default class Creat extends PureComponent {
                  dispatch({
                   type: 'Calendar/xiugaiyaoyue',
                   payload: {
-                     id: params.scheduleId,//邀约id
+                     id: parseInt(params.scheduleId),//邀约id
                      calendarId:this.state.leixing,//日历ID
                      cName:this.state.c_zhuti,
                      eName:this.state.e_zhuti,
