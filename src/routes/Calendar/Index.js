@@ -274,7 +274,7 @@ export default class Index extends PureComponent {
         )}
         <div>
           <Select
-            value={currentYear}
+            value={this.state.params.yearId}
             className={styles.selectBox}
             placeholder="选择学期"
             onChange={this.yearsChange.bind(this)}>
