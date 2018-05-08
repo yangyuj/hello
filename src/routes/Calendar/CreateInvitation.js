@@ -260,7 +260,7 @@ export default class Creat extends PureComponent {
                       && _this.props.yaoyue.status)
                           if(_this.props.yaoyue
                       && _this.props.yaoyue.status==true){
-                          _this.props.dispatch(routerRedux.push('/index'+'/'+this.state.leixing));   
+                          _this.props.dispatch(routerRedux.push('/index'+'/'+_this.state.leixing));   
                               //alert('新建成功')
                           }else{
                                alert(_this.props.yaoyue
