@@ -96,20 +96,32 @@ export default class Creat extends PureComponent {
            _this.setState({value:atr})
       })
 	  }
- 
+    chong(value){
+      let m=[] //
+      let list=[]
+      for(let i=0;i<value.length;i++){
+            if(m.indexOf(value[i].split('-')[1])==-1){
+              m.push(value[i].split('-')[1])
+                list.push(value[i])
+            }
+      }
+        // console.log(m)
+        // console.log(list) 
+    return list 
+    }
 	  onChangeXiala = (value) => {
   		console.log('onChange ', value, arguments);
-  		this.setState({ value });
+  		this.setState({ value: this.chong(value)});
     }
     onChangesearch=(value)=>{
     	console.log(value)
-    	const { dispatch } = this.props;
-	        dispatch({  //模糊查询
-	            type: 'Calendar/mohuChaxun',
-	            payload: {
-	                name:value
-	            }
-	    })
+    	// const { dispatch } = this.props;
+	    //     dispatch({  //模糊查询
+	    //         type: 'Calendar/mohuChaxun',
+	    //         payload: {
+	    //             name:value
+	    //         }
+	    // })
     }
     showConfirm() {
       confirm({
