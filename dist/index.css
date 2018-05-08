@@ -15145,6 +15145,7 @@ textarea.ant-time-picker-input {
   border-left: 1px solid #fff;
   border-right: 1px solid #fff;
   cursor: pointer;
+  vertical-align: top;
 }
 .borderBox___2Xgc- > .allDayRow___1CKu_ {
   border-top: 0;

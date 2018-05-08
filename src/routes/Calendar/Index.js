@@ -188,17 +188,16 @@ export default class Index extends PureComponent {
   }
   //点击显示细节
   calendarClick(obj) {
-    // console.log(obj);
     let dateW = obj && obj.cdate;
     let weekDate = dateW.slice(2);
     let weekday = dateW.slice(0, 2);
     let st = obj && obj.start;
     let et = obj && obj.end;
     let stc = st.split(':'),
-      etc = et.split(':');
+        etc = et.split(':');
     let long = ((etc[0] - stc[0]) < 1 ? '' : (etc[0] - stc[0]) + '小时') + (parseInt(etc[1] - stc[1]) == 0 ? '' : (parseInt(etc[1] - stc[1]) + '分钟'));
     let timeS = st.split(':').join(""),
-      timeE = et.split(':').join("");
+        timeE = et.split(':').join("");
     let timeStart = (timeS < 1200) ? ('上午' + st) : ('下午' + st);
     let timeEnd = (timeE < 1200) ? ('上午' + et) : ('下午' + et);
     this.state.dateWeek = weekDate;
@@ -215,7 +214,9 @@ export default class Index extends PureComponent {
         type: 'Index/detailInfo',
         payload: {
           "pageType": 11,
-          "scheduleId": this.state.schId
+          "scheduleId": this.state.schId,
+          "date": this.state.dateWeek,
+          "yearId": this.state.params.yearId
         }
       });
     });
@@ -244,15 +245,17 @@ export default class Index extends PureComponent {
       this.fetchCalendarInfo();
     });
   }
+
   render() {
     const { getCalendarInfoMessage, getTimeInfoMessage, checkDeleteInfoMessage, checkDetailInfoMessage, checkListInfo, checkConfirmInfoMessage, currentUser } = this.props;
     const { tableType } = this.state;
-    // console.log(getCalendarInfoMessage);
     const identifyStatus = currentUser && currentUser.$body && currentUser.$body.content && currentUser.$body.content.identify;
     const edit = this.state.mark ? "inline-block" : "none";
     const Admin = checkListInfo && checkListInfo.ifAdmin;
-    const currentId = getCalendarInfoMessage && getCalendarInfoMessage.currentId;
+    const canEdit = checkDetailInfoMessage && checkDetailInfoMessage.bj_code;
     const current = String(getCalendarInfoMessage && getCalendarInfoMessage.currentId);
+    const currentYear = getTimeInfoMessage && getTimeInfoMessage.year && getTimeInfoMessage.year.current;
+    console.log(currentYear);
     const stime = checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.sTime;
     const etime = checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.eTime;
     return (
@@ -267,12 +270,11 @@ export default class Index extends PureComponent {
                 }
               </span>} key={el.id}></TabPane>)}
             </Tabs>
-
           </div>
         )}
         <div>
           <Select
-            defaultValue={getTimeInfoMessage && getTimeInfoMessage.year && getTimeInfoMessage.year.current}
+            value={this.state.params.yearId}
             className={styles.selectBox}
             placeholder="选择学期"
             onChange={this.yearsChange.bind(this)}>
@@ -331,10 +333,10 @@ export default class Index extends PureComponent {
           onCancel={this.handleOutCancel}
           footer={[
             
-            Admin &&
+            canEdit === 1 &&
             <p style={{ float: "left" }} onClick={this.showModal} className={styles.deleteSch}>删除</p>,
             <Button onClick={this.handleOutCancel}>取消</Button>,
-            Admin &&
+            canEdit === 1 &&
             <Button type="primary" onClick={this.handleOutOk}>编辑</Button>
           ]}>
           <p><Icon className={styles.detailIcon} type="clock-circle-o" style={{ marginRight: 15, fontSize: 14, color: "#333" }} />{this.state.dateWeek}({this.state.weekDay})</p>

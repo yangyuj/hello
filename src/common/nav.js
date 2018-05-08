@@ -21,7 +21,7 @@ export const getNavData = app => [
       },
       {
         name: '我的行程',
-        path: 'index',
+        path: 'index/:calId?',
         component: dynamicWrapper(app, ['index'], () => import('../routes/Calendar/Index'))
       },
       {
