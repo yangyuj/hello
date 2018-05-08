@@ -60,17 +60,13 @@ export default class Index extends PureComponent {
           completeTime: 0
         }
       }).then(() => {
-        const { getTimeInfoMessage, checkListInfo } = this.props;
+        const { getTimeInfoMessage, getCalendarInfoMessage } = this.props;
         this.state.params.weekNumber = getTimeInfoMessage.week.currentWeek || 1;
         this.state.params.yearId = getTimeInfoMessage && getTimeInfoMessage.year && getTimeInfoMessage.year.current;
-        console.log(this.state.params.calendarId);
-        this.fetchCalendarInfo().then(()=>{
-          const { checkListInfo } = this.props;
-          this.state.params.calendarId = checkListInfo && checkListInfo.currentId;
-        });
+        this.state.params.calendarId = getCalendarInfoMessage && getCalendarInfoMessage.currentId;
+        this.fetchCalendarInfo();
       });
-    })
-    
+    });
   }
 
   //获取所有日历数据
@@ -251,19 +247,20 @@ export default class Index extends PureComponent {
   render() {
     const { getCalendarInfoMessage, getTimeInfoMessage, checkDeleteInfoMessage, checkDetailInfoMessage, checkListInfo, checkConfirmInfoMessage, currentUser } = this.props;
     const { tableType } = this.state;
+    // console.log(getCalendarInfoMessage);
     const identifyStatus = currentUser && currentUser.$body && currentUser.$body.content && currentUser.$body.content.identify;
     const edit = this.state.mark ? "inline-block" : "none";
     const Admin = checkListInfo && checkListInfo.ifAdmin;
-    const currentId = checkListInfo && checkListInfo.currentId;
-    const current = String(checkListInfo && checkListInfo.currentId);
+    const currentId = getCalendarInfoMessage && getCalendarInfoMessage.currentId;
+    const current = String(getCalendarInfoMessage && getCalendarInfoMessage.currentId);
     const stime = checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.sTime;
     const etime = checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.eTime;
     return (
       <div className={styles.borderBox}>
-        {getCalendarInfoMessage && getCalendarInfoMessage.length > 0 && (
+        {getCalendarInfoMessage && getCalendarInfoMessage.content && getCalendarInfoMessage.content.length > 0 && (
           <div>
             <Tabs defaultActiveKey={current} onChange={this.tabChange.bind(this)} style={{ paddingRight: 100 }} >
-              {getCalendarInfoMessage.map(el => <TabPane tab={<span>{el.name}
+              {getCalendarInfoMessage && getCalendarInfoMessage.content.map(el => <TabPane tab={<span>{el.name}
                 {
                   (this.state.tabVal == el.id) && Admin &&
                   <Icon style={{ marginLeft: 5, display: edit }} onClick={this.editCalendar} type="form" />

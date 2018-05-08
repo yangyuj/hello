@@ -198,8 +198,7 @@ const proxy = {
       ],
       "timeStamp": 1524635363000,
       "confirmStatus": 0,
-      "ifAdmin": true,
-      "currentId": 2
+      "ifAdmin": true
     },
     "content—bac": [
       {
@@ -599,6 +598,7 @@ const proxy = {
     "status": true,
     "message": "查询日历成功",
     "code": 11,
+    "currentId": 2,
     "content": [
       {
         "id": 1,
