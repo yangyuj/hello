@@ -53,21 +53,24 @@ export default class Index extends PureComponent {
     dispatch({
       type: 'Index/CalendarInfo',
       payload: this.state.params
-    })
-    dispatch({
-      type: 'Index/timeInfo',
-      payload: {
-        completeTime: 0
-      }
     }).then(() => {
-      const { getTimeInfoMessage } = this.props;
-      this.state.params.weekNumber = getTimeInfoMessage.week.currentWeek || 1;
-      this.fetchCalendarInfo().then(() => {
+      dispatch({
+        type: 'Index/timeInfo',
+        payload: {
+          completeTime: 0
+        }
+      }).then(() => {
         const { getTimeInfoMessage, checkListInfo } = this.props;
-        this.state.params.calendarId = checkListInfo && checkListInfo.currentId;
+        this.state.params.weekNumber = getTimeInfoMessage.week.currentWeek || 1;
         this.state.params.yearId = getTimeInfoMessage && getTimeInfoMessage.year && getTimeInfoMessage.year.current;
+        console.log(this.state.params.calendarId);
+        this.fetchCalendarInfo().then(()=>{
+          const { checkListInfo } = this.props;
+          this.state.params.calendarId = checkListInfo && checkListInfo.currentId;
+        });
       });
-    });
+    })
+    
   }
 
   //获取所有日历数据
