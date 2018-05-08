@@ -177,7 +177,6 @@ export default class Creat extends PureComponent {
                   if(mark=="0002"){
                     _this.setState({bjcode:true})
                     _this.setState({queding:true})
-
                   }
                   if(mark=="0001"){
                     _this.setState({bjcode:true})

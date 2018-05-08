@@ -210,7 +210,6 @@ export default class Creat extends PureComponent {
       if(this.state.c_zhuti==null ||
          this.state.e_zhuti==null ||
          this.state.value1==null ||
-         this.state.value2==null ||
          this.state.firstTime==null ||
          this.state.lastTime==null ||
          this.state.chongfu==null ||
