@@ -231,7 +231,6 @@ export default class Index extends PureComponent {
     let dateChange = new Date(str);
     let timeChange = dateChange.getTime();
     this.state.changeDate = timeChange;
-    console.log(typeof(timeChange));
     const { dispatch } = this.props;
     dispatch({
       type: 'Index/timeInfo',
@@ -241,6 +240,7 @@ export default class Index extends PureComponent {
     }).then(()=>{
       const { getTimeInfoMessage } = this.props;
       this.state.params.yearId = getTimeInfoMessage && getTimeInfoMessage.year && getTimeInfoMessage.year.current;
+      this.state.params.weekNumber = (getTimeInfoMessage && getTimeInfoMessage.week && getTimeInfoMessage.week.currentWeek) || 1;
       this.fetchCalendarInfo();
     });
   }
