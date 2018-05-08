@@ -78,7 +78,8 @@ export default class Creat extends PureComponent {
                 for(let i=0;i<riliall.length;i++){
                   if(riliall[i].id==params.calendarId){
                     console.log(riliall[i].name)
-                    //localStorage.setItem("pp",riliall[i].name)
+                    localStorage.setItem("kkkk",riliall[i].id)
+
                       _this.setState({leixing:riliall[i].id})
                      _this.setState({defaultV:riliall[i].name})
                   }
@@ -196,7 +197,8 @@ export default class Creat extends PureComponent {
     });
   }
     addYaoyue=(e)=>{
- 
+    
+                              //alert('新建成功')
       console.log(this.state.leixing)
       console.log(this.state.c_zhuti)
       console.log(this.state.e_zhuti)
@@ -258,7 +260,7 @@ export default class Creat extends PureComponent {
                       && _this.props.yaoyue.status)
                           if(_this.props.yaoyue
                       && _this.props.yaoyue.status==true){
-                          _this.props.dispatch(routerRedux.push('/index'));   
+                          _this.props.dispatch(routerRedux.push('/index'+'/'+this.state.leixing));   
                               //alert('新建成功')
                           }else{
                                alert(_this.props.yaoyue
@@ -269,7 +271,7 @@ export default class Creat extends PureComponent {
               
     }
     cancel=(e)=>{
-       this.props.dispatch(routerRedux.push('/index'));
+       this.props.dispatch(routerRedux.push('/index'+'/'+localStorage.getItem('kkkk')));
        console.log('取消')
     }
   render() {
