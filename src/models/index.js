@@ -25,7 +25,7 @@ export default {
             }
             yield put({
                 type: 'CalendarInfoMessage',
-                payload: response.content,
+                payload: response,
             });
         },
         *timeInfo({ payload }, { call, put }) {

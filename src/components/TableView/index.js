@@ -24,6 +24,7 @@ class TableView extends PureComponent {
         title: '日期',
         dataIndex: 'week',
         key: 'week',
+        width: '15%',
         className: styles.bgCol,
         render: (text, row, index) => {
           return {
@@ -36,22 +37,27 @@ class TableView extends PureComponent {
        }, {
         title: '时间',
         dataIndex: 'scheduleTime',
+        width: '15%',
         key: 'scheduleTime'
       }, {
         title: '主题',
         dataIndex: 'theme',
+        width: '20%',
         key: 'theme'
       }, {
         title: '参与人员',
         dataIndex: 'people',
+        width: '20%',
         key: 'people'
       }, {
         title: '地点',
         dataIndex: 'location',
+        width: '15%',
         key: 'location'
       }, {
         title: '备注',
         dataIndex: 'remark',
+        width: '20%',
         key: 'remark'
       }
     ];

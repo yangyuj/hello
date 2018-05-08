@@ -125,10 +125,10 @@ const proxy = {
         {
           "scheduleId": 1,
           "scheduleTime": "xx",
-          "theme": "周二会议",
-          "people": "xxx,xxx,xxx,xxx",
+          "theme": "周二会议周二会议周二会议周二会议",
+          "people": "xxx,xxx,xxx,xxxxxx,xxx,xxx,xxxxxx,xxx,xxx,xxxxxx,xxx,xxx,xxxxxx,xxx,xxx,xxxxxx,xxx,xxx,xxxxxx,xxx,xxx,xxxxxx,xxx,xxx,xxxxxx,xxx,xxx,xxxxxx,xxx,xxx,xxxxxx,xxx,xxx,xxx",
           "location": "小雪",
-          "remark": "xxx",
+          "remark": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
           "start": "8:00",
           "end": "9:00"
         },
@@ -198,8 +198,7 @@ const proxy = {
       ],
       "timeStamp": 1524635363000,
       "confirmStatus": 0,
-      "ifAdmin": true,
-      "currentId": 2
+      "ifAdmin": true
     },
     "content—bac": [
       {
@@ -599,6 +598,7 @@ const proxy = {
     "status": true,
     "message": "查询日历成功",
     "code": 11,
+    "currentId": 2,
     "content": [
       {
         "id": 1,
