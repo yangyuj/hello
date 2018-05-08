@@ -777,6 +777,7 @@ const proxy = {
     "message": "查询邀约详情成功",
     "code": 0,
     "content": {
+      "authority":true,
       "scheduleTemplateInfo": {
         "id": 1,
         "calendarId": 1,

@@ -75,19 +75,19 @@ export default class Creat extends PureComponent {
     onChangesearch=(value)=>{
     	    console.log(value)
     	    let _this=this
-    		const { dispatch } = this.props;
-		        dispatch({  //模糊查询
-		            type: 'Calendar/mohuChaxun',
-		            payload: {
-		                 name:value
-		            }
-		    }).then(function(){
-		      console.log(_this.props.personlist 
-		      	&& _this.props.personlist.content.teacherNameList)
-		    	//赋给treeData
-		      // _this.setState({treeData:_this.props.personlist 
-		      // 	&& _this.props.personlist.content.teacherNameList})
-		    })	
+    		// const { dispatch } = this.props;
+		    //     dispatch({  //模糊查询
+		    //         type: 'Calendar/mohuChaxun',
+		    //         payload: {
+		    //              name:value
+		    //         }
+		    // }).then(function(){
+		    //   console.log(_this.props.personlist 
+		    //   	&& _this.props.personlist.content.teacherNameList)
+		    // 	//赋给treeData
+		    //   // _this.setState({treeData:_this.props.personlist 
+		    //   // 	&& _this.props.personlist.content.teacherNameList})
+		    // })	
     }
     huoquJiao=(value)=>{
     	
