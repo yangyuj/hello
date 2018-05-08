@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
-import { Button, Icon, List, Modal, Tabs, Select } from 'antd';
+import { Button, Icon, List, Modal, Tabs, Select, DatePicker } from 'antd';
 import { routerRedux } from 'dva/router';
 import CalendarHeaderLayout from '../../layouts/CalendarHeaderLayout';
 import { trans } from '../../utils/i18n';
@@ -8,6 +8,7 @@ import { intToChinese } from '../../utils/utils';
 import CalendarCalendarTable from '../../components/CalendarCalendarTable';
 import styles from './Index.less';
 import TableView from '../../components/TableView/index';
+import moment from 'moment';
 
 const confirm = Modal.confirm;
 const TabPane = Tabs.TabPane;
@@ -26,8 +27,8 @@ const Option = Select.Option;
 export default class Index extends PureComponent {
   state = {
     params: {
-      calendarId: '1',
-      yearId: '2',
+      calendarId: '',
+      yearId: '',
       weekNumber: 1,
       type: 0
     },
@@ -37,7 +38,14 @@ export default class Index extends PureComponent {
     schId: 0,
     calId: 0,
     semester: 0,
-    mark: 0
+    mark: 0,
+    tabVal: 0,
+    startTime: 0,
+    endTime: 0,
+    timeLong: 0,
+    dateWeek: 0,
+    weekDay: 0,
+    changeDate: 0
   }
   componentDidMount() {
     const { dispatch } = this.props;
@@ -45,24 +53,20 @@ export default class Index extends PureComponent {
     dispatch({
       type: 'Index/CalendarInfo',
       payload: this.state.params
-    })
-    dispatch({
-      type: 'Index/timeInfo',
-      payload: {
-      }
     }).then(() => {
-      const { getTimeInfoMessage } = this.props;
-      this.state.params.weekNumber = getTimeInfoMessage.week.currentWeek || 1;
-      this.fetchCalendarInfo();
+      dispatch({
+        type: 'Index/timeInfo',
+        payload: {
+          completeTime: 0
+        }
+      }).then(() => {
+        const { getTimeInfoMessage, getCalendarInfoMessage } = this.props;
+        this.state.params.weekNumber = getTimeInfoMessage.week.currentWeek || 1;
+        this.state.params.yearId = getTimeInfoMessage && getTimeInfoMessage.year && getTimeInfoMessage.year.current;
+        this.state.params.calendarId = getCalendarInfoMessage && getCalendarInfoMessage.currentId;
+        this.fetchCalendarInfo();
+      });
     });
-
-    // const { checkDetailInfoMessage } = this.props;
-    // console.log(checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.sTime);
-    // console.log(checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.eTime);
-    // let startTime = checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.sTime;
-    // let endTime = checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.eTime;
-    // let arr = startTime.split("-");
-    // console.log(arr);
   }
 
   //获取所有日历数据
@@ -77,6 +81,7 @@ export default class Index extends PureComponent {
   //日历分类选择
   tabChange(val) {
     this.state.params.calendarId = val;
+    this.state.tabVal = val;
     this.fetchCalendarInfo();
     //改变修改日历的入口状态
     this.setState({
@@ -139,7 +144,7 @@ export default class Index extends PureComponent {
   }
   //新建邀约
   newInvitation = () => {
-    this.props.dispatch(routerRedux.push('/createInvitation' + '/' + this.state.params.yearId));
+    this.props.dispatch(routerRedux.push('/createInvitation' + '/' + this.state.params.yearId + '/' + this.state.params.calendarId));
   }
   //点击删除显示modal
   showModal = () => {
@@ -156,6 +161,8 @@ export default class Index extends PureComponent {
     this.props.dispatch({
       type: 'Index/deleteInfo',
       payload: this.state.schId
+    }).then(() => {
+      this.fetchCalendarInfo();
     });
     this.fetchCalendarInfo();
   }
@@ -181,6 +188,24 @@ export default class Index extends PureComponent {
   }
   //点击显示细节
   calendarClick(obj) {
+    // console.log(obj);
+    let dateW = obj && obj.cdate;
+    let weekDate = dateW.slice(2);
+    let weekday = dateW.slice(0, 2);
+    let st = obj && obj.start;
+    let et = obj && obj.end;
+    let stc = st.split(':'),
+      etc = et.split(':');
+    let long = ((etc[0] - stc[0]) < 1 ? '' : (etc[0] - stc[0]) + '小时') + (parseInt(etc[1] - stc[1]) == 0 ? '' : (parseInt(etc[1] - stc[1]) + '分钟'));
+    let timeS = st.split(':').join(""),
+      timeE = et.split(':').join("");
+    let timeStart = (timeS < 1200) ? ('上午' + st) : ('下午' + st);
+    let timeEnd = (timeE < 1200) ? ('上午' + et) : ('下午' + et);
+    this.state.dateWeek = weekDate;
+    this.state.weekDay = weekday;
+    this.state.startTime = timeStart;
+    this.state.endTime = timeEnd;
+    this.state.timeLong = long;
     this.setState({
       visible: true,
       schId: obj.scheduleId
@@ -200,28 +225,47 @@ export default class Index extends PureComponent {
     // console.log("bianjirili");
     this.props.dispatch(routerRedux.push('/updata' + '/' + this.state.params.calendarId));
   }
-  //
-  overTab = () => {
-    console.log("over");
+  //选择日期的时间
+  sendDate = (date, dateString) => {
+    let str = dateString.replace(/-/g, '/');
+    let dateChange = new Date(str);
+    let timeChange = dateChange.getTime();
+    this.state.changeDate = timeChange;
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'Index/timeInfo',
+      payload: {
+        completeTime : this.state.changeDate
+      }
+    }).then(()=>{
+      const { getTimeInfoMessage } = this.props;
+      this.state.params.yearId = getTimeInfoMessage && getTimeInfoMessage.year && getTimeInfoMessage.year.current;
+      this.state.params.weekNumber = (getTimeInfoMessage && getTimeInfoMessage.week && getTimeInfoMessage.week.currentWeek) || 1;
+      this.fetchCalendarInfo();
+    });
   }
-  //
-  outTab = () => {
-    console.log("out");
-  }
-
   render() {
     const { getCalendarInfoMessage, getTimeInfoMessage, checkDeleteInfoMessage, checkDetailInfoMessage, checkListInfo, checkConfirmInfoMessage, currentUser } = this.props;
     const { tableType } = this.state;
+    // console.log(getCalendarInfoMessage);
     const identifyStatus = currentUser && currentUser.$body && currentUser.$body.content && currentUser.$body.content.identify;
     const edit = this.state.mark ? "inline-block" : "none";
-    // console.log(checkListInfo && checkListInfo.ifAdmin);
     const Admin = checkListInfo && checkListInfo.ifAdmin;
+    const currentId = getCalendarInfoMessage && getCalendarInfoMessage.currentId;
+    const current = String(getCalendarInfoMessage && getCalendarInfoMessage.currentId);
+    const stime = checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.sTime;
+    const etime = checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.eTime;
     return (
       <div className={styles.borderBox}>
-        {getCalendarInfoMessage && getCalendarInfoMessage.length > 0 && (
+        {getCalendarInfoMessage && getCalendarInfoMessage.content && getCalendarInfoMessage.content.length > 0 && (
           <div>
-            <Tabs defaultActiveKey="1" onChange={this.tabChange.bind(this)} onMouseOver={this.overTab} onMouseOut={this.outTab} style={{ paddingRight: 100 }} >
-              {getCalendarInfoMessage.map(el => <TabPane tab={<span>{el.name}<Icon style={{ marginLeft: 5, display: edit }} onClick={this.editCalendar} type="form" /></span>} key={el.id}></TabPane>)}
+            <Tabs defaultActiveKey={current} onChange={this.tabChange.bind(this)} style={{ paddingRight: 100 }} >
+              {getCalendarInfoMessage && getCalendarInfoMessage.content.map(el => <TabPane tab={<span>{el.name}
+                {
+                  (this.state.tabVal == el.id) && Admin &&
+                  <Icon style={{ marginLeft: 5, display: edit }} onClick={this.editCalendar} type="form" />
+                }
+              </span>} key={el.id}></TabPane>)}
             </Tabs>
 
           </div>
@@ -242,6 +286,12 @@ export default class Index extends PureComponent {
           {getTimeInfoMessage
             && getTimeInfoMessage.week
             && <span className={styles.plr_10}>{this.renderWeek(getTimeInfoMessage.week.currentWeek)}</span>}
+          <DatePicker 
+            onChange={this.sendDate} 
+            style={{width: 40, border: "none"}} 
+            className={styles.dateStyle}
+            placeholder=''
+            value=''/>
           <Button className={styles.weekChangeBtn} onClick={this.checkWeek.bind(this, 'right')}><Icon type="right" /></Button>
           <span className={styles.tabbleCheck}>
             <Icon className={tableType == 'bars' && styles.cur} onClick={this.checkTable.bind(this, 'bars')} type="bars" />
@@ -280,15 +330,18 @@ export default class Index extends PureComponent {
           visible={this.state.visible}
           onCancel={this.handleOutCancel}
           footer={[
+            
+            Admin &&
             <p style={{ float: "left" }} onClick={this.showModal} className={styles.deleteSch}>删除</p>,
             <Button onClick={this.handleOutCancel}>取消</Button>,
+            Admin &&
             <Button type="primary" onClick={this.handleOutOk}>编辑</Button>
           ]}>
-          {/* <p className={styles.detailName} style={{margin: 50 }}>{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.cName}</p> */}
-          <p className={styles.detailTime}><Icon className={styles.detailIcon} type="clock-circle-o" style={{ marginRight: 15, fontSize: 14, color: "#333" }} />{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.eTime}</p>
-          <p className={styles.detailPlace}><Icon className={styles.detailIcon} type="environment" style={{ marginRight: 15, fontSize: 14, color: "#333" }} />{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.address}</p>
-          <p className={styles.detailNum}><Icon className={styles.detailIcon} type="contacts" style={{ marginRight: 15, fontSize: 14, color: "#333" }} />{checkDetailInfoMessage && checkDetailInfoMessage.personNumbers}位邀约对象</p>
-          <p className={styles.detailMustChoose} style={{ marginLeft: 26, fontSize: 14, color: "#333" }}>必选：
+          <p><Icon className={styles.detailIcon} type="clock-circle-o" style={{ marginRight: 15, fontSize: 14, color: "#333" }} />{this.state.dateWeek}({this.state.weekDay})</p>
+          <p style={{ marginLeft: 26, fontSize: 14, color: "#333" }}>{this.state.startTime}-{this.state.endTime}<p style={{ width: 15, display: 'inline-block' }}></p>{this.state.timeLong}</p>
+          <p><Icon className={styles.detailIcon} type="environment" style={{ marginRight: 15, fontSize: 14, color: "#333" }} />{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.address}</p>
+          <p><Icon className={styles.detailIcon} type="contacts" style={{ marginRight: 15, fontSize: 14, color: "#333" }} />{checkDetailInfoMessage && checkDetailInfoMessage.personNumbers}位邀约对象</p>
+          <p style={{ marginLeft: 26, fontSize: 14, color: "#333" }}>必选：
             {
               checkDetailInfoMessage && checkDetailInfoMessage.bixuan.map((value, index) => {
                 return (
@@ -296,15 +349,15 @@ export default class Index extends PureComponent {
                 );
               })
             }</p>
-          <p className={styles.detailCanChoose} style={{ marginLeft: 26, fontSize: 14, color: "#333" }}>可选：
-          {
+          <p style={{ marginLeft: 26, fontSize: 14, color: "#333" }}>可选：
+            {
               checkDetailInfoMessage && checkDetailInfoMessage.kexuan.map((value, index) => {
                 return (
                   <span key={index} style={{ background: "#F3F3F3", marginRight: 6, fontSize: 12, padding: 2, borderRadius: 4 }}>{value}</span>
                 );
               })
             }</p>
-          <p className={styles.detailRemark}><Icon className={styles.detailIcon} type="profile" style={{ marginRight: 15, fontSize: 14, color: "#333" }} />{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.remark}</p>
+          <p><Icon className={styles.detailIcon} type="profile" style={{ marginRight: 15, fontSize: 14, color: "#333" }} />{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.remark}</p>
           <Modal
             visible={this.state.daleteVisible}
             onOk={this.handleOk}
