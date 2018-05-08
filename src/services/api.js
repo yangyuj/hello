@@ -79,7 +79,7 @@ export async function deleteRili(params) {
 }
 //日程详情的显示
 export async function checkDetailInfo(params) {
-  console.log(params.date);
+  // console.log(params.date);
   const id = params.scheduleId;
   const type = params.pageType;
   const dd = params.date;
@@ -92,7 +92,7 @@ export async function checkDeleteInfo(params) {
 }
 //确认日程
 export async function checkConfirmInfo(params) {
-  console.log(params);
+  // console.log(params);
   return request(`/api/confirmCalendar?${stringify(params)}`);
 
 }

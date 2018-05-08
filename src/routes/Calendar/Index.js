@@ -245,6 +245,7 @@ export default class Index extends PureComponent {
       this.fetchCalendarInfo();
     });
   }
+
   render() {
     const { getCalendarInfoMessage, getTimeInfoMessage, checkDeleteInfoMessage, checkDetailInfoMessage, checkListInfo, checkConfirmInfoMessage, currentUser } = this.props;
     const { tableType } = this.state;
@@ -273,7 +274,7 @@ export default class Index extends PureComponent {
         )}
         <div>
           <Select
-            defaultValue={currentYear}
+            value={currentYear}
             className={styles.selectBox}
             placeholder="选择学期"
             onChange={this.yearsChange.bind(this)}>
