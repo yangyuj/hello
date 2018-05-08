@@ -252,9 +252,9 @@ export default class Index extends PureComponent {
     const edit = this.state.mark ? "inline-block" : "none";
     const Admin = checkListInfo && checkListInfo.ifAdmin;
     const canEdit = checkDetailInfoMessage && checkDetailInfoMessage.bj_code;
-    // console.log(canEdit);
-    const currentId = getCalendarInfoMessage && getCalendarInfoMessage.currentId;
     const current = String(getCalendarInfoMessage && getCalendarInfoMessage.currentId);
+    const currentYear = getTimeInfoMessage && getTimeInfoMessage.year && getTimeInfoMessage.year.current;
+    console.log(currentYear);
     const stime = checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.sTime;
     const etime = checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.eTime;
     return (
@@ -269,12 +269,11 @@ export default class Index extends PureComponent {
                 }
               </span>} key={el.id}></TabPane>)}
             </Tabs>
-
           </div>
         )}
         <div>
           <Select
-            defaultValue={getTimeInfoMessage && getTimeInfoMessage.year && getTimeInfoMessage.year.current}
+            defaultValue={currentYear}
             className={styles.selectBox}
             placeholder="选择学期"
             onChange={this.yearsChange.bind(this)}>
