@@ -330,8 +330,11 @@ export default class Index extends PureComponent {
           visible={this.state.visible}
           onCancel={this.handleOutCancel}
           footer={[
+            
+            Admin &&
             <p style={{ float: "left" }} onClick={this.showModal} className={styles.deleteSch}>删除</p>,
             <Button onClick={this.handleOutCancel}>取消</Button>,
+            Admin &&
             <Button type="primary" onClick={this.handleOutOk}>编辑</Button>
           ]}>
           <p><Icon className={styles.detailIcon} type="clock-circle-o" style={{ marginRight: 15, fontSize: 14, color: "#333" }} />{this.state.dateWeek}({this.state.weekDay})</p>
