@@ -46,11 +46,10 @@ export default class Index extends PureComponent {
     dateWeek: 0,
     weekDay: 0,
     changeDate: 0,
-    currentDefalut: 0
+    currentDefalut: ''
   }
   componentDidMount() {
     const { dispatch } = this.props;
-
     dispatch({
       type: 'Index/CalendarInfo',
       payload: this.state.params
@@ -61,11 +60,10 @@ export default class Index extends PureComponent {
           completeTime: 0
         }
       }).then(() => {
-        const { getTimeInfoMessage, getCalendarInfoMessage } = this.props;
+        const { getTimeInfoMessage, getCalendarInfoMessage, match: {params} } = this.props;
         this.state.params.weekNumber = getTimeInfoMessage.week.currentWeek || 1;
         this.state.params.yearId = getTimeInfoMessage && getTimeInfoMessage.year && getTimeInfoMessage.year.current;
-        this.state.params.calendarId = getCalendarInfoMessage && getCalendarInfoMessage.currentId;
-        // this.state.currentDefalut = String(getCalendarInfoMessage && getCalendarInfoMessage.currentId);
+        this.state.params.calendarId = params.calId ? params.calId : getCalendarInfoMessage && getCalendarInfoMessage.currentId;
         this.fetchCalendarInfo();
       });
     });
@@ -249,21 +247,22 @@ export default class Index extends PureComponent {
   }
 
   render() {
-    const { getCalendarInfoMessage, getTimeInfoMessage, checkDeleteInfoMessage, checkDetailInfoMessage, checkListInfo, checkConfirmInfoMessage, currentUser } = this.props;
+    const { getCalendarInfoMessage, getTimeInfoMessage, checkDeleteInfoMessage, checkDetailInfoMessage, checkListInfo, checkConfirmInfoMessage, currentUser, match: {params} } = this.props;
     const { tableType } = this.state;
     const identifyStatus = currentUser && currentUser.$body && currentUser.$body.content && currentUser.$body.content.identify;
     const edit = this.state.mark ? "inline-block" : "none";
     const Admin = checkListInfo && checkListInfo.ifAdmin;
     const canEdit = checkDetailInfoMessage && checkDetailInfoMessage.bj_code;
+    const cuId = params.calId ? params.calId : getCalendarInfoMessage && getCalendarInfoMessage.currentId;
     const currentYear = getTimeInfoMessage && getTimeInfoMessage.year && getTimeInfoMessage.year.current;
-    // console.log(this.state.currentDefalut);
+    console.log(String(this.state.params.calendarId));
     const stime = checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.sTime;
     const etime = checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.eTime;
     return (
       <div className={styles.borderBox}>
         {getCalendarInfoMessage && getCalendarInfoMessage.content && getCalendarInfoMessage.content.length > 0 && (
           <div>
-            <Tabs defaultActiveKey={this.state.currentDefalut} onChange={this.tabChange.bind(this)} style={{ paddingRight: 100 }} >
+            <Tabs activeKey={String(this.state.params.calendarId)} onChange={this.tabChange.bind(this)} style={{ paddingRight: 100 }} >
               {getCalendarInfoMessage && getCalendarInfoMessage.content.map(el => <TabPane tab={<span>{el.name}
                 {
                   (this.state.tabVal == el.id) && Admin &&
