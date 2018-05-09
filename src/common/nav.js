@@ -38,7 +38,7 @@ export const getNavData = app => [
         component: dynamicWrapper(app, ['Calendar'], () => import('../routes/Calendar/Updata'))
       },{
         name:"修改邀约",
-        path:'updataInvitation/:scheduleId/:yearId',
+        path:'updataInvitation/:scheduleId/:yearId/:date',
         component: dynamicWrapper(app, ['Calendar'], () => import('../routes/Calendar/UpdataInvitation'))
       }
     ],

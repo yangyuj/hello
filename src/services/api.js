@@ -61,8 +61,8 @@ export async function CalendarHuixian(params) {
 }
 //邀约回显
 export async function YaoyueHuixian(params) {
-	// console.log(params.name)
-  return request(`/api/getScheduleEcho?scheduleId=${params.scheduleId}&pageType=${params.pageType}`);
+	// console.log(params);
+  return request(`/api/getScheduleEcho?scheduleId=${params.scheduleId}&yearId=${params.yearId}&pageType=${params.pageType}&date=${params.date}`);
 }
 //修改邀约
 export async function xiugaiYaoyue(params) {

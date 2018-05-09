@@ -170,7 +170,7 @@ export default class Index extends PureComponent {
     this.setState({
       visible: false,
     });
-    this.props.dispatch(routerRedux.push('/UpdataInvitation' + '/' + this.state.schId + '/' + this.state.params.yearId));
+    this.props.dispatch(routerRedux.push('/UpdataInvitation' + '/' + this.state.schId + '/' + this.state.params.yearId + '/' + this.state.dateWeek));
   }
   handleCancel = (e) => {
     this.setState({
