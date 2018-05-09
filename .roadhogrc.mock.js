@@ -789,7 +789,7 @@ const proxy = {
         "endTime": 1524212682,
         "preStartTime": 1524466560,
         "preEndTime": 1524212682,
-        "ifRepeat": false,
+        "ifRepeat": true,
         "address": "教室99",
         "repeatCycle": null,
         "repeatType": 5,

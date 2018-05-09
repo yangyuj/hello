@@ -66,7 +66,9 @@ export default class Creat extends PureComponent {
       queding: null,
       chongfuziduan: null,
       startTime: null,
-      endTime: null
+      endTime: null,
+      beforeRepeat: null,
+      editOnly: null
     };
   }
   componentWillMount() {
@@ -75,14 +77,11 @@ export default class Creat extends PureComponent {
     dispatch({
       type: 'Calendar/charili', //查询all日历
       payload: {
-
       }
     }).then(function () {
       // console.log(_this.props.rililist
       //   && _this.props.rililist.content)
-
     })
-
     //查询地点
     dispatch({
       type: 'Calendar/chaPlace',
@@ -90,8 +89,6 @@ export default class Creat extends PureComponent {
 
       }
     })
-
-
     dispatch({  //查询所有人员
       type: 'Calendar/people',
       payload: {
@@ -105,7 +102,6 @@ export default class Creat extends PureComponent {
           && _this.props.peoplelist.content.getDepartmentList
       })
     })
-
     //邀约回显
     dispatch({  //查询所有人员
       type: 'Calendar/yaoyueHuixian',
@@ -118,13 +114,12 @@ export default class Creat extends PureComponent {
     }).then(function () {
       // console.log(_this.props.yaoyueHui
       //   && _this.props.yaoyueHui.content.scheduleTemplateInfo)
-      // startTime : _this.props.yaoyueHui &&  _this.props.yaoyueHui.content.scheduleTemplateInfo.preStartTime;
-      // endTime : _this.props.yaoyueHui &&  _this.props.yaoyueHui.content.scheduleTemplateInfo.preEndTime;
       _this.setState({
         leixing: _this.props.yaoyueHui
           && _this.props.yaoyueHui.content.scheduleTemplateInfo.calendarId,
-        startTime : _this.props.yaoyueHui &&  _this.props.yaoyueHui.content.scheduleTemplateInfo.preStartTime,
-        endTime : _this.props.yaoyueHui &&  _this.props.yaoyueHui.content.scheduleTemplateInfo.preEndTime
+        startTime: _this.props.yaoyueHui && _this.props.yaoyueHui.content.scheduleTemplateInfo.preStartTime,
+        endTime: _this.props.yaoyueHui && _this.props.yaoyueHui.content.scheduleTemplateInfo.preEndTime,
+        beforeRepeat: _this.props.yaoyueHui && _this.props.yaoyueHui.content.scheduleTemplateInfo.ifRepeat
       })
       _this.setState({
         c_zhuti: _this.props.yaoyueHui
@@ -263,18 +258,14 @@ export default class Creat extends PureComponent {
     // console.log(time, timeString);
     this.setState({ lastTime: timeString })
   }
-
-
   handleChangeplace = (value) => {
     // console.log(`地点 ${value}`);
     this.setState({ place: value })
   }
-
   handleBlurplace = (e) => {
     // console.log("blur");
 
   }
-
   handleFocusplace = () => {
     // console.log('focus');
   }
@@ -282,89 +273,151 @@ export default class Creat extends PureComponent {
     // console.log(e.target.value)
     this.setState({ beizhu: e.target.value })
   }
-  showConfirm() {
-    confirm({
-      title: '请把信息填写完整！',
-
-      onOk() {
-        // console.log('OK');
-      },
-      onCancel() {
-        // console.log('Cancel');
-      },
-    });
-  }
-  addYaoyue = (e) => {
-
-    // console.log(this.state.leixing)
-    // console.log(this.state.c_zhuti)
-    // console.log(this.state.e_zhuti)
-    // console.log(this.state.value1)
-    // console.log(this.state.value2)
-
-    // console.log(this.state.data)
-    // console.log(this.state.firstTime)
-    // console.log(this.state.lastTime)
-    // console.log(new Date(chuofrist).getTime())
-    //  console.log(new Date(chuolast).getTime())
-    // console.log(this.state.chongfu)
-    // console.log(this.state.place)
-    // console.log(this.state.beizhu)
+  //修改当天还是修改以后的弹出框
+  chooseStyle = () => {
+    let _this = this;
     let ifrepeat;
     if (this.state.chongfu == '1') {
       ifrepeat = 0;
     } else {
       ifrepeat = 1;
     }
-    // console.log(ifrepeat)
+    const { dispatch, match: { params } } = this.props;
+    let chuofrist = this.state.data.replace(/-/g, '/') + ' ' + this.state.firstTime
+    let chuolast = this.state.data.replace(/-/g, '/') + ' ' + this.state.lastTime
+    Modal.confirm({
+      title: '选择重复日程的修改方式',
+      okText: '仅修改本次日程',
+      cancelText: '以后的重复日程一同修改',
+      onOk() {
+        _this.state.editOnly = 1;
+        dispatch({
+          type: 'Calendar/xiugaiyaoyue',
+          payload: {
+            preStartTime: _this.state.startTime,
+            preEndTime: _this.state.endTime,
+            id: parseInt(params.scheduleId),//邀约id
+            calendarId: _this.state.leixing,//日历ID
+            cName: _this.state.c_zhuti,
+            eName: _this.state.e_zhuti,
+            startTime: new Date(chuofrist).getTime(),
+            endTime: new Date(chuolast).getTime(),
+            address: _this.state.place,
+            remark: _this.state.beizhu,
+            repeatTypeCode: parseInt(_this.state.chongfu),
+            optionalPersonnel: _this.state.value2,
+            requiredPersonnel: _this.state.value1,
+            semesterId: parseInt(params.yearId), //学期ID
+            ifRepeat: ifrepeat,
+            ifChooseDayOnly: _this.state.editOnly
+          }
+        }).then(function () {
+          if (_this.props.xiugaiyaoyue
+            && _this.props.xiugaiyaoyue.status == true) {
+            _this.props.dispatch(routerRedux.push('/index'));
+          } else {
+            alert(_this.props.xiugaiyaoyue
+              && _this.props.xiugaiyaoyue.message)
+          }
+        })
+      },
+      onCancel() {
+        _this.state.editOnly = 0;
+        dispatch({
+          type: 'Calendar/xiugaiyaoyue',
+          payload: {
+            preStartTime: _this.state.startTime,
+            preEndTime: _this.state.endTime,
+            id: parseInt(params.scheduleId),//邀约id
+            calendarId: _this.state.leixing,//日历ID
+            cName: _this.state.c_zhuti,
+            eName: _this.state.e_zhuti,
+            startTime: new Date(chuofrist).getTime(),
+            endTime: new Date(chuolast).getTime(),
+            address: _this.state.place,
+            remark: _this.state.beizhu,
+            repeatTypeCode: parseInt(_this.state.chongfu),
+            optionalPersonnel: _this.state.value2,
+            requiredPersonnel: _this.state.value1,
+            semesterId: parseInt(params.yearId), //学期ID
+            ifRepeat: ifrepeat,
+            ifChooseDayOnly: _this.state.editOnly
+          }
+        }).then(function () {
+          if (_this.props.xiugaiyaoyue
+            && _this.props.xiugaiyaoyue.status == true) {
+            _this.props.dispatch(routerRedux.push('/index'));
+          } else {
+            alert(_this.props.xiugaiyaoyue
+              && _this.props.xiugaiyaoyue.message)
+          }
+        })
+      },
+    });
+  }
+  //点击编辑邀约的右下角确定按钮
+  addYaoyue = (e) => {
+    let ifrepeat;
+    if (this.state.chongfu == '1') {
+      ifrepeat = 0;
+    } else {
+      ifrepeat = 1;
+    }
     let chuofrist = this.state.data.replace(/-/g, '/') + ' ' + this.state.firstTime
     let chuolast = this.state.data.replace(/-/g, '/') + ' ' + this.state.lastTime
     let _this = this
     const { dispatch, match: { params } } = this.props;
-    dispatch({
-      type: 'Calendar/xiugaiyaoyue',
-      payload: {
-        preStartTime: this.state.startTime,
-        preEndTime: this.state.endTime,
-        id: parseInt(params.scheduleId),//邀约id
-        calendarId: this.state.leixing,//日历ID
-        cName: this.state.c_zhuti,
-        eName: this.state.e_zhuti,
-        startTime: new Date(chuofrist).getTime(),
-        endTime: new Date(chuolast).getTime(),
-        address: this.state.place,
-        remark: this.state.beizhu,
-        repeatTypeCode: parseInt(this.state.chongfu),
-        optionalPersonnel: this.state.value2,
-        requiredPersonnel: this.state.value1,
-        semesterId: parseInt(params.yearId), //学期ID
-        ifRepeat: ifrepeat
-      }
-    }).then(function () {
-      // console.log(_this.props.xiugaiyaoyue
-      //          && _this.props.xiugaiyaoyue.status) 
-      if (_this.props.xiugaiyaoyue
-        && _this.props.xiugaiyaoyue.status == true) {
-        _this.props.dispatch(routerRedux.push('/index'));
+    if (_this.state.leixing == null ||
+      _this.state.c_zhuti == null ||
+      _this.state.e_zhuti == null ||
+      _this.state.value1 == null ||
+      _this.state.value2 == null ||
+      _this.state.firstTime == null ||
+      _this.state.lastTime == null ||
+      _this.state.chongfu == null ||
+      _this.state.place == null ||
+      _this.state.beizhu == null
+    ) {
+      alert('请把信息填写完整');
+    } else {
+      console.log(_this.state.beforeRepeat);
+      if (_this.state.beforeRepeat === true) {
+        this.chooseStyle();
       } else {
-        alert(_this.props.xiugaiyaoyue
-          && _this.props.xiugaiyaoyue.message)
+        dispatch({
+          type: 'Calendar/xiugaiyaoyue',
+          payload: {
+            preStartTime: _this.state.startTime,
+            preEndTime: _this.state.endTime,
+            id: parseInt(params.scheduleId),//邀约id
+            calendarId: _this.state.leixing,//日历ID
+            cName: _this.state.c_zhuti,
+            eName: _this.state.e_zhuti,
+            startTime: new Date(chuofrist).getTime(),
+            endTime: new Date(chuolast).getTime(),
+            address: _this.state.place,
+            remark: _this.state.beizhu,
+            repeatTypeCode: parseInt(_this.state.chongfu),
+            optionalPersonnel: _this.state.value2,
+            requiredPersonnel: _this.state.value1,
+            semesterId: parseInt(params.yearId), //学期ID
+            ifRepeat: ifrepeat
+            // ifChooseDayOnly: _this.state.editOnly
+          }
+        }).then(function () {
+          if (_this.props.xiugaiyaoyue
+            && _this.props.xiugaiyaoyue.status == true) {
+            _this.props.dispatch(routerRedux.push('/index'));
+          } else {
+            alert(_this.props.xiugaiyaoyue
+              && _this.props.xiugaiyaoyue.message)
+          }
+        })
       }
-    })
-    //          // console.log(new Date(chuo).getTime())
-    // if(this.state.leixing==null ||
-    //    this.state.c_zhuti==null ||
-    //    this.state.e_zhuti==null ||
-    //    this.state.value1==null ||
-    //    this.state.value2==null ||
-    //    this.state.firstTime==null ||
-    //    this.state.lastTime==null ||
-    //    this.state.chongfu==null ||
-    //    this.state.place==null ||
-    //    this.state.beizhu==null 
-    //    ){
-    //      alert('请把信息填写完整')
-    // }else{
+    }
+
+
+    // else{
     //   //拼成2017/9/9 3:80
     //    let chuofrist=this.state.data.replace(/-/g, '/')+' '+this.state.firstTime
     //    let chuolast=this.state.data.replace(/-/g, '/')+' '+this.state.lastTime
@@ -397,6 +450,7 @@ export default class Creat extends PureComponent {
     // }         
 
   }
+  //取消按钮
   cancel = (e) => {
     this.props.dispatch(routerRedux.push('/index'));
   }
@@ -405,9 +459,9 @@ export default class Creat extends PureComponent {
     let _this = this
     let tree = this.state.treeData
     let time = new Date(_this.props.yaoyueHui
-      && _this.props.yaoyueHui.content.scheduleTemplateInfo.startTime)
+      && _this.props.yaoyueHui.content.scheduleTemplateInfo.preStartTime)
     let timelast = new Date(_this.props.yaoyueHui
-      && _this.props.yaoyueHui.content.scheduleTemplateInfo.endTime)
+      && _this.props.yaoyueHui.content.scheduleTemplateInfo.preEndTime)
     // console.log(time.getFullYear() + '-' + (time.getMonth() + 1) + '-' + time.getDate())
     // console.log(this.state.leixing)
     // console.log(this.state.value1)
@@ -436,8 +490,6 @@ export default class Creat extends PureComponent {
         width: 500,
       }
     };
-
-
     let allRili = this.props.rililist
       && this.props.rililist.content
     // console.log(allRili)
@@ -464,11 +516,11 @@ export default class Creat extends PureComponent {
               </tr>
               <tr>
                 <td className={styles.leftKuang}>主题：</td>
-                <td className={styles.rightKuang}><Input value={_this.state.c_zhuti} ref="cmingsheng" onChange={this.czhutiinput}  /></td>
+                <td className={styles.rightKuang}><Input value={_this.state.c_zhuti} ref="cmingsheng" onChange={this.czhutiinput} /></td>
               </tr>
               <tr>
                 <td className={styles.leftKuang}>英文主题：</td>
-                <td className={styles.rightKuang}><Input value={_this.state.e_zhuti} ref="emingsheng" onChange={this.ezhutiinput}  /></td>
+                <td className={styles.rightKuang}><Input value={_this.state.e_zhuti} ref="emingsheng" onChange={this.ezhutiinput} /></td>
               </tr>
               <tr>
                 <td className={styles.leftKuang1}>必选人员：</td>
@@ -480,11 +532,11 @@ export default class Creat extends PureComponent {
               </tr>
               <tr>
                 <td className={styles.leftKuang1}>时间：</td>
-                <td className={styles.rightKuang}><DatePicker defaultValue={moment(time.getFullYear() + '/' + (time.getMonth() + 1) + '/' + time.getDate(), dateFormat)} onChange={this.dataChange} placeholder="日期"  />
+                <td className={styles.rightKuang}><DatePicker defaultValue={moment(time.getFullYear() + '/' + (time.getMonth() + 1) + '/' + time.getDate(), dateFormat)} onChange={this.dataChange} placeholder="日期" />
                   <span className={styles.jiange}></span>
-                  <TimePicker defaultValue={moment(time.getHours() + ':' + time.getMinutes(), format)} format={format} onChange={this.timeChangefitst}  />
+                  <TimePicker defaultValue={moment(time.getHours() + ':' + time.getMinutes(), format)} format={format} onChange={this.timeChangefitst} />
                   <span className={styles.jiange}></span>
-                  <TimePicker defaultValue={moment(timelast.getHours() + ':' + timelast.getMinutes(), format)} format={format} onChange={this.timeChangelast}  />
+                  <TimePicker defaultValue={moment(timelast.getHours() + ':' + timelast.getMinutes(), format)} format={format} onChange={this.timeChangelast} />
                 </td>
               </tr>
               <tr>
@@ -511,7 +563,7 @@ export default class Creat extends PureComponent {
                     placeholder=""
                     onChange={this.handleChangeplace}
                     style={{ width: 200 }}
-                    
+
                   >
                     {
                       this.props.placelist
@@ -528,7 +580,7 @@ export default class Creat extends PureComponent {
               <tr>
                 <td className={styles.leftKuang1}>备注：</td>
                 <td className={styles.rightKuang}>
-                  <TextArea rows={4} onChange={this.beizhu} value={_this.state.beizhu}  />
+                  <TextArea rows={4} onChange={this.beizhu} value={_this.state.beizhu} />
                 </td>
               </tr>
               {/*<tr>
