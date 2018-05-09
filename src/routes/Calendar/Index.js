@@ -263,8 +263,12 @@ export default class Index extends PureComponent {
             <Tabs activeKey={String(this.state.params.calendarId)} onChange={this.tabChange.bind(this)} style={{ paddingRight: 100 }} >
               {getCalendarInfoMessage && getCalendarInfoMessage.content.map(el => <TabPane tab={<span>{el.name}
                 {
-                  (this.state.tabVal == el.id) && Admin &&
-                  <Icon style={{ marginLeft: 5, display: edit }} onClick={this.editCalendar} type="form" />
+                  (this.state.params.calendarId == el.id) && Admin &&
+                  <Icon style={{ marginLeft: 5, display: "inline-block" }} onClick={this.editCalendar} type="form" />
+                }
+                {
+                  // (this.state.tabVal == el.id) && Admin &&
+                  // <Icon style={{ marginLeft: 5, display: edit }} onClick={this.editCalendar} type="form" />
                 }
               </span>} key={el.id}></TabPane>)}
             </Tabs>
