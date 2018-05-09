@@ -7,7 +7,8 @@ TreeSelect,Modal} from 'antd';
 import styles from './Creat.less';
 import { trans } from '../../utils/i18n';
 import { routerRedux } from 'dva/router';
-
+// let m=[] //[1,3,2]
+//     	let list=[]
 const confirm = Modal.confirm;
 const RadioGroup = Radio.Group;
 const FormItem = Form.Item;
@@ -67,10 +68,24 @@ export default class Creat extends PureComponent {
 	    		&& _this.props.guanliPeople.content.getDepartmentList}) 
 	    })
 	}
-
+    chong(value){
+    	let m=[] //
+    	let list=[]
+    	for(let i=0;i<value.length;i++){
+            if(m.indexOf(value[i].split('-')[1])==-1){
+            	m.push(value[i].split('-')[1])
+                list.push(value[i])
+            }
+    	}
+        // console.log(m)
+        // console.log(list) 
+		return list 
+    }
 	onChangeXiala = (value) => {
-		console.log('onChange ', value, arguments);
-		this.setState({ value });
+		 // console.log(value);
+         console.log( this.chong(value) )
+		 this.setState({ value: this.chong(value)});
+		 //this.setState({ value : value});
     }
     onChangesearch=(value)=>{
     	    console.log(value)

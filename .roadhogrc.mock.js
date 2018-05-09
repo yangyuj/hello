@@ -500,7 +500,7 @@ const proxy = {
           "key": "d1",
           "label": "学生发展研究院",
           "children": [{
-            "value": "dadas-7",
+            "value": "dadas-78",
             "key": "d12",
             "label": "123"
           }, {
@@ -512,17 +512,17 @@ const proxy = {
             "key": "d15",
             "label": "一年级组",
             "children": [{
-              "value": "cdcsdc-72",
-              "key": "d151",
-              "label": "123"
+              "value": "6-1",
+              "key": "2-1",
+              "label": "小明"
             }, {
               "value": "5dsdsds-123",
               "key": "d152",
               "label": "dsdsdss"
             }, {
-              "value": "sdsds-0",
-              "key": "d153",
-              "label": "王帅q"
+              "value": "99-11",
+              "key": "1aa1",
+              "label": "王帅"
             }]
           }]
         },
@@ -563,17 +563,17 @@ const proxy = {
               "key": "4-8-612-4",
               "label": "栗子1"
             },{
-              "value": "8dsd3sdd-828",
-              "key": "4-8-6d122-4",
-              "label": "栗子2"
+              "value": "2-1",
+              "key": "3-1",
+              "label": "小明"
             },{
               "value": "8dsddssd3-838",
               "key": "4-8-6d13-43",
               "label": "栗子3"
             },{
-              "value": "8dsddsdsd-4848",
-              "key": "4-8-6c14-44",
-              "label": "栗子4"
+              "value": "3-11",
+              "key": "11d",
+              "label": "王帅"
             }]
           }]
         }

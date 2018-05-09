@@ -78,7 +78,8 @@ export default class Creat extends PureComponent {
                 for(let i=0;i<riliall.length;i++){
                   if(riliall[i].id==params.calendarId){
                     console.log(riliall[i].name)
-                    //localStorage.setItem("pp",riliall[i].name)
+                    localStorage.setItem("kkkk",riliall[i].id)
+
                       _this.setState({leixing:riliall[i].id})
                      _this.setState({defaultV:riliall[i].name})
                   }
@@ -126,17 +127,30 @@ export default class Creat extends PureComponent {
         e_zhuti: e.target.value
       })
    }
+   chong(value){
+      let m=[] //
+      let list=[]
+      for(let i=0;i<value.length;i++){
+            if(m.indexOf(value[i].split('-')[1])==-1){
+              m.push(value[i].split('-')[1])
+                list.push(value[i])
+            }
+      }
+        // console.log(m)
+        // console.log(list) 
+    return list 
+    }
    onChangeXiala1 = (value) => {
     // attr1
     console.log('onChange ', value, arguments);
     // for(let i=0;i<value.length;i++){
     //   attr1.push(value[i].split('-')[1])
     // }
-    this.setState({ value1:value });
+    this.setState({ value1:this.chong(value) });
     }
     onChangeXiala2 = (value) => {
     console.log('onChange ', value, arguments);
-    this.setState({ value2:value });
+    this.setState({ value2:this.chong(value) });
     }
     dataChange=(date, dateString)=> {
     console.log(date, dateString);
@@ -183,7 +197,8 @@ export default class Creat extends PureComponent {
     });
   }
     addYaoyue=(e)=>{
- 
+    
+                              //alert('新建成功')
       console.log(this.state.leixing)
       console.log(this.state.c_zhuti)
       console.log(this.state.e_zhuti)
@@ -245,7 +260,7 @@ export default class Creat extends PureComponent {
                       && _this.props.yaoyue.status)
                           if(_this.props.yaoyue
                       && _this.props.yaoyue.status==true){
-                          _this.props.dispatch(routerRedux.push('/index'));   
+                          _this.props.dispatch(routerRedux.push('/index'+'/'+_this.state.leixing));   
                               //alert('新建成功')
                           }else{
                                alert(_this.props.yaoyue
@@ -256,7 +271,7 @@ export default class Creat extends PureComponent {
               
     }
     cancel=(e)=>{
-       this.props.dispatch(routerRedux.push('/index'));
+       this.props.dispatch(routerRedux.push('/index'+'/'+localStorage.getItem('kkkk')));
        console.log('取消')
     }
   render() {

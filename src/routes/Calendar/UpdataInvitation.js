@@ -206,13 +206,26 @@ export default class Creat extends PureComponent {
         e_zhuti: e.target.value
       })
    }
+    chong(value){
+      let m=[] //
+      let list=[]
+      for(let i=0;i<value.length;i++){
+            if(m.indexOf(value[i].split('-')[1])==-1){
+              m.push(value[i].split('-')[1])
+                list.push(value[i])
+            }
+      }
+        // console.log(m)
+        // console.log(list) 
+    return list 
+    }
    onChangeXiala1 = (value) => {
     console.log('onChange ', value, arguments);
-    this.setState({ value1:value });
+    this.setState({ value1: this.chong(value) });
     }
     onChangeXiala2 = (value) => {
     console.log('onChange ', value, arguments);
-    this.setState({ value2:value });
+    this.setState({ value2: this.chong(value) });
     }
     dataChange=(date, dateString)=> {
     console.log(date, dateString);
