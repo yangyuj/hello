@@ -483,7 +483,9 @@ const proxy = {
       message: "插入成功！",
       code: 0,
       ifAdmin: false,
-      content: []
+      content: {
+        currentId : 6
+      }
     });
   },
   //查询所有人员

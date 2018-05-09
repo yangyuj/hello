@@ -46,7 +46,6 @@ export default class Index extends PureComponent {
     dateWeek: 0,
     weekDay: 0,
     changeDate: 0,
-    currentDefalut: ''
   }
   componentDidMount() {
     const { dispatch } = this.props;
@@ -255,7 +254,6 @@ export default class Index extends PureComponent {
     const canEdit = checkDetailInfoMessage && checkDetailInfoMessage.bj_code;
     const cuId = params.calId ? params.calId : getCalendarInfoMessage && getCalendarInfoMessage.currentId;
     const currentYear = getTimeInfoMessage && getTimeInfoMessage.year && getTimeInfoMessage.year.current;
-    console.log(String(this.state.params.calendarId));
     const stime = checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.sTime;
     const etime = checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.eTime;
     return (
