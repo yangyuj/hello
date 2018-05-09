@@ -266,10 +266,6 @@ export default class Index extends PureComponent {
                   (this.state.params.calendarId == el.id) && Admin &&
                   <Icon style={{ marginLeft: 5, display: "inline-block" }} onClick={this.editCalendar} type="form" />
                 }
-                {
-                  // (this.state.tabVal == el.id) && Admin &&
-                  // <Icon style={{ marginLeft: 5, display: edit }} onClick={this.editCalendar} type="form" />
-                }
               </span>} key={el.id}></TabPane>)}
             </Tabs>
           </div>
@@ -295,7 +291,8 @@ export default class Index extends PureComponent {
             style={{width: 40, border: "none"}} 
             className={styles.dateStyle}
             placeholder=''
-            value=''/>
+            value=''
+          />
           <Button className={styles.weekChangeBtn} onClick={this.checkWeek.bind(this, 'right')}><Icon type="right" /></Button>
           <span className={styles.tabbleCheck}>
             <Icon className={tableType == 'bars' && styles.cur} onClick={this.checkTable.bind(this, 'bars')} type="bars" />

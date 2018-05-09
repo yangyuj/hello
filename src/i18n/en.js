@@ -185,5 +185,37 @@ export default {
   "global.textTip6": "(Please no more than 180 Chinese characters or 360 English letters)",
   "global.textTip7": "(Please no more than 100 Chinese characters or 200 English letters)",
   "global.textTip8": "(Please no more than 60 Chinese characters or 120 English letters)",
-  "global.logout": "Logout"
+  "global.logout": "Logout",
+
+
+
+
+
+
+  "index.newCalendar": "new calendar",
+  "index.newInvitation": "new invitation",
+  "index.delete": "delete",
+  "index.cancel": "cancel",
+  "index.edit": "edit",
+  "index.mandatory": "mandatory",
+  "index.optional": "optional",
+  "index.objectOfInvitation": "object of invitation",
+  "index.sureDelete": "Are you sure you want to delete this schedule?",
+  "index.alreadyConfirm": "confirmed",
+  "index.confirm": "schedule of confirmation",
+  "index.choose": "choose term",
+
+  "tableCom.date": "date",
+  "tableCom.time": "time",
+  "tableCom.people": "participants",
+  "tableCom.place": "place",
+  "tableCom.remarks": "remarks",
+
+  "component.monday": "Monday",
+  "component.tuesday": "Tuesday",
+  "component.wednesday": "Wednesday",
+  "component.thursday": "Thursday",
+  "component.friday": "Friday",
+  "component.saturday": "Saturday",
+  "component.sunday": "Sunday"
 }
