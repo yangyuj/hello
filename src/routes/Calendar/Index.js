@@ -45,7 +45,8 @@ export default class Index extends PureComponent {
     timeLong: 0,
     dateWeek: 0,
     weekDay: 0,
-    changeDate: 0
+    changeDate: 0,
+    currentDefalut: 0
   }
   componentDidMount() {
     const { dispatch } = this.props;
@@ -64,6 +65,7 @@ export default class Index extends PureComponent {
         this.state.params.weekNumber = getTimeInfoMessage.week.currentWeek || 1;
         this.state.params.yearId = getTimeInfoMessage && getTimeInfoMessage.year && getTimeInfoMessage.year.current;
         this.state.params.calendarId = getCalendarInfoMessage && getCalendarInfoMessage.currentId;
+        // this.state.currentDefalut = String(getCalendarInfoMessage && getCalendarInfoMessage.currentId);
         this.fetchCalendarInfo();
       });
     });
@@ -253,16 +255,15 @@ export default class Index extends PureComponent {
     const edit = this.state.mark ? "inline-block" : "none";
     const Admin = checkListInfo && checkListInfo.ifAdmin;
     const canEdit = checkDetailInfoMessage && checkDetailInfoMessage.bj_code;
-    const current = String(getCalendarInfoMessage && getCalendarInfoMessage.currentId);
     const currentYear = getTimeInfoMessage && getTimeInfoMessage.year && getTimeInfoMessage.year.current;
-    console.log(currentYear);
+    // console.log(this.state.currentDefalut);
     const stime = checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.sTime;
     const etime = checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.eTime;
     return (
       <div className={styles.borderBox}>
         {getCalendarInfoMessage && getCalendarInfoMessage.content && getCalendarInfoMessage.content.length > 0 && (
           <div>
-            <Tabs defaultActiveKey={current} onChange={this.tabChange.bind(this)} style={{ paddingRight: 100 }} >
+            <Tabs defaultActiveKey={this.state.currentDefalut} onChange={this.tabChange.bind(this)} style={{ paddingRight: 100 }} >
               {getCalendarInfoMessage && getCalendarInfoMessage.content.map(el => <TabPane tab={<span>{el.name}
                 {
                   (this.state.tabVal == el.id) && Admin &&
