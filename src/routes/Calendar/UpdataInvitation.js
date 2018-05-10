@@ -459,9 +459,9 @@ export default class Creat extends PureComponent {
     let _this = this
     let tree = this.state.treeData
     let time = new Date(_this.props.yaoyueHui
-      && _this.props.yaoyueHui.content.scheduleTemplateInfo.preStartTime)
+      && _this.props.yaoyueHui.content.preStartTime)
     let timelast = new Date(_this.props.yaoyueHui
-      && _this.props.yaoyueHui.content.scheduleTemplateInfo.preEndTime)
+      && _this.props.yaoyueHui.content.preEndTime)
     // console.log(time.getFullYear() + '-' + (time.getMonth() + 1) + '-' + time.getDate())
     // console.log(this.state.leixing)
     // console.log(this.state.value1)
