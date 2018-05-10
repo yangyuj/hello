@@ -497,28 +497,23 @@ export default class Creat extends PureComponent {
     // console.log(time)
     if(_this.props.yaoyueHui
           && _this.props.yaoyueHui.content.scheduleTemplateInfo.ifRepeat){
-          time=new Date(_this.props.yaoyueHui
-          && _this.props.yaoyueHui.content.preStartTime)
-
-          timelast=new Date(_this.props.yaoyueHui
-          && _this.props.yaoyueHui.content.preEndTime)
+          // time=new Date(_this.props.yaoyueHui
+          // && _this.props.yaoyueHui.content.preStartTime)
+          time= new Date(this.state.data.replace(/-/g, '/') + ' ' + this.state.firstTime)
+          // timelast=new Date(_this.props.yaoyueHui
+          // && _this.props.yaoyueHui.content.preEndTime)
+          timelast= new Date(this.state.data.replace(/-/g, '/') + ' ' + this.state.lastTime)
           console.log(time)
           console.log(timelast)
-          console.log(_this.props.yaoyueHui
-          && _this.props.yaoyueHui.content.preStartTime)
-          console.log(_this.props.yaoyueHui
-          && _this.props.yaoyueHui.content.preEndTime)
     }else{
-           time=new Date(_this.props.yaoyueHui
-          && _this.props.yaoyueHui.content.scheduleTemplateInfo.startTime)
-          timelast=new Date(_this.props.yaoyueHui
-          && _this.props.yaoyueHui.content.scheduleTemplateInfo.endTime)
-          console.log(time)
-          console.log(timelast)
-          console.log(_this.props.yaoyueHui
-          && _this.props.yaoyueHui.content.scheduleTemplateInfo.startTime)
-          console.log(_this.props.yaoyueHui
-          && _this.props.yaoyueHui.content.scheduleTemplateInfo.endTime)
+          //  time=new Date(_this.props.yaoyueHui
+          // && _this.props.yaoyueHui.content.scheduleTemplateInfo.startTime)
+           time= new Date(this.state.data.replace(/-/g, '/') + ' ' + this.state.firstTime)
+          // timelast=new Date(_this.props.yaoyueHui
+          // && _this.props.yaoyueHui.content.scheduleTemplateInfo.endTime)
+           timelast= new Date(this.state.data.replace(/-/g, '/') + ' ' + this.state.lastTime)
+           console.log(time)
+           console.log(timelast)
     }
     console.log(new Date(_this.props.yaoyueHui
       && _this.props.yaoyueHui.content.scheduleTemplateInfo.startTime))
@@ -602,11 +597,11 @@ export default class Creat extends PureComponent {
               </tr>
               <tr>
                 <td className={styles.leftKuang1}>时间：</td>
-                <td className={styles.rightKuang}><DatePicker defaultValue={moment(time.getFullYear() + '/' + (time.getMonth() + 1) + '/' + time.getDate(), dateFormat)} onChange={this.dataChange} placeholder="日期" />
+                <td className={styles.rightKuang}><DatePicker value={moment(time.getFullYear() + '/' + (time.getMonth() + 1) + '/' + time.getDate(), dateFormat)} onChange={this.dataChange} placeholder="日期" />
                   <span className={styles.jiange}></span>
-                  <TimePicker defaultValue={moment(time.getHours() + ':' + time.getMinutes(), format)} format={format} onChange={this.timeChangefitst} />
+                  <TimePicker value={moment(time.getHours() + ':' + time.getMinutes(), format)} format={format} onChange={this.timeChangefitst} />
                   <span className={styles.jiange}></span>
-                  <TimePicker defaultValue={moment(timelast.getHours() + ':' + timelast.getMinutes(), format)} format={format} onChange={this.timeChangelast} />
+                  <TimePicker value={moment(timelast.getHours() + ':' + timelast.getMinutes(), format)} format={format} onChange={this.timeChangelast} />
                 </td>
               </tr>
               <tr>
