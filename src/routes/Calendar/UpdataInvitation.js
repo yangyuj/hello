@@ -117,8 +117,8 @@ export default class Creat extends PureComponent {
       _this.setState({
         leixing: _this.props.yaoyueHui
           && _this.props.yaoyueHui.content.scheduleTemplateInfo.calendarId,
-        startTime: _this.props.yaoyueHui && _this.props.yaoyueHui.content.scheduleTemplateInfo.preStartTime,
-        endTime: _this.props.yaoyueHui && _this.props.yaoyueHui.content.scheduleTemplateInfo.preEndTime,
+        startTime: _this.props.yaoyueHui && _this.props.yaoyueHui.content.preStartTime,
+        endTime: _this.props.yaoyueHui && _this.props.yaoyueHui.content.preEndTime,
         beforeRepeat: _this.props.yaoyueHui && _this.props.yaoyueHui.content.scheduleTemplateInfo.ifRepeat
       })
       _this.setState({

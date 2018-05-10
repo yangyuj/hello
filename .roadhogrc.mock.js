@@ -787,8 +787,6 @@ const proxy = {
         "eName": "hanxu",
         "startTime": 1524466560,
         "endTime": 1524212682,
-        "preStartTime": 1524466560,
-        "preEndTime": 1524212682,
         "ifRepeat": true,
         "address": "教室99",
         "repeatCycle": null,
@@ -857,7 +855,9 @@ const proxy = {
       "cCalendarType": "行事历",
       "eCalendarType": "calendar",
       "personNumbers": 2,
-      "bj_code": 1
+      "bj_code": 1,
+      "preStartTime": 1524466560,
+      "preEndTime": 1524212682
     },
     "ifAdmin": false
   },
