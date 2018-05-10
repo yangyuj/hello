@@ -68,7 +68,9 @@ export default class Creat extends PureComponent {
       startTime: null,
       endTime: null,
       beforeRepeat: null,
-      editOnly: null
+      editOnly: null,
+      time: null,
+      timeLast: null
     };
   }
   componentWillMount() {
@@ -122,7 +124,16 @@ export default class Creat extends PureComponent {
         startTime_buchongfu:_this.props.yaoyueHui && _this.props.yaoyueHui.content.scheduleTemplateInfo.startTime,
         endTime_buchongfu:_this.props.yaoyueHui && _this.props.yaoyueHui.content.scheduleTemplateInfo.endTime,
         beforeRepeat: _this.props.yaoyueHui && _this.props.yaoyueHui.content.scheduleTemplateInfo.ifRepeat
+      },function(){
+        if(_this.state.beforeRepeat){
+          _this.state.time = _this.props.yaoyueHui && _this.props.yaoyueHui.content.preStartTime,
+          _this.state.timeLast = _this.props.yaoyueHui && _this.props.yaoyueHui.content.preEndTime
+        }else{
+          _this.state.time = _this.props.yaoyueHui && _this.props.yaoyueHui.scheduleTemplateInfo && _this.props.yaoyueHui.scheduleTemplateInfo.startTime,
+          _this.state.timeLast = _this.props.yaoyueHui && _this.props.yaoyueHui.scheduleTemplateInfo && _this.props.yaoyueHui.content.scheduleTemplateInfo.endTime
+        }
       })
+      
       _this.setState({
         c_zhuti: _this.props.yaoyueHui
           && _this.props.yaoyueHui.content.scheduleTemplateInfo.cName
@@ -333,7 +344,7 @@ export default class Creat extends PureComponent {
         }).then(function () {
           if (_this.props.xiugaiyaoyue
             && _this.props.xiugaiyaoyue.status == true) {
-            _this.props.dispatch(routerRedux.push('/index'));
+            _this.props.dispatch(routerRedux.push('/index' + '/' + _this.state.leixing));
           } else {
             alert(_this.props.xiugaiyaoyue
               && _this.props.xiugaiyaoyue.message)
@@ -365,7 +376,7 @@ export default class Creat extends PureComponent {
         }).then(function () {
           if (_this.props.xiugaiyaoyue
             && _this.props.xiugaiyaoyue.status == true) {
-            _this.props.dispatch(routerRedux.push('/index'));
+            _this.props.dispatch(routerRedux.push('/index' + '/' + _this.state.leixing));
           } else {
             alert(_this.props.xiugaiyaoyue
               && _this.props.xiugaiyaoyue.message)
@@ -426,7 +437,7 @@ export default class Creat extends PureComponent {
         }).then(function () {
           if (_this.props.xiugaiyaoyue
             && _this.props.xiugaiyaoyue.status == true) {
-            _this.props.dispatch(routerRedux.push('/index'));
+            _this.props.dispatch(routerRedux.push('/index' + '/' + _this.state.leixing));
           } else {
             alert(_this.props.xiugaiyaoyue
               && _this.props.xiugaiyaoyue.message)
@@ -471,7 +482,7 @@ export default class Creat extends PureComponent {
   }
   //取消按钮
   cancel = (e) => {
-    this.props.dispatch(routerRedux.push('/index'));
+    this.props.dispatch(routerRedux.push('/index' + '/' + this.state.leixing));
   }
   render() {
     let repeatType = this.state.chongfu
@@ -502,6 +513,10 @@ export default class Creat extends PureComponent {
     //   && _this.props.yaoyueHui.content.preStartTime)
     // let timelast = new Date(_this.props.yaoyueHui
     //   && _this.props.yaoyueHui.content.preEndTime)
+
+
+    // let time = new Date(_this.state.time)
+    // let timelast = new Date(_this.state.timeLast)
 
     // console.log(time.getFullYear() + '-' + (time.getMonth() + 1) + '-' + time.getDate())
     // console.log(this.state.leixing)
