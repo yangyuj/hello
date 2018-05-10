@@ -495,25 +495,17 @@ export default class Creat extends PureComponent {
     // let timelast = new Date(_this.props.yaoyueHui
     //   && _this.props.yaoyueHui.content.preEndTime)
     // console.log(time)
-    if(_this.props.yaoyueHui
-          && _this.props.yaoyueHui.content.scheduleTemplateInfo.ifRepeat){
+    if(this.state.data){
           // time=new Date(_this.props.yaoyueHui
           // && _this.props.yaoyueHui.content.preStartTime)
-          time= new Date(this.state.data.replace(/-/g, '/') + ' ' + this.state.firstTime)
+          console.log(this.state.data)
+          time= new Date(this.state.data.replace(/-/g, '/') + ' ' + _this.state.firstTime)
           // timelast=new Date(_this.props.yaoyueHui
           // && _this.props.yaoyueHui.content.preEndTime)
-          timelast= new Date(this.state.data.replace(/-/g, '/') + ' ' + this.state.lastTime)
+          timelast= new Date(this.state.data.replace(/-/g, '/') + ' ' + _this.state.lastTime)
           console.log(time)
           console.log(timelast)
-    }else{
-          //  time=new Date(_this.props.yaoyueHui
-          // && _this.props.yaoyueHui.content.scheduleTemplateInfo.startTime)
-           time= new Date(this.state.data.replace(/-/g, '/') + ' ' + this.state.firstTime)
-          // timelast=new Date(_this.props.yaoyueHui
-          // && _this.props.yaoyueHui.content.scheduleTemplateInfo.endTime)
-           timelast= new Date(this.state.data.replace(/-/g, '/') + ' ' + this.state.lastTime)
-           console.log(time)
-           console.log(timelast)
+
     }
     console.log(new Date(_this.props.yaoyueHui
       && _this.props.yaoyueHui.content.scheduleTemplateInfo.startTime))
@@ -562,7 +554,7 @@ export default class Creat extends PureComponent {
       <div className={styles.content}>
         <div style={{ textAlign: "left" }} className={styles.addyaoyue}>编辑邀约</div>
         {_this.props.yaoyueHui &&
-          _this.props.yaoyueHui.content &&
+          _this.props.yaoyueHui.content && _this.state.data &&
           (<table className={styles.table}>
             <tbody>
               <tr>
