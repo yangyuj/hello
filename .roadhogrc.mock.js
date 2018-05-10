@@ -860,9 +860,7 @@ const proxy = {
       "preEndTime":1525924800000,
       "preStartTime":1525914300000,
       "personNumbers": 2,
-      "bj_code": 1,
-      "preStartTime": 1524466560,
-      "preEndTime": 1524212682
+      "bj_code": 1
     },
     "ifAdmin": false
   },
