@@ -488,7 +488,8 @@ export default class Creat extends PureComponent {
     let repeatType = this.state.chongfu
     let _this = this
     let tree = this.state.treeData
-    let time,timelast
+    let time
+    let timelast
     // let time = new Date(_this.props.yaoyueHui
     //   && _this.props.yaoyueHui.content.preStartTime)
     // let timelast = new Date(_this.props.yaoyueHui
