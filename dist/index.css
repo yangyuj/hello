@@ -15129,6 +15129,9 @@ textarea.ant-time-picker-input {
   padding: 6px;
   display: inline-block;
   font-size: 12px;
+  color: red;
+  height: 75px;
+  overflow: hidden;
 }
 .borderBox___2Xgc- .rendBox___2f3Rp {
   width: 100%;
@@ -15160,8 +15163,8 @@ textarea.ant-time-picker-input {
 .borderBox___2Xgc- > .allDayRow___1CKu_ .timeBox___uUagj {
   height: 60px;
 }
-.borderBox___2Xgc- > .allDayRow___1CKu_ .timeLineBox___mm7_M .positionBox___279XK,
-.borderBox___2Xgc- > .allDayRow___1CKu_ .timeBox___uUagj .positionBox___279XK {
+.borderBox___2Xgc- > .allDayRow___1CKu_ .timeLineBox___mm7_M .poitionBox___Q5gji,
+.borderBox___2Xgc- > .allDayRow___1CKu_ .timeBox___uUagj .poitionBox___Q5gji {
   top: 50%;
   margin-top: -10px;
 }
