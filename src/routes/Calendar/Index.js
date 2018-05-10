@@ -32,7 +32,7 @@ export default class Index extends PureComponent {
       weekNumber: 1,
       type: 0
     },
-    tableType: 'bars',
+    tableType: 'calendar',
     visible: false,
     already: 0,
     schId: 0,
@@ -295,9 +295,9 @@ export default class Index extends PureComponent {
           />
           <Button className={styles.weekChangeBtn} onClick={this.checkWeek.bind(this, 'right')}><Icon type="right" /></Button>
           <span className={styles.tabbleCheck}>
-            <Icon className={tableType == 'bars' && styles.cur} onClick={this.checkTable.bind(this, 'bars')} type="bars" />
-            <span>|</span>
             <Icon className={tableType == 'calendar' && styles.cur} onClick={this.checkTable.bind(this, 'calendar')} type="calendar" />
+            <span>|</span>
+            <Icon className={tableType == 'bars' && styles.cur} onClick={this.checkTable.bind(this, 'bars')} type="bars" />
           </span>
           {
             Admin &&
@@ -314,14 +314,14 @@ export default class Index extends PureComponent {
           <Button type="primary" className={styles.newInvitation} onClick={this.newInvitation}>新建邀约</Button>
         </div>
         <div className={styles.bodyBox}>
-          {tableType == 'bars'
-            && <TableView
-              checkListInfo={checkListInfo} />}
           {tableType == 'calendar'
             && <CalendarCalendarTable
               calendarClick={this.calendarClick.bind(this)}
               dataSource={checkListInfo}
               info={checkDetailInfoMessage} />}
+          {tableType == 'bars'
+            && <TableView
+              checkListInfo={checkListInfo} />}
         </div>
         <Button className={styles.newCalendar} onClick={this.newCalendar}>新建日历</Button>
         <span className={styles.spanSolid}></span>
