@@ -497,6 +497,12 @@ export default class Creat extends PureComponent {
     }
     console.log(new Date(_this.props.yaoyueHui
       && _this.props.yaoyueHui.content.scheduleTemplateInfo.startTime))
+
+    // let time = new Date(_this.props.yaoyueHui
+    //   && _this.props.yaoyueHui.content.preStartTime)
+    // let timelast = new Date(_this.props.yaoyueHui
+    //   && _this.props.yaoyueHui.content.preEndTime)
+
     // console.log(time.getFullYear() + '-' + (time.getMonth() + 1) + '-' + time.getDate())
     // console.log(this.state.leixing)
     // console.log(this.state.value1)

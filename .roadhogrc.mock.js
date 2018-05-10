@@ -786,9 +786,13 @@ const proxy = {
         "cName": "函询",
         "eName": "hanxu",
         "startTime": 1524466560,
+<<<<<<< HEAD
         "endTime": 1524212682,//不重复的时候用这俩
         "preStartTime": 1524466560,
         "preEndTime": 1524212682,//重复的用这俩
+=======
+        "endTime": 1524212682,
+>>>>>>> 0f54df82234f3498faeeba84037b35b26e146f13
         "ifRepeat": true,
         "address": "教室99",
         "repeatCycle": null,
@@ -860,7 +864,9 @@ const proxy = {
       "preEndTime":1525924800000,
       "preStartTime":1525914300000,
       "personNumbers": 2,
-      "bj_code": 1
+      "bj_code": 1,
+      "preStartTime": 1524466560,
+      "preEndTime": 1524212682
     },
     "ifAdmin": false
   },
