@@ -59,7 +59,7 @@ export default class Index extends PureComponent {
           completeTime: 0
         }
       }).then(() => {
-        const { getTimeInfoMessage, getCalendarInfoMessage, match: {params} } = this.props;
+        const { getTimeInfoMessage, getCalendarInfoMessage, match: { params } } = this.props;
         this.state.params.weekNumber = getTimeInfoMessage.week.currentWeek || 1;
         this.state.params.yearId = getTimeInfoMessage && getTimeInfoMessage.year && getTimeInfoMessage.year.current;
         this.state.params.calendarId = params.calId ? params.calId : getCalendarInfoMessage && getCalendarInfoMessage.currentId;
@@ -193,10 +193,10 @@ export default class Index extends PureComponent {
     let st = obj && obj.start;
     let et = obj && obj.end;
     let stc = st.split(':'),
-        etc = et.split(':');
+      etc = et.split(':');
     let long = ((etc[0] - stc[0]) < 1 ? '' : (etc[0] - stc[0]) + '小时') + (parseInt(etc[1] - stc[1]) == 0 ? '' : (parseInt(etc[1] - stc[1]) + '分钟'));
     let timeS = st.split(':').join(""),
-        timeE = et.split(':').join("");
+      timeE = et.split(':').join("");
     let timeStart = (timeS < 1200) ? ('上午' + st) : ('下午' + st);
     let timeEnd = (timeE < 1200) ? ('上午' + et) : ('下午' + et);
     this.state.dateWeek = weekDate;
@@ -235,9 +235,9 @@ export default class Index extends PureComponent {
     dispatch({
       type: 'Index/timeInfo',
       payload: {
-        completeTime : this.state.changeDate
+        completeTime: this.state.changeDate
       }
-    }).then(()=>{
+    }).then(() => {
       const { getTimeInfoMessage } = this.props;
       this.state.params.yearId = getTimeInfoMessage && getTimeInfoMessage.year && getTimeInfoMessage.year.current;
       this.state.params.weekNumber = (getTimeInfoMessage && getTimeInfoMessage.week && getTimeInfoMessage.week.currentWeek) || 1;
@@ -246,7 +246,7 @@ export default class Index extends PureComponent {
   }
 
   render() {
-    const { getCalendarInfoMessage, getTimeInfoMessage, checkDeleteInfoMessage, checkDetailInfoMessage, checkListInfo, checkConfirmInfoMessage, currentUser, match: {params} } = this.props;
+    const { getCalendarInfoMessage, getTimeInfoMessage, checkDeleteInfoMessage, checkDetailInfoMessage, checkListInfo, checkConfirmInfoMessage, currentUser, match: { params } } = this.props;
     const { tableType } = this.state;
     const identifyStatus = currentUser && currentUser.$body && currentUser.$body.content && currentUser.$body.content.identify;
     const edit = this.state.mark ? "inline-block" : "none";
@@ -286,9 +286,9 @@ export default class Index extends PureComponent {
           {getTimeInfoMessage
             && getTimeInfoMessage.week
             && <span className={styles.plr_10}>{this.renderWeek(getTimeInfoMessage.week.currentWeek)}</span>}
-          <DatePicker 
-            onChange={this.sendDate} 
-            style={{width: 40, border: "none"}} 
+          <DatePicker
+            onChange={this.sendDate}
+            style={{ width: 40, border: "none" }}
             className={styles.dateStyle}
             placeholder=''
             value=''
@@ -331,7 +331,7 @@ export default class Index extends PureComponent {
           visible={this.state.visible}
           onCancel={this.handleOutCancel}
           footer={[
-            
+
             canEdit === 1 &&
             <p style={{ float: "left" }} onClick={this.showModal} className={styles.deleteSch}>删除</p>,
             <Button onClick={this.handleOutCancel}>取消</Button>,
