@@ -786,9 +786,9 @@ const proxy = {
         "cName": "函询",
         "eName": "hanxu",
         "startTime": 1524466560,
-        "endTime": 1524212682,
+        "endTime": 1524212682,//不重复的时候用这俩
         "preStartTime": 1524466560,
-        "preEndTime": 1524212682,
+        "preEndTime": 1524212682,//重复的用这俩
         "ifRepeat": true,
         "address": "教室99",
         "repeatCycle": null,
@@ -799,6 +799,7 @@ const proxy = {
         "createTime": null,
         "modifyTime": null,
         "deleted": null,
+        "repeatMark":1,
         "sTime": "2018-04-23 14:56",
         "eTime": "2018-04-20 16:24",
         "weekDays": "1"
@@ -856,6 +857,8 @@ const proxy = {
       "kexuan": ["huhuhuhu", "llsdsl"],
       "cCalendarType": "行事历",
       "eCalendarType": "calendar",
+      "preEndTime":1525924800000,
+      "preStartTime":1525914300000,
       "personNumbers": 2,
       "bj_code": 1
     },

@@ -117,8 +117,10 @@ export default class Creat extends PureComponent {
       _this.setState({
         leixing: _this.props.yaoyueHui
           && _this.props.yaoyueHui.content.scheduleTemplateInfo.calendarId,
-        startTime: _this.props.yaoyueHui && _this.props.yaoyueHui.content.scheduleTemplateInfo.preStartTime,
-        endTime: _this.props.yaoyueHui && _this.props.yaoyueHui.content.scheduleTemplateInfo.preEndTime,
+        startTime: _this.props.yaoyueHui && _this.props.yaoyueHui.content.preStartTime,
+        endTime: _this.props.yaoyueHui && _this.props.yaoyueHui.content.preEndTime,
+        startTime_buchongfu:_this.props.yaoyueHui && _this.props.yaoyueHui.content.scheduleTemplateInfo.startTime,
+        endTime_buchongfu:_this.props.yaoyueHui && _this.props.yaoyueHui.content.scheduleTemplateInfo.endTime,
         beforeRepeat: _this.props.yaoyueHui && _this.props.yaoyueHui.content.scheduleTemplateInfo.ifRepeat
       })
       _this.setState({
@@ -143,18 +145,35 @@ export default class Creat extends PureComponent {
       }
       _this.setState({ value1: bixuan })
       _this.setState({ value2: kexuan })
+       
+       if(_this.props.yaoyueHui && 
+        _this.props.yaoyueHui.content.scheduleTemplateInfo.ifRepeat){
+           let timechuo_first = new Date(_this.props.yaoyueHui
+          && _this.props.yaoyueHui.content.preStartTime)
+         let timechuo_end = new Date(_this.props.yaoyueHui
+          && _this.props.yaoyueHui.content.preEndTime)
+           _this.setState({ data: timechuo_first.getFullYear() + '-' + (timechuo_first.getMonth() + 1) + '-' + timechuo_first.getDate() })
+            _this.setState({ firstTime: timechuo_first.getHours() + ':' + timechuo_first.getMinutes() })
+            _this.setState({ lastTime: timechuo_end.getHours() + ':' + timechuo_end.getMinutes() })
 
-      let timechuo_first = new Date(_this.props.yaoyueHui
-        && _this.props.yaoyueHui.content.scheduleTemplateInfo.startTime)
-      let timechuo_end = new Date(_this.props.yaoyueHui
-        && _this.props.yaoyueHui.content.scheduleTemplateInfo.endTime)
+       }else{
+          let timechuo_first = new Date(_this.props.yaoyueHui
+          && _this.props.yaoyueHui.content.scheduleTemplateInfo.startTime)
+         let timechuo_end = new Date(_this.props.yaoyueHui
+          && _this.props.yaoyueHui.content.scheduleTemplateInfo.endTime)
+          _this.setState({ data: timechuo_first.getFullYear() + '-' + (timechuo_first.getMonth() + 1) + '-' + timechuo_first.getDate() })
+          _this.setState({ firstTime: timechuo_first.getHours() + ':' + timechuo_first.getMinutes() })
+          _this.setState({ lastTime: timechuo_end.getHours() + ':' + timechuo_end.getMinutes() })
+
+       }
+      
 
       // console.log(timechuo_first.getFullYear() + '-' + (timechuo_first.getMonth() + 1) + '-' + timechuo_first.getDate())
       // console.log(timechuo_first.getHours() + ':' + timechuo_first.getMinutes())
       // console.log(timechuo_end.getHours() + ':' + timechuo_end.getMinutes())
-      _this.setState({ data: timechuo_first.getFullYear() + '-' + (timechuo_first.getMonth() + 1) + '-' + timechuo_first.getDate() })
-      _this.setState({ firstTime: timechuo_first.getHours() + ':' + timechuo_first.getMinutes() })
-      _this.setState({ lastTime: timechuo_end.getHours() + ':' + timechuo_end.getMinutes() })
+      // _this.setState({ data: timechuo_first.getFullYear() + '-' + (timechuo_first.getMonth() + 1) + '-' + timechuo_first.getDate() })
+      // _this.setState({ firstTime: timechuo_first.getHours() + ':' + timechuo_first.getMinutes() })
+      // _this.setState({ lastTime: timechuo_end.getHours() + ':' + timechuo_end.getMinutes() })
 
       _this.setState({
         chongfu: _this.props.yaoyueHui
@@ -387,8 +406,8 @@ export default class Creat extends PureComponent {
         dispatch({
           type: 'Calendar/xiugaiyaoyue',
           payload: {
-            preStartTime: _this.state.startTime,
-            preEndTime: _this.state.endTime,
+            preStartTime: _this.state.startTime_buchongfu,
+            preEndTime:_this.state.endTime_buchongfu,
             id: parseInt(params.scheduleId),//邀约id
             calendarId: _this.state.leixing,//日历ID
             cName: _this.state.c_zhuti,
@@ -458,10 +477,26 @@ export default class Creat extends PureComponent {
     let repeatType = this.state.chongfu
     let _this = this
     let tree = this.state.treeData
-    let time = new Date(_this.props.yaoyueHui
-      && _this.props.yaoyueHui.content.scheduleTemplateInfo.preStartTime)
-    let timelast = new Date(_this.props.yaoyueHui
-      && _this.props.yaoyueHui.content.scheduleTemplateInfo.preEndTime)
+    let time,timelast
+    // let time = new Date(_this.props.yaoyueHui
+    //   && _this.props.yaoyueHui.content.preStartTime)
+    // let timelast = new Date(_this.props.yaoyueHui
+    //   && _this.props.yaoyueHui.content.preEndTime)
+    // console.log(time)
+    if(_this.props.yaoyueHui
+          && _this.props.yaoyueHui.content.scheduleTemplateInfo.ifRepeat){
+          time=new Date(_this.props.yaoyueHui
+          && _this.props.yaoyueHui.content.preStartTime)
+          timelast=new Date(_this.props.yaoyueHui
+          && _this.props.yaoyueHui.content.preEndTime)
+    }else{
+           time=new Date(_this.props.yaoyueHui
+          && _this.props.yaoyueHui.content.scheduleTemplateInfo.startTime)
+          timelast=new Date(_this.props.yaoyueHui
+          && _this.props.yaoyueHui.content.scheduleTemplateInfo.preEndTime)
+    }
+    console.log(new Date(_this.props.yaoyueHui
+      && _this.props.yaoyueHui.content.scheduleTemplateInfo.startTime))
     // console.log(time.getFullYear() + '-' + (time.getMonth() + 1) + '-' + time.getDate())
     // console.log(this.state.leixing)
     // console.log(this.state.value1)
