@@ -504,8 +504,8 @@ export default class Creat extends PureComponent {
           && _this.props.yaoyueHui.content.preEndTime)
           console.log(time)
           console.log(timelast)
-          console.log(new Date(_this.props.yaoyueHui
-          && _this.props.yaoyueHui.content.preEndTime))
+          console.log(_this.props.yaoyueHui
+          && _this.props.yaoyueHui.content.preEndTime)
     }else{
            time=new Date(_this.props.yaoyueHui
           && _this.props.yaoyueHui.content.scheduleTemplateInfo.startTime)
@@ -513,8 +513,8 @@ export default class Creat extends PureComponent {
           && _this.props.yaoyueHui.content.scheduleTemplateInfo.preEndTime)
           console.log(time)
           console.log(timelast)
-          console.log(new Date(_this.props.yaoyueHui
-          && _this.props.yaoyueHui.content.scheduleTemplateInfo.preEndTime))
+          console.log(_this.props.yaoyueHui
+          && _this.props.yaoyueHui.content.scheduleTemplateInfo.preEndTime)
     }
     console.log(new Date(_this.props.yaoyueHui
       && _this.props.yaoyueHui.content.scheduleTemplateInfo.startTime))
