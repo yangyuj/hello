@@ -310,7 +310,7 @@ export default class Index extends PureComponent {
   //表格不重复删除时候的确定，要发送请求
   Ok = (e) => {
     this.setState({
-      daleteVisible: false,
+      daleteTable: false,
       visible: false
     });
     this.props.dispatch({
@@ -329,7 +329,7 @@ export default class Index extends PureComponent {
   表格重复仅删除本次
   OkOnly = (e) => {
     this.setState({
-      daleteVisible: false,
+      daleteTable: false,
       visible: false
     });
     this.props.dispatch({
@@ -349,7 +349,7 @@ export default class Index extends PureComponent {
   表格重复删除以后全部
   OkAll = (e) => {
     this.setState({
-      daleteVisible: false,
+      daleteTable: false,
       visible: false
     });
     this.props.dispatch({
