@@ -32,11 +32,6 @@ export default class Index extends PureComponent {
       weekNumber: 1,
       type: 0
     },
-    params1: {
-      calendarId: '',
-      semesterId: '',
-      confirmWeek: 1,
-    },
     tableType: 'calendar',
     visible: false,
     already: 0,
@@ -69,14 +64,10 @@ export default class Index extends PureComponent {
       }).then(() => {
         const { getTimeInfoMessage, getCalendarInfoMessage, match: { params } } = this.props;
         this.state.params.weekNumber = getTimeInfoMessage.week.currentWeek || 1;
-        this.state.params1.confirmWeek = getTimeInfoMessage.week.currentWeek || 1;
         this.state.params.yearId = getTimeInfoMessage && getTimeInfoMessage.year && getTimeInfoMessage.year.current;
-        this.state.params1.semesterId = getTimeInfoMessage && getTimeInfoMessage.year && getTimeInfoMessage.year.current;
         this.state.params.calendarId = params.calId ? params.calId : getCalendarInfoMessage && getCalendarInfoMessage.currentId;
-        this.state.params1.calendarId = params.calId ? params.calId : getCalendarInfoMessage && getCalendarInfoMessage.currentId;
         // this.state.cWeek = getTimeInfoMessage && getTimeInfoMessage.week && getTimeInfoMessage.week.currentWeek
         this.fetchCalendarInfo();
-        this.ConfirmInfo();
       });
     });
   }
@@ -89,22 +80,12 @@ export default class Index extends PureComponent {
       payload: this.state.params
     })
   }
-  //获取确认日程的状态
-  ConfirmInfo() {
-    const { dispatch } = this.props;
-    return dispatch({
-      type: 'Index/confirmInfo',
-      payload: this.state.params1
-    })
-  }
 
   //日历分类选择
   tabChange(val) {
     this.state.params.calendarId = val;
-    this.state.params1.calendarId = val;
     this.state.tabVal = val;
     this.fetchCalendarInfo();
-    this.ConfirmInfo();
     //改变修改日历的入口状态
     this.setState({
       mark: true
@@ -115,9 +96,7 @@ export default class Index extends PureComponent {
   yearsChange(val) {
     // console.log(val);
     this.state.params.yearId = val;
-    this.state.params1.semesterId = val;
     this.fetchCalendarInfo();
-    this.ConfirmInfo();
     const { getTimeInfoMessage } = this.props;
     getTimeInfoMessage && getTimeInfoMessage.year.list.map((value, index) => {
       if (value.id === val) {
@@ -142,9 +121,7 @@ export default class Index extends PureComponent {
     })
     // console.log(week);
     this.state.params.weekNumber = week;
-    this.state.params1.confirmWeek = week;
     this.fetchCalendarInfo();
-    this.ConfirmInfo();
   }
   //切换日历显示类型
   checkTable(type) {
@@ -158,8 +135,8 @@ export default class Index extends PureComponent {
       type: 'Index/confirmInfo',
       payload: {
         calendarId: this.state.params.calendarId,
-        confirmWeek: this.state.params1.weekNumber,//确认周
-        semesterId: this.state.params1.yearId //学期Id
+        confirmWeek: this.state.params.weekNumber,//确认周
+        semesterId: this.state.params.yearId //学期Id
       }
     });
 
@@ -184,7 +161,8 @@ export default class Index extends PureComponent {
       daleteVisible: false,
       visible: false
     });
-    console.log(this.state.schId);
+    alert('999')
+    console.log("klll");
     this.props.dispatch({
       type: 'Index/deleteInfo',
       payload: {
@@ -195,10 +173,8 @@ export default class Index extends PureComponent {
       }
     }).then(() => {
       this.fetchCalendarInfo();
-      this.ConfirmInfo();
     });
     this.fetchCalendarInfo();
-    this.ConfirmInfo();
   }
   //重复仅删除本次
   handleOkOnly = (e) => {
@@ -217,10 +193,8 @@ export default class Index extends PureComponent {
 
     }).then(() => {
       this.fetchCalendarInfo();
-      this.ConfirmInfo();
     });
     this.fetchCalendarInfo();
-    this.ConfirmInfo();
   }
   //重复删除以后全部
   handleOkAll = (e) => {
@@ -239,10 +213,8 @@ export default class Index extends PureComponent {
 
     }).then(() => {
       this.fetchCalendarInfo();
-      this.ConfirmInfo();
     });
     this.fetchCalendarInfo();
-    this.ConfirmInfo();
   }
   //编辑确定跳转
   handleOutOk = (e) => {
@@ -322,7 +294,6 @@ export default class Index extends PureComponent {
       this.state.params.yearId = getTimeInfoMessage && getTimeInfoMessage.year && getTimeInfoMessage.year.current;
       this.state.params.weekNumber = (getTimeInfoMessage && getTimeInfoMessage.week && getTimeInfoMessage.week.currentWeek) || 1;
       this.fetchCalendarInfo();
-      this.ConfirmInfo();
     });
   }
   //表格视图的删除
@@ -335,70 +306,64 @@ export default class Index extends PureComponent {
     });
   }
   //表格不重复删除时候的确定，要发送请求
-  Ok = (e) => {
-    this.setState({
-      daleteVisible: false,
-      visible: false
-    });
-    this.props.dispatch({
-      type: 'Index/deleteInfo',
-      payload: {
-        scheduleTemplateId: this.state.tableSchId,
-        repateStatus: 0,
-        repTime: this.state.reTime,
-        yearId: this.state.params.yearId
-      }
-    }).then(() => {
-      this.fetchCalendarInfo();
-      this.ConfirmInfo();
-    });
-    this.fetchCalendarInfo();
-    this.ConfirmInfo();
-  }
+  // Ok = (e) => {
+  //   this.setState({
+  //     daleteVisible: false,
+  //     visible: false
+  //   });
+  //   this.props.dispatch({
+  //     type: 'Index/deleteInfo',
+  //     payload: {
+  //       scheduleTemplateId: this.state.tableSchId,
+  //       repateStatus: 0,
+  //       repTime: this.state.reTime,
+  //       yearId: this.state.params.yearId
+  //     }
+  //   }).then(() => {
+  //     this.fetchCalendarInfo();
+  //   });
+  //   this.fetchCalendarInfo();
+  // }
   //表格重复仅删除本次
-  OkOnly = (e) => {
-    this.setState({
-      daleteVisible: false,
-      visible: false
-    });
-    this.props.dispatch({
-      type: 'Index/deleteInfo',
-      payload: {
-        scheduleTemplateId: this.state.tableSchId,
-        repateStatus: 1,
-        repTime: this.state.reTime,
-        yearId: this.state.params.yearId
-      }
+  // OkOnly = (e) => {
+  //   this.setState({
+  //     daleteVisible: false,
+  //     visible: false
+  //   });
+  //   this.props.dispatch({
+  //     type: 'Index/deleteInfo',
+  //     payload: {
+  //       scheduleTemplateId: this.state.tableSchId,
+  //       repateStatus: 1,
+  //       repTime: this.state.reTime,
+  //       yearId: this.state.params.yearId
+  //     }
 
-    }).then(() => {
-      this.fetchCalendarInfo();
-      this.ConfirmInfo();
-    });
-    this.fetchCalendarInfo();
-    this.ConfirmInfo();
-  }
+  //   }).then(() => {
+  //     this.fetchCalendarInfo();
+  //   });
+  //   this.fetchCalendarInfo();
+  // }
   //表格重复删除以后全部
-  OkAll = (e) => {
-    this.setState({
-      daleteVisible: false,
-      visible: false
-    });
-    this.props.dispatch({
-      type: 'Index/deleteInfo',
-      payload: {
-        scheduleTemplateId: this.state.tableSchId,
-        repateStatus: 2,
-        repTime: this.state.reTime,
-        yearId: this.state.params.yearId
-      }
+  // OkAll = (e) => {
+  //   this.setState({
+  //     daleteVisible: false,
+  //     visible: false
+  //   });
+  //   this.props.dispatch({
+  //     type: 'Index/deleteInfo',
+  //     payload: {
+  //       scheduleTemplateId: this.state.tableSchId,
+  //       repateStatus: 2,
+  //       repTime: this.state.reTime,
+  //       yearId: this.state.params.yearId
+  //     }
 
-    }).then(() => {
-      this.fetchCalendarInfo();
-      this.ConfirmInfo();
-    });
-    this.fetchCalendarInfo();
-    this.ConfirmInfo();
-  }
+  //   }).then(() => {
+  //     this.fetchCalendarInfo();
+  //   });
+  //   this.fetchCalendarInfo();
+  // }
   //表格视图的编辑
   editClick(record) {
     this.props.dispatch(routerRedux.push('/UpdataInvitation' + '/' + record.scheduleId + '/' + this.state.params.yearId + '/' + record.date + '/' + this.state.params.weekNumber));
@@ -552,8 +517,8 @@ export default class Index extends PureComponent {
           ifRe ?
             <Modal
               visible={this.state.daleteVisible}
-              onOk={this.handleOk}
-              onCancel={this.handleCancel}
+              // onOk={this.handleOk}
+              // onCancel={this.handleCancel}
               style={{ top: 200 }}
               footer={[
                 <Button onClick={this.handleCancel}>取消</Button>,
@@ -564,8 +529,8 @@ export default class Index extends PureComponent {
             </Modal> :
             <Modal
               visible={this.state.daleteVisible}
-              onOk={this.handleOk}
-              onCancel={this.handleCancel}
+              // onOk={this.handleOk}
+              // onCancel={this.handleCancel}
               style={{ top: 200 }}
               footer={[
                 <Button onClick={this.handleCancel}>取消</Button>,
