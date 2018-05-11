@@ -496,12 +496,11 @@ export default class Creat extends PureComponent {
       _this.state.c_zhuti == null ||
       _this.state.e_zhuti == null ||
       _this.state.value1 == null ||
-      _this.state.value2 == null ||
       _this.state.firstTime == null ||
       _this.state.lastTime == null ||
       _this.state.chongfu == null ||
-      _this.state.place == null ||
-      _this.state.beizhu == null
+      _this.state.place == null 
+     
     ) {
       alert('请把信息填写完整');
     } else {
@@ -577,6 +576,7 @@ export default class Creat extends PureComponent {
   }
   //取消按钮
   cancel = (e) => {
+    const { match: { params } } = this.props;
     this.props.dispatch(routerRedux.push('/index' + '/' + this.state.leixing + '/' + params.currentWeek));
   }
   render() {
