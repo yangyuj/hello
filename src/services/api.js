@@ -88,7 +88,7 @@ export async function checkDetailInfo(params) {
 //删除日程
 export async function checkDeleteInfo(params) {
   // console.log(params)
-  return request(`/api/deleteSchedule?scheduleTemplateId=${params}`);
+  return request(`/api/deleteSchedule?scheduleTemplateId=${params.scheduleTemplateId}&repateStatus=${params.repateStatus}&repTime=${params.repTime}&yearId=${params.yearId}`);
 }
 //确认日程
 export async function checkConfirmInfo(params) {

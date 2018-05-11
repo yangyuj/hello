@@ -24,7 +24,7 @@ class TableView extends PureComponent {
         title: '日期',
         dataIndex: 'week',
         key: 'week',
-        width: '15%',
+        width: '10%',
         className: styles.bgCol,
         render: (text, row, index) => {
           return {
@@ -34,15 +34,15 @@ class TableView extends PureComponent {
             }
           };
         }
-       }, {
+      }, {
         title: '时间',
         dataIndex: 'scheduleTime',
-        width: '15%',
+        width: '10%',
         key: 'scheduleTime'
       }, {
         title: '主题',
         dataIndex: 'theme',
-        width: '20%',
+        width: '15%',
         key: 'theme'
       }, {
         title: '参与人员',
@@ -59,12 +59,28 @@ class TableView extends PureComponent {
         dataIndex: 'remark',
         width: '20%',
         key: 'remark'
+      }, {
+        title: '操作',
+        width: '15%',
+        key: 'action',
+        render: (text, record) => (
+          <span>
+            <a href="javascript:;" onClick={this.delete.bind(this, record)}>删除</a>
+            <a href="javascript:;" onClick={this.edit.bind(this, record)} style={{ marginLeft: 20 }}>编辑</a>
+          </span>
+        ),
       }
     ];
   }
-
+  delete(record) {
+    // console.log(this.props);
+    this.props.deleteClick && this.props.deleteClick.call(this, record)
+  }
+  edit(record) {
+    this.props.editClick && this.props.editClick.call(this, record)
+  }
   calculationWeekDate(time) {
-    let date = time?new Date(time) :new Date(),
+    let date = time ? new Date(time) : new Date(),
       day = date.getDay(),
       newWeekMap = [];
 
@@ -77,23 +93,23 @@ class TableView extends PureComponent {
     return newWeekMap;
   }
 
-  calendarList(weekMap){
+  calendarList(weekMap) {
     let map = [],
-        weekDate = this.calculationWeekDate(weekMap && weekMap.timeStamp);
-    if(!weekMap) {
+      weekDate = this.calculationWeekDate(weekMap && weekMap.timeStamp);
+    if (!weekMap) {
       return;
     }
 
-    for(let i = 1; i <= 7; i++) {
-      if(weekMap[i] && weekMap[i].length >0) {
+    for (let i = 1; i <= 7; i++) {
+      if (weekMap[i] && weekMap[i].length > 0) {
         let week = weekMap[i];
-        week.map((value, index)=>{
+        week.map((value, index) => {
           map.push({
             ...value,
             key: i + '-' + index,
-            date: weekDate[i-1],
+            date: weekDate[i - 1],
             week: '周' + intToChinese(i),
-            rowSpan: index == 0? week.length: 0
+            rowSpan: index == 0 ? week.length : 0
           })
         })
       }
@@ -101,8 +117,8 @@ class TableView extends PureComponent {
     return map;
   }
 
-  rowClassName (record, index) {
-    let rc = record.rowSpan == 0? styles.lineTr: '';
+  rowClassName(record, index) {
+    let rc = record.rowSpan == 0 ? styles.lineTr : '';
     return rc;
   }
 
