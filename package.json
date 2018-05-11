@@ -18,7 +18,8 @@
     "test:all": "node ./tests/run-tests.js"
   },
   "dependencies": {
-    "antd": "^3.0.0",
+    "ant": "^0.2.0",
+    "antd": "^3.5.1",
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.9.2",
     "classnames": "^2.2.5",

@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
-import {
-  Form, Input, DatePicker, Select, Button, Card, InputNumber, Radio, Icon, Tooltip,
+import { Form, Input, DatePicker, Select, Button, Card, InputNumber, Radio, Icon, Tooltip,
 TreeSelect,Modal} from 'antd';
 //import AssessmentHeaderLayout from '../../layouts/AssessmentHeaderLayout';
 import styles from './Creat.less';
@@ -54,7 +53,7 @@ export default class Creat extends PureComponent {
     }
 
     componentDidMount() {
-    	let _this=this
+     let _this=this
      const { dispatch } = this.props;
       dispatch({  //查询所有人员
 	            type: 'Calendar/people',
@@ -129,7 +128,7 @@ export default class Creat extends PureComponent {
   		 || this.state.value==undefined){
   			this.showConfirm()
   		}else{
-	  			let _this=this
+	  		let _this=this
 	  		const { dispatch } = this.props;
 	        dispatch({
 	            type: 'Calendar/add',
@@ -174,13 +173,11 @@ export default class Creat extends PureComponent {
       treeData:tree,
       value: this.state.value,
       onChange: this.onChangeXiala,
-      onSearch: this.onChangesearch,
       treeCheckable: true,
       allowClear:true,
       searchPlaceholder: '',
       style: {
         width: 500,
-
       },
     };
       const radioStyle = {
@@ -201,7 +198,7 @@ export default class Creat extends PureComponent {
          </tr>
           <tr>
           <td className={styles.leftKuang}>日历管理员：</td><td className={styles.rightKuang}>
-          	<TreeSelect {...tProps} onKeyup={this.huoquJiao} className={styles.tree}/>
+          	<TreeSelect {...tProps} className={styles.tree}/>
           </td>
          </tr>
          <tr>
