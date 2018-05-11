@@ -46,7 +46,9 @@ export default class Index extends PureComponent {
     dateWeek: 0,
     weekDay: 0,
     changeDate: 0,
-    cWeek: 0
+    cWeek: 0,
+    tableSchId: 0,
+    reTime: 0
   }
   componentDidMount() {
     const { dispatch } = this.props;
@@ -117,9 +119,9 @@ export default class Index extends PureComponent {
       type: 'Index/checkWeek',
       payload: week
     })
+    // console.log(week);
     this.state.params.weekNumber = week;
     this.fetchCalendarInfo();
-
   }
   //切换日历显示类型
   checkTable(type) {
@@ -230,6 +232,7 @@ export default class Index extends PureComponent {
     });
   }
   renderWeek(weekNumber) {
+    // console.log(weekNumber);
     return '第' + intToChinese(weekNumber) + '周';
   }
   //点击显示细节
@@ -292,10 +295,71 @@ export default class Index extends PureComponent {
   }
   //表格视图的删除
   deleteClick(record) {
-    console.log("delete");
+    console.log(record);
     this.setState({
+      tableSchId: record.scheduleId,
+      reTime: record.date,
       daleteVisible: true,
     });
+  }
+  //表格不重复删除时候的确定，要发送请求
+  Ok = (e) => {
+    this.setState({
+      daleteVisible: false,
+      visible: false
+    });
+    this.props.dispatch({
+      type: 'Index/deleteInfo',
+      payload: {
+        scheduleTemplateId: this.state.tableSchId,
+        repateStatus: 0,
+        repTime: this.state.reTime,
+        yearId: this.state.params.yearId
+      }
+    }).then(() => {
+      this.fetchCalendarInfo();
+    });
+    this.fetchCalendarInfo();
+  }
+  //表格重复仅删除本次
+  OkOnly = (e) => {
+    this.setState({
+      daleteVisible: false,
+      visible: false
+    });
+    this.props.dispatch({
+      type: 'Index/deleteInfo',
+      payload: {
+        scheduleTemplateId: this.state.tableSchId,
+        repateStatus: 1,
+        repTime: this.state.reTime,
+        yearId: this.state.params.yearId
+      }
+
+    }).then(() => {
+      this.fetchCalendarInfo();
+    });
+    this.fetchCalendarInfo();
+  }
+  //表格重复删除以后全部
+  OkAll = (e) => {
+    this.setState({
+      daleteVisible: false,
+      visible: false
+    });
+    this.props.dispatch({
+      type: 'Index/deleteInfo',
+      payload: {
+        scheduleTemplateId: this.state.tableSchId,
+        repateStatus: 2,
+        repTime: this.state.reTime,
+        yearId: this.state.params.yearId
+      }
+
+    }).then(() => {
+      this.fetchCalendarInfo();
+    });
+    this.fetchCalendarInfo();
   }
   //表格视图的编辑
   editClick(record) {
@@ -311,7 +375,7 @@ export default class Index extends PureComponent {
     const ifRe = checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.ifRepeat;
     const canEdit = checkDetailInfoMessage && checkDetailInfoMessage.bj_code;
     const cuId = params.calId ? params.calId : getCalendarInfoMessage && getCalendarInfoMessage.currentId;
-    // const cWeek = params.weekCurrent ? params.weekCurrent : getTimeInfoMessage && getTimeInfoMessage.week && getTimeInfoMessage.week.currentWeek;
+    const cWeek = params.weekCurrent ? params.weekCurrent : getTimeInfoMessage && getTimeInfoMessage.week && getTimeInfoMessage.week.currentWeek;
     const currentYear = getTimeInfoMessage && getTimeInfoMessage.year && getTimeInfoMessage.year.current;
     const stime = checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.sTime;
     const etime = checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.eTime;
@@ -455,8 +519,8 @@ export default class Index extends PureComponent {
               style={{ top: 200 }}
               footer={[
                 <Button onClick={this.handleCancel}>取消</Button>,
-                <Button onClick={this.handleOkAll}>以后的日程都删除</Button>,
-                <Button type="primary" onClick={this.handleOkOnly}>仅删除这一次日程</Button>
+                <Button onClick={this.OkAll}>以后的日程都删除</Button>,
+                <Button type="primary" onClick={this.OkOnly}>仅删除这一次日程</Button>
               ]}>
               <p className={styles.deleteSure}>您确定要删除这次日程么？</p>
             </Modal> :
@@ -467,7 +531,7 @@ export default class Index extends PureComponent {
               style={{ top: 200 }}
               footer={[
                 <Button onClick={this.handleCancel}>取消</Button>,
-                <Button type="primary" onClick={this.handleOk}>删除</Button>
+                <Button type="primary" onClick={this.Ok}>删除</Button>
               ]}>
               <p className={styles.deleteSure}>您确定要删除这次日程么？</p>
             </Modal>
