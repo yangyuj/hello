@@ -21,7 +21,7 @@ export const getNavData = app => [
       },
       {
         name: '我的行程',
-        path: 'index/:calId?',
+        path: 'index/:calId?/:weekCurrent?',
         component: dynamicWrapper(app, ['index'], () => import('../routes/Calendar/Index'))
       },
       {
@@ -38,7 +38,7 @@ export const getNavData = app => [
         component: dynamicWrapper(app, ['Calendar'], () => import('../routes/Calendar/Updata'))
       },{
         name:"修改邀约",
-        path:'updataInvitation/:scheduleId/:yearId/:date',
+        path:'updataInvitation/:scheduleId/:yearId/:date/:currentWeek',
         component: dynamicWrapper(app, ['Calendar'], () => import('../routes/Calendar/UpdataInvitation'))
       }
     ],

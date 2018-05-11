@@ -175,7 +175,6 @@ export default class Index extends PureComponent {
 
   render() {
     const { dataSource, info } = this.props;
-    // console.log(info);
     let { ifWeekend } = this.state,
       colSpan = ifWeekend ? '3' : '4',
       columns = ifWeekend ? 7 : 5,

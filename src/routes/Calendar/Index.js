@@ -46,6 +46,7 @@ export default class Index extends PureComponent {
     dateWeek: 0,
     weekDay: 0,
     changeDate: 0,
+    cWeek: 0
   }
   componentDidMount() {
     const { dispatch } = this.props;
@@ -63,6 +64,7 @@ export default class Index extends PureComponent {
         this.state.params.weekNumber = getTimeInfoMessage.week.currentWeek || 1;
         this.state.params.yearId = getTimeInfoMessage && getTimeInfoMessage.year && getTimeInfoMessage.year.current;
         this.state.params.calendarId = params.calId ? params.calId : getCalendarInfoMessage && getCalendarInfoMessage.currentId;
+        // this.state.cWeek = getTimeInfoMessage && getTimeInfoMessage.week && getTimeInfoMessage.week.currentWeek
         this.fetchCalendarInfo();
       });
     });
@@ -151,7 +153,7 @@ export default class Index extends PureComponent {
       daleteVisible: true,
     });
   }
-  //点击删除时候的确定，要发送请求
+  //不重复删除时候的确定，要发送请求
   handleOk = (e) => {
     this.setState({
       daleteVisible: false,
@@ -159,7 +161,52 @@ export default class Index extends PureComponent {
     });
     this.props.dispatch({
       type: 'Index/deleteInfo',
-      payload: this.state.schId
+      payload: {
+        scheduleTemplateId: this.state.schId,
+        repateStatus: 0,
+        repTime: this.state.dateWeek,
+        yearId: this.state.params.yearId
+      }
+    }).then(() => {
+      this.fetchCalendarInfo();
+    });
+    this.fetchCalendarInfo();
+  }
+  //重复仅删除本次
+  handleOkOnly = (e) => {
+    this.setState({
+      daleteVisible: false,
+      visible: false
+    });
+    this.props.dispatch({
+      type: 'Index/deleteInfo',
+      payload: {
+        scheduleTemplateId: this.state.schId,
+        repateStatus: 1,
+        repTime: this.state.dateWeek,
+        yearId: this.state.params.yearId
+      }
+
+    }).then(() => {
+      this.fetchCalendarInfo();
+    });
+    this.fetchCalendarInfo();
+  }
+  //重复删除以后全部
+  handleOkAll = (e) => {
+    this.setState({
+      daleteVisible: false,
+      visible: false
+    });
+    this.props.dispatch({
+      type: 'Index/deleteInfo',
+      payload: {
+        scheduleTemplateId: this.state.schId,
+        repateStatus: 2,
+        repTime: this.state.dateWeek,
+        yearId: this.state.params.yearId
+      }
+
     }).then(() => {
       this.fetchCalendarInfo();
     });
@@ -170,7 +217,7 @@ export default class Index extends PureComponent {
     this.setState({
       visible: false,
     });
-    this.props.dispatch(routerRedux.push('/UpdataInvitation' + '/' + this.state.schId + '/' + this.state.params.yearId + '/' + this.state.dateWeek));
+    this.props.dispatch(routerRedux.push('/UpdataInvitation' + '/' + this.state.schId + '/' + this.state.params.yearId + '/' + this.state.dateWeek + '/' + this.state.params.weekNumber));
   }
   handleCancel = (e) => {
     this.setState({
@@ -222,7 +269,6 @@ export default class Index extends PureComponent {
   }
   //编辑日历跳转
   editCalendar = () => {
-    // console.log("bianjirili");
     this.props.dispatch(routerRedux.push('/updata' + '/' + this.state.params.calendarId));
   }
   //选择日期的时间
@@ -244,15 +290,28 @@ export default class Index extends PureComponent {
       this.fetchCalendarInfo();
     });
   }
+  //表格视图的删除
+  deleteClick(record) {
+    console.log("delete");
+    this.setState({
+      daleteVisible: true,
+    });
+  }
+  //表格视图的编辑
+  editClick(record) {
+    this.props.dispatch(routerRedux.push('/UpdataInvitation' + '/' + record.scheduleId + '/' + this.state.params.yearId + '/' + record.date + '/' + this.state.params.weekNumber));
+  }
 
   render() {
-    const { getCalendarInfoMessage, getTimeInfoMessage, checkDeleteInfoMessage, checkDetailInfoMessage, checkListInfo, checkConfirmInfoMessage, currentUser, match: { params } } = this.props;
+    const { getCalendarInfoMessage, getTimeInfoMessage, checkDetailInfoMessage, checkListInfo, checkConfirmInfoMessage, currentUser, match: { params } } = this.props;
     const { tableType } = this.state;
     const identifyStatus = currentUser && currentUser.$body && currentUser.$body.content && currentUser.$body.content.identify;
     const edit = this.state.mark ? "inline-block" : "none";
     const Admin = checkListInfo && checkListInfo.ifAdmin;
+    const ifRe = checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.ifRepeat;
     const canEdit = checkDetailInfoMessage && checkDetailInfoMessage.bj_code;
     const cuId = params.calId ? params.calId : getCalendarInfoMessage && getCalendarInfoMessage.currentId;
+    // const cWeek = params.weekCurrent ? params.weekCurrent : getTimeInfoMessage && getTimeInfoMessage.week && getTimeInfoMessage.week.currentWeek;
     const currentYear = getTimeInfoMessage && getTimeInfoMessage.year && getTimeInfoMessage.year.current;
     const stime = checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.sTime;
     const etime = checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.eTime;
@@ -321,6 +380,8 @@ export default class Index extends PureComponent {
               info={checkDetailInfoMessage} />}
           {tableType == 'bars'
             && <TableView
+              deleteClick={this.deleteClick.bind(this)}
+              editClick={this.editClick.bind(this)}
               checkListInfo={checkListInfo} />}
         </div>
         <Button className={styles.newCalendar} onClick={this.newCalendar}>新建日历</Button>
@@ -331,7 +392,6 @@ export default class Index extends PureComponent {
           visible={this.state.visible}
           onCancel={this.handleOutCancel}
           footer={[
-
             canEdit === 1 &&
             <p style={{ float: "left" }} onClick={this.showModal} className={styles.deleteSch}>删除</p>,
             <Button onClick={this.handleOutCancel}>取消</Button>,
@@ -359,14 +419,59 @@ export default class Index extends PureComponent {
               })
             }</p>
           <p><Icon className={styles.detailIcon} type="profile" style={{ marginRight: 15, fontSize: 14, color: "#333" }} />{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.remark}</p>
-          <Modal
-            visible={this.state.daleteVisible}
-            onOk={this.handleOk}
-            onCancel={this.handleCancel}
-            style={{ top: 200 }} >
-            <p className={styles.deleteSure}>您确定要删除这次日程么？</p>
-          </Modal>
+          {
+            ifRe ?
+              <Modal
+                visible={this.state.daleteVisible}
+                onOk={this.handleOk}
+                onCancel={this.handleCancel}
+                style={{ top: 200 }}
+                footer={[
+                  <Button onClick={this.handleCancel}>取消</Button>,
+                  <Button onClick={this.handleOkAll}>以后的日程都删除</Button>,
+                  <Button type="primary" onClick={this.handleOkOnly}>仅删除这一次日程</Button>
+                ]}>
+                <p className={styles.deleteSure}>您确定要删除这次日程么？</p>
+              </Modal> :
+              <Modal
+                visible={this.state.daleteVisible}
+                onOk={this.handleOk}
+                onCancel={this.handleCancel}
+                style={{ top: 200 }}
+                footer={[
+                  <Button onClick={this.handleCancel}>取消</Button>,
+                  <Button type="primary" onClick={this.handleOk}>删除</Button>
+                ]}>
+                <p className={styles.deleteSure}>您确定要删除这次日程么？</p>
+              </Modal>
+          }
         </Modal>
+        {
+          ifRe ?
+            <Modal
+              visible={this.state.daleteVisible}
+              onOk={this.handleOk}
+              onCancel={this.handleCancel}
+              style={{ top: 200 }}
+              footer={[
+                <Button onClick={this.handleCancel}>取消</Button>,
+                <Button onClick={this.handleOkAll}>以后的日程都删除</Button>,
+                <Button type="primary" onClick={this.handleOkOnly}>仅删除这一次日程</Button>
+              ]}>
+              <p className={styles.deleteSure}>您确定要删除这次日程么？</p>
+            </Modal> :
+            <Modal
+              visible={this.state.daleteVisible}
+              onOk={this.handleOk}
+              onCancel={this.handleCancel}
+              style={{ top: 200 }}
+              footer={[
+                <Button onClick={this.handleCancel}>取消</Button>,
+                <Button type="primary" onClick={this.handleOk}>删除</Button>
+              ]}>
+              <p className={styles.deleteSure}>您确定要删除这次日程么？</p>
+            </Modal>
+        }
       </div>
     );
   }

@@ -344,7 +344,7 @@ export default class Creat extends PureComponent {
         }).then(function () {
           if (_this.props.xiugaiyaoyue
             && _this.props.xiugaiyaoyue.status == true) {
-            _this.props.dispatch(routerRedux.push('/index' + '/' + _this.state.leixing));
+            _this.props.dispatch(routerRedux.push('/index' + '/' + _this.state.leixing + '/' + params.currentWeek));
           } else {
             alert(_this.props.xiugaiyaoyue
               && _this.props.xiugaiyaoyue.message)
@@ -376,7 +376,7 @@ export default class Creat extends PureComponent {
         }).then(function () {
           if (_this.props.xiugaiyaoyue
             && _this.props.xiugaiyaoyue.status == true) {
-            _this.props.dispatch(routerRedux.push('/index' + '/' + _this.state.leixing));
+            _this.props.dispatch(routerRedux.push('/index' + '/' + _this.state.leixing + '/' + params.currentWeek));
           } else {
             alert(_this.props.xiugaiyaoyue
               && _this.props.xiugaiyaoyue.message)
@@ -437,7 +437,7 @@ export default class Creat extends PureComponent {
         }).then(function () {
           if (_this.props.xiugaiyaoyue
             && _this.props.xiugaiyaoyue.status == true) {
-            _this.props.dispatch(routerRedux.push('/index' + '/' + _this.state.leixing));
+            _this.props.dispatch(routerRedux.push('/index' + '/' + _this.state.leixing + '/' + params.currentWeek));
           } else {
             alert(_this.props.xiugaiyaoyue
               && _this.props.xiugaiyaoyue.message)
@@ -482,7 +482,7 @@ export default class Creat extends PureComponent {
   }
   //取消按钮
   cancel = (e) => {
-    this.props.dispatch(routerRedux.push('/index' + '/' + this.state.leixing));
+    this.props.dispatch(routerRedux.push('/index' + '/' + this.state.leixing + '/' + params.currentWeek));
   }
   render() {
     let repeatType = this.state.chongfu
