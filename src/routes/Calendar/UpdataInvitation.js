@@ -576,6 +576,7 @@ export default class Creat extends PureComponent {
   }
   //取消按钮
   cancel = (e) => {
+    const { match: { params } } = this.props;
     this.props.dispatch(routerRedux.push('/index' + '/' + this.state.leixing + '/' + params.currentWeek));
   }
   render() {
