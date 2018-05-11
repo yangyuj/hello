@@ -35,7 +35,10 @@ export default {
             }
             yield put({
                 type: 'timeInfoMessage',
-                payload: response.content,
+                payload: {
+                    curWeek: payload.week,
+                    ...response.content
+                },
             });
         },
         *detailInfo({ payload }, { call, put }) {
@@ -95,11 +98,13 @@ export default {
             };
         },
         timeInfoMessage(state, { payload }) {
+            let getTimeInfoMessage = Object.assign({}, payload, true);
+            payload.curWeek && (getTimeInfoMessage.week.currentWeek = payload.curWeek);
             return {
                 ...state,
-                getTimeInfoMessage: payload,
+                getTimeInfoMessage,
                 loading: true
-            };
+            }
         },
         detailInfoMessage(state, { payload }) {
             return {

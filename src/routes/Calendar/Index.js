@@ -51,7 +51,8 @@ export default class Index extends PureComponent {
     reTime: 0
   }
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { dispatch, match } = this.props;
+
     dispatch({
       type: 'Index/CalendarInfo',
       payload: this.state.params
@@ -59,7 +60,8 @@ export default class Index extends PureComponent {
       dispatch({
         type: 'Index/timeInfo',
         payload: {
-          completeTime: 0
+          completeTime: 0,
+          week: (match.params && match.params.weekCurrent) || ''
         }
       }).then(() => {
         const { getTimeInfoMessage, getCalendarInfoMessage, match: { params } } = this.props;
@@ -302,68 +304,68 @@ export default class Index extends PureComponent {
     this.setState({
       tableSchId: record.scheduleId,
       reTime: record.date,
-      daleteVisible: true,
+      daleteTable: true,
     });
   }
   //表格不重复删除时候的确定，要发送请求
-  // Ok = (e) => {
-  //   this.setState({
-  //     daleteVisible: false,
-  //     visible: false
-  //   });
-  //   this.props.dispatch({
-  //     type: 'Index/deleteInfo',
-  //     payload: {
-  //       scheduleTemplateId: this.state.tableSchId,
-  //       repateStatus: 0,
-  //       repTime: this.state.reTime,
-  //       yearId: this.state.params.yearId
-  //     }
-  //   }).then(() => {
-  //     this.fetchCalendarInfo();
-  //   });
-  //   this.fetchCalendarInfo();
-  // }
-  //表格重复仅删除本次
-  // OkOnly = (e) => {
-  //   this.setState({
-  //     daleteVisible: false,
-  //     visible: false
-  //   });
-  //   this.props.dispatch({
-  //     type: 'Index/deleteInfo',
-  //     payload: {
-  //       scheduleTemplateId: this.state.tableSchId,
-  //       repateStatus: 1,
-  //       repTime: this.state.reTime,
-  //       yearId: this.state.params.yearId
-  //     }
+  Ok = (e) => {
+    this.setState({
+      daleteVisible: false,
+      visible: false
+    });
+    this.props.dispatch({
+      type: 'Index/deleteInfo',
+      payload: {
+        scheduleTemplateId: this.state.tableSchId,
+        repateStatus: 0,
+        repTime: this.state.reTime,
+        yearId: this.state.params.yearId
+      }
+    }).then(() => {
+      this.fetchCalendarInfo();
+    });
+    this.fetchCalendarInfo();
+  }
+  表格重复仅删除本次
+  OkOnly = (e) => {
+    this.setState({
+      daleteVisible: false,
+      visible: false
+    });
+    this.props.dispatch({
+      type: 'Index/deleteInfo',
+      payload: {
+        scheduleTemplateId: this.state.tableSchId,
+        repateStatus: 1,
+        repTime: this.state.reTime,
+        yearId: this.state.params.yearId
+      }
 
-  //   }).then(() => {
-  //     this.fetchCalendarInfo();
-  //   });
-  //   this.fetchCalendarInfo();
-  // }
-  //表格重复删除以后全部
-  // OkAll = (e) => {
-  //   this.setState({
-  //     daleteVisible: false,
-  //     visible: false
-  //   });
-  //   this.props.dispatch({
-  //     type: 'Index/deleteInfo',
-  //     payload: {
-  //       scheduleTemplateId: this.state.tableSchId,
-  //       repateStatus: 2,
-  //       repTime: this.state.reTime,
-  //       yearId: this.state.params.yearId
-  //     }
+    }).then(() => {
+      this.fetchCalendarInfo();
+    });
+    this.fetchCalendarInfo();
+  }
+  表格重复删除以后全部
+  OkAll = (e) => {
+    this.setState({
+      daleteVisible: false,
+      visible: false
+    });
+    this.props.dispatch({
+      type: 'Index/deleteInfo',
+      payload: {
+        scheduleTemplateId: this.state.tableSchId,
+        repateStatus: 2,
+        repTime: this.state.reTime,
+        yearId: this.state.params.yearId
+      }
 
-  //   }).then(() => {
-  //     this.fetchCalendarInfo();
-  //   });
-  //   this.fetchCalendarInfo();
-  // }
+    }).then(() => {
+      this.fetchCalendarInfo();
+    });
+    this.fetchCalendarInfo();
+  }
   //表格视图的编辑
   editClick(record) {
     this.props.dispatch(routerRedux.push('/UpdataInvitation' + '/' + record.scheduleId + '/' + this.state.params.yearId + '/' + record.date + '/' + this.state.params.weekNumber));
@@ -490,8 +492,8 @@ export default class Index extends PureComponent {
             ifRe ?
               <Modal
                 visible={this.state.daleteVisible}
-                // onOk={this.handleOk}
-                // onCancel={this.handleCancel}
+                onOk={this.handleOk}
+                onCancel={this.handleCancel}
                 style={{ top: 200 }}
                 footer={[
                   <Button onClick={this.handleCancel}>取消</Button>,
@@ -502,8 +504,8 @@ export default class Index extends PureComponent {
               </Modal> :
               <Modal
                 visible={this.state.daleteVisible}
-                // onOk={this.handleOk}
-                // onCancel={this.handleCancel}
+                onOk={this.handleOk}
+                onCancel={this.handleCancel}
                 style={{ top: 200 }}
                 footer={[
                   <Button onClick={this.handleCancel}>取消</Button>,
@@ -514,30 +516,30 @@ export default class Index extends PureComponent {
           }
         </Modal>
         {
-          // ifRe ?
-          //   <Modal
-          //     visible={this.state.daleteVisible}
-          //     // onOk={this.handleOk}
-          //     // onCancel={this.handleCancel}
-          //     style={{ top: 200 }}
-          //     footer={[
-          //       <Button onClick={this.handleCancel}>取消</Button>,
-          //       <Button onClick={this.OkAll}>以后的日程都删除</Button>,
-          //       <Button type="primary" onClick={this.OkOnly}>仅删除这一次日程</Button>
-          //     ]}>
-          //     <p className={styles.deleteSure}>您确定要删除这次日程么？</p>
-          //   </Modal> :
-          //   <Modal
-          //     visible={this.state.daleteVisible}
-          //     // onOk={this.handleOk}
-          //     // onCancel={this.handleCancel}
-          //     style={{ top: 200 }}
-          //     footer={[
-          //       <Button onClick={this.handleCancel}>取消</Button>,
-          //       <Button type="primary" onClick={this.Ok}>删除</Button>
-          //     ]}>
-          //     <p className={styles.deleteSure}>您确定要删除这次日程么？</p>
-          //   </Modal>
+          ifRe ?
+            <Modal
+              visible={this.state.daleteTable}
+              // onOk={this.handleOk}
+              // onCancel={this.handleCancel}
+              style={{ top: 200 }}
+              footer={[
+                <Button onClick={this.handleCancel}>取消</Button>,
+                <Button onClick={this.OkAll}>以后的日程都删除</Button>,
+                <Button type="primary" onClick={this.OkOnly}>仅删除这一次日程</Button>
+              ]}>
+              <p className={styles.deleteSure}>您确定要删除这次日程么？</p>
+            </Modal> :
+            <Modal
+              visible={this.state.daleteTable}
+              // onOk={this.handleOk}
+              // onCancel={this.handleCancel}
+              style={{ top: 200 }}
+              footer={[
+                <Button onClick={this.handleCancel}>取消</Button>,
+                <Button type="primary" onClick={this.Ok}>删除</Button>
+              ]}>
+              <p className={styles.deleteSure}>您确定要删除这次日程么？</p>
+            </Modal>
         }
       </div>
     );
