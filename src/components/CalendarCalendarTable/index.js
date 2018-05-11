@@ -8,8 +8,8 @@ import styles from './index.less';
 
 const spaceMaps = ['', '', '', '', '', '', ''];
 const weekMap = ['周一', '周二', '周三', '周四', '周五', '周六', '周天'];
-const timeLine = ['全天', '上午5点','上午6点','上午7点', '上午8点', '上午9点', '上午10点', '上午11点', '正午', '下午1点', '下午2点', '下午3点', '下午4点', '下午5点', '下午6点', '下午7点', '下午8点', '下午9点', '下午10点', '下午11点', '下午12点'];
-const timeLineNumber = [0,500,600,700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000, 2100, 2200, 2300, 2400];
+const timeLine = ['全天', '上午7点', '上午8点', '上午9点', '上午10点', '上午11点', '正午', '下午1点', '下午2点', '下午3点', '下午4点', '下午5点', '下午6点'];
+const timeLineNumber = [0,700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800];
 
 
 export default class Index extends PureComponent {
@@ -62,8 +62,7 @@ export default class Index extends PureComponent {
 
   calculationList(weekMap, titleMap) {
     let weekCalenList = [],
-      //weekMap = {},
-      renderData = [];
+        renderData = [];
 
 
     if (!weekMap) {
@@ -74,11 +73,13 @@ export default class Index extends PureComponent {
       for (let i = 1; i <= 7; i++) {
         if (weekMap[i] && weekMap[i].length > 0) {
           let a = [],
-            allDay = [],
-            w = '100%';
+              allDay = [],
+              w = '100%';
           weekMap[i].map(e => {
             let startNumber = parseInt(e.start.replace(':', ''), 10),
               endNumber = parseInt(e.end.replace(':', ''), 10);
+              startNumber = startNumber < 700? 700: startNumber;
+              endNumber = endNumber > 1800? 1800: endNumber;
             if (startNumber <= 700 && endNumber >= 1800) {
               allDay.push({
                 week: i,
@@ -121,13 +122,19 @@ export default class Index extends PureComponent {
           if (a.length > 0) {
             let elment = [];
             a.map((v, l) => {
+              let endTime = parseInt(v.end.replace(':', ''), 10), newEnd;
+              newEnd = endTime > 1800 ? '19:00': v.end;
+              endTime = endTime > 1800 ? 1900: endTime;
+              let startTime = parseInt(v.start.replace(':', ''), 10), newStart;
+              newStart = startTime < 700? '7:00': v.start;
+              startTime = startTime < 700? 700: startTime;
               elment.push(<span
                 key={l}
                 onClick={this.floatClick.bind(this, v)}
                 style={{
-                  top: (parseInt(v.start.replace(':', ''), 10) - el) * 10 / 6 + '%',
+                  top: (parseInt(startTime, 10) - el) * 10 / 6 + '%',
                   width: 1 / a.length * 100 + '%',
-                  height: this.minuteDifference(v.start, v.end) * 10 / 6 + '%'
+                  height: this.minuteDifference(newStart, newEnd) * 10 / 6 + '%'
                 }}
                 className={styles.floatEl}>
                 {this.renderColEl(v)}

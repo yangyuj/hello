@@ -149,8 +149,8 @@ const proxy = {
           "people": "xxx,xxx,xxx,xxx",
           "location": "小雪",
           "remark": "xxx",
-          "start": "4:00",
-          "end": "8:20"
+          "start": "5:00",
+          "end": "7:30"
         },{
           "scheduleId": 10,
           "scheduleTime": "xx",
@@ -158,8 +158,8 @@ const proxy = {
           "people": "xxx,xxx,xxx,xxx",
           "location": "小雪",
           "remark": "xxx",
-          "start": "20:00",
-          "end": "23:20"
+          "start": "18:00",
+          "end": "19:20"
         },
         {
           "scheduleId": 3,
