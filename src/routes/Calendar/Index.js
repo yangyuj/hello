@@ -514,30 +514,30 @@ export default class Index extends PureComponent {
           }
         </Modal>
         {
-          ifRe ?
-            <Modal
-              visible={this.state.daleteVisible}
-              // onOk={this.handleOk}
-              // onCancel={this.handleCancel}
-              style={{ top: 200 }}
-              footer={[
-                <Button onClick={this.handleCancel}>取消</Button>,
-                <Button onClick={this.OkAll}>以后的日程都删除</Button>,
-                <Button type="primary" onClick={this.OkOnly}>仅删除这一次日程</Button>
-              ]}>
-              <p className={styles.deleteSure}>您确定要删除这次日程么？</p>
-            </Modal> :
-            <Modal
-              visible={this.state.daleteVisible}
-              // onOk={this.handleOk}
-              // onCancel={this.handleCancel}
-              style={{ top: 200 }}
-              footer={[
-                <Button onClick={this.handleCancel}>取消</Button>,
-                <Button type="primary" onClick={this.Ok}>删除</Button>
-              ]}>
-              <p className={styles.deleteSure}>您确定要删除这次日程么？</p>
-            </Modal>
+          // ifRe ?
+          //   <Modal
+          //     visible={this.state.daleteVisible}
+          //     // onOk={this.handleOk}
+          //     // onCancel={this.handleCancel}
+          //     style={{ top: 200 }}
+          //     footer={[
+          //       <Button onClick={this.handleCancel}>取消</Button>,
+          //       <Button onClick={this.OkAll}>以后的日程都删除</Button>,
+          //       <Button type="primary" onClick={this.OkOnly}>仅删除这一次日程</Button>
+          //     ]}>
+          //     <p className={styles.deleteSure}>您确定要删除这次日程么？</p>
+          //   </Modal> :
+          //   <Modal
+          //     visible={this.state.daleteVisible}
+          //     // onOk={this.handleOk}
+          //     // onCancel={this.handleCancel}
+          //     style={{ top: 200 }}
+          //     footer={[
+          //       <Button onClick={this.handleCancel}>取消</Button>,
+          //       <Button type="primary" onClick={this.Ok}>删除</Button>
+          //     ]}>
+          //     <p className={styles.deleteSure}>您确定要删除这次日程么？</p>
+          //   </Modal>
         }
       </div>
     );
