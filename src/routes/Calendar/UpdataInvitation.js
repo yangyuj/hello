@@ -70,7 +70,9 @@ export default class Creat extends PureComponent {
       beforeRepeat: null,
       editOnly: null,
       time: null,
-      timeLast: null
+      timeLast: null,
+      loading: false,
+      visible: false
     };
   }
   componentWillMount() {
@@ -304,24 +306,151 @@ export default class Creat extends PureComponent {
     this.setState({ beizhu: e.target.value })
   }
   //修改当天还是修改以后的弹出框
-  chooseStyle = () => {
+  // chooseStyle = () => {
+  //   let _this = this;
+  //   let ifrepeat;
+  //   if (this.state.chongfu == '1') {
+  //     ifrepeat = 0;
+  //   } else {
+  //     ifrepeat = 1;
+  //   }
+  //   const { dispatch, match: { params } } = this.props;
+  //   let chuofrist = this.state.data.replace(/-/g, '/') + ' ' + this.state.firstTime
+  //   let chuolast = this.state.data.replace(/-/g, '/') + ' ' + this.state.lastTime
+  //   Modal.confirm({
+  //     title: '选择重复日程的修改方式',
+  //     okText: '仅修改本次日程',
+  //     cancelText: '以后的重复日程一同修改',
+
+  //     onOk() {
+  //       _this.state.editOnly = 1;
+  //       dispatch({
+  //         type: 'Calendar/xiugaiyaoyue',
+  //         payload: {
+  //           preStartTime: _this.state.startTime,
+  //           preEndTime: _this.state.endTime,
+  //           id: parseInt(params.scheduleId),//邀约id
+  //           calendarId: _this.state.leixing,//日历ID
+  //           cName: _this.state.c_zhuti,
+  //           eName: _this.state.e_zhuti,
+  //           startTime: new Date(chuofrist).getTime(),
+  //           endTime: new Date(chuolast).getTime(),
+  //           address: _this.state.place,
+  //           remark: _this.state.beizhu,
+  //           repeatTypeCode: parseInt(_this.state.chongfu),
+  //           optionalPersonnel: _this.state.value2,
+  //           requiredPersonnel: _this.state.value1,
+  //           semesterId: parseInt(params.yearId), //学期ID
+  //           ifRepeat: ifrepeat,
+  //           ifChooseDayOnly: _this.state.editOnly
+  //         }
+  //       }).then(function () {
+  //         if (_this.props.xiugaiyaoyue
+  //           && _this.props.xiugaiyaoyue.status == true) {
+  //           _this.props.dispatch(routerRedux.push('/index' + '/' + _this.state.leixing));
+  //         } else {
+  //           alert(_this.props.xiugaiyaoyue
+  //             && _this.props.xiugaiyaoyue.message)
+  //         }
+  //       })
+  //     },
+  //     onCancel() {
+  //       _this.state.editOnly = 0;
+  //       dispatch({
+  //         type: 'Calendar/xiugaiyaoyue',
+  //         payload: {
+  //           preStartTime: _this.state.startTime,
+  //           preEndTime: _this.state.endTime,
+  //           id: parseInt(params.scheduleId),//邀约id
+  //           calendarId: _this.state.leixing,//日历ID
+  //           cName: _this.state.c_zhuti,
+  //           eName: _this.state.e_zhuti,
+  //           startTime: new Date(chuofrist).getTime(),
+  //           endTime: new Date(chuolast).getTime(),
+  //           address: _this.state.place,
+  //           remark: _this.state.beizhu,
+  //           repeatTypeCode: parseInt(_this.state.chongfu),
+  //           optionalPersonnel: _this.state.value2,
+  //           requiredPersonnel: _this.state.value1,
+  //           semesterId: parseInt(params.yearId), //学期ID
+  //           ifRepeat: ifrepeat,
+  //           ifChooseDayOnly: _this.state.editOnly
+  //         }
+  //       }).then(function () {
+  //         if (_this.props.xiugaiyaoyue
+  //           && _this.props.xiugaiyaoyue.status == true) {
+  //           _this.props.dispatch(routerRedux.push('/index' + '/' + _this.state.leixing));
+  //         } else {
+  //           alert(_this.props.xiugaiyaoyue
+  //             && _this.props.xiugaiyaoyue.message)
+  //         }
+  //       })
+  //     },
+  //   });
+  // }
+  showModal = () => {
+      this.setState({
+        visible: true,
+      });
+  }
+  handleCancel = () => {
+    this.setState({ visible: false });
+  }
+  handleOk1=()=>{
+      console.log("掉接口1 传0")
+      let _this = this;
+      let ifrepeat;
+      if (this.state.chongfu == '1') {
+        ifrepeat = 0;
+      } else {
+        ifrepeat = 1;
+      }
+      const { dispatch, match: { params } } = this.props;
+      let chuofrist = this.state.data.replace(/-/g, '/') + ' ' + this.state.firstTime
+      let chuolast = this.state.data.replace(/-/g, '/') + ' ' + this.state.lastTime
+      dispatch({
+          type: 'Calendar/xiugaiyaoyue',
+          payload: {
+            preStartTime: _this.state.startTime,
+            preEndTime: _this.state.endTime,
+            id: parseInt(params.scheduleId),//邀约id
+            calendarId: _this.state.leixing,//日历ID
+            cName: _this.state.c_zhuti,
+            eName: _this.state.e_zhuti,
+            startTime: new Date(chuofrist).getTime(),
+            endTime: new Date(chuolast).getTime(),
+            address: _this.state.place,
+            remark: _this.state.beizhu,
+            repeatTypeCode: parseInt(_this.state.chongfu),
+            optionalPersonnel: _this.state.value2,
+            requiredPersonnel: _this.state.value1,
+            semesterId: parseInt(params.yearId), //学期ID
+            ifRepeat: ifrepeat,
+            ifChooseDayOnly: 0
+          }
+        }).then(function () {
+          if (_this.props.xiugaiyaoyue
+            && _this.props.xiugaiyaoyue.status == true) {
+            _this.props.dispatch(routerRedux.push('/index' + '/' + _this.state.leixing + '/' + params.currentWeek));
+          } else {
+            alert(_this.props.xiugaiyaoyue
+              && _this.props.xiugaiyaoyue.message)
+          }
+        })
+  }
+  handleOk2 = () => {
+    console.log('掉接口2 传1')
     let _this = this;
-    let ifrepeat;
-    if (this.state.chongfu == '1') {
-      ifrepeat = 0;
-    } else {
-      ifrepeat = 1;
-    }
-    const { dispatch, match: { params } } = this.props;
-    let chuofrist = this.state.data.replace(/-/g, '/') + ' ' + this.state.firstTime
-    let chuolast = this.state.data.replace(/-/g, '/') + ' ' + this.state.lastTime
-    Modal.confirm({
-      title: '选择重复日程的修改方式',
-      okText: '仅修改本次日程',
-      cancelText: '以后的重复日程一同修改',
-      onOk() {
-        _this.state.editOnly = 1;
-        dispatch({
+      let ifrepeat;
+      if (this.state.chongfu == '1') {
+        ifrepeat = 0;
+      } else {
+        ifrepeat = 1;
+      }
+      const { dispatch, match: { params } } = this.props;
+      let chuofrist = this.state.data.replace(/-/g, '/') + ' ' + this.state.firstTime
+      let chuolast = this.state.data.replace(/-/g, '/') + ' ' + this.state.lastTime
+       dispatch({
           type: 'Calendar/xiugaiyaoyue',
           payload: {
             preStartTime: _this.state.startTime,
@@ -339,7 +468,7 @@ export default class Creat extends PureComponent {
             requiredPersonnel: _this.state.value1,
             semesterId: parseInt(params.yearId), //学期ID
             ifRepeat: ifrepeat,
-            ifChooseDayOnly: _this.state.editOnly
+            ifChooseDayOnly: 1
           }
         }).then(function () {
           if (_this.props.xiugaiyaoyue
@@ -350,40 +479,6 @@ export default class Creat extends PureComponent {
               && _this.props.xiugaiyaoyue.message)
           }
         })
-      },
-      onCancel() {
-        _this.state.editOnly = 0;
-        dispatch({
-          type: 'Calendar/xiugaiyaoyue',
-          payload: {
-            preStartTime: _this.state.startTime,
-            preEndTime: _this.state.endTime,
-            id: parseInt(params.scheduleId),//邀约id
-            calendarId: _this.state.leixing,//日历ID
-            cName: _this.state.c_zhuti,
-            eName: _this.state.e_zhuti,
-            startTime: new Date(chuofrist).getTime(),
-            endTime: new Date(chuolast).getTime(),
-            address: _this.state.place,
-            remark: _this.state.beizhu,
-            repeatTypeCode: parseInt(_this.state.chongfu),
-            optionalPersonnel: _this.state.value2,
-            requiredPersonnel: _this.state.value1,
-            semesterId: parseInt(params.yearId), //学期ID
-            ifRepeat: ifrepeat,
-            ifChooseDayOnly: _this.state.editOnly
-          }
-        }).then(function () {
-          if (_this.props.xiugaiyaoyue
-            && _this.props.xiugaiyaoyue.status == true) {
-            _this.props.dispatch(routerRedux.push('/index' + '/' + _this.state.leixing + '/' + params.currentWeek));
-          } else {
-            alert(_this.props.xiugaiyaoyue
-              && _this.props.xiugaiyaoyue.message)
-          }
-        })
-      },
-    });
   }
   //点击编辑邀约的右下角确定按钮
   addYaoyue = (e) => {
@@ -412,7 +507,7 @@ export default class Creat extends PureComponent {
     } else {
       console.log(_this.state.beforeRepeat);
       if (_this.state.beforeRepeat === true) {
-        this.chooseStyle();
+        this.showModal();
       } else {
         dispatch({
           type: 'Calendar/xiugaiyaoyue',
@@ -485,6 +580,7 @@ export default class Creat extends PureComponent {
     this.props.dispatch(routerRedux.push('/index' + '/' + this.state.leixing + '/' + params.currentWeek));
   }
   render() {
+    const { visible, loading } = this.state;
     let repeatType = this.state.chongfu
     let _this = this
     let tree = this.state.treeData
@@ -651,7 +747,19 @@ export default class Creat extends PureComponent {
           <Button onClick={this.cancel}>取消</Button><span className={styles.jiange}></span>
           <Button type="primary" onClick={this.addYaoyue} disabled={this.state.queding}>确定</Button>
         </div>
-
+         <Modal
+          visible={visible}
+          title="提示"
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+          footer={[
+            <Button key="back" onClick={this.handleOk1}>以后的重复日程一同修改</Button>,
+            <Button key="submit" type="primary" loading={loading} onClick={this.handleOk2}>
+              仅修改本次日程
+            </Button>,
+          ]}
+        ><span style={{"fontSize":"20px",}}>选择重复日程的修改方式</span>
+        </Modal>
       </div>
     );
   }

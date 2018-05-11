@@ -54,8 +54,8 @@ export default class Creat extends PureComponent {
       value1: null,
       value2: null,
       data: null,
-      firstTime: null,
-      lastTime: null,
+      firstTime: '8:00',
+      lastTime: '8:00',
       chongfu: null,
       place: null,
       beizhu: null,
@@ -196,7 +196,8 @@ export default class Creat extends PureComponent {
     });
   }
   addYaoyue = (e) => {
-
+   console.log(this.state.firstTime)
+      console.log(this.state.lastTime)
     //alert('新建成功')
     // console.log(this.state.leixing)
     // console.log(this.state.c_zhuti)
@@ -224,11 +225,9 @@ export default class Creat extends PureComponent {
     if (this.state.c_zhuti == null ||
       this.state.e_zhuti == null ||
       this.state.value1 == null ||
-      this.state.firstTime == null ||
-      this.state.lastTime == null ||
+      this.state.data == null ||
       this.state.chongfu == null ||
-      this.state.place == null ||
-      this.state.beizhu == null
+      this.state.place == null   
     ) {
       this.showConfirm()
     } else {
@@ -341,8 +340,8 @@ export default class Creat extends PureComponent {
             <tr>
               <td className={styles.leftKuang1}>时间：</td>
               <td className={styles.rightKuang}><DatePicker onChange={this.dataChange} placeholder="日期" /><span className={styles.jiange}></span>
-                <TimePicker defaultValue={moment('0:00', format)} format={format} onChange={this.timeChangefitst} /><span className={styles.jiange}></span>
-                <TimePicker defaultValue={moment('0:00', format)} format={format} onChange={this.timeChangelast} />
+                <TimePicker defaultValue={moment('8:00', format)} format={format} onChange={this.timeChangefitst} /><span className={styles.jiange}></span>
+                <TimePicker defaultValue={moment('8:00', format)} format={format} onChange={this.timeChangelast} />
               </td>
             </tr>
             <tr>
