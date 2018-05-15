@@ -7,8 +7,28 @@ import { intToChinese, fixedZero } from '../../utils/utils';
 import styles from './index.less';
 
 const spaceMaps = ['', '', '', '', '', '', ''];
-const weekMap = ['周一', '周二', '周三', '周四', '周五', '周六', '周天'];
-const timeLine = ['全天', '上午7点', '上午8点', '上午9点', '上午10点', '上午11点', '正午', '下午1点', '下午2点', '下午3点', '下午4点', '下午5点', '下午6点'];
+const weekMap = [trans('global.monday', '周一'),
+                trans('global.tuesday', '周二'),
+                trans('global.wednesday', '周三'),
+                trans('global.thursday','周四'),
+                trans('global.friday', '周五'),
+                trans('global.saturday', '周六'),
+                trans('global.sunday', '周天')];
+
+const timeLine = [trans('global.allDay', '全天'),
+                  trans('global.am7', '上午7点'),
+                  trans('global.am8', '上午8点'),
+                  trans('global.am9', '上午9点'),
+                  trans('global.am10', '上午10点'),
+                  trans('global.am11', '上午11点'),
+                  trans('global.am12', '正午'),
+                  trans('global.pm1', '下午1点'),
+                  trans('global.pm2', '下午2点'),
+                  trans('global.pm3', '下午3点'),
+                  trans('global.pm4', '下午4点'),
+                  trans('global.pm5', '下午5点'),
+                  trans('global.pm6', '下午6点')];
+
 const timeLineNumber = [0,700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800];
 
 
@@ -171,7 +191,7 @@ export default class Index extends PureComponent {
     let curHours = (time ? new Date(time) : new Date()).getHours();
     return 80 + (curHours - 7) * 121 + 60;
   }
-  
+
 
   render() {
     const { dataSource, info } = this.props;

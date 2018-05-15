@@ -78,8 +78,8 @@ export default class GlobalHeader extends PureComponent {
         </div>
         <a href="/" className={styles.logo}>{trans('global.logo', '云谷日程中心')}</a>
         <div className={styles.topMenu}>
-          <a href={pathname + '#/index'} ref="unNorm">{trans('global.headTab1', '个人日程')}</a>
-          <a href={pathname + '#/calshow'} ref="norm">{trans('global.headTab2', '行事历')}</a>
+          <a href={pathname + '#/index'} ref="unNorm">{trans('global.headTab2', '行事历')}</a>
+          <a style={{display: 'none'}} href={pathname + '#/calshow'} ref="norm">{trans('global.headTab1', '个人日程')}</a>
           <a href={pathname + '#/assessment/norm'} ref="norm">{trans('global.headTab3', '校历')}</a>
         </div>
         {/* <div>

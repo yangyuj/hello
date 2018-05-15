@@ -1,18 +1,19 @@
 import { routerRedux } from 'dva/router';
 import { message } from 'antd';
-import { getCalendarInfo, getTimeInfo, checkDetailInfo, checkDeleteInfo, checkConfirmInfo } from '../services/api';
+import { getCalendarInfo, getTimeInfo, checkDetailInfo, checkDeleteInfo, checkConfirmInfo, checkListInfo } from '../services/api';
 import { trans } from '../utils/i18n';
 
 export default {
-    namespace: 'CalendarInfo',
+    namespace: 'CalShow',
 
     state: {
         state: {
-            getCalendarInfoMessage:[],
-            getTimeInfoMessage:{},
-            checkDetailInfoMessage:{},
-            checkDeleteInfoMessage:{},
-            checkConfirmInfoMessage:{}
+            getCalendarInfoMessage: [],
+            getTimeInfoMessage: {},
+            checkDetailInfoMessage: {},
+            checkDeleteInfoMessage: {},
+            checkConfirmInfoMessage: {},
+            checkListInfo: []
         },
     },
 
@@ -24,7 +25,7 @@ export default {
             }
             yield put({
                 type: 'CalendarInfoMessage',
-                payload: response.content,
+                payload: response,
             });
         },
         *timeInfo({ payload }, { call, put }) {
@@ -34,7 +35,10 @@ export default {
             }
             yield put({
                 type: 'timeInfoMessage',
-                payload: response,
+                payload: {
+                    curWeek: payload.week,
+                    ...response.content
+                },
             });
         },
         *detailInfo({ payload }, { call, put }) {
@@ -44,7 +48,7 @@ export default {
             }
             yield put({
                 type: 'detailInfoMessage',
-                payload: response,
+                payload: response.content,
             });
         },
         *deleteInfo({ payload }, { call, put }) {
@@ -54,7 +58,7 @@ export default {
             }
             yield put({
                 type: 'deleteInfoMessage',
-                payload: response,
+                payload: response.content,
             });
         },
         *confirmInfo({ payload }, { call, put }) {
@@ -64,46 +68,78 @@ export default {
             }
             yield put({
                 type: 'confirmInfoMessage',
-                payload: response.status,
+                payload: response,
+            });
+        },
+        *checkWeek({ payload }, { call, put }) {
+            yield put({
+                type: 'updateWeek',
+                payload: payload,
+            });
+        },
+        *fetchList({ payload }, { call, put }) {
+            const response = yield call(checkListInfo, payload);
+            if (!response) {
+                return;
+            }
+            yield put({
+                type: 'updateList',
+                payload: response.content,
             });
         }
     },
 
     reducers: {
         CalendarInfoMessage(state, { payload }) {
-			return { 
-				...state,
-				getCalendarInfoMessage: payload,
-				loading: true
-			};	
+            return {
+                ...state,
+                getCalendarInfoMessage: payload,
+                loading: true
+            };
         },
         timeInfoMessage(state, { payload }) {
-			return { 
-				...state,
-				getTimeInfoMessage: payload,
-				loading: true
-			};	
+            let getTimeInfoMessage = Object.assign({}, payload, true);
+            payload.curWeek && (getTimeInfoMessage.week.currentWeek = payload.curWeek);
+            return {
+                ...state,
+                getTimeInfoMessage,
+                loading: true
+            }
         },
         detailInfoMessage(state, { payload }) {
-			return { 
-				...state,
-				checkDetailInfoMessage: payload,
-				loading: true
-			};	
+            return {
+                ...state,
+                checkDetailInfoMessage: payload,
+                loading: true
+            };
         },
         deleteInfoMessage(state, { payload }) {
-			return { 
-				...state,
-				checkDeleteInfoMessage: payload,
-				loading: true
-			};	
+            return {
+                ...state,
+                checkDeleteInfoMessage: payload,
+                loading: true
+            };
         },
         confirmInfoMessage(state, { payload }) {
-			return { 
-				...state,
-				checkConfirmInfoMessage: payload,
-				loading: true
-			};	
-		},
+            return {
+                ...state,
+                checkConfirmInfoMessage: payload,
+                loading: true
+            };
+        },
+        updateWeek(state, { payload }) {
+            let getTimeInfoMessage = Object.assign({}, state.getTimeInfoMessage, true);
+            getTimeInfoMessage.week.currentWeek = payload;
+            return {
+                ...state,
+                getTimeInfoMessage
+            }
+        },
+        updateList(state, { payload }) {
+            return {
+                ...state,
+                checkListInfo: payload
+            }
+        }
     },
 };

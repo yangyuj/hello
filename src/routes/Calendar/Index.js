@@ -248,32 +248,33 @@ export default class Index extends PureComponent {
     let et = obj && obj.end;
     let stc = st.split(':'),
       etc = et.split(':');
-    let long = ((etc[0] - stc[0]) < 1 ? '' : (etc[0] - stc[0]) + '小时') + (parseInt(etc[1] - stc[1]) == 0 ? '' : (parseInt(etc[1] - stc[1]) + '分钟'));
+    let long = ((etc[0] - stc[0]) < 1 ? '' : (etc[0] - stc[0]) + trans('global.hour', '小时')) + (parseInt(etc[1] - stc[1]) == 0 ? '' : (parseInt(etc[1] - stc[1]) + trans('global.minute', '分钟')));
     let timeS = st.split(':').join(""),
       timeE = et.split(':').join("");
-    let timeStart = (timeS < 1200) ? ('上午' + st) : ('下午' + st);
-    let timeEnd = (timeE < 1200) ? ('上午' + et) : ('下午' + et);
+    let timeStart = (timeS < 1200) ? (trans('global.am', '上午') + st) : (trans('global.pm', '下午') + st);
+    let timeEnd = (timeE < 1200) ? (trans('global.am', '上午') + et) : (trans('global.pm', '下午') + et);
     this.state.dateWeek = weekDate;
     this.state.weekDay = weekday;
     this.state.startTime = timeStart;
     this.state.endTime = timeEnd;
     this.state.timeLong = long;
-    this.setState({
-      visible: true,
-      schId: obj.scheduleId
-    }, () => {
-      const { dispatch } = this.props;
-      // console.log(this.state.schId);
-      dispatch({
-        type: 'Index/detailInfo',
-        payload: {
-          "pageType": 11,
-          "scheduleId": this.state.schId,
-          "date": this.state.dateWeek,
-          "yearId": this.state.params.yearId
-        }
-      });
+
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'Index/detailInfo',
+      payload: {
+        "pageType": 11,
+        "scheduleId": this.state.schId,
+        "date": this.state.dateWeek,
+        "yearId": this.state.params.yearId
+      }
+    }).then(() => {
+      this.setState({
+        visible: true,
+        schId: obj.scheduleId
+      }, () => {});
     });
+
   }
   //编辑日历跳转
   editCalendar = () => {
@@ -326,7 +327,7 @@ export default class Index extends PureComponent {
     });
     this.fetchCalendarInfo();
   }
-  表格重复仅删除本次
+
   OkOnly = (e) => {
     this.setState({
       daleteTable: false,
@@ -388,7 +389,7 @@ export default class Index extends PureComponent {
       <div className={styles.borderBox}>
         {getCalendarInfoMessage && getCalendarInfoMessage.content && getCalendarInfoMessage.content.length > 0 && (
           <div>
-            <Tabs activeKey={String(this.state.params.calendarId)} onChange={this.tabChange.bind(this)} style={{ paddingRight: 100 }} >
+            <Tabs activeKey={String(this.state.params.calendarId)} onChange={this.tabChange.bind(this)} style={{ marginRight: 120 }} >
               {getCalendarInfoMessage && getCalendarInfoMessage.content.map(el => <TabPane tab={<span>{el.name}
                 {
                   (this.state.params.calendarId == el.id) && Admin &&
@@ -402,7 +403,7 @@ export default class Index extends PureComponent {
           <Select
             value={this.state.params.yearId}
             className={styles.selectBox}
-            placeholder="选择学期"
+            placeholder={trans('index.choose', '选择学期')}
             onChange={this.yearsChange.bind(this)}>
             {getTimeInfoMessage
               && getTimeInfoMessage.year
@@ -419,7 +420,6 @@ export default class Index extends PureComponent {
             style={{ width: 40, border: "none" }}
             className={styles.dateStyle}
             placeholder=''
-            value=''
           />
           <Button className={styles.weekChangeBtn} onClick={this.checkWeek.bind(this, 'right')}><Icon type="right" /></Button>
           <span className={styles.tabbleCheck}>
@@ -431,15 +431,15 @@ export default class Index extends PureComponent {
             Admin &&
             (
               (checkListInfo && checkListInfo.confirmStatus === 1) ?
-                <Button disabled className={styles.alreadyConfirm} >已确认</Button> :
+                <Button disabled className={styles.alreadyConfirm} >{trans('index.alreadyConfirm', '已确认')}</Button> :
                 (
                   checkConfirmInfoMessage && checkConfirmInfoMessage.status ?
-                    <Button disabled className={styles.alreadyConfirm} >已确认</Button> :
-                    <Button type="primary" className={styles.confirmationSchedule} onClick={this.confirmCal.bind(this, checkConfirmInfoMessage)}>确认日程</Button>
+                    <Button disabled className={styles.alreadyConfirm} >{trans('index.alreadyConfirm', '已确认')}</Button> :
+                    <Button type="primary" className={styles.confirmationSchedule} onClick={this.confirmCal.bind(this, checkConfirmInfoMessage)}>{trans('index.confirmCalendar', '确认日程')}</Button>
                 )
             )
           }
-          <Button type="primary" className={styles.newInvitation} onClick={this.newInvitation}>新建邀约</Button>
+          <Button type="primary" className={styles.newInvitation} onClick={this.newInvitation}>{trans('index.newInvitation', '新建邀约')}</Button>
         </div>
         <div className={styles.bodyBox}>
           {tableType == 'calendar'
@@ -453,7 +453,7 @@ export default class Index extends PureComponent {
               editClick={this.editClick.bind(this)}
               checkListInfo={checkListInfo} />}
         </div>
-        <Button className={styles.newCalendar} onClick={this.newCalendar}>新建日历</Button>
+        <Button className={styles.newCalendar} onClick={this.newCalendar}>{trans('index.newCalendar', '新建日历')}</Button>
         <span className={styles.spanSolid}></span>
         <Modal
           className={styles.stylesll}
@@ -462,33 +462,73 @@ export default class Index extends PureComponent {
           onCancel={this.handleOutCancel}
           footer={[
             canEdit === 1 &&
-            <p style={{ float: "left" }} onClick={this.showModal} className={styles.deleteSch}>删除</p>,
-            <Button onClick={this.handleOutCancel}>取消</Button>,
+            <p
+              key="1"
+              style={{ float: "left" }}
+              onClick={this.showModal}
+              className={styles.deleteSch}>{trans('global.delete', '删除')}
+            </p>,
+            <Button  key="2" onClick={this.handleOutCancel}>取消</Button>,
             canEdit === 1 &&
-            <Button type="primary" onClick={this.handleOutOk}>编辑</Button>
+            <Button key="3" type="primary" onClick={this.handleOutOk}>{trans('global.edit', '编辑')}</Button>
           ]}>
-          <p><Icon className={styles.detailIcon} type="clock-circle-o" style={{ marginRight: 15, fontSize: 14, color: "#333" }} />{this.state.dateWeek}({this.state.weekDay})</p>
-          <p style={{ marginLeft: 26, fontSize: 14, color: "#333" }}>{this.state.startTime}-{this.state.endTime}<p style={{ width: 15, display: 'inline-block' }}></p>{this.state.timeLong}</p>
-          <p><Icon className={styles.detailIcon} type="environment" style={{ marginRight: 15, fontSize: 14, color: "#333" }} />{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.address}</p>
-          <p><Icon className={styles.detailIcon} type="contacts" style={{ marginRight: 15, fontSize: 14, color: "#333" }} />{checkDetailInfoMessage && checkDetailInfoMessage.personNumbers}位邀约对象</p>
-          <p style={{ marginLeft: 26, fontSize: 14, color: "#333" }}>必选：
-            {
-              checkDetailInfoMessage && checkDetailInfoMessage.bixuan.map((value, index) => {
-                return (
-                  <span key={index} style={{ background: "#F3F3F3", marginRight: 6, fontSize: 12, padding: 2, borderRadius: 4 }}>{value}</span>
-                );
-              })
-            }</p>
-          <p style={{ marginLeft: 26, fontSize: 14, color: "#333" }}>可选：
-            {
-              checkDetailInfoMessage && checkDetailInfoMessage.kexuan.map((value, index) => {
-                return (
-                  <span key={index} style={{ background: "#F3F3F3", marginRight: 6, fontSize: 12, padding: 2, borderRadius: 4 }}>{value}</span>
-                );
-              })
-            }</p>
-          <p><Icon className={styles.detailIcon} type="profile" style={{ marginRight: 15, fontSize: 14, color: "#333" }} />{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.remark}</p>
-          {
+            <div>
+              <p  key="7">
+                <Icon className={styles.detailIcon} type="clock-circle-o" style={{ marginRight: 15, fontSize: 14, color: "#333" }} />
+                {this.state.dateWeek}({this.state.weekDay})
+              </p>
+              <p  key="6" style={{ marginLeft: 26, fontSize: 14, color: "#333" }}>
+                {this.state.startTime}-{this.state.endTime}<span style={{ width: 15, display: 'inline-block' }}></span>
+                {this.state.timeLong}
+              </p>
+              <p  key="5">
+                <Icon
+                  className={styles.detailIcon}
+                  type="environment"
+                  style={{ marginRight: 15, fontSize: 14, color: "#333" }} />
+                  {checkDetailInfoMessage
+                    && checkDetailInfoMessage.scheduleTemplateInfo
+                    && checkDetailInfoMessage.scheduleTemplateInfo.address}
+              </p>
+              <p  key="4">
+                <Icon className={styles.detailIcon} type="contacts" style={{ marginRight: 15, fontSize: 14, color: "#333" }} />
+                {checkDetailInfoMessage && checkDetailInfoMessage.personNumbers}
+                {trans('index.objectOfInvitation', '位邀约对象')}
+              </p>
+              <p  key="3" style={{ marginLeft: 26, fontSize: 14, color: "#333" }}>{trans('index.mandatory', '必选：')}
+                {
+                  checkDetailInfoMessage && checkDetailInfoMessage.bixuan.map((value, index) => {
+                    return (
+                      <span
+                        key={index}
+                        style={{ background: "#F3F3F3", marginRight: 6, fontSize: 12, padding: 2, borderRadius: 4 }}>
+                          {value}
+                      </span>
+                    );
+                  })
+                }</p>
+              <p  key="2" style={{ marginLeft: 26, fontSize: 14, color: "#333" }}>{trans('index.optional', '可选：')}
+                {
+                  checkDetailInfoMessage && checkDetailInfoMessage.kexuan.map((value, index) => {
+                    return (
+                      <span key={index}
+                        style={{ background: "#F3F3F3", marginRight: 6, fontSize: 12, padding: 2, borderRadius: 4 }}>
+                        {value}
+                      </span>
+                    );
+                  })
+                }</p>
+              <p  key="1">
+                <Icon
+                  className={styles.detailIcon}
+                  type="profile" style={{ marginRight: 15, fontSize: 14, color: "#333" }} />
+                  {checkDetailInfoMessage
+                    && checkDetailInfoMessage.scheduleTemplateInfo
+                    && checkDetailInfoMessage.scheduleTemplateInfo.remark}
+              </p>
+            </div>
+         </Modal>
+         {
             ifRe ?
               <Modal
                 visible={this.state.daleteVisible}
@@ -496,11 +536,11 @@ export default class Index extends PureComponent {
                 onCancel={this.handleCancel}
                 style={{ top: 200 }}
                 footer={[
-                  <Button onClick={this.handleCancel}>取消</Button>,
-                  <Button onClick={this.handleOkAll}>以后的日程都删除</Button>,
-                  <Button type="primary" onClick={this.handleOkOnly}>仅删除这一次日程</Button>
+                  <Button key="1" onClick={this.handleCancel}>{trans('index.cancel', '取消')}</Button>,
+                  <Button key="2" onClick={this.handleOkAll}>{trans('index.allDelete', '以后的日程都删除')}</Button>,
+                  <Button key="3" type="primary" onClick={this.handleOkOnly}>{trans('index.onlyDelete', '仅删除这一次日程')}</Button>
                 ]}>
-                <p className={styles.deleteSure}>您确定要删除这次日程么？</p>
+                <p className={styles.deleteSure}>{trans('index.sureDelete"', '您确定要删除这次日程么？')}</p>
               </Modal> :
               <Modal
                 visible={this.state.daleteVisible}
@@ -508,39 +548,34 @@ export default class Index extends PureComponent {
                 onCancel={this.handleCancel}
                 style={{ top: 200 }}
                 footer={[
-                  <Button onClick={this.handleCancel}>取消</Button>,
-                  <Button type="primary" onClick={this.handleOk}>删除</Button>
+                  <Button key="1" onClick={this.handleCancel}>{trans('index.cancel', '取消')}</Button>,
+                  <Button key="2" type="primary" onClick={this.handleOk}>{trans('global.delete', '删除')}</Button>
                 ]}>
-                <p className={styles.deleteSure}>您确定要删除这次日程么？</p>
+                <p className={styles.deleteSure}>{trans('index.sureDelete"', '您确定要删除这次日程么？')}</p>
               </Modal>
           }
-        </Modal>
-        {
-          ifRe ?
-            <Modal
-              visible={this.state.daleteTable}
-              // onOk={this.handleOk}
-              // onCancel={this.handleCancel}
-              style={{ top: 200 }}
-              footer={[
-                <Button onClick={this.handleCancel}>取消</Button>,
-                <Button onClick={this.OkAll}>以后的日程都删除</Button>,
-                <Button type="primary" onClick={this.OkOnly}>仅删除这一次日程</Button>
-              ]}>
-              <p className={styles.deleteSure}>您确定要删除这次日程么？</p>
-            </Modal> :
-            <Modal
-              visible={this.state.daleteTable}
-              // onOk={this.handleOk}
-              // onCancel={this.handleCancel}
-              style={{ top: 200 }}
-              footer={[
-                <Button onClick={this.handleCancel}>取消</Button>,
-                <Button type="primary" onClick={this.Ok}>删除</Button>
-              ]}>
-              <p className={styles.deleteSure}>您确定要删除这次日程么？</p>
-            </Modal>
-        }
+          {
+            ifRe ?
+              <Modal
+                visible={this.state.daleteTable}
+                style={{ top: 200 }}
+                footer={[
+                  <Button key="1" onClick={this.handleCancel}>{trans('index.cancel', '取消')}</Button>,
+                  <Button key="2" onClick={this.OkAll}>{trans('index.allDelete"', '以后的日程都删除')}</Button>,
+                  <Button key="3" type="primary" onClick={this.OkOnly}>{trans('index.onlyDelete', '仅删除这一次日程')}</Button>
+                ]}>
+                <p className={styles.deleteSure}>{trans('index.sureDelete"', '您确定要删除这次日程么？')}</p>
+              </Modal> :
+              <Modal
+                visible={this.state.daleteTable}
+                style={{ top: 200 }}
+                footer={[
+                  <Button key="1" onClick={this.handleCancel}>{trans('index.cancel', '取消')}</Button>,
+                  <Button key="2" type="primary" onClick={this.Ok}>{trans('global.delete', '删除')}</Button>
+                ]}>
+                <p className={styles.deleteSure}>{trans('index.sureDelete"', '您确定要删除这次日程么？')}</p>
+              </Modal>
+            }
       </div>
     );
   }

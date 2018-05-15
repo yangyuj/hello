@@ -72,15 +72,12 @@ export default class Creat extends PureComponent {
 
       }
     }).then(function () {
-      console.log(_this.props.rililist
-        && _this.props.rililist.content)
       let riliall = _this.props.rililist
-        && _this.props.rililist.content
+        && _this.props.rililist.content;
+
       for (let i = 0; i < riliall.length; i++) {
         if (riliall[i].id == params.calendarId) {
-          console.log(riliall[i].name)
           localStorage.setItem("kkkk", riliall[i].id)
-
           _this.setState({ leixing: riliall[i].id })
           _this.setState({ defaultV: riliall[i].name })
         }
@@ -103,8 +100,6 @@ export default class Creat extends PureComponent {
 
       }
     }).then(function () {
-      console.log(_this.props.peoplelist
-        && _this.props.peoplelist.content.getDepartmentList)
       _this.setState({
         treeData: _this.props.peoplelist
           && _this.props.peoplelist.content.getDepartmentList
@@ -140,19 +135,14 @@ export default class Creat extends PureComponent {
       }
     }
     // console.log(m)
-    // console.log(list) 
+    // console.log(list)
     return list
   }
   onChangeXiala1 = (value) => {
-    // attr1
-    console.log('onChange ', value, arguments);
-    // for(let i=0;i<value.length;i++){
-    //   attr1.push(value[i].split('-')[1])
-    // }
+
     this.setState({ value1: this.chong(value) });
   }
   onChangeXiala2 = (value) => {
-    console.log('onChange ', value, arguments);
     this.setState({ value2: this.chong(value) });
   }
   dataChange = (date, dateString) => {
@@ -186,48 +176,18 @@ export default class Creat extends PureComponent {
   showConfirm() {
     confirm({
       title: '请把信息填写完整！',
-
-      onOk() {
-        console.log('OK');
-      },
-      onCancel() {
-        console.log('Cancel');
-      },
+      onOk() {},
+      onCancel() {},
     });
   }
-  addYaoyue = (e) => {
-   console.log(this.state.firstTime)
-      console.log(this.state.lastTime)
-    //alert('新建成功')
-    // console.log(this.state.leixing)
-    // console.log(this.state.c_zhuti)
-    // console.log(this.state.e_zhuti)
-    // console.log(this.state.value1)
-    // let attr=[]
-    // let attr1=[]
-    //   for(let i=0;i<this.state.value1.length;i++){
-    //       attr.push(this.state.value1[i].split('-')[1])
-    //   }
-    //   console.log(attr)
-    // console.log(this.state.value2)
-    //   for(let i=0;i<this.state.value2.length;i++){
-    //       attr1.push(this.state.value2[i].split('-')[1])
-    //   }
-    //   console.log(attr1)
-    // console.log(this.state.data)
-    // console.log(new Date(chuofrist).getTime())
-    //  console.log(new Date(chuolast).getTime())
-    // console.log(this.state.chongfu)
-    // console.log(this.state.place)
-    // console.log(this.state.beizhu)
 
-    // console.log(new Date(chuo).getTime())
+  addYaoyue = (e) => {
     if (this.state.c_zhuti == null ||
       this.state.e_zhuti == null ||
       this.state.value1 == null ||
       this.state.data == null ||
       this.state.chongfu == null ||
-      this.state.place == null   
+      this.state.place == null
     ) {
       this.showConfirm()
     } else {
@@ -268,21 +228,32 @@ export default class Creat extends PureComponent {
     }
 
   }
+
   cancel = (e) => {
     this.props.dispatch(routerRedux.push('/index' + '/' + localStorage.getItem('kkkk')));
-    console.log('取消')
   }
-  render() {
 
+  filterPeople = (value, nodeTree) => {
+    //console.log(nodeTree);
+    return true;
+  }
+
+  asyncLoadData = (node) => {
+    console.log(node);
+  }
+
+  render() {
     let tree = this.state.treeData
     const tProps1 = {
       treeData: tree,
       value: this.state.value1,
       onChange: this.onChangeXiala1,
-      onSearch: this.onChangesearch,
       treeCheckable: true,
       allowClear: true,
       searchPlaceholder: '',
+      filterTreeNode: this.filterPeople,
+      loadData: this.asyncLoadData,
+      treeNodeFilterProp: 'title',
       style: {
         width: 500,
       },
@@ -291,7 +262,6 @@ export default class Creat extends PureComponent {
       treeData: tree,
       value: this.state.value2,
       onChange: this.onChangeXiala2,
-      onSearch: this.onChangesearch,
       treeCheckable: true,
       allowClear: true,
       searchPlaceholder: '',
@@ -300,10 +270,8 @@ export default class Creat extends PureComponent {
       },
     };
 
+    let allRili = this.props.rililist && this.props.rililist.content;
 
-    let allRili = this.props.rililist
-      && this.props.rililist.content
-    console.log(allRili)
     return (
       <div className={styles.content}>
         <div style={{ textAlign: "left" }} className={styles.addyaoyue}>新建邀约</div>

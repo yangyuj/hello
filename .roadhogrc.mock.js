@@ -912,6 +912,17 @@ const proxy = {
     "content": [],
     "ifAdmin": false
   },
+
+  //切换语言
+  'GET /api/set_language': {
+    "ifLogin": true,
+    "status": true,
+    "message": "切换成功！",
+    "code": 11,
+    "content": [],
+    "ifAdmin": false
+  }
+
 };
 
 export default noProxy ? {} : delay(proxy, 1000);

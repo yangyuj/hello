@@ -101,3 +101,11 @@ export async function checkConfirmInfo(params) {
 export async function checkListInfo(params) {
   return request(`/api/getScheduleList?${stringify(params)}`);
 }
+
+
+//语言切换
+export async function queryLang(params) {
+  // console.log(params);
+  return request(`/api/set_language?${stringify(params)}`);
+
+}

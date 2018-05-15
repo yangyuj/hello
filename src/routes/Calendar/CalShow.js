@@ -6,7 +6,7 @@ import CalendarHeaderLayout from '../../layouts/CalendarHeaderLayout';
 import { trans } from '../../utils/i18n';
 import { intToChinese } from '../../utils/utils';
 import CalendarCalendarTable from '../../components/CalendarCalendarTable';
-import styles from './Index.less';
+import styles from './CalShow.less';
 import TableView from '../../components/TableView/index';
 import moment from 'moment';
 
@@ -16,15 +16,15 @@ const Option = Select.Option;
 
 
 @connect(state => ({
-  getCalendarInfoMessage: state.Index.getCalendarInfoMessage,
-  getTimeInfoMessage: state.Index.getTimeInfoMessage,
-  checkDetailInfoMessage: state.Index.checkDetailInfoMessage,
-  checkDeleteInfoMessage: state.Index.checkDeleteInfoMessage,
-  checkConfirmInfoMessage: state.Index.checkConfirmInfoMessage,
-  checkListInfo: state.Index.checkListInfo,
+  getCalendarInfoMessage: state.CalShow.getCalendarInfoMessage,
+  getTimeInfoMessage: state.CalShow.getTimeInfoMessage,
+  checkDetailInfoMessage: state.CalShow.checkDetailInfoMessage,
+  checkDeleteInfoMessage: state.CalShow.checkDeleteInfoMessage,
+  checkConfirmInfoMessage: state.CalShow.checkConfirmInfoMessage,
+  checkListInfo: state.CalShow.checkListInfo,
   currentUser: state.user.currentUser
 }))
-export default class Index extends PureComponent {
+export default class CalShow extends PureComponent {
   state = {
     params: {
       calendarId: '',
@@ -50,11 +50,11 @@ export default class Index extends PureComponent {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: 'Index/CalendarInfo',
+      type: 'CalShow/CalendarInfo',
       payload: this.state.params
     }).then(() => {
       dispatch({
-        type: 'Index/timeInfo',
+        type: 'CalShow/timeInfo',
         payload: {
           completeTime: 0
         }
@@ -72,7 +72,7 @@ export default class Index extends PureComponent {
   fetchCalendarInfo() {
     const { dispatch } = this.props;
     return dispatch({
-      type: 'Index/fetchList',
+      type: 'CalShow/fetchList',
       payload: this.state.params
     })
   }
@@ -112,7 +112,7 @@ export default class Index extends PureComponent {
       week++;
     }
     dispatch({
-      type: 'Index/checkWeek',
+      type: 'CalShow/checkWeek',
       payload: week
     })
     this.state.params.weekNumber = week;
@@ -128,7 +128,7 @@ export default class Index extends PureComponent {
   //确认日程
   confirmCal = (value) => {
     this.props.dispatch({
-      type: 'Index/confirmInfo',
+      type: 'CalShow/confirmInfo',
       payload: {
         calendarId: this.state.params.calendarId,
         confirmWeek: this.state.params.weekNumber,//确认周
@@ -158,7 +158,7 @@ export default class Index extends PureComponent {
       visible: false
     });
     this.props.dispatch({
-      type: 'Index/deleteInfo',
+      type: 'CalShow/deleteInfo',
       payload: this.state.schId
     }).then(() => {
       this.fetchCalendarInfo();
@@ -197,8 +197,8 @@ export default class Index extends PureComponent {
     let long = ((etc[0] - stc[0]) < 1 ? '' : (etc[0] - stc[0]) + '小时') + (parseInt(etc[1] - stc[1]) == 0 ? '' : (parseInt(etc[1] - stc[1]) + '分钟'));
     let timeS = st.split(':').join(""),
         timeE = et.split(':').join("");
-    let timeStart = (timeS < 1200) ? ('上午' + st) : ('下午' + st);
-    let timeEnd = (timeE < 1200) ? ('上午' + et) : ('下午' + et);
+    let timeStart = (timeS < 1200) ? (trans('global.am', '上午') + st) : (trans('global.pm', '下午') + st);
+    let timeEnd = (timeE < 1200) ? (trans('global.am', '上午') + et) : (trans('global.pm', '下午') + et);
     this.state.dateWeek = weekDate;
     this.state.weekDay = weekday;
     this.state.startTime = timeStart;
@@ -210,7 +210,7 @@ export default class Index extends PureComponent {
     }, () => {
       const { dispatch } = this.props;
       dispatch({
-        type: 'Index/detailInfo',
+        type: 'CalShow/detailInfo',
         payload: {
           "pageType": 11,
           "scheduleId": this.state.schId,
@@ -233,7 +233,7 @@ export default class Index extends PureComponent {
     this.state.changeDate = timeChange;
     const { dispatch } = this.props;
     dispatch({
-      type: 'Index/timeInfo',
+      type: 'CalShow/timeInfo',
       payload: {
         completeTime : this.state.changeDate
       }
@@ -274,7 +274,7 @@ export default class Index extends PureComponent {
           <Select
             value={this.state.params.yearId}
             className={styles.selectBox}
-            placeholder="选择学期"
+            placeholder={trans('index.choose', '选择学期')}
             onChange={this.yearsChange.bind(this)}>
             {getTimeInfoMessage
               && getTimeInfoMessage.year
@@ -286,9 +286,9 @@ export default class Index extends PureComponent {
           {getTimeInfoMessage
             && getTimeInfoMessage.week
             && <span className={styles.plr_10}>{this.renderWeek(getTimeInfoMessage.week.currentWeek)}</span>}
-          <DatePicker 
-            onChange={this.sendDate} 
-            style={{width: 40, border: "none"}} 
+          <DatePicker
+            onChange={this.sendDate}
+            style={{width: 40, border: "none"}}
             className={styles.dateStyle}
             placeholder=''
             value=''
@@ -303,15 +303,21 @@ export default class Index extends PureComponent {
             Admin &&
             (
               (checkListInfo && checkListInfo.confirmStatus === 1) ?
-                <Button disabled className={styles.alreadyConfirm} >已确认</Button> :
+                <Button disabled className={styles.alreadyConfirm} >{trans('calshow.confirmOk', '已确认')}</Button> :
                 (
                   checkConfirmInfoMessage && checkConfirmInfoMessage.status ?
-                    <Button disabled className={styles.alreadyConfirm} >已确认</Button> :
-                    <Button type="primary" className={styles.confirmationSchedule} onClick={this.confirmCal.bind(this, checkConfirmInfoMessage)}>确认日程</Button>
+                    <Button disabled className={styles.alreadyConfirm} >{trans('calshow.confirmOk', '已确认')}</Button> :
+                    <Button
+                      type="primary"
+                      className={styles.confirmationSchedule}
+                      onClick={this.confirmCal.bind(this, checkConfirmInfoMessage)}>
+                      确认日程</Button>
                 )
             )
           }
-          <Button type="primary" className={styles.newInvitation} onClick={this.newInvitation}>新建邀约</Button>
+          <Button type="primary"
+            className={styles.newInvitation}
+            onClick={this.newInvitation}>{trans("index.newInvitation", "新建邀约")}</Button>
         </div>
         <div className={styles.bodyBox}>
           {tableType == 'bars'
@@ -323,7 +329,9 @@ export default class Index extends PureComponent {
               dataSource={checkListInfo}
               info={checkDetailInfoMessage} />}
         </div>
-        <Button className={styles.newCalendar} onClick={this.newCalendar}>新建日历</Button>
+        <Button
+          className={styles.newCalendar}
+          onClick={this.newCalendar}>{trans("index.newCalendar", "新建日历")}</Button>
         <span className={styles.spanSolid}></span>
         <Modal
           className={styles.stylesll}
@@ -331,26 +339,51 @@ export default class Index extends PureComponent {
           visible={this.state.visible}
           onCancel={this.handleOutCancel}
           footer={[
-            
-            canEdit === 1 &&
-            <p style={{ float: "left" }} onClick={this.showModal} className={styles.deleteSch}>删除</p>,
+
+            canEdit === 1 && <p style={{ float: "left" }}
+              onClick={this.showModal}
+              className={styles.deleteSch}>{trans("global.delete", "删除")}</p>,
             <Button onClick={this.handleOutCancel}>取消</Button>,
-            canEdit === 1 &&
-            <Button type="primary" onClick={this.handleOutOk}>编辑</Button>
+            canEdit === 1 &&<Button type="primary" onClick={this.handleOutOk}>{trans("global.edit", "编辑")}</Button>
           ]}>
-          <p><Icon className={styles.detailIcon} type="clock-circle-o" style={{ marginRight: 15, fontSize: 14, color: "#333" }} />{this.state.dateWeek}({this.state.weekDay})</p>
-          <p style={{ marginLeft: 26, fontSize: 14, color: "#333" }}>{this.state.startTime}-{this.state.endTime}<p style={{ width: 15, display: 'inline-block' }}></p>{this.state.timeLong}</p>
-          <p><Icon className={styles.detailIcon} type="environment" style={{ marginRight: 15, fontSize: 14, color: "#333" }} />{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.address}</p>
-          <p><Icon className={styles.detailIcon} type="contacts" style={{ marginRight: 15, fontSize: 14, color: "#333" }} />{checkDetailInfoMessage && checkDetailInfoMessage.personNumbers}位邀约对象</p>
-          <p style={{ marginLeft: 26, fontSize: 14, color: "#333" }}>必选：
+          <p>
+            <Icon
+              className={styles.detailIcon}
+              type="clock-circle-o"
+              style={{ marginRight: 15, fontSize: 14, color: "#333" }} />
+                {this.state.dateWeek}({this.state.weekDay})
+          </p>
+          <p style={{ marginLeft: 26, fontSize: 14, color: "#333" }}>
+            {this.state.startTime}-{this.state.endTime}
+            <p style={{ width: 15, display: 'inline-block' }}></p>
+            {this.state.timeLong}
+          </p>
+          <p>
+            <Icon className={styles.detailIcon} type="environment" style={{ marginRight: 15, fontSize: 14, color: "#333" }} />
+              {checkDetailInfoMessage
+                && checkDetailInfoMessage.scheduleTemplateInfo
+                && checkDetailInfoMessage.scheduleTemplateInfo.address}
+          </p>
+          <p>
+            <Icon className={styles.detailIcon}
+              type="contacts"
+              style={{ marginRight: 15, fontSize: 14, color: "#333" }} />
+              {checkDetailInfoMessage && checkDetailInfoMessage.personNumbers}
+              {trans("index.objectOfInvitation", "位邀约对象")}
+          </p>
+          <p style={{ marginLeft: 26, fontSize: 14, color: "#333" }}>{trans("index.mandatory", "必选：")}
             {
               checkDetailInfoMessage && checkDetailInfoMessage.bixuan.map((value, index) => {
                 return (
-                  <span key={index} style={{ background: "#F3F3F3", marginRight: 6, fontSize: 12, padding: 2, borderRadius: 4 }}>{value}</span>
+                  <span
+                    key={index}
+                    style={{ background: "#F3F3F3", marginRight: 6, fontSize: 12, padding: 2, borderRadius: 4 }}>
+                      {value}
+                  </span>
                 );
               })
             }</p>
-          <p style={{ marginLeft: 26, fontSize: 14, color: "#333" }}>可选：
+          <p style={{ marginLeft: 26, fontSize: 14, color: "#333" }}>{trans("index.optional", "可选：")}
             {
               checkDetailInfoMessage && checkDetailInfoMessage.kexuan.map((value, index) => {
                 return (
@@ -358,13 +391,20 @@ export default class Index extends PureComponent {
                 );
               })
             }</p>
-          <p><Icon className={styles.detailIcon} type="profile" style={{ marginRight: 15, fontSize: 14, color: "#333" }} />{checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.remark}</p>
+          <p>
+            <Icon
+              className={styles.detailIcon}
+              type="profile" style={{ marginRight: 15, fontSize: 14, color: "#333" }} />
+              {checkDetailInfoMessage
+                && checkDetailInfoMessage.scheduleTemplateInfo
+                && checkDetailInfoMessage.scheduleTemplateInfo.remark}
+          </p>
           <Modal
             visible={this.state.daleteVisible}
             onOk={this.handleOk}
             onCancel={this.handleCancel}
             style={{ top: 200 }} >
-            <p className={styles.deleteSure}>您确定要删除这次日程么？</p>
+            <p className={styles.deleteSure}>{trans("index.sureDelete", "您确定要删除这次日程么？")}</p>
           </Modal>
         </Modal>
       </div>

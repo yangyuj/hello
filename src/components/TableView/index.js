@@ -6,8 +6,13 @@ import { routerRedux } from 'dva/router';
 import { trans } from '../../utils/i18n';
 import { intToChinese, fixedZero } from '../../utils/utils';
 
-const weekMap = ['周一', '周二', '周三', '周四', '周五', '周六', '周天'];
-
+const weekMap = [trans('global.monday', '周一'),
+                trans('global.tuesday', '周二'),
+                trans('global.wednesday', '周三'),
+                trans('global.thursday','周四'),
+                trans('global.friday', '周五'),
+                trans('global.saturday', '周六'),
+                trans('global.sunday', '周天')];
 
 @connect(state => ({
 
@@ -21,7 +26,7 @@ class TableView extends PureComponent {
     super(props);
     this.columns = [
       {
-        title: '日期',
+        title: trans('tableView.date', '日期'),
         dataIndex: 'week',
         key: 'week',
         width: '10%',
@@ -35,38 +40,38 @@ class TableView extends PureComponent {
           };
         }
       }, {
-        title: '时间',
+        title: trans('tableView.time', '时间'),
         dataIndex: 'scheduleTime',
         width: '10%',
         key: 'scheduleTime'
       }, {
-        title: '主题',
+        title: trans('tableCom.theme', '主题'),
         dataIndex: 'theme',
         width: '15%',
         key: 'theme'
       }, {
-        title: '参与人员',
+        title: trans('tableCom.people', '参与人员'),
         dataIndex: 'people',
         width: '20%',
         key: 'people'
       }, {
-        title: '地点',
+        title: trans('tableCom.location', '地点'),
         dataIndex: 'location',
         width: '15%',
         key: 'location'
       }, {
-        title: '备注',
+        title: trans('tableCom.remark', '备注'),
         dataIndex: 'remark',
         width: '20%',
         key: 'remark'
       }, {
-        title: '操作',
+        title: trans('tableCom.action', '操作'),
         width: '15%',
         key: 'action',
         render: (text, record) => (
           <span>
-            <a href="javascript:;" onClick={this.delete.bind(this, record)}>删除</a>
-            <a href="javascript:;" onClick={this.edit.bind(this, record)} style={{ marginLeft: 20 }}>编辑</a>
+            <a href="javascript:;" onClick={this.delete.bind(this, record)}>{trans('global.delete', '删除')}</a>
+            <a href="javascript:;" onClick={this.edit.bind(this, record)} style={{ marginLeft: 20 }}>{trans('global.edit', '编辑')}</a>
           </span>
         ),
       }
@@ -108,7 +113,7 @@ class TableView extends PureComponent {
             ...value,
             key: i + '-' + index,
             date: weekDate[i - 1],
-            week: '周' + intToChinese(i),
+            week: trans('global.week', '周') + intToChinese(i),
             rowSpan: index == 0 ? week.length : 0
           })
         })
