@@ -109,3 +109,8 @@ export async function queryLang(params) {
   return request(`/api/set_language?${stringify(params)}`);
 
 }
+
+//搜索人
+export async function searchPeopleAsync(params) {
+  return request(`/api/selectPersonName?${stringify(params)}`);
+}

@@ -1,6 +1,17 @@
 import { routerRedux } from 'dva/router';
 import { message } from 'antd';
-import { addCalendar , mohuCha,getpeopleList,addYaoyue,getallRili,getallplace,CalendarHuixian,YaoyueHuixian,xiugaiYaoyue,deleteRili} from '../services/api';
+import {
+    addCalendar ,
+    mohuCha,
+    getpeopleList,
+    addYaoyue,
+    getallRili,
+    getallplace,
+    CalendarHuixian,
+    YaoyueHuixian,
+    xiugaiYaoyue,
+    deleteRili,
+    searchPeopleAsync } from '../services/api';
 import { trans } from '../utils/i18n';
 
 
@@ -18,7 +29,8 @@ export default {
             riliHuilist:{},
             yaoyueHuilist:{},
             xiugaiyaoyue:{},
-            delete:{}
+            delete:{},
+            searchPeopleData: []
         },
     },
 
@@ -123,78 +135,94 @@ export default {
 	            payload: response,
 	        });
 	    },
+      *searchPeople({ payload }, { call, put }) {
+        const response = yield call(searchPeopleAsync, payload);
+        if (!response) {
+            return;
+        }
+        yield put({
+            type: 'searchPeopleReducers',
+            payload: response.content,
+        });
+      }
     },
 
     reducers: {
         CalendarInfoMessageQ(state, { payload }) {
-			return { 
-				...state,
-				addCalendarapi: payload,
-				loading: true
-			};	
-		},
-		 CalendarInfoMessageM(state, { payload }) {
-			return { 
-				...state,
-				mohuList: payload,
-				loading: true
-			};	
-		},
-		CalendarInfoMessageP(state, { payload }) {
-			return { 
-				...state,
-				peoplelist: payload,
-				loading: true
-			};	
-		},
-		CalendarInfoMessageYao(state, { payload }) {
-			return { 
-				...state,
-				yaoyue: payload,
-				loading: true
-			};	
-		},
-		CalendarInfoMessagerili(state, { payload }) {
-			return { 
-				...state,
-				allrili: payload,
-				loading: true
-			};	
-		},
-		CalendarInfoMessageplace(state, { payload }) {
-			return { 
-				...state,
-				allplace: payload,
-				loading: true
-			};	
-		},
-		CalendarInfoMessageHuixianRili(state, { payload }) {
-			return { 
-				...state,
-				riliHuilist: payload,
-				loading: true
-			};	
-		},
-		CalendarInfoMessageHuixianyaoyue(state, { payload }) {
-			return { 
-				...state,
-				yaoyueHuilist: payload,
-				loading: true
-			};	
-		},
-		CalendarInfoMessageXiugaiyaoyue(state, { payload }) {
-			return { 
-				...state,
-				xiugaiyaoyue: payload,
-				loading: true
-			};	
-		},
-		deleteRiLi(state, { payload }) {
-			return { 
-				...state,
-				delete: payload,
-				loading: true
-			};	
-		},
+    			return {
+    				...state,
+    				addCalendarapi: payload,
+    				loading: true
+    			};
+    		 },
+    		 CalendarInfoMessageM(state, { payload }) {
+    			return {
+    				...state,
+    				mohuList: payload,
+    				loading: true
+    			};
+    		},
+    		CalendarInfoMessageP(state, { payload }) {
+    			return {
+    				...state,
+    				peoplelist: payload,
+    				loading: true
+    			};
+    		},
+    		CalendarInfoMessageYao(state, { payload }) {
+    			return {
+    				...state,
+    				yaoyue: payload,
+    				loading: true
+    			};
+    		},
+    		CalendarInfoMessagerili(state, { payload }) {
+    			return {
+    				...state,
+    				allrili: payload,
+    				loading: true
+    			};
+    		},
+    		CalendarInfoMessageplace(state, { payload }) {
+    			return {
+    				...state,
+    				allplace: payload,
+    				loading: true
+    			};
+    		},
+    		CalendarInfoMessageHuixianRili(state, { payload }) {
+    			return {
+    				...state,
+    				riliHuilist: payload,
+    				loading: true
+    			};
+    		},
+    		CalendarInfoMessageHuixianyaoyue(state, { payload }) {
+    			return {
+    				...state,
+    				yaoyueHuilist: payload,
+    				loading: true
+    			};
+    		},
+    		CalendarInfoMessageXiugaiyaoyue(state, { payload }) {
+    			return {
+    				...state,
+    				xiugaiyaoyue: payload,
+    				loading: true
+    			};
+    		},
+    		deleteRiLi(state, { payload }) {
+    			return {
+    				...state,
+    				delete: payload,
+    				loading: true
+    			};
+    		},
+        searchPeopleReducers(state, { payload }) {
+          return {
+    				...state,
+    				searchPeopleData: payload
+    			};
+        }
     },
 };
