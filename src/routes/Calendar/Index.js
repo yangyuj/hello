@@ -30,6 +30,7 @@ export default class Index extends PureComponent {
       calendarId: '',
       yearId: '',
       weekNumber: 1,
+      userSchedule:1,
       type: 0
     },
     tableType: 'calendar',

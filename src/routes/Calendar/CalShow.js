@@ -16,7 +16,6 @@ const Option = Select.Option;
 
 
 @connect(state => ({
-  getCalendarInfoMessage: state.CalShow.getCalendarInfoMessage,
   getTimeInfoMessage: state.CalShow.getTimeInfoMessage,
   checkDetailInfoMessage: state.CalShow.checkDetailInfoMessage,
   checkDeleteInfoMessage: state.CalShow.checkDeleteInfoMessage,
@@ -61,10 +60,10 @@ export default class CalShow extends PureComponent {
           completeTime: 0
         }
       }).then(() => {
-        const { getTimeInfoMessage, getCalendarInfoMessage, match: {params} } = this.props;
+        const { getTimeInfoMessage, match: {params} } = this.props;
         this.state.params.weekNumber = getTimeInfoMessage.week.currentWeek || 1;
         this.state.params.yearId = getTimeInfoMessage && getTimeInfoMessage.year && getTimeInfoMessage.year.current;
-        this.state.params.calendarId = params.calId ? params.calId : getCalendarInfoMessage && getCalendarInfoMessage.currentId;
+
         this.fetchCalendarInfo();
       });
     });
@@ -80,15 +79,7 @@ export default class CalShow extends PureComponent {
   }
 
   //日历分类选择
-  tabChange(val) {
-    this.state.params.calendarId = val;
-    this.state.tabVal = val;
-    this.fetchCalendarInfo();
-    //改变修改日历的入口状态
-    this.setState({
-      mark: true
-    })
-  }
+
 
   //学期选择
   yearsChange(val) {
@@ -249,7 +240,7 @@ export default class CalShow extends PureComponent {
 
   render() {
     const {
-      getCalendarInfoMessage,
+
       getTimeInfoMessage,
       checkDeleteInfoMessage,
       checkDetailInfoMessage,
@@ -263,7 +254,7 @@ export default class CalShow extends PureComponent {
     const edit = this.state.mark ? "inline-block" : "none";
     const Admin = checkListInfo && checkListInfo.ifAdmin;
     const canEdit = checkDetailInfoMessage && checkDetailInfoMessage.bj_code;
-    const cuId = params.calId ? params.calId : getCalendarInfoMessage && getCalendarInfoMessage.currentId;
+
     const currentYear = getTimeInfoMessage && getTimeInfoMessage.year && getTimeInfoMessage.year.current;
     const stime = checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.sTime;
     const etime = checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.eTime;
@@ -282,7 +273,7 @@ export default class CalShow extends PureComponent {
             </Tabs>
           </div>
         )}*/}
-        <div>
+        <div style={{paddingTop:15}}>
           <Select
             value={this.state.params.yearId}
             className={styles.selectBox}
@@ -342,9 +333,9 @@ export default class CalShow extends PureComponent {
               info={checkDetailInfoMessage} />}
         </div>
         <Button
-          className={styles.newCalendar}
+          className={styles.newCalendar} style={{right:236,top:15}}
           onClick={this.newCalendar}>{trans("index.newCalendar", "新建日历")}</Button>
-        <span className={styles.spanSolid}></span>
+        
         <Modal
           className={styles.stylesll}
           title={checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.cName}
