@@ -7,49 +7,27 @@ import styles from './index.less';
 const Option = Select.Option;
 const TreeNode = Tree.TreeNode;
 
-
-const data = [{
-  title: '0-0',
-  key: '0-0',
-  children: [{
-    title: '0-0-0',
-    key: '0-0-0',
-    children: [
-      { title: '0-0-0-0', key: '0-0-0-0' },
-      { title: '0-0-0-1', key: '0-0-0-1' },
-      { title: '0-0-0-2', key: '0-0-0-2' },
-    ],
-  }, {
-    title: '0-0-1',
-    key: '0-0-1',
-    children: [
-      { title: '0-0-1-0', key: '0-0-1-0' },
-      { title: '0-0-1-1', key: '0-0-1-1' },
-      { title: '0-0-1-2', key: '0-0-1-2' },
-    ],
-  }, {
-    title: '0-0-2',
-    key: '0-0-2',
-  }],
-  }, {
-  title: '0-1',
-  key: '0-1',
-  children: [
-    { title: '0-1-0-0', key: '0-1-0-0' },
-    { title: '0-1-0-1', key: '0-1-0-1' },
-    { title: '0-1-0-2', key: '0-1-0-2' },
-  ],
-  }, {
-  title: '0-2',
-  key: '0-2',
-}];
-
 export default class Index extends PureComponent {
 
   state = {
     dropVisible: false,
     checkListId: [],
     checkListLabel: []
+  }
+
+
+
+  componentWillMount() {
+    let { value } = this.props;
+    let checkListId = [], checkListLabel = [];
+    value && value.length > 0 && value.map((el) => {
+      checkListId.push(el.userId);
+      checkListLabel.push(el.name);
+    })
+    this.setState({
+      checkListId,
+      checkListLabel
+    })
   }
 
   onSearch (keyWord) {
@@ -180,7 +158,7 @@ export default class Index extends PureComponent {
         style={{ width: '100%' }}
         value={this.state.checkListLabel}
         className={styles.selectBox}
-        placeholder="Please select"
+        placeholder={this.props.placeholder}
         onSelect={this.selectCheck}
         onDeselect={this.deSelectCheck}
         onSearch={this.onSearch.bind(this)}>
