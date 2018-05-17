@@ -170,7 +170,7 @@ export default class Creat extends PureComponent {
       dispatch({
         type: 'Calendar/searchPeople',
         payload: {
-          keyWord: keyWord
+          name: keyWord
         }
       }).then(() => {
          this.peopleSearchFlag = false;
