@@ -109,6 +109,7 @@ class TableView extends PureComponent {
       if (weekMap[i] && weekMap[i].length > 0) {
         let week = weekMap[i];
         week.map((value, index) => {
+
           map.push({
             ...value,
             key: i + '-' + index,
@@ -116,6 +117,7 @@ class TableView extends PureComponent {
             week: trans('global.week', '周') + intToChinese(i),
             rowSpan: index == 0 ? week.length : 0
           })
+
         })
       }
     }
@@ -129,6 +131,7 @@ class TableView extends PureComponent {
 
   render() {
     const { checkListInfo } = this.props;
+    console.info(checkListInfo)
     let dataMap = this.calendarList(checkListInfo);
     return (
       <div className={styles.standardTable}>

@@ -30,6 +30,7 @@ export default class CalShow extends PureComponent {
       calendarId: '',
       yearId: '',
       weekNumber: 1,
+      userSchedule:1,
       type: 0
     },
     tableType: 'bars',
@@ -47,6 +48,7 @@ export default class CalShow extends PureComponent {
     weekDay: 0,
     changeDate: 0,
   }
+
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
@@ -246,7 +248,16 @@ export default class CalShow extends PureComponent {
   }
 
   render() {
-    const { getCalendarInfoMessage, getTimeInfoMessage, checkDeleteInfoMessage, checkDetailInfoMessage, checkListInfo, checkConfirmInfoMessage, currentUser, match: {params} } = this.props;
+    const {
+      getCalendarInfoMessage,
+      getTimeInfoMessage,
+      checkDeleteInfoMessage,
+      checkDetailInfoMessage,
+      checkListInfo,
+      checkConfirmInfoMessage,
+      currentUser,
+      match: {params} } = this.props;
+
     const { tableType } = this.state;
     const identifyStatus = currentUser && currentUser.$body && currentUser.$body.content && currentUser.$body.content.identify;
     const edit = this.state.mark ? "inline-block" : "none";
@@ -258,6 +269,7 @@ export default class CalShow extends PureComponent {
     const etime = checkDetailInfoMessage && checkDetailInfoMessage.scheduleTemplateInfo && checkDetailInfoMessage.scheduleTemplateInfo.eTime;
     return (
       <div className={styles.borderBox}>
+      {/*
         {getCalendarInfoMessage && getCalendarInfoMessage.content && getCalendarInfoMessage.content.length > 0 && (
           <div>
             <Tabs activeKey={String(this.state.params.calendarId)} onChange={this.tabChange.bind(this)} style={{ paddingRight: 100 }} >
@@ -269,7 +281,7 @@ export default class CalShow extends PureComponent {
               </span>} key={el.id}></TabPane>)}
             </Tabs>
           </div>
-        )}
+        )}*/}
         <div>
           <Select
             value={this.state.params.yearId}
@@ -323,7 +335,7 @@ export default class CalShow extends PureComponent {
           {tableType == 'bars'
             && <TableView
               checkListInfo={checkListInfo} />}
-          {tableType == 'calendar'
+         {tableType == 'calendar'
             && <CalendarCalendarTable
               calendarClick={this.calendarClick.bind(this)}
               dataSource={checkListInfo}
@@ -359,7 +371,7 @@ export default class CalShow extends PureComponent {
             {this.state.timeLong}
           </p>
           <p>
-            <Icon className={styles.detailIcon} type="environment" style={{ marginRight: 15, fontSize: 14, color: "#333" }} />
+            <Icon className={styles.detailIcon} type="environment" style={{ marginRight: 15, fontSize: 14, color: "#333" }} />00
               {checkDetailInfoMessage
                 && checkDetailInfoMessage.scheduleTemplateInfo
                 && checkDetailInfoMessage.scheduleTemplateInfo.address}

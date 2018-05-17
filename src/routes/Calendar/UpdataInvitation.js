@@ -135,7 +135,7 @@ export default class Creat extends PureComponent {
           _this.state.timeLast = _this.props.yaoyueHui && _this.props.yaoyueHui.scheduleTemplateInfo && _this.props.yaoyueHui.content.scheduleTemplateInfo.endTime
         }
       })
-      
+
       _this.setState({
         c_zhuti: _this.props.yaoyueHui
           && _this.props.yaoyueHui.content.scheduleTemplateInfo.cName
@@ -158,8 +158,8 @@ export default class Creat extends PureComponent {
       }
       _this.setState({ value1: bixuan })
       _this.setState({ value2: kexuan })
-       
-       if(_this.props.yaoyueHui && 
+
+       if(_this.props.yaoyueHui &&
         _this.props.yaoyueHui.content.scheduleTemplateInfo.ifRepeat){
            let timechuo_first = new Date(_this.props.yaoyueHui
           && _this.props.yaoyueHui.content.preStartTime)
@@ -179,7 +179,7 @@ export default class Creat extends PureComponent {
           _this.setState({ lastTime: timechuo_end.getHours() + ':' + timechuo_end.getMinutes() })
 
        }
-      
+
 
       // console.log(timechuo_first.getFullYear() + '-' + (timechuo_first.getMonth() + 1) + '-' + timechuo_first.getDate())
       // console.log(timechuo_first.getHours() + ':' + timechuo_first.getMinutes())
@@ -266,7 +266,7 @@ export default class Creat extends PureComponent {
       }
     }
     // console.log(m)
-    // console.log(list) 
+    // console.log(list)
     return list
   }
   onChangeXiala1 = (value) => {
@@ -499,10 +499,10 @@ export default class Creat extends PureComponent {
       _this.state.firstTime == null ||
       _this.state.lastTime == null ||
       _this.state.chongfu == null ||
-      _this.state.place == null 
-     
+      _this.state.place == null
+
     ) {
-      alert('请把信息填写完整');
+      alert(trans('global.confirmTitle','请把信息填写完整'));
     } else {
       console.log(_this.state.beforeRepeat);
       if (_this.state.beforeRepeat === true) {
@@ -571,7 +571,7 @@ export default class Creat extends PureComponent {
     //                          alert('新建失败')
     //                     }
     //         })
-    // }         
+    // }
 
   }
   //取消按钮
@@ -648,13 +648,13 @@ export default class Creat extends PureComponent {
     // console.log(allRili)
     return (
       <div className={styles.content}>
-        <div style={{ textAlign: "left" }} className={styles.addyaoyue}>编辑邀约</div>
+        <div style={{ textAlign: "left" }} className={styles.addyaoyue}>{trans('updatainvitation.editInvitation','编辑邀约')}</div>
         {_this.props.yaoyueHui &&
           _this.props.yaoyueHui.content && _this.state.data &&
           (<table className={styles.table}>
             <tbody>
               <tr>
-                <td className={styles.leftKuang}>类型：</td>
+                <td className={styles.leftKuang}>{trans('global.type','类型：')}</td>
                 <td className={styles.rightKuang}>
                   <Select defaultValue={_this.props.yaoyueHui
                     && _this.props.yaoyueHui.content.cCalendarType} style={{ width: 300 }} onChange={this.handleChange} >
@@ -668,23 +668,23 @@ export default class Creat extends PureComponent {
                 </td>
               </tr>
               <tr>
-                <td className={styles.leftKuang}>主题：</td>
+                <td className={styles.leftKuang}>{trans('global.theme','主题：')}</td>
                 <td className={styles.rightKuang}><Input value={_this.state.c_zhuti} ref="cmingsheng" onChange={this.czhutiinput} /></td>
               </tr>
               <tr>
-                <td className={styles.leftKuang}>英文主题：</td>
+                <td className={styles.leftKuang}>{trans('global.enTheme','英文主题：')}</td>
                 <td className={styles.rightKuang}><Input value={_this.state.e_zhuti} ref="emingsheng" onChange={this.ezhutiinput} /></td>
               </tr>
               <tr>
-                <td className={styles.leftKuang1}>必选人员：</td>
+                <td className={styles.leftKuang1}>{trans('global.compulsoryPerson','必选人员：')}</td>
                 <td className={styles.rightKuang}><TreeSelect {...tProps1} className={styles.tree} /> </td>
               </tr>
               <tr>
-                <td className={styles.leftKuang1}>可选人员：</td>
+                <td className={styles.leftKuang1}>{trans('global.optionalPerson','可选人员：')}</td>
                 <td className={styles.rightKuang}><TreeSelect {...tProps2} className={styles.tree} /> </td>
               </tr>
               <tr>
-                <td className={styles.leftKuang1}>时间：</td>
+                <td className={styles.leftKuang1}>{trans('global.time','时间：')}</td>
                 <td className={styles.rightKuang}><DatePicker value={moment(time.getFullYear() + '/' + (time.getMonth() + 1) + '/' + time.getDate(), dateFormat)} onChange={this.dataChange} placeholder="日期" />
                   <span className={styles.jiange}></span>
                   <TimePicker value={moment(time.getHours() + ':' + time.getMinutes(), format)} format={format} onChange={this.timeChangefitst} />
@@ -693,21 +693,21 @@ export default class Creat extends PureComponent {
                 </td>
               </tr>
               <tr>
-                <td className={styles.leftKuang1}>重复：</td>
+                <td className={styles.leftKuang1}>{trans('global.repeat','重复：')}</td>
                 <td className={styles.rightKuang}>
-                  <Select value={repeatType == 1 ? '不重复' : repeatType == 2 ?
-                    '每天' : repeatType == 3 ? '每周' : repeatType == 4 ? '每月' : repeatType == 5 ? '每2周' : ''} style={{ width: 300 }} onChange={this.handleChangechong} >
-                    <Option value="1">不重复</Option>
-                    <Option value="2">每天</Option>
-                    <Option value="3">每周</Option>
-                    <Option value="5">每2周</Option>
-                    <Option value="4">每月</Option>
+                  <Select value={repeatType == 1 ? trans('global.noRepeat','不重复') : repeatType == 2 ?
+                    trans('global.everyday','每天') : repeatType == 3 ? trans('global.weekly','每周'): repeatType == 4 ?trans('global.monthly','每月')  : repeatType == 5 ? trans('global.weeklyTwo','每2周') : ''} style={{ width: 300 }} onChange={this.handleChangechong} >
+                    <Option value="1">{trans('global.noRepeat','不重复')}</Option>
+                    <Option value="2">{trans('global.everyday','每天')}</Option>
+                    <Option value="3">{trans('global.weekly','每周')}</Option>
+                    <Option value="5">{trans('global.weeklyTwo','每2周')}</Option>
+                    <Option value="4">{trans('global.everyday','每月')}</Option>
                   </Select>
 
                 </td>
               </tr>
               <tr>
-                <td className={styles.leftKuang1}>地点：</td>
+                <td className={styles.leftKuang1}>{trans('global.place','地点：')}</td>
                 <td className={styles.rightKuang}>
                   <Select
                     mode="combobox"
@@ -731,7 +731,7 @@ export default class Creat extends PureComponent {
                 </td>
               </tr>
               <tr>
-                <td className={styles.leftKuang1}>备注：</td>
+                <td className={styles.leftKuang1}>{trans('global.Remarks','备注：')}</td>
                 <td className={styles.rightKuang}>
                   <TextArea rows={4} onChange={this.beizhu} value={_this.state.beizhu} />
                 </td>
@@ -744,8 +744,8 @@ export default class Creat extends PureComponent {
           </table>)
         }
         <div className={styles.di}>
-          <Button onClick={this.cancel}>取消</Button><span className={styles.jiange}></span>
-          <Button type="primary" onClick={this.addYaoyue} disabled={this.state.queding}>确定</Button>
+          <Button onClick={this.cancel}>{trans('global.cancel','取消')}</Button><span className={styles.jiange}></span>
+          <Button type="primary" onClick={this.addYaoyue} disabled={this.state.queding}>{trans('global.determine','确定')}</Button>
         </div>
          <Modal
           visible={visible}
@@ -753,12 +753,12 @@ export default class Creat extends PureComponent {
           onOk={this.handleOk}
           onCancel={this.handleCancel}
           footer={[
-            <Button key="back" onClick={this.handleOk1}>以后的重复日程一同修改</Button>,
+            <Button key="back" onClick={this.handleOk1}>{trans('updatainvitation.modifyOne','以后的重复日程一同修改')}</Button>,
             <Button key="submit" type="primary" loading={loading} onClick={this.handleOk2}>
-              仅修改本次日程
+              {trans('updatainvitation.modifyTwo','仅修改本次日程')}
             </Button>,
           ]}
-        ><span style={{"fontSize":"20px",}}>选择重复日程的修改方式</span>
+        ><span style={{"fontSize":"20px",}}>{trans('updatainvitation.modifyThree','选择重复日程的修改方式')}</span>
         </Modal>
       </div>
     );

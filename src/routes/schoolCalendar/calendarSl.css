@@ -1,0 +1,5 @@
+.divBox{
+  height: 1200px;
+  background:url( ./img/calendar.png) no-repeat top center;
+  background-size: contain;
+}

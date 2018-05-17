@@ -40,7 +40,12 @@ export const getNavData = app => [
         name:"修改邀约",
         path:'updataInvitation/:scheduleId/:yearId/:date/:currentWeek',
         component: dynamicWrapper(app, ['Calendar'], () => import('../routes/Calendar/UpdataInvitation'))
-      }
+      },
+      {
+        name: '校历',
+        path: 'schoolCalendar',
+        component: dynamicWrapper(app, [], () => import('../routes/schoolCalendar/calendarSl'))
+      },
     ],
   },
 ];

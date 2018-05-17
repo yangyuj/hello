@@ -78,6 +78,7 @@ export default class Index extends PureComponent {
       detailShow: !this.state.detailShow,
       dataV : v
     });
+
   }
 
   calculationList(weekMap, titleMap) {
@@ -92,6 +93,7 @@ export default class Index extends PureComponent {
       let lineEl = [];
       for (let i = 1; i <= 7; i++) {
         if (weekMap[i] && weekMap[i].length > 0) {
+          
           let a = [],
               allDay = [],
               w = '100%';
