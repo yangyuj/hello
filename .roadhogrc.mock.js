@@ -530,11 +530,11 @@ const proxy = {
           "key": "d1",
           "label": "学生发展研究院",
           "children": [{
-            "value": "dadas-1",
-            "key": "1",
+            "value": 1,
+            "key": 1,
             "label": "张三"
           }, {
-            "value": "789-2",
+            "value": "2",
             "key": "2",
             "label": "张四"
           }, {
@@ -978,8 +978,7 @@ const proxy = {
     "message": "切换成功！",
     "code": 11,
     "content": [
-      {"id":1, "name":"张三"},
-      {"id":2, "name":"张四"}
+
     ],
     "ifAdmin": false
   }

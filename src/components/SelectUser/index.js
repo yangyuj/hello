@@ -37,7 +37,7 @@ export default class Index extends PureComponent {
   rendChildren () {
     let { data } = this.props;
     const children = [];
-    data && data.map((el) => {
+    data && data.length > 0 && data.map((el) => {
       this.state.checkListId.indexOf(el.id) < 0
         && children.push(<Option checked key={el.id}>{el.name}</Option>);
     })
@@ -53,12 +53,14 @@ export default class Index extends PureComponent {
       node.map((el) => {
         let { props } = el;
         let userId = props.value;
-        if(newCheckListId.indexOf(userId) < 0) {
+
+        if(userId && newCheckListId.indexOf(userId) < 0) {
           newCheckListId.push(userId);
           newCheckListLabel.push(props.label);
         }
       });
     }
+    debugger;
     this.setState({
       checkListId: newCheckListId,
       checkListLabel: newCheckListLabel
@@ -133,6 +135,7 @@ export default class Index extends PureComponent {
     let checkListId = this.state.checkListId.concat(),
         checkListLabel = this.state.checkListLabel.concat(),
         index = checkListLabel.indexOf(val);
+
     if(index > -1){
       checkListId.splice(index, 1);
       checkListLabel.splice(index, 1);
