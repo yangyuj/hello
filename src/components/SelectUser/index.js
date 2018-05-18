@@ -52,8 +52,7 @@ export default class Index extends PureComponent {
     if(node && node.length > 0) {
       node.map((el) => {
         let { props } = el;
-        let userId = props.value.split('-');
-        userId = userId[userId.length - 1];
+        let userId = props.value;
         if(newCheckListId.indexOf(userId) < 0) {
           newCheckListId.push(userId);
           newCheckListLabel.push(props.label);

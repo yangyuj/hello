@@ -99,7 +99,7 @@ export default class Creat extends PureComponent {
     dispatch({
       type: 'Calendar/searchPeople',
       payload: {
-        keyWord: ''
+        name: ''
       }
     })
 
@@ -239,7 +239,7 @@ export default class Creat extends PureComponent {
 
     if(this.peopleSearchFlag) {
       return;
-    }console.log(keyWord);
+    }
     this.peopleSearchFlag = setTimeout(() => {
       dispatch({
         type: 'Calendar/searchPeople',
