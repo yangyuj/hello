@@ -72,6 +72,8 @@ export default class Creat extends PureComponent {
     }).then(function(){
         _this.setState({treeData: _this.props.guanliPeople
     		&& _this.props.guanliPeople.content.getDepartmentList})
+        console.info(treeData)
+
     })
   }
 
@@ -85,14 +87,14 @@ export default class Creat extends PureComponent {
       }
   	}
     return list;
+
   }
 
   onChangeXiala = (value) => {
 	 this.setState({ value: this.chong(value)});
-  }
+ }
 
   onChangesearch=(value)=>{
-  	    console.log(value)
   	    let _this=this
   		// const { dispatch } = this.props;
       //     dispatch({  //模糊查询
