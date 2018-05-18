@@ -142,7 +142,7 @@ export default {
         }
         yield put({
             type: 'searchPeopleReducers',
-            payload: response.content,
+            payload: response.content.teacherNameList || [],
         });
       }
     },

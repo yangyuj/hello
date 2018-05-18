@@ -977,9 +977,9 @@ const proxy = {
     "status": true,
     "message": "切换成功！",
     "code": 11,
-    "content": [
-
-    ],
+    "content": {
+      "teacherNameList":[]
+    },
     "ifAdmin": false
   }
 
