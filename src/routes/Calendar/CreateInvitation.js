@@ -4,8 +4,11 @@ import {
   Form, Input, DatePicker, Select, Button, Card, InputNumber, Radio, Icon, Tooltip,
   TreeSelect, TimePicker, Modal
 } from 'antd';
-//import AssessmentHeaderLayout from '../../layouts/AssessmentHeaderLayout';
+import SelectUser from '../../components/SelectUser';
 import styles from './CreatInvition.less';
+
+
+
 import { routerRedux } from 'dva/router';
 import { trans } from '../../utils/i18n';
 import moment from 'moment';
@@ -18,30 +21,15 @@ const { TextArea } = Input;
 const SHOW_PARENT = TreeSelect.SHOW_PARENT;
 const SHOW_ALL = TreeSelect.SHOW_ALL;
 const format = 'HH:mm';
-// const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
-// let attr1=[]
 
-const treeData = [{
-  label: '技术部',
-  value: '技术部',
-  key: '0-0',
-  children: [{
-    label: '张三',
-    value: '张三',
-    key: '0-0-0',
-  }, {
-    label: '王哦',
-    value: '王哦',
-    key: '0-0-1',
-  }],
-}];
 @connect(state => ({
   addWork: state.Calendar.addCalendarapi,
   personlist: state.Calendar.mohuList,
   yaoyue: state.Calendar.yaoyue,
   rililist: state.Calendar.allrili,
   placelist: state.Calendar.allplace,
-  peoplelist: state.Calendar.peoplelist
+  peoplelist: state.Calendar.peoplelist,
+  searchPeopleData: state.Calendar.searchPeopleData
 }))
 @Form.create()
 export default class Creat extends PureComponent {
@@ -59,10 +47,11 @@ export default class Creat extends PureComponent {
       chongfu: null,
       place: null,
       beizhu: null,
-      treeData: null,
+      treeData: [],
       defaultV: null
     };
   }
+
   componentDidMount() {
     let _this = this
     const { dispatch, match: { params } } = this.props;
@@ -106,25 +95,36 @@ export default class Creat extends PureComponent {
       })
     })
 
+    //搜索人接口
+    dispatch({
+      type: 'Calendar/searchPeople',
+      payload: {
+        name: ''
+      }
+    })
+
   }
+
   handleChange = (value) => {
-    console.log(`类型 ${value}`);
     this.setState({ leixing: value })
   }
+
   handleChangechong = (value) => {
-    console.log(`重复 ${value}`);
     this.setState({ chongfu: value })
   }
+
   czhutiinput = (e) => {
     this.setState({
       c_zhuti: e.target.value
     })
   }
+
   ezhutiinput = (e) => {
     this.setState({
       e_zhuti: e.target.value
     })
   }
+
   chong(value) {
     let m = [] //
     let list = []
@@ -138,41 +138,44 @@ export default class Creat extends PureComponent {
     // console.log(list)
     return list
   }
+
   onChangeXiala1 = (value) => {
 
-    this.setState({ value1: this.chong(value) });
+    this.setState({ value1: value });
   }
+
   onChangeXiala2 = (value) => {
     this.setState({ value2: this.chong(value) });
   }
+
   dataChange = (date, dateString) => {
-    console.log(date, dateString);
     this.setState({ data: dateString })
 
   }
+
   timeChangefitst = (time, timeString) => {
-    console.log(time, timeString);
     this.setState({ firstTime: timeString })
   }
+
   timeChangelast = (time, timeString) => {
-    console.log(time, timeString);
     this.setState({ lastTime: timeString })
   }
+
   handleChangeplace = (value) => {
-    console.log(`地点 ${value}`);
     this.setState({ place: value })
   }
+
   handleBlurplace = (e) => {
-    console.log("blur");
 
   }
+
   handleFocusplace = () => {
-    console.log('focus');
   }
+
   beizhu = (e) => {
-    console.log(e.target.value)
     this.setState({ beizhu: e.target.value })
   }
+
   showConfirm() {
     confirm({
       title:trans('global.confirmTitle','请把信息填写完整！'),
@@ -214,8 +217,6 @@ export default class Creat extends PureComponent {
           semesterId: parseInt(params.yearId)
         }
       }).then(function (res) {
-        console.log(_this.props.yaoyue
-          && _this.props.yaoyue.status)
         if (_this.props.yaoyue
           && _this.props.yaoyue.status == true) {
           _this.props.dispatch(routerRedux.push('/index' + '/' + _this.state.leixing));
@@ -233,42 +234,27 @@ export default class Creat extends PureComponent {
     this.props.dispatch(routerRedux.push('/index' + '/' + localStorage.getItem('kkkk')));
   }
 
-  filterPeople = (value, nodeTree) => {
-    //console.log(nodeTree);
-    return true;
-  }
+  peopleSearch = (keyWord) => {
+    const { dispatch } = this.props;
 
-  asyncLoadData = (node) => {
-    console.log(node);
+    if(this.peopleSearchFlag) {
+      return;
+    }
+    this.peopleSearchFlag = setTimeout(() => {
+      dispatch({
+        type: 'Calendar/searchPeople',
+        payload: {
+          name: keyWord
+        }
+      }).then(() => {
+         this.peopleSearchFlag = false;
+      });
+    }, 800)
   }
 
   render() {
+    let { searchPeopleData } = this.props;
     let tree = this.state.treeData
-    const tProps1 = {
-      treeData: tree,
-      value: this.state.value1,
-      onChange: this.onChangeXiala1,
-      treeCheckable: true,
-      allowClear: true,
-      searchPlaceholder: '',
-      filterTreeNode: this.filterPeople,
-      loadData: this.asyncLoadData,
-      treeNodeFilterProp: 'title',
-      style: {
-        width: 500,
-      },
-    };
-    const tProps2 = {
-      treeData: tree,
-      value: this.state.value2,
-      onChange: this.onChangeXiala2,
-      treeCheckable: true,
-      allowClear: true,
-      searchPlaceholder: '',
-      style: {
-        width: 500,
-      },
-    };
 
     let allRili = this.props.rililist && this.props.rililist.content;
 
@@ -279,19 +265,25 @@ export default class Creat extends PureComponent {
           <tbody>
             <tr>
               <td className={styles.leftKuang}>{trans('global.type','类型：')}</td>
-              {this.state.defaultV && (<td className={styles.rightKuang}> <Select defaultValue={this.state.defaultV} style={{ width: 300 }} onChange={this.handleChange}>
-                {
-                  this.props.rililist
-                  && this.props.rililist.content.map((value, index) => {
-                    return <Option value={value.id} key={value.id}>{value.name}</Option>
-                  })
-                }
-              </Select>
+              {this.state.defaultV && (<td className={styles.rightKuang}>
+                <Select
+                  defaultValue={this.state.defaultV}
+                  style={{ width: 300 }}
+                  onChange={this.handleChange}>
+                  {
+                    this.props.rililist
+                    && this.props.rililist.content.map((value, index) => {
+                      return <Option value={value.id} key={value.id}>{value.name}</Option>
+                    })
+                  }
+                </Select>
               </td>)}
             </tr>
             <tr>
               <td className={styles.leftKuang}>{trans('global.theme','主题：')}</td>
-              <td className={styles.rightKuang}><Input placeholder= {trans('a.pleaseEnte','请输入')} ref="cmingsheng" onChange={this.czhutiinput} /></td>
+              <td className={styles.rightKuang}>
+                <Input placeholder= {trans('a.pleaseEnte','请输入')} ref="cmingsheng" onChange={this.czhutiinput} />
+              </td>
             </tr>
             <tr>
               <td className={styles.leftKuang}>{trans('global.enTheme','英文主题：')}</td>
@@ -299,11 +291,25 @@ export default class Creat extends PureComponent {
             </tr>
             <tr>
               <td className={styles.leftKuang1}>{trans('global.compulsoryPerson','必选人员：')}</td>
-              <td className={styles.rightKuang}><TreeSelect {...tProps1} className={styles.tree} /> </td>
+              <td className={styles.rightKuang}>
+                {tree && tree.length > 0 && <SelectUser
+                  data={searchPeopleData}
+                  treeData={tree}
+                  placeholder={trans('global.pleaseSelectTip', '选择或搜索你想要的人')}
+                  onChange={this.onChangeXiala1}
+                  onSearch={this.peopleSearch} />}
+              </td>
             </tr>
             <tr>
               <td className={styles.leftKuang1}>{trans('global.optionalPerson','可选人员：')}</td>
-              <td className={styles.rightKuang}><TreeSelect {...tProps2} className={styles.tree} /> </td>
+              <td className={styles.rightKuang}>
+                {tree && tree.length > 0 && <SelectUser
+                  data={searchPeopleData}
+                  treeData={tree}
+                  placeholder={trans('global.pleaseSelectTip', '搜索或选择你想要的人')}
+                  onChange={this.onChangeXiala2}
+                  onSearch={this.peopleSearch} />}
+              </td>
             </tr>
             <tr>
               <td className={styles.leftKuang1}>{trans('global.time','时间：')}</td>
@@ -342,9 +348,6 @@ export default class Creat extends PureComponent {
                       return <Option value={value.cName} key={value.id}>{value.cName}</Option>
                     })
                   }
-                  {/*<Option value="3-1">3-1</Option>
-                <Option value="3-2">3-2</Option>
-                <Option value="3-3">3-3</Option>*/}
                 </Select>
               </td>
             </tr>

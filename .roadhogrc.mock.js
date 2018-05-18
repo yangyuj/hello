@@ -530,13 +530,13 @@ const proxy = {
           "key": "d1",
           "label": "学生发展研究院",
           "children": [{
-            "value": "dadas-78",
-            "key": "d12",
-            "label": "123"
+            "value": 1,
+            "key": 1,
+            "label": "张三"
           }, {
-            "value": "789-99",
-            "key": "d13",
-            "label": "12345"
+            "value": "2",
+            "key": "2",
+            "label": "张四"
           }, {
             "value": "d15",
             "key": "d15",
@@ -731,10 +731,10 @@ const proxy = {
         "deleted": false
       },
       "adminers": [{
-        "userId": 7,
+        "userId": "1",
         "userUnionId": null,
         "orgId": null,
-        "name": "诸葛昳隽",
+        "name": "张三",
         "ename": "Zoe",
         "nickName": null,
         "sex": null,
@@ -753,10 +753,10 @@ const proxy = {
         "createTime": null,
         "modifyTime": null
       }, {
-        "userId": 8,
+        "userId": "2",
         "userUnionId": null,
         "orgId": null,
-        "name": "陈少伟",
+        "name": "张四",
         "ename": "Arvin Chen",
         "nickName": null,
         "sex": null,
@@ -833,7 +833,7 @@ const proxy = {
         "weekDays": "1"
       },
       "persons": [{
-        "userId": 9,
+        "userId": "1",
         "userUnionId": null,
         "orgId": null,
         "name": "张三",
@@ -857,10 +857,59 @@ const proxy = {
         "relationType": 1,
         "deInfoDoList": null
       }, {
-        "userId": 8,
+        "userId": "2",
+        "userUnionId": null,
+        "orgId": "张四",
+        "name": "张四",
+        "ename": null,
+        "nickName": null,
+        "sex": null,
+        "certType": null,
+        "certNo": null,
+        "mobile": null,
+        "email": null,
+        "tel": null,
+        "nameSpelling": null,
+        "nationalityCode": null,
+        "deleted": null,
+        "birthday": null,
+        "birthCityCode": null,
+        "birthplace": null,
+        "remarks": null,
+        "createTime": null,
+        "modifyTime": null,
+        "relationType": 1,//1必选  2可选
+        "deInfoDoList": null
+      }],
+      "persons1": [{
+        "userId": "1",
         "userUnionId": null,
         "orgId": null,
-        "name": "栗子",
+        "name": "张三",
+        "ename": null,
+        "nickName": null,
+        "sex": null,
+        "certType": null,
+        "certNo": null,
+        "mobile": null,
+        "email": null,
+        "tel": null,
+        "nameSpelling": null,
+        "nationalityCode": null,
+        "deleted": null,
+        "birthday": null,
+        "birthCityCode": null,
+        "birthplace": null,
+        "remarks": null,
+        "createTime": null,
+        "modifyTime": null,
+        "relationType": 1,
+        "deInfoDoList": null
+      }, {
+        "userId": "2",
+        "userUnionId": null,
+        "orgId": "张四",
+        "name": "张四",
         "ename": null,
         "nickName": null,
         "sex": null,
@@ -920,6 +969,17 @@ const proxy = {
     "message": "切换成功！",
     "code": 11,
     "content": [],
+    "ifAdmin": false
+  },
+  //搜索人
+  'GET /api/selectPersonName': {
+    "ifLogin": true,
+    "status": true,
+    "message": "切换成功！",
+    "code": 11,
+    "content": {
+      "teacherNameList":[]
+    },
     "ifAdmin": false
   }
 

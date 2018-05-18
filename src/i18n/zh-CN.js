@@ -1,7 +1,5 @@
 export default {
 
-
-
   "global.fileUploadError": "服务器出错了，请稍后重试！",
   "global.editBtn": "编辑",
   "global.selectReport": "查看成长画像",
@@ -48,26 +46,37 @@ export default {
   "global.minute": "分钟",
 
 
-  "global.confirmTitle":"请把信息填写完整！",
-  "global.type":"类型：",
-  "global.theme":"主题",
-  "global.pleaseEnte":"请输入",
-  "global.enTheme":"英文主题：",
-  "global.compulsoryPerson":"必选人员：",
-  "global.optionalPerson":"可选人员：",
-  "global.time":"时间：",
-  "global.data":"日期",
-  "global.repeat":"重复：",
-  "global.pleseType":"请选择类型",
-  "global.noRepeat":"不重复",
-  "global.everyday":"每天",
-  "global.weekly":"每周",
-  "global.weeklyTwo":"每2周",
-  "global.monthly":"每月",
-  "global.place":"地点：",
-  "global.Remarks":"备注：",
-  "global.cancel":"取消",
-  "global.determine":"确定",
+  "global.confirmTitle": "请把信息填写完整！",
+  "global.type": "类型：",
+  "global.theme": "主题：",
+  "global.pleaseEnte": "请输入",
+  "global.enTheme": "英文主题：",
+  "global.compulsoryPerson": "必选人员：",
+  "global.optionalPerson": "可选人员：",
+  "global.time": "时间：",
+  "global.data": "日期",
+  "global.repeat": "重复：",
+  "global.pleseType": "请选择类型",
+  "global.noRepeat": "不重复",
+  "global.everyday": "每天",
+  "global.weekly": "每周",
+  "global.weeklyTwo": "每2周",
+  "global.monthly": "每月",
+  "global.place": "地点：",
+  "global.Remarks": "备注：",
+  "global.cancel": "取消",
+  "global.determine": "确定",
+  "global.pleaseSelectTip": "搜索或选择你想要的人",
+
+  // 日历 2018/5/18
+  "global.editorialCalendar": "编辑日历",
+  "global.calendarName": "日历名称：",
+  "global.englishCalendarName": "日历英文名称：",
+  "global.admin": "日历管理员:",
+  "global.schedule": "日程生效:",
+  "global.scheduleRidioOne": "管理员确定后在生效，自动添加到个人日程中",
+  "global.scheduleRidioTwo": "及时生效，自动添加到个人日程中",
+  "global.scheduleRidioThree": "报名后，再添加到个人日程中",
 
 
   "index.newCalendar": "新建日历",
@@ -84,11 +93,7 @@ export default {
   "index.allDelete": "以后的日程都删除",
   "index.onlyDelete": "仅删除这一次日程'",
 
-
   "calshow.confirmOk": "已确认",
-
-
-
 
   "tableView.date": "日期",
   "tableView.time": "时间",
@@ -104,25 +109,18 @@ export default {
   "tableCom.place": "地点",
   "tableCom.remarks": "备注",
 
-  "creat.name":"日历名称:",
-  "creat.enName":"日历英文名称:",
-  "creat.admin":"日历管理员:",
-  "creat.schedule":"日程生效:",
-  "creat.confirmTitle": "请把信息填写完整！",
-  "creat.pleaseEnte":"请输入",
-  "creat.scheduleRidioOne":"管理员确定后在生效，自动添加到个人日程中",
-  "creat.scheduleRidioTwo":"及时生效，自动添加到个人日程中",
-  "creat.scheduleRidioThree":"报名后，再添加到个人日程中",
-  "creat.newTime":"新建日历",
-  "creat.cancel":"取消",
-  "creat.confirmOk":"确定",
+  // 新建日历 2018/5/18
+  "creat.newTime": "新建日历",
 
+  "updatainvitation.prompt": "提示",
+  "updatainvitation.modifyOne": "以后的重复日程一同修改",
+  "updatainvitation.modifyTwo": "仅修改本次日程",
+  "updatainvitation.modifyThree": "选择重复日程的修改方式",
+  "updatainvitation.editInvitation": "编辑邀约",
 
-"updatainvitation.prompt":"提示",
-"updatainvitation.modifyOne":"以后的重复日程一同修改",
-"updatainvitation.modifyTwo":"仅修改本次日程",
-"updatainvitation.modifyThree":"选择重复日程的修改方式",
-"updatainvitation.editInvitation":"编辑邀约",
+  // 日历修改
+  "updata.whetherDelete": "是否删除日历",
+
 
 
 }

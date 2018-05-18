@@ -4,10 +4,12 @@ import {
   Form, Input, DatePicker, Select, Button, Card, InputNumber, Radio, Icon, Tooltip,
   TreeSelect, TimePicker, Modal
 } from 'antd';
-//import AssessmentHeaderLayout from '../../layouts/AssessmentHeaderLayout';
 import styles from './CreatInvition.less';
 import { routerRedux } from 'dva/router';
 import { trans } from '../../utils/i18n';
+
+import SelectUser from '../../components/SelectUser';
+
 import moment from 'moment';
 const confirm = Modal.confirm;
 const RadioGroup = Radio.Group;
@@ -21,20 +23,6 @@ const format = 'HH:mm';
 const dateFormat = 'YYYY/MM/DD';
 // const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
 
-const treeData = [{
-  label: '技术部',
-  value: '技术部',
-  key: '0-0',
-  children: [{
-    label: '张三',
-    value: '张三',
-    key: '0-0-0',
-  }, {
-    label: '王哦',
-    value: '王哦',
-    key: '0-0-1',
-  }],
-}];
 @connect(state => ({
   addWork: state.Calendar.addCalendarapi,
   personlist: state.Calendar.mohuList,
@@ -43,34 +31,35 @@ const treeData = [{
   placelist: state.Calendar.allplace,
   peoplelist: state.Calendar.peoplelist,
   yaoyueHui: state.Calendar.yaoyueHuilist,
-  xiugaiyaoyue: state.Calendar.xiugaiyaoyue
+  xiugaiyaoyue: state.Calendar.xiugaiyaoyue,
+  searchPeopleData: state.Calendar.searchPeopleData
 }))
 @Form.create()
 export default class Creat extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      c_zhuti: null,
-      e_zhuti: null,
-      leixing: null,
-      value1: null,
-      value2: null,
-      data: null,
-      firstTime: null,
-      lastTime: null,
-      chongfu: null,
-      place: null,
-      beizhu: null,
-      treeData: null,
-      bjcode: null,
-      queding: null,
-      chongfuziduan: null,
-      startTime: null,
-      endTime: null,
-      beforeRepeat: null,
-      editOnly: null,
-      time: null,
-      timeLast: null,
+      c_zhuti: "",
+      e_zhuti: "",
+      leixing: "",
+      value1: "",
+      value2: "",
+      data: "",
+      firstTime: "",
+      lastTime: "",
+      chongfu: "",
+      place: "",
+      beizhu: "",
+      treeData: "",
+      bjcode: "",
+      queding: "",
+      chongfuziduan: "",
+      startTime: "",
+      endTime: "",
+      beforeRepeat: "",
+      editOnly: "",
+      time: "",
+      timeLast: "",
       loading: false,
       visible: false
     };
@@ -271,11 +260,11 @@ export default class Creat extends PureComponent {
   }
   onChangeXiala1 = (value) => {
     // console.log('onChange ', value, arguments);
-    this.setState({ value1: this.chong(value) });
+    this.setState({ value1: value });
   }
   onChangeXiala2 = (value) => {
     // console.log('onChange ', value, arguments);
-    this.setState({ value2: this.chong(value) });
+    this.setState({ value2: value });
   }
   dataChange = (date, dateString) => {
     // console.log(date, dateString);
@@ -526,7 +515,6 @@ export default class Creat extends PureComponent {
             requiredPersonnel: _this.state.value1,
             semesterId: parseInt(params.yearId), //学期ID
             ifRepeat: ifrepeat
-            // ifChooseDayOnly: _this.state.editOnly
           }
         }).then(function () {
           if (_this.props.xiugaiyaoyue
@@ -579,76 +567,54 @@ export default class Creat extends PureComponent {
     const { match: { params } } = this.props;
     this.props.dispatch(routerRedux.push('/index' + '/' + this.state.leixing + '/' + params.currentWeek));
   }
+
+
+  peopleSearch = (keyWord) => {
+    const { dispatch } = this.props;
+
+    if(this.peopleSearchFlag) {
+      return;
+    }
+    this.peopleSearchFlag = setTimeout(() => {
+      dispatch({
+        type: 'Calendar/searchPeople',
+        payload: {
+          name: keyWord
+        }
+      }).then(() => {
+         this.peopleSearchFlag = false;
+      });
+    }, 800)
+  }
+
   render() {
     const { visible, loading } = this.state;
+    const { searchPeopleData } = this.props;
     let repeatType = this.state.chongfu
     let _this = this
     let tree = this.state.treeData
     let time
     let timelast
-    // let time = new Date(_this.props.yaoyueHui
-    //   && _this.props.yaoyueHui.content.preStartTime)
-    // let timelast = new Date(_this.props.yaoyueHui
-    //   && _this.props.yaoyueHui.content.preEndTime)
-    // console.log(time)
+
     if(this.state.data){
           // time=new Date(_this.props.yaoyueHui
           // && _this.props.yaoyueHui.content.preStartTime)
-          console.log(this.state.data)
           time= new Date(this.state.data.replace(/-/g, '/') + ' ' + _this.state.firstTime)
           // timelast=new Date(_this.props.yaoyueHui
           // && _this.props.yaoyueHui.content.preEndTime)
           timelast= new Date(this.state.data.replace(/-/g, '/') + ' ' + _this.state.lastTime)
-          console.log(time)
-          console.log(timelast)
+
 
     }
-    console.log(new Date(_this.props.yaoyueHui
-      && _this.props.yaoyueHui.content.scheduleTemplateInfo.startTime))
 
-    // let time = new Date(_this.props.yaoyueHui
-    //   && _this.props.yaoyueHui.content.preStartTime)
-    // let timelast = new Date(_this.props.yaoyueHui
-    //   && _this.props.yaoyueHui.content.preEndTime)
-
-
-    // let time = new Date(_this.state.time)
-    // let timelast = new Date(_this.state.timeLast)
-
-    // console.log(time.getFullYear() + '-' + (time.getMonth() + 1) + '-' + time.getDate())
-    // console.log(this.state.leixing)
-    // console.log(this.state.value1)
-    // console.log(this.state.value2)
-    const tProps1 = {
-      treeData: tree,
-      value: this.state.value1,
-      onChange: this.onChangeXiala1,
-      onSearch: this.onChangesearch,
-      treeCheckable: true,
-      allowClear: true,
-      searchPlaceholder: '',
-      style: {
-        width: 500,
-      }
-    };
-    const tProps2 = {
-      treeData: tree,
-      value: this.state.value2,
-      onChange: this.onChangeXiala2,
-      onSearch: this.onChangesearch,
-      treeCheckable: true,
-      allowClear: true,
-      searchPlaceholder: '',
-      style: {
-        width: 500,
-      }
-    };
     let allRili = this.props.rililist
       && this.props.rililist.content
     // console.log(allRili)
     return (
       <div className={styles.content}>
-        <div style={{ textAlign: "left" }} className={styles.addyaoyue}>{trans('updatainvitation.editInvitation','编辑邀约')}</div>
+        <div style={{ textAlign: "left" }} className={styles.addyaoyue}>
+            {trans('updatainvitation.editInvitation','编辑邀约')}
+        </div>
         {_this.props.yaoyueHui &&
           _this.props.yaoyueHui.content && _this.state.data &&
           (<table className={styles.table}>
@@ -677,11 +643,27 @@ export default class Creat extends PureComponent {
               </tr>
               <tr>
                 <td className={styles.leftKuang1}>{trans('global.compulsoryPerson','必选人员：')}</td>
-                <td className={styles.rightKuang}><TreeSelect {...tProps1} className={styles.tree} /> </td>
+                <td className={styles.rightKuang}>
+                  {tree && tree.length > 0 && <SelectUser
+                    data={searchPeopleData}
+                    value={this.props.yaoyueHui.content.persons}
+                    treeData={tree}
+                    placeholder={trans('global.pleaseSelectTip', '选择或搜索你想要的人')}
+                    onChange={this.onChangeXiala1}
+                    onSearch={this.peopleSearch} />}
+                </td>
               </tr>
               <tr>
                 <td className={styles.leftKuang1}>{trans('global.optionalPerson','可选人员：')}</td>
-                <td className={styles.rightKuang}><TreeSelect {...tProps2} className={styles.tree} /> </td>
+                <td className={styles.rightKuang}>
+                  {tree && tree.length > 0 && <SelectUser
+                    data={searchPeopleData}
+                    value={this.props.yaoyueHui.content.persons1}
+                    treeData={tree}
+                    placeholder={trans('global.pleaseSelectTip', '选择或搜索你想要的人')}
+                    onChange={this.onChangeXiala2}
+                    onSearch={this.peopleSearch} />}
+                </td>
               </tr>
               <tr>
                 <td className={styles.leftKuang1}>{trans('global.time','时间：')}</td>
@@ -715,18 +697,14 @@ export default class Creat extends PureComponent {
                     value={_this.state.place}
                     placeholder=""
                     onChange={this.handleChangeplace}
-                    style={{ width: 200 }}
-
-                  >
+                    style={{ width: 200 }}>
                     {
                       this.props.placelist
                       && this.props.placelist.content.listInfobyAddress.map((value, index) => {
                         return <Option value={value.cName} key={value.id}>{value.cName}</Option>
                       })
                     }
-                    {/*<Option value="3-1">3-1</Option>
-                  <Option value="3-2">3-2</Option>
-                  <Option value="3-3">3-3</Option>*/}
+
                   </Select>
                 </td>
               </tr>
@@ -736,10 +714,7 @@ export default class Creat extends PureComponent {
                   <TextArea rows={4} onChange={this.beizhu} value={_this.state.beizhu} />
                 </td>
               </tr>
-              {/*<tr>
-            <td colSpan="2" style={{textAlign:"right"}} ><Button onClick={this.cancel}>取消</Button><span className={styles.jiange}></span>
-            <Button type="primary" onClick={this.addYaoyue} disabled={this.state.queding}>确定</Button></td>
-           </tr>*/}
+
             </tbody>
           </table>)
         }
@@ -749,7 +724,7 @@ export default class Creat extends PureComponent {
         </div>
          <Modal
           visible={visible}
-          title="提示"
+          title={trans('updatainvitation.prompt', '提示')}
           onOk={this.handleOk}
           onCancel={this.handleCancel}
           footer={[
