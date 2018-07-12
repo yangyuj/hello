@@ -25,7 +25,7 @@ export const getNavData = app => [
         component: dynamicWrapper(app, ['index'], () => import('../routes/Calendar/Index'))
       },
       {
-        name: '日历视图',
+        name: '日历视图6',
         path: 'CalShow',
         component: dynamicWrapper(app, ['calShow'], () => import('../routes/Calendar/CalShow'))
       },{
